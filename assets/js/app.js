@@ -110,18 +110,26 @@ async function carregarDadesPlantes() {
 
 // Generar índex d'imatges disponibles
 async function generarIndexImatges() {
-    // Per a una aplicació estàtica, hauríem de mantenir un índex manual
-    // o generar-lo del servidor. Per simplicitat, assumim la nomenclatura estàndard
-    window.app.imatgesIndex = {};
+    console.log("Generant índex d'imatges...");
     
-    for (const planta of window.app.plantes) {
-        const imatges = await detectarImatgesPlanta(planta.nom_cientific);
-        window.app.imatgesIndex[planta.id || planta.nom_cientific] = imatges;
+    try {
+        window.app.imatgesIndex = await detectarTotesLesImatges();
+        console.log('Índex d\'imatges generat:', window.app.imatgesIndex);
+    } catch (error) {
+        console.error('Error generant índex d\'imatges:', error);
+        // Fallback: crear índex buit amb imatges per defecte
+        window.app.imatgesIndex = {};
+        for (const planta of window.app.plantes) {
+            const plantaId = planta.id || sanitizeTitle(planta.nom_cientific);
+            window.app.imatgesIndex[plantaId] = {
+                principal: 'default_planta.jpg',
+                principal_tipus: 'general',
+                detalls: [],
+                detalls_tipus: []
+            };
+        }
     }
-    
-    console.log('Índex d\'imatges generat');
 }
-
 // Detectar imatges disponibles per una planta
 async function detectarImatgesPlanta(nomCientific) {
     // Normalitzar el nom científic
@@ -149,7 +157,7 @@ async function detectarImatgesPlanta(nomCientific) {
                 const nomImatge = `${nomCurt}_${numeroFormatat}_${tipus}.${ext}`;
                 
                 try {
-                    // Comprovar si la imatge existeix (simulat)
+                    // Comprovar si la imatge existeix (real)
                     const existeix = await comprovarImatgeExisteix(nomImatge);
                     
                     if (existeix) {
@@ -169,7 +177,35 @@ async function detectarImatgesPlanta(nomCientific) {
         }
     }
     
-    // Si no hem trobat cap imatge, usar la per defecte
+    // Si no hem trobat cap imatge amb el patró estàndard, buscar alternatives
+    if (!imatges.principal) {
+        // Provar patrons alternatius més simples
+        const patronsAlternatius = [
+            `${nomCurt}.jpg`,
+            `${nomCurt}.jpeg`,
+            `${nomCurt}.png`,
+            `${nomCurt}_01.jpg`,
+            `${nomCurt}_1.jpg`,
+            `${nomBase}.jpg`,
+            `${nomBase}.jpeg`,
+            `${nomBase}.png`
+        ];
+        
+        for (const nomImatge of patronsAlternatius) {
+            try {
+                const existeix = await comprovarImatgeExisteix(nomImatge);
+                if (existeix) {
+                    imatges.principal = nomImatge;
+                    imatges.principal_tipus = 'general';
+                    break;
+                }
+            } catch (error) {
+                continue;
+            }
+        }
+    }
+    
+    // Si encara no hem trobat cap imatge, usar la per defecte
     if (!imatges.principal) {
         imatges.principal = 'default_planta.jpg';
         imatges.principal_tipus = 'general';
@@ -180,22 +216,49 @@ async function detectarImatgesPlanta(nomCientific) {
 
 // Comprovar si una imatge existeix (simulat per a aplicació estàtica)
 async function comprovarImatgeExisteix(nomImatge) {
-    // En una aplicació real, faries una petició HEAD per comprovar si existeix
-    // Per simplicitat, assumim que existeixen certes imatges segons patrons coneguts
-    const imatgesConesudes = [
-        'acer_campestre_01_general.jpg',
-        'ajuga_reptans_01_general.jpg',
-        'ajuga_reptans_02_flor.jpg',
-        'alyssum_alyssoides_01_general.jpg',
-        'trifolium_repens_01_general.jpg',
-        'trifolium_repens_02_flor.jpg',
-        'vaccinium_myrtillus_01_general.jpg',
-        'vaccinium_myrtillus_02_fruit.jpg',
-        'viscum_album_01_general.jpg',
-        'default_planta.jpg'
-    ];
+    try {
+        const url = CONFIG.imagesPath + nomImatge;
+        const response = await fetch(url, { method: 'HEAD' });
+        return response.ok;
+    } catch (error) {
+        return false;
+    }
+}
+
+// Funció alternativa per detectar totes les imatges disponibles d'un cop
+async function detectarTotesLesImatges() {
+    console.log("Detectant imatges disponibles...");
     
-    return imatgesConesudes.includes(nomImatge);
+    // Si tens un manifest o index de les imatges, pots carregar-lo aquí
+    // Alternativament, pots provar patrons coneguts
+    
+    const imatgesDetectades = {};
+    
+    for (const planta of window.app.plantes) {
+        const nomCientific = planta.nom_cientific;
+        const plantaId = planta.id || sanitizeTitle(nomCientific);
+        
+        try {
+            const imatges = await detectarImatgesPlanta(nomCientific);
+            imatgesDetectades[plantaId] = imatges;
+            
+            // Log per debug
+            if (imatges.principal !== 'default_planta.jpg') {
+                console.log(`Imatges trobades per ${nomCientific}:`, imatges);
+            }
+        } catch (error) {
+            console.warn(`Error detectant imatges per ${nomCientific}:`, error);
+            // Usar imatge per defecte
+            imatgesDetectades[plantaId] = {
+                principal: 'default_planta.jpg',
+                principal_tipus: 'general',
+                detalls: [],
+                detalls_tipus: []
+            };
+        }
+    }
+    
+    return imatgesDetectades;
 }
 
 // Configurar navegació
