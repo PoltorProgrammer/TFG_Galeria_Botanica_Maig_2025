@@ -20,8 +20,8 @@
         <header class="app-header">
             <h1>Galeria Botànica UAB</h1>
             <nav class="app-nav">
-                <button onclick="window.app.mostrarGaleria()" class="nav-btn active" id="btn-galeria">Galeria</button>
-                <button onclick="window.app.mostrarMapa()" class="nav-btn" id="btn-mapa">Mapa</button>
+                <button onclick="mostrarGaleria()" class="nav-btn active" id="btn-galeria">Galeria</button>
+                <button onclick="mostrarMapa()" class="nav-btn" id="btn-mapa">Mapa</button>
             </nav>
         </header>
 
@@ -34,7 +34,6 @@
             <!-- MAPA -->
             <div id="mapa-section" class="mapa-botanica-contenidor" style="display: none;">
                 <!-- Els filtres del mapa es generaran dinàmicament -->
-                <div id="mapa-botanica" style="height: 600px;"></div>
             </div>
         </main>
 
@@ -58,9 +57,133 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
     
-    <!-- Scripts propis adaptats -->
-    <script src="assets/js/app.js"></script>
-    <script src="assets/js/galeria.js"></script>
-    <script src="assets/js/mapa.js"></script>
+    <!-- Variables globals per compatibilitat amb WordPress -->
+    <script>
+        // Variables globals necessàries per als scripts originals
+        var gb_vars = {
+            ajaxurl: 'api/ajax.php' // Simulem l'AJAX de WordPress
+        };
+        
+        var mb_vars = {
+            ajaxurl: 'api/ajax.php',
+            plugin_url: '.',
+            dades_plantes: [] // Es carregarà dinàmicament
+        };
+        
+        // Variable global per a les dades de plantes (per la galeria)
+        var gb_plantes_data = [];
+    </script>
+    
+    <!-- Scripts originals de WordPress adaptats -->
+    <script src="assets/js/galeria-botanica-original.js"></script>
+    <script src="assets/js/mapa-botanica-original.js"></script>
+    
+    <!-- Script de navegació -->
+    <script>
+        // Funcions de navegació
+        function mostrarGaleria() {
+            document.getElementById('galeria-section').style.display = 'block';
+            document.getElementById('mapa-section').style.display = 'none';
+            
+            document.getElementById('btn-galeria').classList.add('active');
+            document.getElementById('btn-mapa').classList.remove('active');
+        }
+
+        function mostrarMapa() {
+            document.getElementById('galeria-section').style.display = 'none';
+            document.getElementById('mapa-section').style.display = 'block';
+            
+            document.getElementById('btn-galeria').classList.remove('active');
+            document.getElementById('btn-mapa').classList.add('active');
+            
+            // Redimensionar el mapa si ja existeix
+            if (window.map) {
+                setTimeout(() => window.map.invalidateSize(), 100);
+            }
+        }
+        
+        // Carregar dades i inicialitzar
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Mostrar loading
+                document.getElementById('loading-overlay').classList.remove('hidden');
+                
+                // Carregar dades de plantes
+                const response = await fetch('dades/plantes.json');
+                const data = await response.json();
+                
+                // Assignar a variables globals
+                gb_plantes_data = data;
+                mb_vars.dades_plantes = processarDadesPerMapa(data);
+                
+                // Generar contingut de la galeria
+                await generarGaleriaHTML(data);
+                
+                // Generar contingut del mapa
+                await generarMapaHTML();
+                
+                // Amagar loading
+                document.getElementById('loading-overlay').classList.add('hidden');
+                
+            } catch (error) {
+                console.error('Error carregant dades:', error);
+                document.getElementById('loading-overlay').innerHTML = 
+                    '<div style="color: red;">Error carregant les dades. Si us plau, recarrega la pàgina.</div>';
+            }
+        });
+        
+        // Processar dades per al mapa (format compatible)
+        function processarDadesPerMapa(plantes) {
+            return plantes.map(planta => ({
+                ...planta,
+                imatge: planta.imatges?.principal ? `assets/imatges/${planta.imatges.principal}` : '',
+                habitat_norm: planta.habitat ? planta.habitat.map(h => h.toLowerCase().replace(/\s+/g, '_').replace(/\s*\(.*?\)\s*/g, '')) : [],
+                floracio_norm: planta.caracteristiques?.floracio ? 
+                    (Array.isArray(planta.caracteristiques.floracio) ? 
+                        planta.caracteristiques.floracio.map(f => f.toLowerCase().replace(/\s*\(.*?\)\s*/g, '')) : 
+                        [planta.caracteristiques.floracio.toLowerCase().replace(/\s*\(.*?\)\s*/g, '')]) : [],
+                usos_norm: planta.usos ? planta.usos.map(u => u.toLowerCase().replace(/\s+/g, '_').replace(/\s*\(.*?\)\s*/g, '')) : [],
+                info_completa: construirInfoCompleta(planta)
+            }));
+        }
+        
+        // Construir informació completa per la cerca
+        function construirInfoCompleta(planta) {
+            let info = [
+                planta.nom_comu, 
+                planta.nom_cientific, 
+                planta.familia, 
+                planta.descripcio, 
+                planta.tipus
+            ];
+            
+            if (planta.caracteristiques) {
+                Object.values(planta.caracteristiques).forEach(valor => {
+                    if (Array.isArray(valor)) {
+                        info.push(...valor);
+                    } else if (valor) {
+                        info.push(valor);
+                    }
+                });
+            }
+            
+            if (planta.usos) {
+                const usosNetejats = planta.usos.map(us => us.replace(/\s*\(.*?\)\s*/g, '').trim());
+                info.push(...usosNetejats);
+            }
+            
+            if (planta.colors) {
+                const colorsNetejats = planta.colors.map(c => c.replace(/\s*\(.*?\)\s*/g, '').trim());
+                info.push(...colorsNetejats);
+            }
+            
+            if (planta.habitat) {
+                const habitatsNetejats = planta.habitat.map(h => h.replace(/\s*\(.*?\)\s*/g, '').trim());
+                info.push(...habitatsNetejats);
+            }
+            
+            return info.filter(i => i).join(' ');
+        }
+    </script>
 </body>
 </html>
