@@ -9,6 +9,10 @@ let markers = null;
 let totsElsMarcadors = [];
 let habitatsLayers = {};
 
+// Fer les funcions globals
+window.generarGaleriaHTML = generarGaleriaHTML;
+window.generarMapaHTML = generarMapaHTML;
+
 // Funció per generar el HTML del mapa
 async function generarMapaHTML() {
     const mapaContainer = document.getElementById('mapa-section');
