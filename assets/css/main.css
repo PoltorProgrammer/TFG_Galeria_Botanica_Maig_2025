@@ -762,3 +762,147 @@ body {
         padding: 10px;
     }
 }
+
+/* PATRONS LATERALS BOTÀNICS - Afegir a main.css */
+
+/* Patrons de fons laterals */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    width: 200px;
+    height: 100vh;
+    background-repeat: repeat-y;
+    background-size: 200px auto;
+    z-index: -1;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+/* Patró esquerre */
+body::before {
+    left: -50px;
+    background-image: url('../imatges/patro-esquerra.jpg');
+}
+
+/* Patró dret */
+body::after {
+    right: -50px;
+    background-image: url('../imatges/patro-dreta.jpg');
+}
+
+/* Ajustar el contenidor principal per deixar espai als patrons */
+.app-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* En pantalles grans, afegir més marge per mostrar millor els patrons */
+@media (min-width: 1400px) {
+    .app-container {
+        margin: 0 100px;
+    }
+    
+    body::before {
+        left: 0;
+        opacity: 0.2;
+    }
+    
+    body::after {
+        right: 0;
+        opacity: 0.2;
+    }
+}
+
+/* En pantalles molt grans, fer els patrons més visibles */
+@media (min-width: 1600px) {
+    .app-container {
+        margin: 0 150px;
+    }
+    
+    body::before,
+    body::after {
+        width: 250px;
+        background-size: 250px auto;
+        opacity: 0.25;
+    }
+    
+    body::before {
+        left: 20px;
+    }
+    
+    body::after {
+        right: 20px;
+    }
+}
+
+/* Pantalles extragrans */
+@media (min-width: 1920px) {
+    .app-container {
+        margin: 0 200px;
+    }
+    
+    body::before,
+    body::after {
+        width: 300px;
+        background-size: 300px auto;
+        opacity: 0.3;
+    }
+    
+    body::before {
+        left: 50px;
+    }
+    
+    body::after {
+        right: 50px;
+    }
+}
+
+/* Amagar patrons en pantalles petites per no interferir */
+@media (max-width: 1200px) {
+    body::before,
+    body::after {
+        display: none;
+    }
+}
+
+/* Variant alternativa: Patrons només visibles en el fons, sense afectar el layout */
+/*
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    width: 150px;
+    height: 100vh;
+    background-repeat: repeat-y;
+    background-size: 150px auto;
+    z-index: -1;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+body::before {
+    left: 0;
+    background-image: url('../imatges/patro-esquerra.jpg');
+}
+
+body::after {
+    right: 0;
+    background-image: url('../imatges/patro-dreta.jpg');
+}
+*/
+
+/* Efecte adicional: Gradient overlay per fer que els patrons es difuminin */
+body::before {
+    background: 
+        linear-gradient(to right, transparent 0%, rgba(255,255,255,0.3) 70%, rgba(255,255,255,0.8) 100%),
+        url('../imatges/patro-esquerra.jpg');
+}
+
+body::after {
+    background: 
+        linear-gradient(to left, transparent 0%, rgba(255,255,255,0.3) 70%, rgba(255,255,255,0.8) 100%),
+        url('../imatges/patro-dreta.jpg');
+}
