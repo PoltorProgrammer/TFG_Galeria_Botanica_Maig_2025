@@ -627,7 +627,8 @@ function generarHTMLDetallsPlanta(planta) {
     if (imatges.principal) {
         const imatgeUrl = `assets/imatges/${imatges.principal}`;
         html += '<div class="planta-imatge-principal">';
-        html += `<img src="${imatgeUrl}" alt="${escapeHtml(planta.nom_comu)}" data-tipus="${escapeHtml(imatges.principal_tipus)}" onerror="this.src='assets/imatges/default_planta.jpg'">`;
+        html += `<img src="${imatgeUrl}" alt="${escapeHtml(planta.nom_comu)}" data-tipus="${escapeHtml(imatges.principal_tipus)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=planta-sense-imatge>Imatge no disponible</div>'">`;
+
         if (imatges.principal_tipus !== 'general') {
             html += `<span class="planta-tipus-imatge-detall">${imatges.principal_tipus.charAt(0).toUpperCase() + imatges.principal_tipus.slice(1)}</span>`;
         }
@@ -645,7 +646,8 @@ function generarHTMLDetallsPlanta(planta) {
             const imatgeUrl = `assets/imatges/${imatge}`;
             const tipus = imatges.detalls_tipus[i] || 'general';
             html += '<div class="planta-imatge-detall" data-tipus="' + escapeHtml(tipus) + '">';
-            html += `<img src="${imatgeUrl}" alt="Detall de ${escapeHtml(planta.nom_comu)}" data-tipus="${escapeHtml(tipus)}" onerror="this.src='assets/imatges/default_planta.jpg'">`;
+            html += `<img src="${imatgeUrl}" alt="Detall de ${escapeHtml(planta.nom_comu)}" data-tipus="${escapeHtml(tipus)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=planta-sense-imatge>Imatge no disponible</div>'">`;
+
             if (tipus !== 'general') {
                 html += `<span class="planta-tipus-imatge-detall">${tipus.charAt(0).toUpperCase() + tipus.slice(1)}</span>`;
             }
