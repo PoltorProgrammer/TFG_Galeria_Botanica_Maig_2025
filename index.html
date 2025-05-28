@@ -177,11 +177,32 @@
                 
                 console.log('Dades carregades:', data.length, 'plantes');
                 
-                // Generar contingut de la galeria (ara la funció ja està definida)
-                await generarMapaHTML();
+                // Esperar que les funcions estiguin disponibles
+                let intents = 0;
+                const esperarFuncions = () => {
+                    if (typeof window.generarGaleriaHTML === 'function' && typeof window.generarMapaHTML === 'function') {
+                        // Generar contingut de la galeria
+                        window.generarGaleriaHTML(data).then(() => {
+                            // Generar contingut del mapa
+                            return window.generarMapaHTML();
+                        }).then(() => {
+                            // Amagar loading
+                            document.getElementById('loading-overlay').classList.add('hidden');
+                            console.log('Aplicació inicialitzada correctament');
+                        });
+                    } else {
+                        intents++;
+                        if (intents < 50) { // Màxim 5 segons d'espera
+                            setTimeout(esperarFuncions, 100);
+                        } else {
+                            console.error('No s\'han pogut carregar les funcions necessàries');
+                            document.getElementById('loading-overlay').innerHTML = 
+                                '<div style="color: red; text-align: center;"><h3>Error carregant l\'aplicació</h3><p>Si us plau, recarrega la pàgina.</p></div>';
+                        }
+                    }
+                };
                 
-                // Generar contingut del mapa
-                await generarMapaHTML();
+                esperarFuncions();
                 
                 // Amagar loading
                 document.getElementById('loading-overlay').classList.add('hidden');
