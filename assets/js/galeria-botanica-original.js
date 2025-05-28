@@ -749,7 +749,7 @@ function mostrarFiltresActius() {
         console.error("Error en mostrarFiltresActius:", error);
         jQuery('.netejar-filtres').hide();
     }
-}
+}                      
 
 // Eliminar un filtre individual
 function eliminarFiltre($element) {
@@ -1248,5 +1248,15 @@ function generarHTMLDetallsPlanta(planta) {
     return html;
 }
 
+// Al final del fitxer, després de totes les funcions
+jQuery(document).ready(function() {
+    verificarHashURL();
+});
+                                 
 // Cridar verificarHashURL quan es carregui la pàgina
 jQuery(window).on('load', verificarHashURL);                
+
+
+// Assegurar funcions globals per compatibilitat
+window.generarGaleriaHTML = generarGaleriaHTML;
+window.mostrarFiltresActius = mostrarFiltresActius;
