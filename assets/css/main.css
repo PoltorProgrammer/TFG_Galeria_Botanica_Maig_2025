@@ -18,6 +18,112 @@ body {
 }
 
 /* =============================================================================
+   MARGES DECORATIUS AMB ENFILADISSES
+   ========================================================================== */
+
+/* Pseudoelements per als marges decoratius */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    width: 200px; /* Amplada de les imatges decoratives */
+    height: 100vh;
+    z-index: -1; /* Posar darrere de tot el contingut */
+    background-repeat: repeat-y;
+    background-position: top left;
+    background-size: 200px auto; /* Amplada fixa, altura automàtica */
+    pointer-events: none; /* Evitar que interfereixin amb la interacció */
+}
+
+/* Marge esquerre */
+body::before {
+    left: 0;
+    background-image: url('/assets/imatges/marge-esquerra.png');
+}
+
+/* Marge dret */
+body::after {
+    right: 0;
+    background-image: url('/assets/imatges/marge-dreta.png');
+}
+
+/* Contenidor principal de l'aplicació */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    position: relative;
+    z-index: 1; /* Assegurar que estigui per damunt dels marges */
+    /* Marges laterals per deixar espai als decorats */
+    margin-left: 220px; /* 200px de la imatge + 20px de separació */
+    margin-right: 220px; /* 200px de la imatge + 20px de separació */
+    background: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.app-header {
+    background: linear-gradient(135deg, #2c5530 0%, #4a7c59 100%);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 2;
+}
+
+.app-header h1 {
+    margin: 0 0 1rem 0;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Navegació */
+.app-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.nav-btn.active {
+    background: white;
+    color: #2c5530;
+    border-color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Main content */
+.app-main {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+    min-height: 0;
+    z-index: 2;
+}
+
+/* =============================================================================
    ESTILS ESPECÍFICS PER A LA PESTANYA D'INICI
    ========================================================================== */
 
@@ -267,11 +373,9 @@ body {
 /* Seccions específiques */
 #galeria-section {
     padding: 0;
-    /* NO afegim display aquí - es controla amb JavaScript */
 }
 
 #mapa-section {
-    /* ELIMINAT: height, min-height, overflow, display, padding */
     /* Es controla completament amb JavaScript i CSS inline */
 }
 
@@ -802,44 +906,66 @@ body {
    ========================================================================== */
 
 /* RESPONSIVE: Amagar els marges en pantalles petites */
-@media (max-width: 1400px) {
+@media (max-width: 1000px) {
     body::before,
     body::after {
         display: none;
     }
     
-    .app-main,
-    .app-header {
+    .app-container {
         margin-left: 0;
         margin-right: 0;
+        margin-top: 0;
+        border-radius: 0;
+        box-shadow: none;
     }
 }
 
 /* Per pantalles mitjanes, reduir l'amplada dels marges */
-@media (min-width: 1401px) and (max-width: 1600px) {
+@media (min-width: 1001px) and (max-width: 1400px) {
     body::before,
     body::after {
         width: 150px;
     }
     
-    .app-main,
-    .app-header {
+    .app-container {
         margin-left: 170px; /* 150px + 20px */
         margin-right: 170px;
+        margin-top: 20px;
+        border-radius: 8px 8px 0 0;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
     }
 }
 
 /* Per pantalles grans, amplada completa */
-@media (min-width: 1601px) {
+@media (min-width: 1401px) {
     body::before,
     body::after {
         width: 200px;
     }
     
-    .app-main,
-    .app-header {
+    .app-container {
         margin-left: 220px; /* 200px + 20px */
         margin-right: 220px;
+        margin-top: 20px;
+        border-radius: 8px 8px 0 0;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Per pantalles molt grans, amplada extra */
+@media (min-width: 1800px) {
+    body::before,
+    body::after {
+        width: 250px;
+    }
+    
+    .app-container {
+        margin-left: 270px; /* 250px + 20px */
+        margin-right: 270px;
+        margin-top: 20px;
+        border-radius: 8px 8px 0 0;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
     }
 }
 
@@ -1004,120 +1130,6 @@ body {
     }
 }
 
-
-/* =============================================================================
-   MARGES DECORATIUS AMB ENFILADISSES - VERSIÓ MILLORADA
-   ========================================================================== */
-
-/* Pseudoelements per als marges decoratius - SEMPRE VISIBLES */
-body::before,
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    width: 200px; /* Amplada de les imatges decoratives */
-    height: 100vh;
-    z-index: -1; /* Posar darrere de tot el contingut */
-    background-repeat: repeat-y;
-    background-position: top left; /* Canviat a left per millor alineació */
-    background-size: 200px auto; /* Amplada fixa, altura automàtica per mantenir proporció */
-    pointer-events: none; /* Evitar que interfereixin amb la interacció */
-}
-
-/* Marge esquerre */
-body::before {
-    left: 0;
-    background-image: url('/assets/imatges/marge-esquerra.png');
-}
-
-/* Marge dret */
-body::after {
-    right: 0;
-    background-image: url('/assets/imatges/marge-dreta.png');
-}
-
-/* Assegurar que el cos tingui fons blanc per contrast */
-body {
-    background-color: #f8f9fa;
-    position: relative;
-}
-
-/* Contenidor principal de l'aplicació amb marges per evitar sobreposició */
-.app-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: visible;
-    position: relative;
-    z-index: 1; /* Assegurar que estigui per damunt dels marges */
-    /* Marges laterals per deixar espai als decorats */
-    margin-left: 220px; /* 200px de la imatge + 20px de separació */
-    margin-right: 220px; /* 200px de la imatge + 20px de separació */
-}
-
-/* Header i main amb els mateixos marges */
-.app-header,
-.app-main {
-    position: relative;
-    z-index: 2; /* Per damunt dels pseudoelements */
-}
-
-/* =============================================================================
-   RESPONSIVE DESIGN PER ALS MARGES
-   ========================================================================== */
-
-/* Per pantalles molt petites, amagar els marges decoratius */
-@media (max-width: 1000px) {
-    body::before,
-    body::after {
-        display: none;
-    }
-    
-    .app-container {
-        margin-left: 0;
-        margin-right: 0;
-    }
-}
-
-/* Per pantalles mitjanes, reduir l'amplada dels marges */
-@media (min-width: 1001px) and (max-width: 1400px) {
-    body::before,
-    body::after {
-        width: 150px;
-    }
-    
-    .app-container {
-        margin-left: 170px; /* 150px + 20px */
-        margin-right: 170px;
-    }
-}
-
-/* Per pantalles grans, amplada completa */
-@media (min-width: 1401px) {
-    body::before,
-    body::after {
-        width: 200px;
-    }
-    
-    .app-container {
-        margin-left: 220px; /* 200px + 20px */
-        margin-right: 220px;
-    }
-}
-
-/* Per pantalles molt grans, amplada extra */
-@media (min-width: 1800px) {
-    body::before,
-    body::after {
-        width: 250px;
-    }
-    
-    .app-container {
-        margin-left: 270px; /* 250px + 20px */
-        margin-right: 270px;
-    }
-}
-
 /* =============================================================================
    ASSEGURAR QUE EL CONTINGUT SIGUI SEMPRE VISIBLE
    ========================================================================== */
@@ -1160,22 +1172,6 @@ body::after {
     transition: margin-left 0.3s ease, margin-right 0.3s ease;
 }
 
-/* Opcional: Afegir una ombra subtil al contingut per destacar-lo dels marges */
-.app-container {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-    background: white;
-    border-radius: 0; /* Sense vores arrodonides per defecte */
-}
-
-/* Només per pantalles grans on els marges són visibles */
-@media (min-width: 1001px) {
-    .app-container {
-        border-radius: 8px 8px 0 0; /* Vores arrodonides només a la part superior */
-        margin-top: 20px;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-    }
-}
-
 /* =============================================================================
    CORRECCIÓ D'ERRORS POTENCIALS
    ========================================================================== */
@@ -1199,10 +1195,10 @@ body::after {
     }
 }
 
-/* Debug: Opcional - descomenta per veure els marges amb color de fons */
-
+/* Debug: Opcional - comenta aquesta secció quan vulguis treure el color de debug */
+/*
 body::before,
 body::after {
     background-color: rgba(255, 0, 0, 0.1) !important;
 }
-
+*/
