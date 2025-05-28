@@ -1,6 +1,3 @@
-acaba'm aquesta versió del fitxer complet, continua la funció (// Mostrar filtres actius
-function mostrarFiltresActius() {) fins a acabrar, escriu-ho aquí al xat, no em fagis o editis cap document
-
 /**
  * Galeria Botànica UAB - Adaptat per funcionar sense WordPress
  * Basat en galeria-botanica.js original
