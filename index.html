@@ -14,20 +14,478 @@
     <link rel="stylesheet" href="assets/css/galeria-botanica.css">
     <link rel="stylesheet" href="assets/css/mapa-botanica.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    
+    <style>
+        /* Estils específics per a la pestanya d'inici */
+        #inici-section {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        .inici-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            border: 2px solid #4CAF50;
+        }
+
+        .inici-hero h1 {
+            color: #2c5530;
+            font-size: 2.5rem;
+            margin: 0 0 1rem 0;
+            font-weight: 700;
+        }
+
+        .inici-hero .subtitol {
+            color: #4a7c59;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .inici-hero .descripcio {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .inici-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            min-width: 120px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .inici-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .inici-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 4px solid #4CAF50;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .inici-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        .inici-card h3 {
+            color: #2c5530;
+            margin: 0 0 1rem 0;
+            font-size: 1.4rem;
+        }
+
+        .inici-card p {
+            margin: 0.5rem 0;
+            color: #555;
+        }
+
+        .inici-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .inici-table th {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .inici-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .inici-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .zones-clau {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .zones-clau h3 {
+            color: #2c5530;
+            margin: 0 0 1.5rem 0;
+            text-align: center;
+        }
+
+        .zona-item {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #FF9800;
+        }
+
+        .zona-nom {
+            font-weight: bold;
+            color: #2c5530;
+            margin-bottom: 0.5rem;
+        }
+
+        .caracteristiques-tecniques {
+            background: #e8f5e8;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .col-laboracio {
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .col-laboracio h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .col-laboracio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .col-laboracio-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .credits {
+            background: #2c5530;
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .credits h3 {
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-btn:hover {
+            background: #388E3C;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .cta-btn.secondary {
+            background: #FF9800;
+        }
+
+        .cta-btn.secondary:hover {
+            background: #F57C00;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #inici-section {
+                padding: 1rem;
+            }
+            
+            .inici-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .inici-stats {
+                gap: 1rem;
+            }
+            
+            .inici-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .col-laboracio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
         <header class="app-header">
             <h1>Galeria Botànica UAB</h1>
             <nav class="app-nav">
-                <button onclick="mostrarGaleria()" class="nav-btn active" id="btn-galeria">Galeria</button>
+                <button onclick="mostrarInici()" class="nav-btn active" id="btn-inici">Inici</button>
+                <button onclick="mostrarGaleria()" class="nav-btn" id="btn-galeria">Galeria</button>
                 <button onclick="mostrarMapa()" class="nav-btn" id="btn-mapa">Mapa</button>
             </nav>
         </header>
 
         <main class="app-main">
+            <!-- INICI -->
+            <div id="inici-section">
+                <div class="inici-hero">
+                    <h1>🌿 Galeria i Mapa Botànica UAB</h1>
+                    <div class="subtitol">Descobreix la biodiversitat del campus de la Universitat Autònoma de Barcelona</div>
+                    <div class="descripcio">
+                        Benvinguts i benvingudes al portal que converteix els <strong>260 ha</strong> de zones verdes de la UAB 
+                        en un herbari digital interactiu.
+                    </div>
+                    
+                    <div class="inici-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">300+</span>
+                            <span class="stat-label">Espècies</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">1800+</span>
+                            <span class="stat-label">Fotografies</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">260</span>
+                            <span class="stat-label">Hectàrees</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="#" onclick="mostrarGaleria()" class="cta-btn">
+                        🍃 Explora la Galeria
+                    </a>
+                    <a href="#" onclick="mostrarMapa()" class="cta-btn secondary">
+                        🗺️ Viatja pel Mapa
+                    </a>
+                </div>
+
+                <div class="inici-grid">
+                    <div class="inici-card">
+                        <h3>🔍 Galeria Botànica</h3>
+                        <p>Un catàleg visual filtrable amb fotos detallades (flor, fulla, fruit, hàbit) i fitxa completa.</p>
+                        <p><strong>Com t'ajuda:</strong> Identifica espècies ràpidament amb filtres per color, hàbitat o època de floració.</p>
+                    </div>
+                    
+                    <div class="inici-card">
+                        <h3>🗺️ Mapa Botànic</h3>
+                        <p>Un mapa interactiu amb marcadors geolocalitzats i rutes temàtiques que situa cada planta <em>in situ</em>.</p>
+                        <p><strong>Com t'ajuda:</strong> Organitza sortides, troba exemplars singulars i segueix itineraris auto-guiats.</p>
+                    </div>
+                    
+                    <div class="inici-card">
+                        <h3>⚡ Cercador Instantani</h3>
+                        <p>Cerca per nom científic o vulgar en temps real.</p>
+                        <p><strong>Com t'ajuda:</strong> Troba la planta que busques en segons.</p>
+                    </div>
+                </div>
+
+                <div class="inici-card">
+                    <h3>🎯 Per què un catàleg botànic del campus?</h3>
+                    <p>El campus de Bellaterra és molt més que aules i laboratoris: és un mosaic de <strong>boscos mediterranis, torrents i camps</strong> que actua de corredor biològic entre el Massís de Sant Llorenç i Collserola. Documentar-lo té tres grans avantatges:</p>
+                    
+                    <table class="inici-table">
+                        <thead>
+                            <tr>
+                                <th>Àmbit</th>
+                                <th>Com t'ajuda</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>📚 Docència</strong></td>
+                                <td>Facilita la identificació de plantes durant sortides de camp i pràctiques</td>
+                            </tr>
+                            <tr>
+                                <td><strong>🔬 Ciència</strong></td>
+                                <td>Genera dades fiables per a projectes de recerca i seguiment de biodiversitat</td>
+                            </tr>
+                            <tr>
+                                <td><strong>🌱 Divulgació</strong></td>
+                                <td>Apropa la botànica a qualsevol persona que passegi pel campus</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="zones-clau">
+                    <h3>🗺️ Zones clau per començar a explorar</h3>
+                    
+                    <div class="zona-item">
+                        <div class="zona-nom">🌳 Camí de Ho Chi Minh</div>
+                        <div>Alzinar amb arbusts mediterranis i orquídies de primavera.</div>
+                    </div>
+                    
+                    <div class="zona-item">
+                        <div class="zona-nom">🌊 Torrent de Can Domènech</div>
+                        <div>Vegetació de ribera amb salzes, joncs i freixes.</div>
+                    </div>
+                    
+                    <div class="zona-item">
+                        <div class="zona-nom">🌺 Eix Central</div>
+                        <div>Arborets ornamentals que combinen espècies autòctones i exòtiques.</div>
+                    </div>
+                    
+                    <div class="zona-item">
+                        <div class="zona-nom">🌾 Rondes del campus</div>
+                        <div>Prats oberts ideals per observar floració estacional d'herbàcies.</div>
+                    </div>
+                </div>
+
+                <div class="caracteristiques-tecniques">
+                    <h3>⚙️ Com s'ha construït la plataforma?</h3>
+                    <ul>
+                        <li><strong>Plugin de WordPress</strong> 100% codi obert – dos <em>shortcodes</em> carreguen la galeria i el mapa.</li>
+                        <li><strong>Fitxer únic <code>plantes.json</code></strong> – la "font de la veritat" que evita dades duplicades.</li>
+                        <li><strong>Leaflet + Tailwind</strong> – mapa lleuger i disseny adaptat a mòbil i escriptori.</li>
+                        <li><strong>Editor offline integrat</strong> – afegeix o edita espècies sense tocar codi gràcies a la File System Access API (opcional).</li>
+                        <li><strong>Llicència MIT</strong> – pots forquejar, millorar o portar el projecte al teu entorn.</li>
+                    </ul>
+                </div>
+
+                <div class="inici-card">
+                    <h3>👥 A qui va dirigit?</h3>
+                    <ul>
+                        <li><strong>Estudiantat de Biologia, Ciències Ambientals i Educació</strong> – recurs per a pràctiques i TFG/TFM.</li>
+                        <li><strong>Professorat</strong> – material didàctic per a classes i sortides.</li>
+                        <li><strong>Investigadors/es</strong> – punt de partida per a estudis de biodiversitat local.</li>
+                        <li><strong>Públic general</strong> – eina per gaudir i entendre la natura del campus.</li>
+                    </ul>
+                </div>
+
+                <div class="inici-card">
+                    <h3>🚀 Plans de futur</h3>
+                    <ol>
+                        <li><strong>Miniatures WebP</strong> per accelerar encara més la galeria.</li>
+                        <li><strong>API REST</strong> perquè aplicacions mòbils (p. ex. Planttes) consumeixin dades en temps real.</li>
+                        <li><strong>Versió PWA</strong> amb funcionalitat offline completa.</li>
+                        <li><strong>Traducció multilingüe</strong> per compartir el recurs amb estudiants internacionals.</li>
+                        <li><strong>Nous camps</strong>: pol·linitzadors, estatus de protecció i fenologia mensual.</li>
+                    </ol>
+                </div>
+
+                <div class="col-laboracio">
+                    <h3>🤝 Com pots col·laborar?</h3>
+                    
+                    <div class="col-laboracio-grid">
+                        <div class="col-laboracio-item">
+                            <strong>📸 Afegir dades o fotos</strong><br>
+                            Obre un <em>Pull Request</em> o puja una <em>Issue</em> amb la teva proposta.
+                        </div>
+                        
+                        <div class="col-laboracio-item">
+                            <strong>🐛 Reportar un error</strong><br>
+                            Indica la planta, captura de pantalla i pas a pas per reproduir-lo.
+                        </div>
+                        
+                        <div class="col-laboracio-item">
+                            <strong>🌍 Traduir la interfície</strong><br>
+                            Crea un fitxer a <code>/lang</code> seguint l'estructura JSON existent.
+                        </div>
+                        
+                        <div class="col-laboracio-item">
+                            <strong>🚶 Organitzar una sortida guiada</strong><br>
+                            Escriu a <a href="mailto:botanica@uab.cat" style="color: #E8F5E8;">botanica@uab.cat</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="credits">
+                    <h3>👨‍🎓 Crèdits</h3>
+                    <p>Projecte desenvolupat com a <strong>Treball de Fi de Grau</strong> a la Facultat de Biociències de la UAB.</p>
+                    <p><strong>Autor:</strong> <em>Tomás González Bartomeu</em></p>
+                    <p><strong>Tutor acadèmic:</strong> <em>Ramon Pérez Obiol</em></p>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="#" onclick="mostrarGaleria()" class="cta-btn">
+                        🍃 Explora la Galeria
+                    </a>
+                    <a href="#" onclick="mostrarMapa()" class="cta-btn secondary">
+                        🗺️ Viatja pel Mapa
+                    </a>
+                </div>
+
+                <div style="text-align: center; margin: 2rem 0; color: #4CAF50; font-size: 1.2rem; font-weight: 600;">
+                    🌱 Ajuda'ns a fer créixer el coneixement de la flora local!
+                </div>
+            </div>
+
             <!-- GALERIA -->
-            <div id="galeria-section" class="galeria-botanica">
+            <div id="galeria-section" class="galeria-botanica" style="display: none;">
                 <!-- Els filtres i la graella es generaran dinàmicament amb JS -->
             </div>
 
@@ -212,18 +670,32 @@
         }
         
         // Funcions de navegació
+        function mostrarInici() {
+            document.getElementById('inici-section').style.display = 'block';
+            document.getElementById('galeria-section').style.display = 'none';
+            document.getElementById('mapa-section').style.display = 'none';
+            
+            document.getElementById('btn-inici').classList.add('active');
+            document.getElementById('btn-galeria').classList.remove('active');
+            document.getElementById('btn-mapa').classList.remove('active');
+        }
+
         function mostrarGaleria() {
+            document.getElementById('inici-section').style.display = 'none';
             document.getElementById('galeria-section').style.display = 'block';
             document.getElementById('mapa-section').style.display = 'none';
             
+            document.getElementById('btn-inici').classList.remove('active');
             document.getElementById('btn-galeria').classList.add('active');
             document.getElementById('btn-mapa').classList.remove('active');
         }
 
         function mostrarMapa() {
+            document.getElementById('inici-section').style.display = 'none';
             document.getElementById('galeria-section').style.display = 'none';
             document.getElementById('mapa-section').style.display = 'block';
             
+            document.getElementById('btn-inici').classList.remove('active');
             document.getElementById('btn-galeria').classList.remove('active');
             document.getElementById('btn-mapa').classList.add('active');
             
