@@ -80,6 +80,137 @@
     
     <!-- Script d'inicialització (DESPRÉS de carregar els altres scripts) -->
     <script>
+        // Sistema per assignar imatges automàticament
+        class SistemaImatges {
+            constructor() {
+                this.imatgesDisponibles = new Map(); // Mapa de nom_cientific -> llista d'imatges
+                this.tipusImatges = {
+                    'flor': 'flor',
+                    'fulla': 'fulla', 
+                    'fruit': 'fruit',
+                    'tija': 'tija',
+                    'habit': 'habit',
+                    'altre': 'altre'
+                };
+            }
+
+            // Convertir nom científic a format de fitxer
+            nomCientificAFitxer(nomCientific) {
+                return nomCientific.toLowerCase()
+                                  .replace(/\s+/g, '_')
+                                  .replace(/[^a-z0-9_]/g, '');
+            }
+
+            // Generar llista de possibles noms d'imatges per una planta
+            generarPossiblesImatges(nomCientific) {
+                const nomFitxer = this.nomCientificAFitxer(nomCientific);
+                const possiblesImatges = [];
+                
+                // Generar possibles noms per números 00-20 i tots els tipus
+                for (let num = 0; num <= 20; num++) {
+                    const numStr = num.toString().padStart(2, '0');
+                    Object.keys(this.tipusImatges).forEach(tipus => {
+                        possiblesImatges.push(`${nomFitxer}_${numStr}_${tipus}.jpg`);
+                    });
+                }
+                
+                return possiblesImatges;
+            }
+
+            // Verificar si una imatge existeix (usant una tècnica que no generi errors 404)
+            async verificarImatgeExisteix(rutaImatge) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = rutaImatge;
+                });
+            }
+
+            // Trobar totes les imatges disponibles per una planta
+            async trobarImatgesPlanta(nomCientific) {
+                const possiblesImatges = this.generarPossiblesImatges(nomCientific);
+                const imatgesTrobades = [];
+                
+                // Crear promeses per verificar totes les imatges en paral·lel
+                const verificacions = possiblesImatges.map(async (nomImatge) => {
+                    const rutaCompleta = `assets/imatges/${nomImatge}`;
+                    const existeix = await this.verificarImatgeExisteix(rutaCompleta);
+                    
+                    if (existeix) {
+                        // Extreure informació del nom del fitxer
+                        const parts = nomImatge.replace('.jpg', '').split('_');
+                        const numero = parts[parts.length - 2];
+                        const tipus = parts[parts.length - 1];
+                        
+                        return {
+                            nom: nomImatge,
+                            ruta: rutaCompleta,
+                            numero: parseInt(numero),
+                            tipus: tipus
+                        };
+                    }
+                    return null;
+                });
+                
+                // Esperar totes les verificacions
+                const resultats = await Promise.all(verificacions);
+                
+                // Filtrar nulls i ordenar per número
+                return resultats.filter(img => img !== null)
+                               .sort((a, b) => a.numero - b.numero);
+            }
+
+            // Assignar imatges a una planta
+            async assignarImatgesPlanta(planta) {
+                console.log(`Buscant imatges per: ${planta.nom_cientific}`);
+                
+                const imatgesTrobades = await this.trobarImatgesPlanta(planta.nom_cientific);
+                
+                if (imatgesTrobades.length === 0) {
+                    console.warn(`No s'han trobat imatges per: ${planta.nom_cientific}`);
+                    return {
+                        principal: null,
+                        principal_tipus: 'general',
+                        detalls: [],
+                        detalls_tipus: []
+                    };
+                }
+                
+                console.log(`Trobades ${imatgesTrobades.length} imatges per: ${planta.nom_cientific}`);
+                
+                // Assignar la primera imatge com a principal
+                const principal = imatgesTrobades[0];
+                
+                // La resta com a detalls
+                const detalls = imatgesTrobades.slice(1);
+                
+                return {
+                    principal: principal.nom,
+                    principal_tipus: principal.tipus,
+                    detalls: detalls.map(img => img.nom),
+                    detalls_tipus: detalls.map(img => img.tipus)
+                };
+            }
+
+            // Processar totes les plantes del JSON
+            async processarTotesLesPlantes(plantes) {
+                console.log('Iniciant assignació automàtica d\'imatges...');
+                const plantesAmbImatges = [];
+                
+                for (const planta of plantes) {
+                    const imatges = await this.assignarImatgesPlanta(planta);
+                    plantesAmbImatges.push({
+                        ...planta,
+                        imatges: imatges
+                    });
+                }
+                
+                console.log('Assignació d\'imatges completada!');
+                return plantesAmbImatges;
+            }
+        }
+        
         // Funcions de navegació
         function mostrarGaleria() {
             document.getElementById('galeria-section').style.display = 'block';
@@ -171,18 +302,22 @@
                 }
                 const data = await response.json();
                 
-                // Assignar a variables globals
-                gb_plantes_data = data;
-                mb_vars.dades_plantes = processarDadesPerMapa(data);
+                // Assignar imatges automàticament
+                const sistemaImatges = new SistemaImatges();
+                const plantesAmbImatges = await sistemaImatges.processarTotesLesPlantes(data.plantes);
                 
-                console.log('Dades carregades:', data.length, 'plantes');
+                // Assignar a variables globals
+                gb_plantes_data = plantesAmbImatges;
+                mb_vars.dades_plantes = processarDadesPerMapa(plantesAmbImatges);
+                
+                console.log('Dades carregades:', plantesAmbImatges.length, 'plantes amb imatges');
                 
                 // Esperar que les funcions estiguin disponibles
                 let intents = 0;
                 const esperarFuncions = () => {
                     if (typeof window.generarGaleriaHTML === 'function' && typeof window.generarMapaHTML === 'function') {
                         // Generar contingut de la galeria
-                        window.generarGaleriaHTML(data).then(() => {
+                        window.generarGaleriaHTML(plantesAmbImatges).then(() => {
                             // Generar contingut del mapa
                             return window.generarMapaHTML();
                         }).then(() => {
@@ -203,11 +338,6 @@
                 };
                 
                 esperarFuncions();
-                
-                // Amagar loading
-                document.getElementById('loading-overlay').classList.add('hidden');
-                
-                console.log('Aplicació inicialitzada correctament');
                 
             } catch (error) {
                 console.error('Error carregant dades:', error);
