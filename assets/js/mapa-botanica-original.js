@@ -3,10 +3,7 @@
  * Basat en mapa-botanica.js original
  */
 
-// Variables globals del mapa (NOMÉS UNA DECLARACIÓ)
-let map, markers, totsElsMarcadors, habitatsLayers;
-
-// Inicialitzar variables
+// Variables globals del mapa
 var map = null;
 var markers = null;
 var totsElsMarcadors = [];
