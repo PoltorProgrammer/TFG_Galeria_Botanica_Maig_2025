@@ -7,10 +7,10 @@
 let map, markers, totsElsMarcadors, habitatsLayers;
 
 // Inicialitzar variables
-map = null;
-markers = null;
-totsElsMarcadors = [];
-habitatsLayers = {};
+var map = null;
+var markers = null;
+var totsElsMarcadors = [];
+var habitatsLayers = {};
 
 // Funció per generar el HTML del mapa
 async function generarMapaHTML() {
