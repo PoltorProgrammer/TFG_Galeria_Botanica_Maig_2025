@@ -76,17 +76,28 @@ body {
 /* Main content */
 .app-main {
     flex: 1;
-    overflow: visible;
+    overflow: auto; /* CANVIAT: de visible a auto per permetre scroll */
     position: relative;
     min-height: 0;
 }
 
+/* =============================================================================
+   SECCIONS - CONTROL DE PESTANYES
+   ========================================================================== */
+
 /* Seccions específiques */
 #galeria-section {
     padding: 0;
+    /* NO afegim display aquí - es controla amb JavaScript */
 }
 
 #mapa-section {
+    /* ELIMINAT: height, min-height, overflow, display, padding */
+    /* Es controla completament amb JavaScript i CSS inline */
+}
+
+/* Quan el mapa està visible, assegurem que tingui l'estructura correcta */
+#mapa-section:not([style*="display: none"]) {
     height: auto;
     min-height: calc(100vh - 140px);
     overflow: visible;
@@ -577,7 +588,8 @@ body {
         font-size: 0.9rem;
     }
     
-    #mapa-section {
+    /* Ajustos per al mapa quan és visible */
+    #mapa-section:not([style*="display: none"]) {
         min-height: calc(100vh - 180px);
         padding: 15px;
     }
@@ -654,7 +666,8 @@ body {
         max-width: 200px;
     }
     
-    #mapa-section {
+    /* Ajustos per al mapa quan és visible */
+    #mapa-section:not([style*="display: none"]) {
         padding: 10px;
     }
     
