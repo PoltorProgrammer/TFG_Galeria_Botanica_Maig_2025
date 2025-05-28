@@ -37,25 +37,25 @@ async function generarHTMLFiltresMapa() {
     let html = '<div class="mapa-filtres">';
     html += '<div class="filtres-grup">';
     
-    // Generar filtres
+    // 1. PRIMER: Generar filtres
     html += generarFiltresTipusMapa(plantes);
     html += generarFiltresHabitatMapa(plantes);
     html += generarFiltresFloracioMapa(plantes);
     html += generarFiltresUsosMapa(plantes);
     html += generarFiltresFullatgeMapa(plantes);
     
-    // Cercador
-    html += `<div class="cerca-contenidor">
-        <input type="text" id="mapa-cerca" placeholder="Cercar per paraules clau..." class="cerca-input" />
-    </div>`;
-    
     html += '</div>'; // Fi filtres-grup
     
-    // Filtres actius + botó netejar
+    // 2. SEGON: Filtres actius
     html += `<div class="filtres-actius-contenidor">
         <span class="etiqueta-filtres-actius">Filtres actius:</span>
         <div class="filtres-actius"></div>
         <button class="netejar-filtres" style="display:none;">Netejar tots els filtres</button>
+    </div>`;
+    
+    // 3. TERCER: Cercador (AL FINAL, com a la galeria)
+    html += `<div class="cerca-contenidor">
+        <input type="text" id="mapa-cerca" placeholder="Cercar per paraules clau..." class="cerca-input" />
     </div>`;
     
     html += '</div>'; // Fi mapa-filtres
