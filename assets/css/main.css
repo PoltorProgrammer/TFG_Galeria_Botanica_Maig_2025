@@ -767,7 +767,7 @@ body {
 /* PATRONS LATERALS BOTÀNICS - Afegir a main.css */
 /* PATRONS LATERALS BOTÀNICS - Afegir a main.css */
 
-/* Patrons de fons laterals - NOMÉS FONS, SENSE AFECTAR LAYOUT */
+/* Patrons de fons laterals - IMATGES ORIGINALS REPETIDES */
 body::before,
 body::after {
     content: '';
@@ -778,7 +778,6 @@ body::after {
     background-repeat: repeat-y;
     background-size: 200px auto;
     z-index: -1;
-    opacity: 0.03;
     pointer-events: none;
 }
 
@@ -794,28 +793,10 @@ body::after {
     background-image: url('../imatges/patro-dreta.jpg');
 }
 
-/* Gradient overlay per fer que els patrons es difuminin cap al centre */
-body::before {
-    background: 
-        linear-gradient(to right, transparent 0%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0.95) 100%),
-        url('../imatges/patro-esquerra.jpg');
-    background-repeat: repeat-y;
-    background-size: 200px auto;
-}
-
-body::after {
-    background: 
-        linear-gradient(to left, transparent 0%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0.95) 100%),
-        url('../imatges/patro-dreta.jpg');
-    background-repeat: repeat-y;
-    background-size: 200px auto;
-}
-
-/* En pantalles grans, fer els patrons lleugerament més visibles */
+/* En pantalles grans, fer els patrons més amples */
 @media (min-width: 1400px) {
     body::before,
     body::after {
-        opacity: 0.05;
         width: 250px;
         background-size: 250px auto;
     }
@@ -825,7 +806,6 @@ body::after {
 @media (min-width: 1600px) {
     body::before,
     body::after {
-        opacity: 0.07;
         width: 300px;
         background-size: 300px auto;
     }
