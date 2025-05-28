@@ -1105,3 +1105,206 @@ body::after {
         padding: 10px;
     }
 }
+
+
+/* =============================================================================
+   MARGES DECORATIUS AMB ENFILADISSES - VERSIÓ MILLORADA
+   ========================================================================== */
+
+/* Pseudoelements per als marges decoratius - SEMPRE VISIBLES */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    width: 200px; /* Amplada de les imatges decoratives */
+    height: 100vh;
+    z-index: -1; /* Posar darrere de tot el contingut */
+    background-repeat: repeat-y;
+    background-position: top left; /* Canviat a left per millor alineació */
+    background-size: 200px auto; /* Amplada fixa, altura automàtica per mantenir proporció */
+    pointer-events: none; /* Evitar que interfereixin amb la interacció */
+}
+
+/* Marge esquerre */
+body::before {
+    left: 0;
+    background-image: url('/assets/imatges/marge-esquerra.png');
+}
+
+/* Marge dret */
+body::after {
+    right: 0;
+    background-image: url('/assets/imatges/marge-dreta.png');
+}
+
+/* Assegurar que el cos tingui fons blanc per contrast */
+body {
+    background-color: #f8f9fa;
+    position: relative;
+}
+
+/* Contenidor principal de l'aplicació amb marges per evitar sobreposició */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    position: relative;
+    z-index: 1; /* Assegurar que estigui per damunt dels marges */
+    /* Marges laterals per deixar espai als decorats */
+    margin-left: 220px; /* 200px de la imatge + 20px de separació */
+    margin-right: 220px; /* 200px de la imatge + 20px de separació */
+}
+
+/* Header i main amb els mateixos marges */
+.app-header,
+.app-main {
+    position: relative;
+    z-index: 2; /* Per damunt dels pseudoelements */
+}
+
+/* =============================================================================
+   RESPONSIVE DESIGN PER ALS MARGES
+   ========================================================================== */
+
+/* Per pantalles molt petites, amagar els marges decoratius */
+@media (max-width: 1000px) {
+    body::before,
+    body::after {
+        display: none;
+    }
+    
+    .app-container {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+/* Per pantalles mitjanes, reduir l'amplada dels marges */
+@media (min-width: 1001px) and (max-width: 1400px) {
+    body::before,
+    body::after {
+        width: 150px;
+    }
+    
+    .app-container {
+        margin-left: 170px; /* 150px + 20px */
+        margin-right: 170px;
+    }
+}
+
+/* Per pantalles grans, amplada completa */
+@media (min-width: 1401px) {
+    body::before,
+    body::after {
+        width: 200px;
+    }
+    
+    .app-container {
+        margin-left: 220px; /* 200px + 20px */
+        margin-right: 220px;
+    }
+}
+
+/* Per pantalles molt grans, amplada extra */
+@media (min-width: 1800px) {
+    body::before,
+    body::after {
+        width: 250px;
+    }
+    
+    .app-container {
+        margin-left: 270px; /* 250px + 20px */
+        margin-right: 270px;
+    }
+}
+
+/* =============================================================================
+   ASSEGURAR QUE EL CONTINGUT SIGUI SEMPRE VISIBLE
+   ========================================================================== */
+
+/* Tots els elements principals han de tenir z-index positiu */
+.app-header,
+.app-main,
+.planta-modal,
+.planta-lightbox,
+.loading-overlay {
+    position: relative;
+    z-index: 10;
+}
+
+/* Modal i lightbox per damunt de tot */
+.planta-modal {
+    z-index: 9999 !important;
+}
+
+.planta-lightbox {
+    z-index: 10000 !important;
+}
+
+/* Loading overlay per damunt dels marges però sota modals */
+.loading-overlay {
+    z-index: 1000 !important;
+}
+
+/* =============================================================================
+   MILLORES VISUALS ADDICIONALS
+   ========================================================================== */
+
+/* Assegurar transicions suaus quan canvien els breakpoints */
+body::before,
+body::after {
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.app-container {
+    transition: margin-left 0.3s ease, margin-right 0.3s ease;
+}
+
+/* Opcional: Afegir una ombra subtil al contingut per destacar-lo dels marges */
+.app-container {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    background: white;
+    border-radius: 0; /* Sense vores arrodonides per defecte */
+}
+
+/* Només per pantalles grans on els marges són visibles */
+@media (min-width: 1001px) {
+    .app-container {
+        border-radius: 8px 8px 0 0; /* Vores arrodonides només a la part superior */
+        margin-top: 20px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* =============================================================================
+   CORRECCIÓ D'ERRORS POTENCIALS
+   ========================================================================== */
+
+/* Assegurar que les imatges de fons carreguin correctament */
+@supports (background-image: url('')) {
+    body::before {
+        background-image: url('/assets/imatges/marge-esquerra.png');
+    }
+    
+    body::after {
+        background-image: url('/assets/imatges/marge-dreta.png');
+    }
+}
+
+/* Fallback per si les imatges no carreguen */
+@media (min-width: 1001px) {
+    body::before,
+    body::after {
+        background-color: rgba(76, 175, 80, 0.05); /* Color verd molt subtil com a fallback */
+    }
+}
+
+/* Debug: Opcional - descomenta per veure els marges amb color de fons */
+
+body::before,
+body::after {
+    background-color: rgba(255, 0, 0, 0.1) !important;
+}
+
