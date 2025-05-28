@@ -1412,4 +1412,55 @@ function activarLightboxGaleria() {
                 lightbox.append(tipusEtiqueta);
             }
             
-            tancaBtn.on('click',
+            tancaBtn.on('click', function(e) {
+                e.stopPropagation();
+                tancarLightboxGaleria(lightbox);
+            });
+            
+            lightbox.on('click', function() {
+                tancarLightboxGaleria(lightbox);
+            });
+            
+            img.on('click', function(e) {
+                e.stopPropagation();
+            });
+            
+            jQuery(document).on('keydown.lightboxGaleria', function(e) {
+                if (e.key === "Escape") {
+                    tancarLightboxGaleria(lightbox);
+                }
+            });
+        });
+    } catch (error) {
+        console.error("Error en activarLightboxGaleria:", error);
+    }
+}
+
+// Tancar lightbox de la galeria
+function tancarLightboxGaleria(lightbox) {
+    try {
+        lightbox.removeClass('actiu');
+        setTimeout(function() {
+            lightbox.remove();
+            jQuery(document).off('keydown.lightboxGaleria');
+        }, 300);
+    } catch (error) {
+        console.error("Error en tancarLightboxGaleria:", error);
+        lightbox.remove();
+        jQuery(document).off('keydown.lightboxGaleria');
+    }
+}
+
+// Verificar si hi ha un hash a l'URL per obrir directament una planta
+function verificarHashURL() {
+    const hash = window.location.hash;
+    if (hash && hash.startsWith('#planta-')) {
+        const plantaId = hash.substring(8);
+        setTimeout(function() {
+            obrirDetallsPlanta(plantaId);
+        }, 500);
+    }
+}
+
+// Cridar verificarHashURL quan es carregui la pàgina
+jQuery(window).on('load', verificarHashURL);
