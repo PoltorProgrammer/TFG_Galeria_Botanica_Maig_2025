@@ -764,57 +764,105 @@ body {
 }
 
 
-/* PATRONS LATERALS BOTÀNICS - Afegir a main.css */
-/* PATRONS LATERALS BOTÀNICS - Afegir a main.css */
+/* PATRONS LATERALS BOTÀNICS - MARGES REALS AMB SCROLL */
 
-/* Patrons de fons laterals - IMATGES ORIGINALS REPETIDES */
-body::before,
-body::after {
-    content: '';
+/* Contenidor principal amb marges laterals */
+body {
+    background: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Wrapper per crear els marges laterals */
+.app-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Patrons laterals com a elements reals (no pseudo-elements) */
+.patrons-laterals {
     position: fixed;
     top: 0;
     width: 200px;
     height: 100vh;
     background-repeat: repeat-y;
     background-size: 200px auto;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
 }
 
-/* Patró esquerre */
-body::before {
+.patro-esquerra {
     left: 0;
     background-image: url('../imatges/patro-esquerra.jpg');
 }
 
-/* Patró dret */
-body::after {
+.patro-dreta {
     right: 0;
     background-image: url('../imatges/patro-dreta.jpg');
 }
 
-/* En pantalles grans, fer els patrons més amples */
+/* Contingut principal centrat amb marges */
+.app-container > * {
+    margin-left: 220px;
+    margin-right: 220px;
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Header sense marges laterals per ocupar tot l'ample */
+.app-header {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    position: relative;
+    z-index: 10;
+}
+
+/* En pantalles grans, ampliar els marges */
 @media (min-width: 1400px) {
-    body::before,
-    body::after {
+    .patrons-laterals {
         width: 250px;
         background-size: 250px auto;
+    }
+    
+    .app-container > * {
+        margin-left: 270px;
+        margin-right: 270px;
+    }
+    
+    .app-header {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
 }
 
 /* En pantalles molt grans */
 @media (min-width: 1600px) {
-    body::before,
-    body::after {
+    .patrons-laterals {
         width: 300px;
         background-size: 300px auto;
     }
+    
+    .app-container > * {
+        margin-left: 320px;
+        margin-right: 320px;
+    }
+    
+    .app-header {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
 }
 
-/* Amagar patrons en pantalles petites per no interferir */
-@media (max-width: 992px) {
-    body::before,
-    body::after {
+/* Amagar patrons i eliminar marges en pantalles petites */
+@media (max-width: 1200px) {
+    .patrons-laterals {
         display: none;
+    }
+    
+    .app-container > * {
+        margin-left: 0;
+        margin-right: 0;
     }
 }
