@@ -14,6 +14,38 @@ body {
     background-color: #f8f9fa;
     overflow-x: hidden;
     overflow-y: auto;
+    position: relative; /* Necessari per als pseudoelements */
+}
+
+/* =============================================================================
+   MARGES DECORATIUS AMB ENFILADISSES
+   ========================================================================== */
+
+/* Pseudoelements per als marges decoratius */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    width: 200px; /* Ajusta segons l'amplada de les teves imatges */
+    height: 100vh;
+    z-index: -1; /* Posar darrere de tot el contingut */
+    background-repeat: repeat-y;
+    background-position: top;
+    background-size: contain;
+    pointer-events: none; /* Evitar que interfereixin amb la interacció */
+}
+
+/* Marge esquerre */
+body::before {
+    left: 0;
+    background-image: url('/assets/imatges/marge-esquerra.png');
+}
+
+/* Marge dret */
+body::after {
+    right: 0;
+    background-image: url('/assets/imatges/marge-dreta.png');
 }
 
 /* Contenidor principal de l'aplicació */
@@ -22,6 +54,8 @@ body {
     display: flex;
     flex-direction: column;
     overflow: visible;
+    position: relative;
+    z-index: 1; /* Assegurar que estigui per damunt dels marges */
 }
 
 /* Header */
@@ -30,6 +64,8 @@ body {
     color: white;
     padding: 1rem 2rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-left: 220px; /* 200px de la imatge + 20px de separació */
+    margin-right: 220px; /* 200px de la imatge + 20px de separació */
 }
 
 .app-header h1 {
@@ -79,6 +115,8 @@ body {
     overflow: auto; /* CANVIAT: de visible a auto per permetre scroll */
     position: relative;
     min-height: 0;
+    margin-left: 220px; /* 200px de la imatge + 20px de separació */
+    margin-right: 220px; /* 200px de la imatge + 20px de separació */
 }
 
 /* =============================================================================
@@ -571,8 +609,98 @@ body {
 }
 
 /* =============================================================================
+   CORRECCIONS D'AMPLADA - IGUALAR GALERIA I MAPA
+   ========================================================================== */
+
+/* Assegurar que ambdues seccions tinguin el mateix contenidor */
+#galeria-section,
+#mapa-section:not([style*="display: none"]) {
+    padding: 0 20px; /* Mateix padding lateral */
+    box-sizing: border-box;
+}
+
+/* Contenidors principals amb la mateixa amplada */
+.galeria-botanica,
+.mapa-botanica-contenidor {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Assegurar que els filtres de galeria i mapa tinguin la mateixa amplada */
+.filtres-contenidor,
+.mapa-filtres {
+    width: 100%;
+    max-width: none; /* Eliminar restriccions addicionals */
+    margin: 20px 0 40px 0;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    padding: 40px;
+    border: 2px solid #4CAF50;
+    box-sizing: border-box;
+}
+
+/* Grid de plantes i mapa amb la mateixa amplada base */
+.plantes-grid,
+#mapa-botanica {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Assegurar que els modals i lightbox estiguin per damunt de tot */
+.planta-modal,
+.planta-lightbox {
+    z-index: 10000 !important;
+}
+
+/* =============================================================================
    RESPONSIVE DESIGN
    ========================================================================== */
+
+/* RESPONSIVE: Amagar els marges en pantalles petites */
+@media (max-width: 1400px) {
+    body::before,
+    body::after {
+        display: none;
+    }
+    
+    .app-main,
+    .app-header {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+/* Per pantalles mitjanes, reduir l'amplada dels marges */
+@media (min-width: 1401px) and (max-width: 1600px) {
+    body::before,
+    body::after {
+        width: 150px;
+    }
+    
+    .app-main,
+    .app-header {
+        margin-left: 170px; /* 150px + 20px */
+        margin-right: 170px;
+    }
+}
+
+/* Per pantalles grans, amplada completa */
+@media (min-width: 1601px) {
+    body::before,
+    body::after {
+        width: 200px;
+    }
+    
+    .app-main,
+    .app-header {
+        margin-left: 220px; /* 200px + 20px */
+        margin-right: 220px;
+    }
+}
 
 @media (max-width: 768px) {
     .app-header {
@@ -653,6 +781,17 @@ body {
         right: 15px;
         font-size: 30px;
     }
+    
+    /* Responsive - Mateixos marges */
+    #galeria-section,
+    #mapa-section:not([style*="display: none"]) {
+        padding: 0 15px;
+    }
+    
+    .filtres-contenidor,
+    .mapa-filtres {
+        padding: 15px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -685,73 +824,7 @@ body {
         font-size: 14px;
         padding: 8px 12px;
     }
-}
-
-/* AFEGEIX AQUESTS ESTILS AL FINAL DE main.css */
-
-/* =============================================================================
-   CORRECCIONS D'AMPLADA - IGUALAR GALERIA I MAPA
-   ========================================================================== */
-
-/* Assegurar que ambdues seccions tinguin el mateix contenidor */
-#galeria-section,
-#mapa-section:not([style*="display: none"]) {
-    padding: 0 20px; /* Mateix padding lateral */
-    box-sizing: border-box;
-}
-
-/* Contenidors principals amb la mateixa amplada */
-.galeria-botanica,
-.mapa-botanica-contenidor {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    position: relative;
-    box-sizing: border-box;
-}
-
-/* Assegurar que els filtres de galeria i mapa tinguin la mateixa amplada */
-.filtres-contenidor,
-.mapa-filtres {
-    width: 100%;
-    max-width: none; /* Eliminar restriccions addicionals */
-    margin: 20px 0 40px 0;
-    background: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    padding: 40px;
-    border: 2px solid #4CAF50;
-    box-sizing: border-box;
-}
-
-/* Grid de plantes i mapa amb la mateixa amplada base */
-.plantes-grid,
-#mapa-botanica {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* Responsive - Mateixos marges */
-@media (max-width: 1040px) {
-    #galeria-section,
-    #mapa-section:not([style*="display: none"]) {
-        padding: 0 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    #galeria-section,
-    #mapa-section:not([style*="display: none"]) {
-        padding: 0 15px;
-    }
     
-    .filtres-contenidor,
-    .mapa-filtres {
-        padding: 15px;
-    }
-}
-
-@media (max-width: 480px) {
     #galeria-section,
     #mapa-section:not([style*="display: none"]) {
         padding: 0 10px;
@@ -760,136 +833,5 @@ body {
     .filtres-contenidor,
     .mapa-filtres {
         padding: 10px;
-    }
-}
-
-/* CSS per als marges decoratius amb enfiladisses */
-
-/* Aplicar els marges decoratius al body */
-body {
-    position: relative;
-    /* Mantenir tots els altres estils existents */
-}
-
-/* Pseudoelements per als marges decoratius */
-body::before,
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    width: 200px; /* Ajusta segons l'amplada de les teves imatges */
-    height: 100vh;
-    z-index: -1; /* Posar darrere de tot el contingut */
-    background-repeat: repeat-y;
-    background-position: top;
-    background-size: contain;
-    pointer-events: none; /* Evitar que interfereixin amb la interacció */
-}
-
-/* Marge esquerre */
-body::before {
-    left: 0;
-    background-image: url('/assets/imatges/marge-esquerra.png');
-}
-
-/* Marge dret */
-body::after {
-    right: 0;
-    background-image: url('/assets/imatges/marge-dreta.png');
-}
-
-/* Assegurar que el contingut principal tingui espai als costats */
-.app-container {
-    position: relative;
-    z-index: 1; /* Assegurar que estigui per damunt dels marges */
-    min-height: 100vh;
-    /* Mantenir tots els altres estils existents */
-}
-
-/* Ajustar marges del contingut principal per deixar espai als decoratius */
-.app-main {
-    margin-left: 220px; /* 200px de la imatge + 20px de separació */
-    margin-right: 220px; /* 200px de la imatge + 20px de separació */
-    /* Mantenir tots els altres estils existents */
-}
-
-/* Ajustar també el header per coherència visual */
-.app-header {
-    margin-left: 220px;
-    margin-right: 220px;
-    /* Mantenir tots els altres estils existents */
-}
-
-/* RESPONSIVE: Amagar els marges en pantalles petites */
-@media (max-width: 1400px) {
-    body::before,
-    body::after {
-        display: none;
-    }
-    
-    .app-main,
-    .app-header {
-        margin-left: 0;
-        margin-right: 0;
-    }
-}
-
-/* Per pantalles mitjanes, reduir l'amplada dels marges */
-@media (min-width: 1401px) and (max-width: 1600px) {
-    body::before,
-    body::after {
-        width: 150px;
-    }
-    
-    .app-main,
-    .app-header {
-        margin-left: 170px; /* 150px + 20px */
-        margin-right: 170px;
-    }
-}
-
-/* Per pantalles grans, amplada completa */
-@media (min-width: 1601px) {
-    body::before,
-    body::after {
-        width: 200px;
-    }
-    
-    .app-main,
-    .app-header {
-        margin-left: 220px; /* 200px + 20px */
-        margin-right: 220px;
-    }
-}
-
-/* Alternativa més sofisticada amb gradient per suavitzar els marges */
-body::before,
-body::after {
-    /* Afegir un gradient suau per integrar millor amb el fons */
-    mask: linear-gradient(to right, 
-        rgba(0,0,0,0.8) 0%, 
-        rgba(0,0,0,1) 20%, 
-        rgba(0,0,0,1) 80%, 
-        rgba(0,0,0,0.8) 100%
-    );
-    -webkit-mask: linear-gradient(to right, 
-        rgba(0,0,0,0.8) 0%, 
-        rgba(0,0,0,1) 20%, 
-        rgba(0,0,0,1) 80%, 
-        rgba(0,0,0,0.8) 100%
-    );
-}
-
-/* Assegurar que els modals i lightbox estiguin per damunt de tot */
-.planta-modal,
-.planta-lightbox {
-    z-index: 10000 !important;
-}
-
-/* Si vols un efecte de parallax suau (opcional) */
-@media (min-width: 1401px) {
-    body::before,
-    body::after {
-        background-attachment: fixed; /* Parallax fix */
     }
 }
