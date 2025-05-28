@@ -39,7 +39,7 @@ body::after {
 /* Marge esquerre */
 body::before {
     left: 0;
-    background-image: url('/assets/imatges/marge-esquerra.png');
+    background-image: url('/assets/imatges/marge-esquerre.png');
 }
 
 /* Marge dret */
@@ -1179,7 +1179,7 @@ body::after {
 /* Assegurar que les imatges de fons carreguin correctament */
 @supports (background-image: url('')) {
     body::before {
-        background-image: url('/assets/imatges/marge-esquerra.png');
+        background-image: url('/assets/imatges/marge-esquerre.png');
     }
     
     body::after {
@@ -1196,9 +1196,33 @@ body::after {
 }
 
 /* Debug: Opcional - comenta aquesta secció quan vulguis treure el color de debug */
-/*
+
 body::before,
 body::after {
     background-color: rgba(255, 0, 0, 0.1) !important;
 }
-*/
+
+
+
+/* Marge esquerre - RUTA RELATIVA */
+body::before {
+    left: 0;
+    background-image: url('assets/imatges/marge-esquerre.png');
+}
+
+/* Marge dret - RUTA RELATIVA */
+body::after {
+    right: 0;
+    background-image: url('assets/imatges/marge-dreta.png');
+}
+
+/* I també al fallback */
+@supports (background-image: url('')) {
+    body::before {
+        background-image: url('assets/imatges/marge-esquerre.png');
+    }
+    
+    body::after {
+        background-image: url('assets/imatges/marge-dreta.png');
+    }
+}
