@@ -413,3 +413,266 @@ body {
         margin: 10px 0;
     }
 }
+
+/* SOLUCIÓ COMPLETA - Afegir al final de main.css o crear fitxer separat */
+
+/* ========================================
+   1. SOLUCIÓ DEL PROBLEMA DE SCROLL
+   ======================================== */
+
+/* Forçar overflow visible a tot l'arbre de contenidors */
+html, body {
+    overflow-x: hidden;
+    overflow-y: auto !important;
+}
+
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: visible !important;
+}
+
+.app-main {
+    flex: 1;
+    overflow: visible !important; /* CLAU: Canviar de hidden a visible */
+    position: relative;
+}
+
+/* Contenidor específic del mapa */
+#mapa-section {
+    height: auto !important; /* Eliminar altura fixa */
+    min-height: auto !important;
+    overflow: visible !important;
+    display: block !important;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.mapa-botanica-contenidor {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================
+   2. FILTRES IDÈNTICS A LA GALERIA
+   ======================================== */
+
+/* Reescriure completament els estils dels filtres del mapa */
+.mapa-filtres {
+    /* Exactament igual que .filtres-contenidor de la galeria */
+    margin: 20px 0 40px 0 !important;
+    background: #f8f9fa !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+    padding: 40px !important; /* Mateix padding que la galeria */
+    border: 2px solid #4CAF50 !important;
+}
+
+/* Barra de filtres - VERTICAL com a la galeria */
+.mapa-filtres .filtres-grup {
+    display: flex !important;
+    flex-direction: column !important; /* CLAU: Vertical, no horitzontal */
+    gap: 15px !important;
+}
+
+/* Cada grup de filtres en una línia separada */
+.mapa-filtres .grup-filtre {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin-bottom: 15px !important; /* Espai entre grups */
+    width: 100% !important;
+}
+
+/* Etiquetes dels grups */
+.mapa-filtres .etiqueta-filtre {
+    font-weight: bold !important;
+    color: #555 !important;
+    margin-right: 5px !important;
+    white-space: nowrap !important;
+    min-width: 80px !important; /* Amplada mínima per alinear */
+}
+
+/* Contenidor de botons dins cada grup */
+.mapa-filtres .botons-filtre {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    flex: 1 !important;
+}
+
+/* Botons de filtre - Exactament iguals que la galeria */
+.mapa-filtres .filtre-boto {
+    padding: 6px 12px !important;
+    background: #f0f0f0 !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 20px !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+    user-select: none !important;
+    font-size: 13px !important;
+    color: #333 !important;
+    box-shadow: none !important;
+}
+
+.mapa-filtres .filtre-boto:hover {
+    background: #e0e0e0 !important;
+    transform: translateY(-1px) !important;
+}
+
+.mapa-filtres .filtre-boto.actiu {
+    background: #4CAF50 !important;
+    color: white !important;
+    border-color: #388E3C !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+}
+
+/* Colors específics per grups (iguals que la galeria) */
+.mapa-filtres .tipus-planta-filtre .filtre-boto.actiu {
+    background: #4CAF50 !important;
+    border-color: #388E3C !important;
+}
+
+.mapa-filtres .habitat-filtre .filtre-boto.actiu {
+    background: #FF9800 !important;
+    border-color: #EF6C00 !important;
+}
+
+.mapa-filtres .floracio-filtre .filtre-boto.actiu {
+    background: #E91E63 !important;
+    border-color: #C2185B !important;
+}
+
+.mapa-filtres .usos-filtre .filtre-boto.actiu {
+    background: #00BCD4 !important;
+    border-color: #0097A7 !important;
+}
+
+.mapa-filtres .fullatge-filtre .filtre-boto.actiu {
+    background: #795548 !important;
+    border-color: #5D4037 !important;
+}
+
+/* Cercador - Igual que la galeria */
+.mapa-filtres .cerca-contenidor {
+    margin-top: 15px !important;
+    width: 100% !important;
+}
+
+.mapa-filtres #mapa-cerca {
+    width: 100% !important;
+    padding: 10px 15px !important;
+    font-size: 16px !important;
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 25px !important;
+    transition: all 0.3s !important;
+    box-sizing: border-box !important;
+}
+
+.mapa-filtres #mapa-cerca:focus {
+    outline: none !important;
+    border-color: #4CAF50 !important;
+}
+
+.mapa-filtres #mapa-cerca::placeholder {
+    color: #999 !important;
+    font-style: italic !important;
+}
+
+/* Filtres actius - Idèntics a la galeria */
+.mapa-filtres .filtres-actius-contenidor {
+    margin-top: 10px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.mapa-filtres .etiqueta-filtres-actius {
+    font-weight: bold !important;
+    color: #555 !important;
+}
+
+.mapa-filtres .filtres-actius {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+
+/* Botó netejar filtres */
+.mapa-filtres .netejar-filtres {
+    padding: 5px 10px !important;
+    background: #f5f5f5 !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+    transition: all 0.2s !important;
+}
+
+.mapa-filtres .netejar-filtres:hover {
+    background: #e0e0e0 !important;
+}
+
+/* ========================================
+   3. MAPA LEAFLET
+   ======================================== */
+
+#mapa-botanica {
+    width: 100% !important;
+    height: 600px !important;
+    border: 2px solid #ddd !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+    margin-top: 20px !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* ========================================
+   4. RESPONSIVE 
+   ======================================== */
+
+@media (max-width: 768px) {
+    .mapa-filtres {
+        padding: 15px !important;
+        margin: 10px 0 20px 0 !important;
+    }
+    
+    .mapa-filtres .grup-filtre {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .mapa-filtres .etiqueta-filtre {
+        width: 100% !important;
+        margin-bottom: 5px !important;
+        min-width: auto !important;
+    }
+    
+    .mapa-filtres .botons-filtre {
+        width: 100% !important;
+    }
+    
+    #mapa-botanica {
+        height: 400px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .mapa-filtres .filtre-boto {
+        font-size: 12px !important;
+        padding: 5px 10px !important;
+    }
+    
+    #mapa-section {
+        padding: 10px !important;
+    }
+}
