@@ -348,3 +348,68 @@ body {
 .slide-up {
     animation: slideUp 0.3s ease;
 }
+
+/* Correcció per al problema del mapa - Afegir a main.css */
+
+/* Ajustar l'alçada del main content per permetre scroll */
+.app-main {
+    flex: 1;
+    overflow: auto; /* Canviar de 'hidden' a 'auto' per permetre scroll */
+    min-height: 0; /* Assegurar que el flex funcioni correctament */
+}
+
+/* Ajustar la secció del mapa */
+#mapa-section {
+    height: auto; /* Canviar de calc(100vh - 140px) a auto */
+    min-height: calc(100vh - 140px); /* Mantenir alçada mínima */
+    overflow: visible; /* Assegurar que el contingut sigui visible */
+    padding: 20px 0; /* Afegir padding per respirar */
+}
+
+/* Assegurar que el contenidor del mapa tingui una alçada adequada */
+.mapa-botanica-contenidor {
+    width: 100%;
+    font-family: Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 100%; /* Assegurar que ocupi tot l'espai disponible */
+}
+
+/* Ajustar l'alçada del mapa Leaflet */
+#mapa-botanica {
+    width: 100%;
+    height: 600px; /* Mantenir alçada fixa per al mapa */
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px; /* Afegir marge inferior */
+}
+
+/* Ajustar els filtres del mapa per no ocupar massa espai */
+.mapa-filtres {
+    background: #f8f9fa;
+    padding: 20px; /* Reduir de 40px a 20px */
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin: 20px 0 20px 0; /* Reduir marge inferior */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #mapa-section {
+        min-height: calc(100vh - 180px); /* Ajustar per a mòbils */
+    }
+    
+    #mapa-botanica {
+        height: 400px; /* Altura més petita en mòbils */
+    }
+    
+    .mapa-filtres {
+        padding: 15px;
+        margin: 10px 0;
+    }
+}
