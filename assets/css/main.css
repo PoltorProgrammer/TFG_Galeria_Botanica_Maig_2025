@@ -676,3 +676,288 @@ html, body {
         padding: 10px !important;
     }
 }
+
+/* AFEGEIX AQUEST CSS AL FINAL DE main.css o com a fitxer separat */
+/* Això sobreescriurà els estils existents del mapa per fer-los EXACTAMENT iguals */
+
+/* =============================================================================
+   CORRECCIONS EXACTES PER IGUALAR ELS FILTRES DEL MAPA AMB LA GALERIA
+   ========================================================================== */
+
+/* Contenidor principal - Exactament igual que .filtres-contenidor */
+.mapa-filtres {
+    margin: 20px 0 40px 0 !important;
+    background: #f8f9fa !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+    padding: 40px !important; /* MATEIX PADDING que la galeria */
+    border: 2px solid #4CAF50 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; /* MATEIXA FONT */
+}
+
+/* Estructura de filtres - Exactament igual que .filtres-barra */
+.mapa-filtres .filtres-grup {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 15px !important;
+    margin-bottom: 15px !important;
+}
+
+/* Grups de filtres - Exactament igual que .grup-filtre */
+.mapa-filtres .grup-filtre {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin-bottom: 0 !important; /* ELIMINAR margin-bottom extra */
+}
+
+/* Etiquetes - Exactament igual que .etiqueta-filtre */
+.mapa-filtres .etiqueta-filtre {
+    font-weight: bold !important; /* NO 600, sinó bold normal */
+    color: #555 !important;
+    margin-right: 5px !important;
+    white-space: nowrap !important;
+    font-size: inherit !important; /* Mida de font normal */
+    font-family: inherit !important;
+}
+
+/* Contenidor de botons - Exactament igual que .botons-filtre */
+.mapa-filtres .botons-filtre {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+
+/* Botons de filtre - Exactament igual que .filtre-boto */
+.mapa-filtres .filtre-boto {
+    padding: 6px 12px !important;
+    background: #f0f0f0 !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 20px !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+    user-select: none !important;
+    font-size: 13px !important;
+    color: #333 !important;
+    box-shadow: none !important;
+    font-weight: normal !important; /* FORÇAR font-weight normal */
+    font-family: inherit !important;
+    line-height: 1.2 !important;
+}
+
+.mapa-filtres .filtre-boto:hover {
+    background: #e0e0e0 !important;
+    transform: translateY(-1px) !important;
+}
+
+.mapa-filtres .filtre-boto.actiu {
+    background: #4CAF50 !important;
+    color: white !important;
+    border-color: #388E3C !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+    font-weight: normal !important; /* MANTENIR font-weight normal */
+}
+
+/* Colors dels grups - Exactament iguals */
+.mapa-filtres .tipus-planta-filtre .filtre-boto.actiu {
+    background: #4CAF50 !important;
+    border-color: #388E3C !important;
+}
+
+.mapa-filtres .habitat-filtre .filtre-boto.actiu {
+    background: #FF9800 !important;
+    border-color: #EF6C00 !important;
+}
+
+.mapa-filtres .floracio-filtre .filtre-boto.actiu {
+    background: #E91E63 !important;
+    border-color: #C2185B !important;
+}
+
+.mapa-filtres .usos-filtre .filtre-boto.actiu {
+    background: #00BCD4 !important;
+    border-color: #0097A7 !important;
+}
+
+.mapa-filtres .fullatge-filtre .filtre-boto.actiu {
+    background: #795548 !important;
+    border-color: #5D4037 !important;
+}
+
+/* Cercador - Exactament igual que .cerca-input */
+.mapa-filtres .cerca-contenidor {
+    margin-top: 15px !important;
+    width: 100% !important;
+}
+
+.mapa-filtres #mapa-cerca {
+    width: 100% !important;
+    padding: 10px 15px !important;
+    font-size: 16px !important;
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 25px !important;
+    transition: all 0.3s !important;
+    box-sizing: border-box !important;
+    font-family: inherit !important;
+    font-weight: normal !important;
+}
+
+.mapa-filtres #mapa-cerca:focus {
+    outline: none !important;
+    border-color: #4CAF50 !important;
+}
+
+.mapa-filtres #mapa-cerca::placeholder {
+    color: #999 !important;
+    font-style: italic !important;
+    font-weight: normal !important;
+}
+
+/* Filtres actius - Exactament iguals */
+.mapa-filtres .filtres-actius-contenidor {
+    margin-top: 10px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.mapa-filtres .etiqueta-filtres-actius {
+    font-weight: bold !important;
+    color: #555 !important;
+    font-size: inherit !important;
+}
+
+.mapa-filtres .filtres-actius {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+
+.mapa-filtres .filtre-actiu {
+    display: inline-block !important;
+    padding: 5px 10px !important;
+    background: #e0e0e0 !important;
+    border-radius: 20px !important;
+    font-size: 12px !important;
+    color: #333 !important;
+    margin-right: 5px !important;
+    font-weight: normal !important;
+}
+
+/* Colors per filtres actius */
+.mapa-filtres .filtre-actiu[data-group="tipus"] {
+    background: rgba(76, 175, 80, 0.2) !important;
+    border: 1px solid rgba(76, 175, 80, 0.5) !important;
+}
+
+.mapa-filtres .filtre-actiu[data-group="habitat"] {
+    background: rgba(255, 152, 0, 0.2) !important;
+    border: 1px solid rgba(255, 152, 0, 0.5) !important;
+}
+
+.mapa-filtres .filtre-actiu[data-group="floracio"] {
+    background: rgba(233, 30, 99, 0.2) !important;
+    border: 1px solid rgba(233, 30, 99, 0.5) !important;
+}
+
+.mapa-filtres .filtre-actiu[data-group="usos"] {
+    background: rgba(0, 188, 212, 0.2) !important;
+    border: 1px solid rgba(0, 188, 212, 0.5) !important;
+}
+
+.mapa-filtres .filtre-actiu[data-group="fullatge"] {
+    background: rgba(121, 85, 72, 0.2) !important;
+    border: 1px solid rgba(121, 85, 72, 0.5) !important;
+}
+
+/* Botó eliminar filtre */
+.mapa-filtres .eliminar-filtre {
+    margin-left: 5px !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    line-height: 14px !important;
+    text-align: center !important;
+    border-radius: 50% !important;
+    transition: all 0.2s !important;
+}
+
+.mapa-filtres .eliminar-filtre:hover {
+    background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Botó netejar filtres */
+.mapa-filtres .netejar-filtres {
+    padding: 5px 10px !important;
+    background: #f5f5f5 !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+    transition: all 0.2s !important;
+    font-weight: normal !important;
+}
+
+.mapa-filtres .netejar-filtres:hover {
+    background: #e0e0e0 !important;
+}
+
+/* Assegurar que el mapa tingui prou espai */
+#mapa-botanica {
+    margin-top: 20px !important;
+    height: 600px !important;
+}
+
+/* Responsive - Exactament igual que la galeria */
+@media (max-width: 768px) {
+    .mapa-filtres {
+        padding: 15px !important;
+    }
+    
+    .mapa-filtres .filtres-grup {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    
+    .mapa-filtres .grup-filtre {
+        width: 100% !important;
+    }
+    
+    .mapa-filtres .etiqueta-filtre {
+        width: 100% !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .mapa-filtres .botons-filtre {
+        width: 100% !important;
+    }
+    
+    .mapa-filtres .filtre-boto {
+        font-size: 12px !important;
+        padding: 5px 10px !important;
+    }
+    
+    .mapa-filtres #mapa-cerca {
+        font-size: 15px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .mapa-filtres {
+        padding: 10px !important;
+    }
+    
+    .mapa-filtres .filtre-boto {
+        font-size: 11px !important;
+        padding: 4px 8px !important;
+    }
+    
+    .mapa-filtres #mapa-cerca {
+        font-size: 14px !important;
+        padding: 8px 12px !important;
+    }
+}
