@@ -324,17 +324,6 @@
 }
 
 /* Imatge no disponible */
-.planta-sense-imatge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    background-color: #f5f5f5;
-    color: #888;
-    text-align: center;
-    font-style: italic;
-}
 
 .planta-sense-imatge {
     display: flex;
