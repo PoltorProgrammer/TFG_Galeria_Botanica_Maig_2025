@@ -1126,7 +1126,6 @@ function generarHTMLDetallsPlanta(planta) {
         const imatgeUrl = `assets/imatges/${imatges.principal}`;
         html += '<div class="planta-imatge-principal">';
         html += `<img src="${imatgeUrl}" alt="${escapeHtml(planta.nom_comu)}" data-tipus="${escapeHtml(imatges.principal_tipus)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=planta-sense-imatge>Imatge no disponible</div>'">`;
-
         if (imatges.principal_tipus !== 'general') {
             html += `<span class="planta-tipus-imatge-detall">${imatges.principal_tipus.charAt(0).toUpperCase() + imatges.principal_tipus.slice(1)}</span>`;
         }
