@@ -1,84 +1,4 @@
-<!DOCTYPE html>
-<html lang="ca">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeria Botànica UAB</title>
-    
-    <!-- Leaflet CSS per al mapa -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
-    
-    <!-- Estils propis -->
-    <link rel="stylesheet" href="assets/css/galeria-botanica.css">
-    <link rel="stylesheet" href="assets/css/mapa-botanica.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-</head>
-<body>
-    <div class="app-container">
-        <header class="app-header">
-            <h1>Galeria Botànica UAB</h1>
-            <nav class="app-nav">
-                <button onclick="mostrarGaleria()" class="nav-btn active" id="btn-galeria">Galeria</button>
-                <button onclick="mostrarMapa()" class="nav-btn" id="btn-mapa">Mapa</button>
-            </nav>
-        </header>
-
-        <main class="app-main">
-            <!-- GALERIA -->
-            <div id="galeria-section" class="galeria-botanica">
-                <!-- Els filtres i la graella es generaran dinàmicament amb JS -->
-            </div>
-
-            <!-- MAPA -->
-            <div id="mapa-section" class="mapa-botanica-contenidor" style="display: none;">
-                <!-- Els filtres del mapa es generaran dinàmicament -->
-            </div>
-        </main>
-
-        <!-- Modal per detalls -->
-        <div class="planta-modal" style="display: none;">
-            <div class="planta-modal-contingut">
-                <span class="planta-modal-tancar">&times;</span>
-                <div class="planta-modal-cos"></div>
-            </div>
-        </div>
-
-        <!-- Loading overlay -->
-        <div id="loading-overlay" class="loading-overlay">
-            <div class="loading-spinner"></div>
-            <p>Carregant galeria botànica...</p>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
-    
-    <!-- Variables globals per compatibilitat amb WordPress -->
-    <script>
-        // Variables globals necessàries per als scripts originals
-        var gb_vars = {
-            ajaxurl: 'api/ajax.php' // Simulem l'AJAX de WordPress
-        };
-        
-        var mb_vars = {
-            ajaxurl: 'api/ajax.php',
-            plugin_url: '.',
-            dades_plantes: [] // Es carregarà dinàmicament
-        };
-        
-        // Variable global per a les dades de plantes (per la galeria)
-        var gb_plantes_data = [];
-    </script>
-    
-    <!-- Scripts originals de WordPress adaptats -->
-    <script src="assets/js/galeria-botanica-original.js"></script>
-    <script src="assets/js/mapa-botanica-original.js"></script>
-    
-    <!-- Script d'inicialització (DESPRÉS de carregar els altres scripts) -->
+<!-- Script d'inicialització (DESPRÉS de carregar els altres scripts) -->
     <script>
         // Funcions de navegació
         function mostrarGaleria() {
@@ -158,8 +78,27 @@
             return info.filter(i => i).join(' ');
         }
         
-        // Carregar dades i inicialitzar DESPRÉS que tots els scripts estiguin carregats
-        document.addEventListener('DOMContentLoaded', async function() {
+        // Esperar a que tots els scripts estiguin carregats
+        function inicialitzarApp() {
+            // Verificar que les funcions necessàries existeixen
+            if (typeof generarGaleriaHTML === 'undefined') {
+                console.error('generarGaleriaHTML no està definida. Reintentant...');
+                setTimeout(inicialitzarApp, 100);
+                return;
+            }
+            
+            if (typeof generarMapaHTML === 'undefined') {
+                console.error('generarMapaHTML no està definida. Reintentant...');
+                setTimeout(inicialitzarApp, 100);
+                return;
+            }
+            
+            // Ara podem inicialitzar l'aplicació
+            carregarDadesIInicialitzar();
+        }
+        
+        // Carregar dades i inicialitzar
+        async function carregarDadesIInicialitzar() {
             try {
                 // Mostrar loading
                 document.getElementById('loading-overlay').classList.remove('hidden');
@@ -177,7 +116,7 @@
                 
                 console.log('Dades carregades:', data.length, 'plantes');
                 
-                // Generar contingut de la galeria (ara la funció ja està definida)
+                // Generar contingut de la galeria
                 await generarGaleriaHTML(data);
                 
                 // Generar contingut del mapa
@@ -197,7 +136,11 @@
                         <p>Si us plau, recarrega la pàgina.</p>
                     </div>`;
             }
+        }
+        
+        // Inicialitzar quan el DOM estigui llest
+        document.addEventListener('DOMContentLoaded', function() {
+            // Esperar un moment a que tots els scripts es carreguin
+            setTimeout(inicialitzarApp, 500);
         });
     </script>
-</body>
-</html>
