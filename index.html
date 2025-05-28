@@ -84,7 +84,7 @@
 
                 <div class="inici-card">
                     <h3>🎯 Per què un catàleg botànic del campus?</h3>
-                    <p>El campus de Bellaterra és molt més que aules i laboratoris: és un mosaic de <strong>boscos mediterranis, torrents i camps</strong> que actua de corredor biològic entre el Massís de Sant Llorenç i Collserola. Documentar-lo té tres grans avantatges:</p>
+                    <p>El campus de Bellaterra és molt més que aules i laboratoris: és un mosaic de <strong>boscos mediterranis, torrents i camps</strong> que actua de corredor biològic entre el Massís de Sant Llorenç i Collserola. Documentar-ho té tres grans avantatges:</p>
                     
                     <table class="inici-table">
                         <thead>
@@ -306,18 +306,15 @@
     
     <!-- Script d'inicialització (DESPRÉS de carregar els altres scripts) -->
     <script>
-        // Sistema per assignar imatges automàticament
-        class SistemaImatges {
+        /**
+         * Sistema optimitzat per assignar imatges automàticament
+         * Evita cerques innecessàries i peticions 404
+         */
+        class SistemaImatgesOptimitzat {
             constructor() {
-                this.imatgesDisponibles = new Map(); // Mapa de nom_cientific -> llista d'imatges
-                this.tipusImatges = {
-                    'flor': 'flor',
-                    'fulla': 'fulla', 
-                    'fruit': 'fruit',
-                    'tija': 'tija',
-                    'habit': 'habit',
-                    'altre': 'altre'
-                };
+                this.tipusImatges = ['flor', 'fulla', 'fruit', 'tija', 'habit', 'altre'];
+                this.maxNumero = 10; // Límit màxim de números a buscar
+                this.cache = new Map(); // Cache de resultats per evitar recerques
             }
 
             // Convertir nom científic a format de fitxer
@@ -327,74 +324,93 @@
                                   .replace(/[^a-z0-9_]/g, '');
             }
 
-            // Generar llista de possibles noms d'imatges per una planta
-            generarPossiblesImatges(nomCientific) {
-                const nomFitxer = this.nomCientificAFitxer(nomCientific);
-                const possiblesImatges = [];
-                
-                // Generar possibles noms per números 00-20 i tots els tipus
-                for (let num = 0; num <= 20; num++) {
-                    const numStr = num.toString().padStart(2, '0');
-                    Object.keys(this.tipusImatges).forEach(tipus => {
-                        possiblesImatges.push(`${nomFitxer}_${numStr}_${tipus}.jpg`);
-                    });
-                }
-                
-                return possiblesImatges;
-            }
-
-            // Verificar si una imatge existeix (usant una tècnica que no generi errors 404)
+            // Verificar si una imatge existeix
             async verificarImatgeExisteix(rutaImatge) {
                 return new Promise((resolve) => {
                     const img = new Image();
-                    img.onload = () => resolve(true);
-                    img.onerror = () => resolve(false);
+                    
+                    // Timeout per evitar esperes infinites
+                    const timeout = setTimeout(() => {
+                        resolve(false);
+                    }, 3000);
+                    
+                    img.onload = () => {
+                        clearTimeout(timeout);
+                        resolve(true);
+                    };
+                    
+                    img.onerror = () => {
+                        clearTimeout(timeout);
+                        resolve(false);
+                    };
+                    
                     img.src = rutaImatge;
                 });
             }
 
-            // Trobar totes les imatges disponibles per una planta
-            async trobarImatgesPlanta(nomCientific) {
-                const possiblesImatges = this.generarPossiblesImatges(nomCientific);
+            // Buscar imatges de forma seqüencial i intel·ligent
+            async trobarImatgesPer_Numero(nomFitxer, numero) {
+                const numStr = numero.toString().padStart(2, '0');
                 const imatgesTrobades = [];
                 
-                // Crear promeses per verificar totes les imatges en paral·lel
-                const verificacions = possiblesImatges.map(async (nomImatge) => {
+                // Buscar per cada tipus d'imatge
+                for (const tipus of this.tipusImatges) {
+                    const nomImatge = `${nomFitxer}_${numStr}_${tipus}.jpg`;
                     const rutaCompleta = `assets/imatges/${nomImatge}`;
+                    
                     const existeix = await this.verificarImatgeExisteix(rutaCompleta);
                     
                     if (existeix) {
-                        // Extreure informació del nom del fitxer
-                        const parts = nomImatge.replace('.jpg', '').split('_');
-                        const numero = parts[parts.length - 2];
-                        const tipus = parts[parts.length - 1];
-                        
-                        return {
+                        imatgesTrobades.push({
                             nom: nomImatge,
                             ruta: rutaCompleta,
-                            numero: parseInt(numero),
+                            numero: numero,
                             tipus: tipus
-                        };
+                        });
                     }
-                    return null;
-                });
+                }
                 
-                // Esperar totes les verificacions
-                const resultats = await Promise.all(verificacions);
+                return imatgesTrobades;
+            }
+
+            // Trobar TOTES les imatges disponibles per una planta de forma eficient
+            async trobarImatgesPlanta(nomCientific) {
+                // Verificar cache primer
+                if (this.cache.has(nomCientific)) {
+                    return this.cache.get(nomCientific);
+                }
                 
-                // Filtrar nulls i ordenar per número
-                return resultats.filter(img => img !== null)
-                               .sort((a, b) => a.numero - b.numero);
+                const nomFitxer = this.nomCientificAFitxer(nomCientific);
+                const totesLesImatges = [];
+                
+                // Buscar seqüencialment per números
+                for (let num = 0; num <= this.maxNumero; num++) {
+                    const imatgesDelNumero = await this.trobarImatgesPer_Numero(nomFitxer, num);
+                    
+                    if (imatgesDelNumero.length > 0) {
+                        totesLesImatges.push(...imatgesDelNumero);
+                    } else if (num > 0 && totesLesImatges.length > 0) {
+                        // Si no trobem cap imatge per aquest número i ja n'hem trobat abans,
+                        // probablement hem arribat al final de la seqüència
+                        console.log(`Aturant cerca per ${nomCientific} al número ${num} (cap imatge trobada)`);
+                        break;
+                    }
+                }
+                
+                // Guardar al cache
+                this.cache.set(nomCientific, totesLesImatges);
+                
+                return totesLesImatges;
             }
 
             // Assignar imatges a una planta
             async assignarImatgesPlanta(planta) {
-                console.log(`Buscant imatges per: ${planta.nom_cientific}`);
+                console.log(`🔍 Buscant imatges per: ${planta.nom_cientific}`);
                 
                 const imatgesTrobades = await this.trobarImatgesPlanta(planta.nom_cientific);
                 
                 if (imatgesTrobades.length === 0) {
-                    console.warn(`No s'han trobat imatges per: ${planta.nom_cientific}`);
+                    console.log(`❌ No s'han trobat imatges per: ${planta.nom_cientific}`);
                     return {
                         principal: null,
                         principal_tipus: 'general',
@@ -403,7 +419,26 @@
                     };
                 }
                 
-                console.log(`Trobades ${imatgesTrobades.length} imatges per: ${planta.nom_cientific}`);
+                console.log(`✅ Trobades ${imatgesTrobades.length} imatges per: ${planta.nom_cientific}`);
+                
+                // Ordenar per número i prioritzar tipus d'imatge
+                imatgesTrobades.sort((a, b) => {
+                    if (a.numero !== b.numero) {
+                        return a.numero - b.numero;
+                    }
+                    
+                    // Prioritat per tipus d'imatge (habit primer, després flor, etc.)
+                    const prioritat = {
+                        'habit': 1,
+                        'flor': 2, 
+                        'fulla': 3,
+                        'fruit': 4,
+                        'tija': 5,
+                        'altre': 6
+                    };
+                    
+                    return (prioritat[a.tipus] || 10) - (prioritat[b.tipus] || 10);
+                });
                 
                 // Assignar la primera imatge com a principal
                 const principal = imatgesTrobades[0];
@@ -419,12 +454,20 @@
                 };
             }
 
-            // Processar totes les plantes del JSON
+            // Processar totes les plantes amb indicador de progrés
             async processarTotesLesPlantes(plantes) {
-                console.log('Iniciant assignació automàtica d\'imatges...');
+                console.log('🚀 Iniciant assignació automàtica d\'imatges...');
                 const plantesAmbImatges = [];
+                const total = plantes.length;
                 
-                for (const planta of plantes) {
+                for (let i = 0; i < plantes.length; i++) {
+                    const planta = plantes[i];
+                    
+                    // Mostrar progrés cada 10 plantes
+                    if (i % 10 === 0 || i === total - 1) {
+                        console.log(`📊 Progrés: ${i + 1}/${total} plantes processades (${Math.round((i + 1) / total * 100)}%)`);
+                    }
+                    
                     const imatges = await this.assignarImatgesPlanta(planta);
                     plantesAmbImatges.push({
                         ...planta,
@@ -432,8 +475,32 @@
                     });
                 }
                 
-                console.log('Assignació d\'imatges completada!');
+                // Estadístiques finals
+                const plantesAmbImatges_Count = plantesAmbImatges.filter(p => p.imatges.principal).length;
+                const plantesSenseImatges_Count = plantesAmbImatges.filter(p => !p.imatges.principal).length;
+                
+                console.log('🎉 Assignació d\'imatges completada!');
+                console.log(`📈 Estadístiques:`);
+                console.log(`   - Plantes amb imatges: ${plantesAmbImatges_Count}`);
+                console.log(`   - Plantes sense imatges: ${plantesSenseImatges_Count}`);
+                console.log(`   - Total d'imatges assignades: ${plantesAmbImatges.reduce((acc, p) => acc + (p.imatges.detalls?.length || 0) + (p.imatges.principal ? 1 : 0), 0)}`);
+                
                 return plantesAmbImatges;
+            }
+
+            // Mètode per netejar cache si cal
+            netejarCache() {
+                this.cache.clear();
+                console.log('🧹 Cache d\'imatges netejat');
+            }
+
+            // Mètode per obtenir estadístiques del cache
+            getEstadistiquesCache() {
+                return {
+                    entrades: this.cache.size,
+                    plantesAmbImatges: Array.from(this.cache.values()).filter(imgs => imgs.length > 0).length,
+                    plantesSenseImatges: Array.from(this.cache.values()).filter(imgs => imgs.length === 0).length
+                };
             }
         }
         
@@ -546,7 +613,7 @@
                 const data = await response.json();
                 
                 // Assignar imatges automàticament
-                const sistemaImatges = new SistemaImatges();
+                const sistemaImatges = new SistemaImatgesOptimitzat();
                 const plantesAmbImatges = await sistemaImatges.processarTotesLesPlantes(data.plantes || data);
                 
                 // Assignar a variables globals
