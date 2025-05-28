@@ -783,17 +783,17 @@ body::after {
     pointer-events: none; /* No interfereix amb la interacció */
 }
 
-/* Marge esquerre */
+/* Marge esquerra */
 body::before {
     left: 0;
-    background-image: url('assets/imatges/marge-esquerre.png');
+    background-image: url('assets/imatges/marge-esquerra.png');
     /* Si les imatges tenen noms diferents, canvia aquí */
 }
 
-/* Marge dret */
+/* Marge dreta */
 body::after {
     right: 0;
-    background-image: url('assets/imatges/marge-dret.png');
+    background-image: url('assets/imatges/marge-dreta.png');
 }
 
 /* Assegurar que el contingut principal no es solapi amb els marges */
@@ -983,21 +983,21 @@ body::after {
 /* Si les imatges són SVG */
 .svg-marges body::before,
 .svg-marges body::after {
-    background-image: url('assets/imatges/marge-esquerre.svg');
+    background-image: url('assets/imatges/marge-esquerra.svg');
 }
 
 .svg-marges body::after {
-    background-image: url('assets/imatges/marge-dret.svg');
+    background-image: url('assets/imatges/marge-dreta.svg');
 }
 
 /* Si les imatges són WebP (més optimitzades) */
 @supports (background-image: url('test.webp')) {
     body::before {
-        background-image: url('assets/imatges/marge-esquerre.webp');
+        background-image: url('assets/imatges/marge-esquerra.webp');
     }
     
     body::after {
-        background-image: url('assets/imatges/marge-dret.webp');
+        background-image: url('assets/imatges/marge-dreta.webp');
     }
 }
 
