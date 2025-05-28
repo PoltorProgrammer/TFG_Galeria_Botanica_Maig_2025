@@ -259,6 +259,45 @@
         
         // Variable global per a les dades de plantes (per la galeria)
         var gb_plantes_data = [];
+
+        // Funció per verificar si les imatges dels marges existeixen
+        async function verificarImatgesMarges() {
+            const imatgeEsquerra = 'assets/imatges/marge-esquerra.png';
+            const imatgeDreta = 'assets/imatges/marge-dreta.png';
+            
+            try {
+                // Test imatge esquerra
+                const imgEsq = new Image();
+                const promiseEsq = new Promise((resolve) => {
+                    imgEsq.onload = () => resolve(true);
+                    imgEsq.onerror = () => resolve(false);
+                    imgEsq.src = imatgeEsquerra;
+                });
+                
+                // Test imatge dreta
+                const imgDreta = new Image();
+                const promiseDreta = new Promise((resolve) => {
+                    imgDreta.onload = () => resolve(true);
+                    imgDreta.onerror = () => resolve(false);
+                    imgDreta.src = imatgeDreta;
+                });
+                
+                // Esperar ambdues imatges
+                const [esquerraExisteix, dretaExisteix] = await Promise.all([promiseEsq, promiseDreta]);
+                
+                // Si ambdues imatges existeixen, activar els marges
+                if (esquerraExisteix && dretaExisteix) {
+                    document.body.classList.add('marges-actius');
+                    console.log('✅ Marges decoratius activats - imatges carregades correctament');
+                } else {
+                    console.warn('⚠️ Marges decoratius desactivats - imatges no trobades');
+                    console.log(`Imatge esquerra: ${esquerraExisteix ? '✅' : '❌'}`);
+                    console.log(`Imatge dreta: ${dretaExisteix ? '✅' : '❌'}`);
+                }
+            } catch (error) {
+                console.error('Error verificant imatges dels marges:', error);
+            }
+        }
     </script>
     
     <!-- Scripts originals de WordPress adaptats -->
@@ -495,6 +534,9 @@
             try {
                 // Mostrar loading
                 document.getElementById('loading-overlay').classList.remove('hidden');
+                
+                // PRIMER: Verificar imatges dels marges
+                verificarImatgesMarges();
                 
                 // Carregar dades de plantes
                 const response = await fetch('dades/plantes.json');
