@@ -762,3 +762,259 @@ body {
         padding: 10px;
     }
 }
+
+
+/* ========================================================================
+   MARGES BOTÀNICS DECORATIUS - ENFILADISSES LATERALS
+   ======================================================================== */
+
+/* Contenidor per als marges decoratius */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    width: 120px; /* Amplada dels marges decoratius */
+    height: 100vh;
+    background-repeat: repeat-y;
+    background-position: center;
+    background-size: contain;
+    z-index: -1; /* Darrere de tot el contingut */
+    pointer-events: none; /* No interfereix amb la interacció */
+}
+
+/* Marge esquerre */
+body::before {
+    left: 0;
+    background-image: url('assets/imatges/marge-esquerre.png');
+    /* Si les imatges tenen noms diferents, canvia aquí */
+}
+
+/* Marge dret */
+body::after {
+    right: 0;
+    background-image: url('assets/imatges/marge-dret.png');
+}
+
+/* Assegurar que el contingut principal no es solapi amb els marges */
+.app-container {
+    margin: 0 140px; /* Deixar espai per als marges decoratius */
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.95); /* Fons semi-transparent per llegibilitat */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Ombra suau per separar del fons */
+}
+
+/* Alternativa amb pseudo-elements més complexos si necessites més control */
+.marges-botanics {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.marges-botanics::before,
+.marges-botanics::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 120px;
+    height: 100%;
+    background-repeat: repeat-y;
+    background-position: center;
+    background-size: contain;
+}
+
+.marges-botanics::before {
+    left: 0;
+    background-image: url('assets/imatges/enfiladissa-esquerra.png');
+}
+
+.marges-botanics::after {
+    right: 0;
+    background-image: url('assets/imatges/enfiladissa-dreta.png');
+}
+
+/* ========================================================================
+   RESPONSIVE - ADAPTACIÓ PELS DIFERENTS DISPOSITIUS
+   ======================================================================== */
+
+/* Tablets i pantallas mitjanes */
+@media (max-width: 1200px) {
+    body::before,
+    body::after {
+        width: 80px; /* Marges més estrets */
+    }
+    
+    .app-container {
+        margin: 0 100px;
+    }
+}
+
+/* Tablets petites */
+@media (max-width: 992px) {
+    body::before,
+    body::after {
+        width: 60px;
+    }
+    
+    .app-container {
+        margin: 0 80px;
+    }
+}
+
+/* Mòbils grans */
+@media (max-width: 768px) {
+    body::before,
+    body::after {
+        width: 40px;
+        opacity: 0.7; /* Més transparents en mòbil */
+    }
+    
+    .app-container {
+        margin: 0 60px;
+    }
+}
+
+/* Mòbils petits */
+@media (max-width: 480px) {
+    body::before,
+    body::after {
+        display: none; /* Ocultar en pantalles molt petites */
+    }
+    
+    .app-container {
+        margin: 0; /* Sense marges en mòbil petit */
+    }
+}
+
+/* ========================================================================
+   VARIANTS ALTERNATIVES DE DISSENY
+   ======================================================================== */
+
+/* Opció A: Marges amb gradient de transparència */
+.marges-amb-gradient body::before,
+.marges-amb-gradient body::after {
+    mask: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(0,0,0,1) 10%, 
+        rgba(0,0,0,1) 90%, 
+        transparent 100%);
+    -webkit-mask: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(0,0,0,1) 10%, 
+        rgba(0,0,0,1) 90%, 
+        transparent 100%);
+}
+
+/* Opció B: Efecte parallax suau (opcional) */
+.parallax-marges body::before,
+.parallax-marges body::after {
+    position: absolute; /* Canviar de fixed a absolute */
+    background-attachment: scroll;
+    transform: translateZ(0); /* Optimització hardware */
+}
+
+/* Opció C: Animació suau d'aparició */
+@keyframes apareixMarges {
+    from {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+.marges-animats body::before,
+.marges-animats body::after {
+    animation: apareixMarges 1.5s ease-out;
+}
+
+/* ========================================================================
+   MILLORES PER A LA LLEGIBILITAT
+   ======================================================================== */
+
+/* Assegurar contrast suficient amb el contingut */
+.app-main {
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 0;
+    min-height: 100vh;
+}
+
+/* Ombra suau per separar el contingut dels marges */
+#inici-section,
+#galeria-section,
+#mapa-section {
+    background: white;
+    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.05), 
+                10px 0 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Assegurar que els modals quedin per damunt */
+.planta-modal,
+.planta-lightbox {
+    z-index: 10000 !important;
+}
+
+/* ========================================================================
+   CLASSE D'ACTIVACIÓ/DESACTIVACIÓ
+   ======================================================================== */
+
+/* Per poder controlar els marges amb JavaScript si cal */
+.marges-botanics-actius body::before,
+.marges-botanics-actius body::after {
+    display: block;
+}
+
+.marges-botanics-inactius body::before,
+.marges-botanics-inactius body::after {
+    display: none;
+}
+
+/* ========================================================================
+   SUPORT PER A IMATGES DE DIFERENTS FORMATS
+   ======================================================================== */
+
+/* Si les imatges són SVG */
+.svg-marges body::before,
+.svg-marges body::after {
+    background-image: url('assets/imatges/marge-esquerre.svg');
+}
+
+.svg-marges body::after {
+    background-image: url('assets/imatges/marge-dret.svg');
+}
+
+/* Si les imatges són WebP (més optimitzades) */
+@supports (background-image: url('test.webp')) {
+    body::before {
+        background-image: url('assets/imatges/marge-esquerre.webp');
+    }
+    
+    body::after {
+        background-image: url('assets/imatges/marge-dret.webp');
+    }
+}
+
+/* ========================================================================
+   PREVENCIÓ DE PROBLEMES DE RENDIMENT
+   ======================================================================== */
+
+/* Optimitzacions per al rendiment */
+body::before,
+body::after {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* Evitar repaint innecessaris */
+.app-container {
+    contain: layout style paint;
+}
