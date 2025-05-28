@@ -3,11 +3,14 @@
  * Basat en mapa-botanica.js original
  */
 
-// Variables globals del mapa
-let map = null;
-let markers = null;
-let totsElsMarcadors = [];
-let habitatsLayers = {};
+// Variables globals del mapa (NOMÉS UNA DECLARACIÓ)
+let map, markers, totsElsMarcadors, habitatsLayers;
+
+// Inicialitzar variables
+map = null;
+markers = null;
+totsElsMarcadors = [];
+habitatsLayers = {};
 
 // Funció per generar el HTML del mapa
 async function generarMapaHTML() {
