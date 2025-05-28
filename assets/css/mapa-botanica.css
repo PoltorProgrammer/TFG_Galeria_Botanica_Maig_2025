@@ -1,6 +1,8 @@
+/* SUBSTITUEIX TOT EL CSS DE MAPA-BOTANICA.CSS PER AQUEST */
+
 /* =============================================================================
-   MAPA BOTÀNICA UAB  –  FULLA D’ESTILS COMPLETA
-   Versió 1.2 (19-05-2025)
+   MAPA BOTÀNICA UAB  –  FULLA D'ESTILS COMPLETA
+   Versió 1.3 (28-05-2025) - FILTRES IDÈNTICS A LA GALERIA
    ========================================================================== */
 
 /* ---------- Contenidor principal del mapa ---------- */
@@ -14,213 +16,403 @@
 /* ---------- Mapa ---------- */
 #mapa-botanica {
     width: 100%;
+    height: 600px;
     border: 2px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
 }
 
 /* =============================================================================
-   BARRA DE FILTRES  (estil compartit amb la galeria)
+   FILTRES IDÈNTICS A LA GALERIA
    ========================================================================== */
+
+/* Contenidor principal de filtres - IGUAL QUE LA GALERIA */
 .mapa-filtres {
-    /* Posicionament en flux (res de position:absolute) */
+    margin: 20px 0 40px 0;
     background: #f8f9fa;
-    padding: 40px;
-    border: 2px solid #4CAF50;        /* mateix verd que la galeria */
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    margin: 20px 0 40px 0 !important;  /* mateix marge inferior */
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    padding: 40px;
+    border: 2px solid #4CAF50;
 }
 
-/* --- Grups --- */
-.grup-filtre {
+/* Barra de filtres - IGUAL QUE LA GALERIA */
+.mapa-filtres .filtres-grup {
+    display: flex;
+    flex-direction: column; /* VERTICAL: cada grup en una línia */
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* Estil per a grups de filtres - IGUAL QUE LA GALERIA */
+.mapa-filtres .grup-filtre {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 15px;
+    width: 100%;
 }
-.etiqueta-filtre {
-    font-weight: 600;
+
+/* Etiquetes de grups de filtres - IGUAL QUE LA GALERIA */
+.mapa-filtres .etiqueta-filtre {
+    font-weight: bold;
     color: #555;
     margin-right: 5px;
+    white-space: nowrap;
 }
-.botons-filtre {
+
+/* Contenidor de botons de filtre - IGUAL QUE LA GALERIA */
+.mapa-filtres .botons-filtre {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
 }
 
-/* --- Botons --- */
-.filtre-boto {
-    padding: 6px 12px;                /* mateix padding que la galeria */
-    background: #f0f0f0;              /* gris clar idèntic */
+/* Estil dels botons de filtre - IGUAL QUE LA GALERIA */
+.mapa-filtres .filtre-boto {
+    padding: 6px 12px;
+    background: #f0f0f0;
     border: 1px solid #e0e0e0;
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.2s;
-    font-size: 13px;
-    line-height: 1.25;
     user-select: none;
-    box-shadow: none;
+    font-size: 13px;
     color: #333;
+    box-shadow: none;
 }
-.filtre-boto:hover {
-    background: #e0e0e0;              /* hover = lleugerament més fosc */
-    transform: translateY(-1px);      /* petit “lift” com la galeria */
+
+.mapa-filtres .filtre-boto:hover {
+    background: #e0e0e0;
+    transform: translateY(-1px);
 }
-.filtre-boto.actiu {
-    /* En cas que un botó no pertanyi a un grup amb color propi */
+
+.mapa-filtres .filtre-boto.actiu {
     background: #4CAF50;
-    border-color: #388E3C;
     color: white;
+    border-color: #388E3C;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-/* --- Colors de cada grup (paleta oficial galeria) --- */
-.tipus-planta-filtre   .filtre-boto.actiu { background:#4CAF50; border-color:#388E3C; }
-.habitat-filtre        .filtre-boto.actiu { background:#FF9800; border-color:#EF6C00; }
-.floracio-filtre       .filtre-boto.actiu { background:#E91E63; border-color:#C2185B; }
-.usos-filtre           .filtre-boto.actiu { background:#00BCD4; border-color:#0097A7; }
+/* Colors específics per grups - IGUAL QUE LA GALERIA */
+.mapa-filtres .tipus-planta-filtre .filtre-boto.actiu {
+    background: #4CAF50;
+    border-color: #388E3C;
+}
 
-/* ---------- Secció Filtres actius ---------- */
-.filtres-actius-contenidor {
+.mapa-filtres .habitat-filtre .filtre-boto.actiu {
+    background: #FF9800;
+    border-color: #EF6C00;
+}
+
+.mapa-filtres .floracio-filtre .filtre-boto.actiu {
+    background: #E91E63;
+    border-color: #C2185B;
+}
+
+.mapa-filtres .usos-filtre .filtre-boto.actiu {
+    background: #00BCD4;
+    border-color: #0097A7;
+}
+
+.mapa-filtres .fullatge-filtre .filtre-boto.actiu {
+    background: #795548;
+    border-color: #5D4037;
+}
+
+/* Contenidor de filtres actius - IGUAL QUE LA GALERIA */
+.mapa-filtres .filtres-actius-contenidor {
+    margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 10px;
 }
-.etiqueta-filtres-actius { font-weight: 600; color: #555; }
-.filtres-actius         { display: flex; flex-wrap: wrap; gap: 8px; }
 
-.filtre-actiu{
+/* Camp de cerca - IGUAL QUE LA GALERIA */
+.mapa-filtres .cerca-contenidor {
+    margin-top: 15px;
+    width: 100%;
+}
+
+.mapa-filtres #mapa-cerca {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    transition: all 0.3s;
+    box-sizing: border-box;
+}
+
+.mapa-filtres #mapa-cerca:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.mapa-filtres #mapa-cerca::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Etiquetes i elements de filtres actius - IGUAL QUE LA GALERIA */
+.mapa-filtres .etiqueta-filtres-actius {
+    font-weight: bold;
+    color: #555;
+}
+
+.mapa-filtres .filtres-actius {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mapa-filtres .filtre-actiu {
+    display: inline-block;
     padding: 5px 10px;
+    background: #e0e0e0;
     border-radius: 20px;
     font-size: 12px;
-    display: inline-flex;
-    align-items: center;
-    background: #e0e0e0;
     color: #333;
+    margin-right: 5px;
 }
-.filtre-actiu[data-group="tipus"]   { background: rgba(76,175,80,.2);  border:1px solid rgba(76,175,80,.5);}  
-.filtre-actiu[data-group="habitat"] { background: rgba(255,152,0,.2);  border:1px solid rgba(255,152,0,.5);} 
-.filtre-actiu[data-group="floracio"]{ background: rgba(233,30,99,.2);  border:1px solid rgba(233,30,99,.5);} 
-.filtre-actiu[data-group="usos"]    { background: rgba(0,188,212,.2); border:1px solid rgba(0,188,212,.5);} 
 
-.eliminar-filtre{
-    margin-left: 6px;
+/* Colors per filtres actius - IGUAL QUE LA GALERIA */
+.mapa-filtres .filtre-actiu[data-group="tipus"] {
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid rgba(76, 175, 80, 0.5);
+}
+
+.mapa-filtres .filtre-actiu[data-group="habitat"] {
+    background: rgba(255, 152, 0, 0.2);
+    border: 1px solid rgba(255, 152, 0, 0.5);
+}
+
+.mapa-filtres .filtre-actiu[data-group="floracio"] {
+    background: rgba(233, 30, 99, 0.2);
+    border: 1px solid rgba(233, 30, 99, 0.5);
+}
+
+.mapa-filtres .filtre-actiu[data-group="usos"] {
+    background: rgba(0, 188, 212, 0.2);
+    border: 1px solid rgba(0, 188, 212, 0.5);
+}
+
+.mapa-filtres .filtre-actiu[data-group="fullatge"] {
+    background: rgba(121, 85, 72, 0.2);
+    border: 1px solid rgba(121, 85, 72, 0.5);
+}
+
+/* Botó per eliminar filtres - IGUAL QUE LA GALERIA */
+.mapa-filtres .eliminar-filtre {
+    margin-left: 5px;
+    cursor: pointer;
     font-weight: bold;
-    cursor: pointer;
-    width: 16px; height: 16px; line-height: 14px; text-align: center;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 14px;
+    text-align: center;
     border-radius: 50%;
+    transition: all 0.2s;
 }
-.eliminar-filtre:hover { background: rgba(0,0,0,.1); }
 
-/* Botó netejar */
-.netejar-filtres{
-    padding: 6px 14px;
+.mapa-filtres .eliminar-filtre:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Botó per netejar tots els filtres - IGUAL QUE LA GALERIA */
+.mapa-filtres .netejar-filtres {
+    padding: 5px 10px;
     background: #f5f5f5;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 13px;
     cursor: pointer;
-    transition: all .25s;
+    font-size: 12px;
+    transition: all 0.2s;
 }
-.netejar-filtres:hover { background: #e0e0e0; }
 
-/* ---------- Cercador ---------- */
-.mapa-cercador { display: flex; width: 100%; }
-#mapa-cerca{
-    flex: 1 1 auto;
-    padding: 9px 15px;
-    border: 2px solid #ddd;
-    border-radius: 25px;
-    font-size: 15px;
-    transition: border .25s;
+.mapa-filtres .netejar-filtres:hover {
+    background: #e0e0e0;
 }
-#mapa-cerca:focus      { outline: none; border-color: #4CAF50; }
-#mapa-cerca::placeholder{ color: #999; font-style: italic; }
 
 /* =============================================================================
-   POPUPS, MARCADORS, CLUSTERS  (sense canvis)
+   POPUPS, MARCADORS, CLUSTERS
    ========================================================================== */
-.leaflet-popup-content { width: 280px !important; }
-.planta-popup{ text-align: center; }
-.planta-popup-imatge{
-    width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;
+
+.leaflet-popup-content { 
+    width: 280px !important; 
 }
-.planta-popup h3{
-    margin: 10px 0 5px; color: #28a745; font-size: 18px;
+
+.planta-popup { 
+    text-align: center; 
 }
-.planta-popup .nom-cientific{
-    font-style: italic; color: #666; font-size: 14px; margin-bottom: 10px;
+
+.planta-popup-imatge {
+    width: 100%; 
+    height: 150px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    margin-bottom: 10px;
 }
-.planta-popup-info{ text-align: left; margin: 10px 0; }
-.planta-popup-info p{ margin: 5px 0; font-size: 13px; }
+
+.planta-popup h3 {
+    margin: 10px 0 5px; 
+    color: #28a745; 
+    font-size: 18px;
+}
+
+.planta-popup .nom-cientific {
+    font-style: italic; 
+    color: #666; 
+    font-size: 14px; 
+    margin-bottom: 10px;
+}
+
+.planta-popup-info { 
+    text-align: left; 
+    margin: 10px 0; 
+}
+
+.planta-popup-info p { 
+    margin: 5px 0; 
+    font-size: 13px; 
+}
+
 .boto-veure-detalls {
     display: inline-block;
-    padding: 8px 16px !important;        /* ample idèntic a la galeria */
-    background: #4CAF50 !important;      /* verd galeria */
+    padding: 8px 16px !important;
+    background: #4CAF50 !important;
     color: white !important;
     text-decoration: none;
-    border-radius: 4px !important;       /* cantonades iguals */
+    border-radius: 4px !important;
     font-size: 14px !important;
     transition: all 0.3s;
-    margin-top: 10px;                    /* conserva l'espai vertical del popup */
+    margin-top: 10px;
     text-align: center;
 }
 
 .boto-veure-detalls:hover {
-    background: #388E3C !important;      /* mateix hover que la galeria */
-    transform: translateY(-2px);         /* petit "lift" com a la galeria */
+    background: #388E3C !important;
+    transform: translateY(-2px);
 }
 
 /* Llegenda */
-.mapa-llegenda{
-    position: absolute; bottom: 20px; right: 20px;
-    background: #fff; padding: 15px; border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,.1); z-index: 1000;
-}
-.mapa-llegenda h4{ margin: 0 0 10px; font-size: 16px; }
-.llegenda-item{
-    display: flex; align-items: center; gap: 10px; margin: 5px 0; font-size: 14px;
+.mapa-llegenda {
+    position: absolute; 
+    bottom: 20px; 
+    right: 20px;
+    background: #fff; 
+    padding: 15px; 
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.1); 
+    z-index: 1000;
 }
 
-/* ---------- Marcador emoji ---------- */
-.marcador-planta{
-    background: #fff; border: 3px solid #28a745; border-radius: 50%;
-    width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;
-    font-size: 20px; box-shadow: 0 2px 5px rgba(0,0,0,.2);
+.mapa-llegenda h4 { 
+    margin: 0 0 10px; 
+    font-size: 16px; 
 }
-.marcador-arbre  { border-color: #228b22; }
+
+.llegenda-item {
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    margin: 5px 0; 
+    font-size: 14px;
+}
+
+/* Marcador emoji */
+.marcador-planta {
+    background: #fff; 
+    border: 3px solid #28a745; 
+    border-radius: 50%;
+    width: 35px; 
+    height: 35px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    font-size: 20px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,.2);
+}
+
+.marcador-arbre { border-color: #228b22; }
 .marcador-arbust { border-color: #32cd32; }
-.marcador-herba  { border-color: #90ee90; }
+.marcador-herba { border-color: #90ee90; }
 
-/* ---------- Clusters ---------- */
-.marker-cluster{ background-clip: padding-box; border-radius: 50%; }
-.marker-cluster div{
-    background: #28a745; color: #fff; font-weight: bold;
+/* Clusters */
+.marker-cluster { 
+    background-clip: padding-box; 
+    border-radius: 50%; 
 }
-.marker-cluster span{ color: #fff; }
+
+.marker-cluster div {
+    background: #28a745; 
+    color: #fff; 
+    font-weight: bold;
+}
+
+.marker-cluster span { 
+    color: #fff; 
+}
 
 /* =============================================================================
    RESPONSIVE
    ========================================================================== */
-@media (max-width: 768px){
-    .mapa-filtres{ padding: 15px; }
-    .grup-filtre{ flex-direction: column; align-items: flex-start; }
-    .botons-filtre{ width: 100%; gap: 8px; }
-    .filtre-boto{ font-size: 13px; }
-    .mapa-cercador{ flex-direction: column; gap: 10px; }
-    #mapa-cerca{ width: 100%; }
-    .mapa-llegenda{ position: relative; bottom: auto; right: auto; margin-top: 20px; }
+
+@media (max-width: 768px) {
+    .mapa-filtres { 
+        padding: 15px; 
+    }
+    
+    .mapa-filtres .grup-filtre { 
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+    
+    .mapa-filtres .etiqueta-filtre {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .mapa-filtres .botons-filtre { 
+        width: 100%; 
+        gap: 8px; 
+    }
+    
+    .mapa-filtres .filtre-boto { 
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    
+    #mapa-botanica {
+        height: 400px;
+    }
+    
+    .mapa-llegenda { 
+        position: relative; 
+        bottom: auto; 
+        right: auto; 
+        margin-top: 20px; 
+    }
 }
 
-@media (max-width: 480px){
-    .filtre-boto{ font-size: 12px; padding: 5px 10px; }
-    .filtres-actius-contenidor{ gap: 6px; }
-    .filtre-actiu{ font-size: 11px; }
+@media (max-width: 480px) {
+    .mapa-filtres .filtre-boto { 
+        font-size: 11px; 
+        padding: 4px 8px; 
+    }
+    
+    .mapa-filtres .filtres-actius-contenidor { 
+        gap: 6px; 
+    }
+    
+    .mapa-filtres .filtre-actiu { 
+        font-size: 11px; 
+    }
+    
+    .mapa-filtres {
+        padding: 10px;
+    }
 }
