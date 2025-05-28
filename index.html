@@ -78,7 +78,7 @@
     <script src="assets/js/galeria-botanica-original.js"></script>
     <script src="assets/js/mapa-botanica-original.js"></script>
     
-    <!-- Script de navegació -->
+    <!-- Script d'inicialització (DESPRÉS de carregar els altres scripts) -->
     <script>
         // Funcions de navegació
         function mostrarGaleria() {
@@ -102,36 +102,6 @@
             }
         }
         
-        // Carregar dades i inicialitzar
-        document.addEventListener('DOMContentLoaded', async function() {
-            try {
-                // Mostrar loading
-                document.getElementById('loading-overlay').classList.remove('hidden');
-                
-                // Carregar dades de plantes
-                const response = await fetch('dades/plantes.json');
-                const data = await response.json();
-                
-                // Assignar a variables globals
-                gb_plantes_data = data;
-                mb_vars.dades_plantes = processarDadesPerMapa(data);
-                
-                // Generar contingut de la galeria
-                await generarGaleriaHTML(data);
-                
-                // Generar contingut del mapa
-                await generarMapaHTML();
-                
-                // Amagar loading
-                document.getElementById('loading-overlay').classList.add('hidden');
-                
-            } catch (error) {
-                console.error('Error carregant dades:', error);
-                document.getElementById('loading-overlay').innerHTML = 
-                    '<div style="color: red;">Error carregant les dades. Si us plau, recarrega la pàgina.</div>';
-            }
-        });
-        
         // Processar dades per al mapa (format compatible)
         function processarDadesPerMapa(plantes) {
             return plantes.map(planta => ({
@@ -143,6 +113,9 @@
                         planta.caracteristiques.floracio.map(f => f.toLowerCase().replace(/\s*\(.*?\)\s*/g, '')) : 
                         [planta.caracteristiques.floracio.toLowerCase().replace(/\s*\(.*?\)\s*/g, '')]) : [],
                 usos_norm: planta.usos ? planta.usos.map(u => u.toLowerCase().replace(/\s+/g, '_').replace(/\s*\(.*?\)\s*/g, '')) : [],
+                floracio: planta.caracteristiques?.floracio ? 
+                    (Array.isArray(planta.caracteristiques.floracio) ? planta.caracteristiques.floracio : [planta.caracteristiques.floracio]) : [],
+                fullatge: planta.caracteristiques?.fullatge || '',
                 info_completa: construirInfoCompleta(planta)
             }));
         }
@@ -184,6 +157,47 @@
             
             return info.filter(i => i).join(' ');
         }
+        
+        // Carregar dades i inicialitzar DESPRÉS que tots els scripts estiguin carregats
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Mostrar loading
+                document.getElementById('loading-overlay').classList.remove('hidden');
+                
+                // Carregar dades de plantes
+                const response = await fetch('dades/plantes.json');
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+                const data = await response.json();
+                
+                // Assignar a variables globals
+                gb_plantes_data = data;
+                mb_vars.dades_plantes = processarDadesPerMapa(data);
+                
+                console.log('Dades carregades:', data.length, 'plantes');
+                
+                // Generar contingut de la galeria (ara la funció ja està definida)
+                await generarGaleriaHTML(data);
+                
+                // Generar contingut del mapa
+                await generarMapaHTML();
+                
+                // Amagar loading
+                document.getElementById('loading-overlay').classList.add('hidden');
+                
+                console.log('Aplicació inicialitzada correctament');
+                
+            } catch (error) {
+                console.error('Error carregant dades:', error);
+                document.getElementById('loading-overlay').innerHTML = 
+                    `<div style="color: red; text-align: center;">
+                        <h3>Error carregant les dades</h3>
+                        <p>${error.message}</p>
+                        <p>Si us plau, recarrega la pàgina.</p>
+                    </div>`;
+            }
+        });
     </script>
 </body>
 </html>
