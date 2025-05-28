@@ -304,7 +304,7 @@
                 
                 // Assignar imatges automàticament
                 const sistemaImatges = new SistemaImatges();
-                const plantesAmbImatges = await sistemaImatges.processarTotesLesPlantes(data.plantes);
+                const plantesAmbImatges = await sistemaImatges.processarTotesLesPlantes(data.plantes || data);
                 
                 // Assignar a variables globals
                 gb_plantes_data = plantesAmbImatges;
