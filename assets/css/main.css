@@ -18,28 +18,34 @@ body {
 }
 
 /* =============================================================================
-   FONS DECORATIU AMB ENFILADISSES
+   MARGES DECORATIUS AMB ENFILADISSES
    ========================================================================== */
 
-/* Fons decoratiu amb enfiladisses laterals */
-body::before {
+/* Pseudoelements per als marges decoratius */
+body::before,
+body::after {
     content: '';
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    width: 200px; /* Ajusta segons l'amplada de les teves imatges */
     height: 100vh;
     z-index: -1; /* Posar darrere de tot el contingut */
-    background-image: url('assets/imatges/fons_enfiladisses.png');
     background-repeat: repeat-y;
-    background-position: center top;
-    background-size: cover; /* Ajustar per cobrir tota l'amplada */
-    pointer-events: none; /* Evitar que interfereixi amb la interacció */
+    background-position: top;
+    background-size: contain;
+    pointer-events: none; /* Evitar que interfereixin amb la interacció */
 }
 
-/* Eliminem el pseudoelement ::after ja que no el necessitem */
+/* Marge esquerre */
+body::before {
+    left: 0;
+    background-image: url('/assets/imatges/marge-esquerra.png');
+}
+
+/* Marge dret */
 body::after {
-    display: none;
+    right: 0;
+    background-image: url('/assets/imatges/marge-dreta.png');
 }
 
 /* Contenidor principal de l'aplicació */
@@ -58,6 +64,8 @@ body::after {
     color: white;
     padding: 1rem 2rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-left: 220px; /* 200px de la imatge + 20px de separació */
+    margin-right: 220px; /* 200px de la imatge + 20px de separació */
 }
 
 .app-header h1 {
@@ -104,9 +112,11 @@ body::after {
 /* Main content */
 .app-main {
     flex: 1;
-    overflow: auto;
+    overflow: auto; /* CANVIAT: de visible a auto per permetre scroll */
     position: relative;
     min-height: 0;
+    margin-left: 220px; /* 200px de la imatge + 20px de separació */
+    margin-right: 220px; /* 200px de la imatge + 20px de separació */
 }
 
 /* =============================================================================
@@ -893,11 +903,45 @@ body::after {
    RESPONSIVE DESIGN
    ========================================================================== */
 
-/* Per pantalles petites, el fons s'adapta automàticament */
-@media (max-width: 768px) {
-    body::before {
-        background-size: contain; /* En mòbil, mantenir proporcions */
-        background-position: center top;
+/* RESPONSIVE: Amagar els marges en pantalles petites */
+@media (max-width: 1400px) {
+    body::before,
+    body::after {
+        display: none;
+    }
+    
+    .app-main,
+    .app-header {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+/* Per pantalles mitjanes, reduir l'amplada dels marges */
+@media (min-width: 1401px) and (max-width: 1600px) {
+    body::before,
+    body::after {
+        width: 150px;
+    }
+    
+    .app-main,
+    .app-header {
+        margin-left: 170px; /* 150px + 20px */
+        margin-right: 170px;
+    }
+}
+
+/* Per pantalles grans, amplada completa */
+@media (min-width: 1601px) {
+    body::before,
+    body::after {
+        width: 200px;
+    }
+    
+    .app-main,
+    .app-header {
+        margin-left: 220px; /* 200px + 20px */
+        margin-right: 220px;
     }
 }
 
