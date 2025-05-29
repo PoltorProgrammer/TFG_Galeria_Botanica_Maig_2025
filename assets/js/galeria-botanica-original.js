@@ -532,10 +532,18 @@ function configurarEventListenersGaleria() {
     });
     
     // Event listeners per tancar el modal
-    jQuery(document).on('click', '.planta-modal-tancar, .planta-modal', function(e) {
+    jQuery(document).on('click', '.planta-modal-tancar', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        tancarModal();
+        if (window.location.hash.startsWith('#planta-')) {
+            window.location.hash = '';
+        }
+    });
+    
+    jQuery(document).on('click', '.planta-modal', function(e) {
         if (e.target === this) {
             tancarModal();
-            // Eliminar hash de l'URL
             if (window.location.hash.startsWith('#planta-')) {
                 window.location.hash = '';
             }
@@ -746,7 +754,7 @@ function mostrarFiltresActius() {
         console.error("Error en mostrarFiltresActius:", error);
         jQuery('.netejar-filtres').hide();
     }
-}                      
+}
 
 // Eliminar un filtre individual
 function eliminarFiltre($element) {
@@ -1126,7 +1134,6 @@ function generarHTMLDetallsPlanta(planta) {
         const imatgeUrl = `assets/imatges/${imatges.principal}`;
         html += '<div class="planta-imatge-principal">';
         html += `<img src="${imatgeUrl}" alt="${escapeHtml(planta.nom_comu)}" data-tipus="${escapeHtml(imatges.principal_tipus)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=planta-sense-imatge>Imatge no disponible</div>'">`;
-
         if (imatges.principal_tipus !== 'general') {
             html += `<span class="planta-tipus-imatge-detall">${imatges.principal_tipus.charAt(0).toUpperCase() + imatges.principal_tipus.slice(1)}</span>`;
         }
@@ -1253,7 +1260,6 @@ jQuery(document).ready(function() {
                                  
 // Cridar verificarHashURL quan es carregui la pàgina
 jQuery(window).on('load', verificarHashURL);                
-
 
 // Assegurar funcions globals per compatibilitat
 window.generarGaleriaHTML = generarGaleriaHTML;
