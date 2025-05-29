@@ -145,244 +145,266 @@ body::after {
     box-sizing: border-box;
 }
 
-/* Contenidor del mapa */
-.mapa-botanica-contenidor {
-    width: 100%;
+/* Contingut de la secció d'inici */
+#inici-section {
+    padding: 2rem;
     max-width: 1000px;
     margin: 0 auto;
-    position: relative;
-    z-index: 1;
-}
-
-/* Mapa Leaflet */
-#mapa-botanica {
-    width: 100%;
-    height: 600px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-top: 20px;
-    position: relative;
-    z-index: 10;
-}
-
-/* =============================================================================
-   FILTRES DEL MAPA - IDÈNTICS A LA GALERIA
-   ========================================================================== */
-
-/* Contenidor principal - Exactament igual que .filtres-contenidor */
-.mapa-filtres {
-    margin: 20px 0 40px 0;
-    background: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    padding: 40px;
-    border: 2px solid #4CAF50;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Estructura de filtres - Exactament igual que .filtres-barra */
-.mapa-filtres .filtres-grup {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-/* Grups de filtres - Exactament igual que .grup-filtre */
-.mapa-filtres .grup-filtre {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-/* Etiquetes - Exactament igual que .etiqueta-filtre */
-.mapa-filtres .etiqueta-filtre {
-    font-weight: bold;
-    color: #555;
-    margin-right: 5px;
-    white-space: nowrap;
-}
-
-/* Contenidor de botons - Exactament igual que .botons-filtre */
-.mapa-filtres .botons-filtre {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-/* Botons de filtre - Exactament igual que .filtre-boto */
-.mapa-filtres .filtre-boto {
-    padding: 6px 12px;
-    background: #f0f0f0;
-    border: 1px solid #e0e0e0;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.2s;
-    user-select: none;
-    font-size: 13px;
+    line-height: 1.6;
     color: #333;
-    box-shadow: none;
-    font-weight: normal;
-    line-height: 1.2;
+    background: #fff;
 }
 
-.mapa-filtres .filtre-boto:hover {
-    background: #e0e0e0;
-    transform: translateY(-1px);
+.inici-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    border: 2px solid #4CAF50;
 }
 
-.mapa-filtres .filtre-boto.actiu {
+.inici-hero h1 {
+    color: #2c5530;
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+}
+
+.inici-hero .subtitol {
+    color: #4a7c59;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.inici-hero .descripcio {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.inici-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    min-width: 120px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4CAF50;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.inici-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.inici-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-left: 4px solid #4CAF50;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inici-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.inici-card h3 {
+    color: #2c5530;
+    margin: 0 0 1rem 0;
+    font-size: 1.4rem;
+}
+
+.inici-card p {
+    margin: 0.5rem 0;
+    color: #555;
+}
+
+.inici-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.inici-table th {
     background: #4CAF50;
     color: white;
-    border-color: #388E3C;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
 }
 
-/* Colors dels grups - Exactament iguals a la galeria */
-.mapa-filtres .tipus-planta-filtre .filtre-boto.actiu {
-    background: #4CAF50;
-    border-color: #388E3C;
+.inici-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
 }
 
-.mapa-filtres .habitat-filtre .filtre-boto.actiu {
-    background: #FF9800;
-    border-color: #EF6C00;
+.inici-table tr:last-child td {
+    border-bottom: none;
 }
 
-.mapa-filtres .floracio-filtre .filtre-boto.actiu {
-    background: #E91E63;
-    border-color: #C2185B;
+.zones-clau {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
 }
 
-.mapa-filtres .usos-filtre .filtre-boto.actiu {
-    background: #00BCD4;
-    border-color: #0097A7;
-}
-
-.mapa-filtres .fullatge-filtre .filtre-boto.actiu {
-    background: #795548;
-    border-color: #5D4037;
-}
-
-/* Cercador - Exactament igual que .cerca-input */
-.mapa-filtres .cerca-contenidor {
-    margin-top: 15px;
-    width: 100%;
-}
-
-.mapa-filtres #mapa-cerca {
-    width: 100%;
-    padding: 10px 15px;
-    font-size: 16px;
-    border: 2px solid #e0e0e0;
-    border-radius: 25px;
-    transition: all 0.3s;
-    box-sizing: border-box;
-    font-weight: normal;
-}
-
-.mapa-filtres #mapa-cerca:focus {
-    outline: none;
-    border-color: #4CAF50;
-}
-
-.mapa-filtres #mapa-cerca::placeholder {
-    color: #999;
-    font-style: italic;
-    font-weight: normal;
-}
-
-/* Filtres actius - Exactament iguals a la galeria */
-.mapa-filtres .filtres-actius-contenidor {
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-}
-
-.mapa-filtres .etiqueta-filtres-actius {
-    font-weight: bold;
-    color: #555;
-}
-
-.mapa-filtres .filtres-actius {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.mapa-filtres .filtre-actiu {
-    display: inline-block;
-    padding: 5px 10px;
-    background: #e0e0e0;
-    border-radius: 20px;
-    font-size: 12px;
-    color: #333;
-    margin-right: 5px;
-    font-weight: normal;
-}
-
-/* Colors per filtres actius */
-.mapa-filtres .filtre-actiu[data-group="tipus"] {
-    background: rgba(76, 175, 80, 0.2);
-    border: 1px solid rgba(76, 175, 80, 0.5);
-}
-
-.mapa-filtres .filtre-actiu[data-group="habitat"] {
-    background: rgba(255, 152, 0, 0.2);
-    border: 1px solid rgba(255, 152, 0, 0.5);
-}
-
-.mapa-filtres .filtre-actiu[data-group="floracio"] {
-    background: rgba(233, 30, 99, 0.2);
-    border: 1px solid rgba(233, 30, 99, 0.5);
-}
-
-.mapa-filtres .filtre-actiu[data-group="usos"] {
-    background: rgba(0, 188, 212, 0.2);
-    border: 1px solid rgba(0, 188, 212, 0.5);
-}
-
-.mapa-filtres .filtre-actiu[data-group="fullatge"] {
-    background: rgba(121, 85, 72, 0.2);
-    border: 1px solid rgba(121, 85, 72, 0.5);
-}
-
-/* Botó eliminar filtre */
-.mapa-filtres .eliminar-filtre {
-    margin-left: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    line-height: 14px;
+.zones-clau h3 {
+    color: #2c5530;
+    margin: 0 0 1.5rem 0;
     text-align: center;
-    border-radius: 50%;
-    transition: all 0.2s;
 }
 
-.mapa-filtres .eliminar-filtre:hover {
-    background: rgba(0, 0, 0, 0.1);
+.zona-item {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    border-left: 4px solid #FF9800;
 }
 
-/* Botó netejar filtres */
-.mapa-filtres .netejar-filtres {
-    padding: 5px 10px;
-    background: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: all 0.2s;
-    font-weight: normal;
+.zona-nom {
+    font-weight: bold;
+    color: #2c5530;
+    margin-bottom: 0.5rem;
 }
 
-.mapa-filtres .netejar-filtres:hover {
-    background: #e0e0e0;
+.caracteristiques-tecniques {
+    background: #e8f5e8;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+.col-laboracio {
+    background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.col-laboracio h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.col-laboracio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.col-laboracio-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.credits {
+    background: #2c5530;
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.credits h3 {
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+}
+
+.cta-btn {
+    padding: 1rem 2rem;
+    background: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cta-btn:hover {
+    background: #388E3C;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.cta-btn.secondary {
+    background: #FF9800;
+}
+
+.cta-btn.secondary:hover {
+    background: #F57C00;
+}
+
+/* Estils per les estadístiques d'imatges */
+.loading-stats {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.loading-stats.success {
+    background: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.loading-stats.error {
+    background: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
 }
 
 /* =============================================================================
@@ -609,54 +631,6 @@ body::after {
 }
 
 /* =============================================================================
-   CORRECCIONS D'AMPLADA - IGUALAR GALERIA I MAPA
-   ========================================================================== */
-
-/* Assegurar que ambdues seccions tinguin el mateix contenidor */
-#galeria-section,
-#mapa-section:not([style*="display: none"]) {
-    padding: 0 20px; /* Mateix padding lateral */
-    box-sizing: border-box;
-}
-
-/* Contenidors principals amb la mateixa amplada */
-.galeria-botanica,
-.mapa-botanica-contenidor {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    position: relative;
-    box-sizing: border-box;
-}
-
-/* Assegurar que els filtres de galeria i mapa tinguin la mateixa amplada */
-.filtres-contenidor,
-.mapa-filtres {
-    width: 100%;
-    max-width: none; /* Eliminar restriccions addicionals */
-    margin: 20px 0 40px 0;
-    background: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    padding: 40px;
-    border: 2px solid #4CAF50;
-    box-sizing: border-box;
-}
-
-/* Grid de plantes i mapa amb la mateixa amplada base */
-.plantes-grid,
-#mapa-botanica {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* Assegurar que els modals i lightbox estiguin per damunt de tot */
-.planta-modal,
-.planta-lightbox {
-    z-index: 10000 !important;
-}
-
-/* =============================================================================
    RESPONSIVE DESIGN
    ========================================================================== */
 
@@ -722,42 +696,6 @@ body::after {
         padding: 15px;
     }
     
-    #mapa-botanica {
-        height: 400px;
-    }
-    
-    /* Filtres del mapa responsive */
-    .mapa-filtres {
-        padding: 15px;
-    }
-    
-    .mapa-filtres .filtres-grup {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .mapa-filtres .grup-filtre {
-        width: 100%;
-    }
-    
-    .mapa-filtres .etiqueta-filtre {
-        width: 100%;
-        margin-bottom: 5px;
-    }
-    
-    .mapa-filtres .botons-filtre {
-        width: 100%;
-    }
-    
-    .mapa-filtres .filtre-boto {
-        font-size: 12px;
-        padding: 5px 10px;
-    }
-    
-    .mapa-filtres #mapa-cerca {
-        font-size: 15px;
-    }
-    
     /* Modal responsive */
     .planta-modal-contingut {
         width: 95%;
@@ -788,9 +726,31 @@ body::after {
         padding: 0 15px;
     }
     
-    .filtres-contenidor,
-    .mapa-filtres {
-        padding: 15px;
+    /* Inici responsive */
+    #inici-section {
+        padding: 1rem;
+    }
+    
+    .inici-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .inici-stats {
+        gap: 1rem;
+    }
+    
+    .inici-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .col-laboracio-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -810,28 +770,8 @@ body::after {
         padding: 10px;
     }
     
-    /* Filtres del mapa móvil */
-    .mapa-filtres {
-        padding: 10px;
-    }
-    
-    .mapa-filtres .filtre-boto {
-        font-size: 11px;
-        padding: 4px 8px;
-    }
-    
-    .mapa-filtres #mapa-cerca {
-        font-size: 14px;
-        padding: 8px 12px;
-    }
-    
     #galeria-section,
     #mapa-section:not([style*="display: none"]) {
         padding: 0 10px;
-    }
-    
-    .filtres-contenidor,
-    .mapa-filtres {
-        padding: 10px;
     }
 }
