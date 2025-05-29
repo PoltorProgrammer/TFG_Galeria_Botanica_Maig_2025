@@ -84,7 +84,7 @@
 
                 <div class="inici-card">
                     <h3>🎯 Per què un catàleg botànic del campus?</h3>
-                    <p>El campus de Bellaterra és molt més que aules i laboratoris: és un mosaic de <strong>boscos mediterranis, torrents i camps</strong> que actua de corredor biològic entre el Massís de Sant Llorenç i Collserola. Documentar-lo té tres grans avantatges:</p>
+                    <p>El campus de Bellaterra és molt més que aules i laboratoris: és un mosaic de <strong>boscos mediterranis, torrents i camps</strong> que actua de corredor biològic entre el Massís de Sant Llorenç i Collserola. Documentar-ho té tres grans avantatges:</p>
                     
                     <table class="inici-table">
                         <thead>
@@ -223,20 +223,6 @@
                 <!-- Els filtres del mapa es generaran dinàmicament -->
             </div>
         </main>
-
-        <!-- Modal per detalls -->
-        <div class="planta-modal" style="display: none;">
-            <div class="planta-modal-contingut">
-                <span class="planta-modal-tancar">&times;</span>
-                <div class="planta-modal-cos"></div>
-            </div>
-        </div>
-
-        <!-- Loading overlay -->
-        <div id="loading-overlay" class="loading-overlay">
-            <div class="loading-spinner"></div>
-            <p>Carregant galeria botànica...</p>
-        </div>
     </div>
 
     <!-- Scripts -->
@@ -259,103 +245,139 @@
         
         // Variable global per a les dades de plantes (per la galeria)
         var gb_plantes_data = [];
-    </script>
-    
-    <!-- Scripts originals de WordPress adaptats -->
-    <script src="assets/js/galeria-botanica-original.js"></script>
-    <script src="assets/js/mapa-botanica-original.js"></script>
-    
-    <!-- Script d'inicialització (DESPRÉS de carregar els altres scripts) -->
-    <script>
-        // Sistema per assignar imatges automàticament
-        class SistemaImatges {
+
+        // Funció per verificar si les imatges dels marges existeixen
+        async function verificarImatgesMarges() {
+            const imatgeEsquerra = 'assets/imatges/marge-esquerra.png';
+            const imatgeDreta = 'assets/imatges/marge-dreta.png';
+            
+            try {
+                // Test imatge esquerra
+                const imgEsq = new Image();
+                const promiseEsq = new Promise((resolve) => {
+                    imgEsq.onload = () => resolve(true);
+                    imgEsq.onerror = () => resolve(false);
+                    imgEsq.src = imatgeEsquerra;
+                });
+                
+                // Test imatge dreta
+                const imgDreta = new Image();
+                const promiseDreta = new Promise((resolve) => {
+                    imgDreta.onload = () => resolve(true);
+                    imgDreta.onerror = () => resolve(false);
+                    imgDreta.src = imatgeDreta;
+                });
+                
+                // Esperar ambdues imatges
+                const [esquerraExisteix, dretaExisteix] = await Promise.all([promiseEsq, promiseDreta]);
+                
+                // Si ambdues imatges existeixen, activar els marges
+                if (esquerraExisteix && dretaExisteix) {
+                    document.body.classList.add('marges-actius');
+                    console.log('✅ Marges decoratius activats - imatges carregades correctament');
+                } else {
+                    console.warn('⚠️ Marges decoratius desactivats - imatges no trobades');
+                    console.log(`Imatge esquerra: ${esquerraExisteix ? '✅' : '❌'}`);
+                    console.log(`Imatge dreta: ${dretaExisteix ? '✅' : '❌'}`);
+                }
+            } catch (error) {
+                console.error('Error verificant imatges dels marges:', error);
+            }
+        }
+
+        // Sistema d'assignació automàtica d'imatges des de GitHub
+        class SistemaImatgesGitHub {
             constructor() {
-                this.imatgesDisponibles = new Map(); // Mapa de nom_cientific -> llista d'imatges
-                this.tipusImatges = {
-                    'flor': 'flor',
-                    'fulla': 'fulla', 
-                    'fruit': 'fruit',
-                    'tija': 'tija',
-                    'habit': 'habit',
-                    'altre': 'altre'
-                };
+                this.cache = new Map();
+                this.llistaImatges = null;
+                this.githubAPI = 'https://api.github.com/repos/PoltorProgrammer/TFG_Galeria_Botanica_Maig_2025/contents/assets/imatges';
             }
 
-            // Convertir nom científic a format de fitxer
             nomCientificAFitxer(nomCientific) {
                 return nomCientific.toLowerCase()
                                   .replace(/\s+/g, '_')
                                   .replace(/[^a-z0-9_]/g, '');
             }
 
-            // Generar llista de possibles noms d'imatges per una planta
-            generarPossiblesImatges(nomCientific) {
-                const nomFitxer = this.nomCientificAFitxer(nomCientific);
-                const possiblesImatges = [];
-                
-                // Generar possibles noms per números 00-20 i tots els tipus
-                for (let num = 0; num <= 20; num++) {
-                    const numStr = num.toString().padStart(2, '0');
-                    Object.keys(this.tipusImatges).forEach(tipus => {
-                        possiblesImatges.push(`${nomFitxer}_${numStr}_${tipus}.jpg`);
-                    });
+            async carregarImatgesDeGitHub() {
+                if (this.llistaImatges) {
+                    return this.llistaImatges;
+                }
+
+                try {
+                    console.log('🔍 Carregant llista d\'imatges des de GitHub...');
+                    
+                    const response = await fetch(this.githubAPI);
+                    if (!response.ok) {
+                        throw new Error(`GitHub API error: ${response.status}`);
+                    }
+                    
+                    const fitxers = await response.json();
+                    
+                    this.llistaImatges = fitxers
+                        .filter(fitxer => {
+                            if (fitxer.type !== 'file') return false;
+                            if (!fitxer.name.endsWith('.jpg')) return false;
+                            const patro = /^[a-z_]+_\d{2}_[a-z]+\.jpg$/i;
+                            return patro.test(fitxer.name);
+                        })
+                        .map(fitxer => fitxer.name)
+                        .sort();
+                    
+                    console.log(`✅ Carregades ${this.llistaImatges.length} imatges des de GitHub`);
+                    return this.llistaImatges;
+                    
+                } catch (error) {
+                    console.error('❌ Error carregant imatges de GitHub:', error);
+                    this.llistaImatges = [];
+                    return this.llistaImatges;
+                }
+            }
+
+            async trobarImatgesPlanta(nomCientific) {
+                if (this.cache.has(nomCientific)) {
+                    return this.cache.get(nomCientific);
                 }
                 
-                return possiblesImatges;
-            }
-
-            // Verificar si una imatge existeix (usant una tècnica que no generi errors 404)
-            async verificarImatgeExisteix(rutaImatge) {
-                return new Promise((resolve) => {
-                    const img = new Image();
-                    img.onload = () => resolve(true);
-                    img.onerror = () => resolve(false);
-                    img.src = rutaImatge;
-                });
-            }
-
-            // Trobar totes les imatges disponibles per una planta
-            async trobarImatgesPlanta(nomCientific) {
-                const possiblesImatges = this.generarPossiblesImatges(nomCientific);
-                const imatgesTrobades = [];
+                const nomFitxer = this.nomCientificAFitxer(nomCientific);
+                const llistaCompleta = await this.carregarImatgesDeGitHub();
                 
-                // Crear promeses per verificar totes les imatges en paral·lel
-                const verificacions = possiblesImatges.map(async (nomImatge) => {
-                    const rutaCompleta = `assets/imatges/${nomImatge}`;
-                    const existeix = await this.verificarImatgeExisteix(rutaCompleta);
+                const imatgesPlanta = llistaCompleta.filter(imatge => 
+                    imatge.startsWith(nomFitxer + '_')
+                );
+                
+                const imatgesProcessades = imatgesPlanta.map(nomImatge => {
+                    const parts = nomImatge.replace('.jpg', '').split('_');
+                    const numero = parseInt(parts[parts.length - 2]);
+                    const tipus = parts[parts.length - 1];
                     
-                    if (existeix) {
-                        // Extreure informació del nom del fitxer
-                        const parts = nomImatge.replace('.jpg', '').split('_');
-                        const numero = parts[parts.length - 2];
-                        const tipus = parts[parts.length - 1];
-                        
-                        return {
-                            nom: nomImatge,
-                            ruta: rutaCompleta,
-                            numero: parseInt(numero),
-                            tipus: tipus
-                        };
+                    return {
+                        nom: nomImatge,
+                        ruta: `assets/imatges/${nomImatge}`,
+                        numero: numero,
+                        tipus: tipus
+                    };
+                }).sort((a, b) => {
+                    if (a.numero !== b.numero) {
+                        return a.numero - b.numero;
                     }
-                    return null;
+                    
+                    const prioritat = {
+                        'habit': 1, 'flor': 2, 'fulla': 3,
+                        'fruit': 4, 'tija': 5, 'altre': 6
+                    };
+                    
+                    return (prioritat[a.tipus] || 10) - (prioritat[b.tipus] || 10);
                 });
                 
-                // Esperar totes les verificacions
-                const resultats = await Promise.all(verificacions);
-                
-                // Filtrar nulls i ordenar per número
-                return resultats.filter(img => img !== null)
-                               .sort((a, b) => a.numero - b.numero);
+                this.cache.set(nomCientific, imatgesProcessades);
+                return imatgesProcessades;
             }
 
-            // Assignar imatges a una planta
             async assignarImatgesPlanta(planta) {
-                console.log(`Buscant imatges per: ${planta.nom_cientific}`);
-                
                 const imatgesTrobades = await this.trobarImatgesPlanta(planta.nom_cientific);
                 
                 if (imatgesTrobades.length === 0) {
-                    console.warn(`No s'han trobat imatges per: ${planta.nom_cientific}`);
                     return {
                         principal: null,
                         principal_tipus: 'general',
@@ -364,12 +386,7 @@
                     };
                 }
                 
-                console.log(`Trobades ${imatgesTrobades.length} imatges per: ${planta.nom_cientific}`);
-                
-                // Assignar la primera imatge com a principal
                 const principal = imatgesTrobades[0];
-                
-                // La resta com a detalls
                 const detalls = imatgesTrobades.slice(1);
                 
                 return {
@@ -380,12 +397,19 @@
                 };
             }
 
-            // Processar totes les plantes del JSON
             async processarTotesLesPlantes(plantes) {
-                console.log('Iniciant assignació automàtica d\'imatges...');
+                console.log('🚀 Iniciant assignació automàtica d\'imatges des de GitHub...');
+                
+                await this.carregarImatgesDeGitHub();
                 const plantesAmbImatges = [];
                 
-                for (const planta of plantes) {
+                for (let i = 0; i < plantes.length; i++) {
+                    const planta = plantes[i];
+                    
+                    if (i % 5 === 0 || i === plantes.length - 1) {
+                        console.log(`📊 Progrés: ${i + 1}/${plantes.length} plantes processades`);
+                    }
+                    
                     const imatges = await this.assignarImatgesPlanta(planta);
                     plantesAmbImatges.push({
                         ...planta,
@@ -393,11 +417,11 @@
                     });
                 }
                 
-                console.log('Assignació d\'imatges completada!');
+                console.log('🎉 Assignació GitHub completada!');
                 return plantesAmbImatges;
             }
         }
-        
+
         // Funcions de navegació
         function mostrarInici() {
             document.getElementById('inici-section').style.display = 'block';
@@ -428,13 +452,12 @@
             document.getElementById('btn-galeria').classList.remove('active');
             document.getElementById('btn-mapa').classList.add('active');
             
-            // Redimensionar el mapa si ja existeix
             if (window.map) {
                 setTimeout(() => window.map.invalidateSize(), 100);
             }
         }
         
-        // Processar dades per al mapa (format compatible)
+        // Processar dades per al mapa
         function processarDadesPerMapa(plantes) {
             return plantes.map(planta => ({
                 ...planta,
@@ -490,11 +513,13 @@
             return info.filter(i => i).join(' ');
         }
         
-        // Carregar dades i inicialitzar DESPRÉS que tots els scripts estiguin carregats
+        // Inicialització principal
         document.addEventListener('DOMContentLoaded', async function() {
             try {
-                // Mostrar loading
-                document.getElementById('loading-overlay').classList.remove('hidden');
+                console.log('Iniciant aplicació...');
+                
+                // Verificar imatges dels marges
+                verificarImatgesMarges();
                 
                 // Carregar dades de plantes
                 const response = await fetch('dades/plantes.json');
@@ -503,37 +528,34 @@
                 }
                 const data = await response.json();
                 
-                // Assignar imatges automàticament
-                const sistemaImatges = new SistemaImatges();
+                // Assignar imatges automàticament des de GitHub
+                const sistemaImatges = new SistemaImatgesGitHub();
                 const plantesAmbImatges = await sistemaImatges.processarTotesLesPlantes(data.plantes || data);
                 
                 // Assignar a variables globals
                 gb_plantes_data = plantesAmbImatges;
                 mb_vars.dades_plantes = processarDadesPerMapa(plantesAmbImatges);
                 
-                console.log('Dades carregades:', plantesAmbImatges.length, 'plantes amb imatges');
+                console.log('Dades carregades:', plantesAmbImatges.length, 'plantes');
                 
                 // Esperar que les funcions estiguin disponibles
                 let intents = 0;
                 const esperarFuncions = () => {
                     if (typeof window.generarGaleriaHTML === 'function' && typeof window.generarMapaHTML === 'function') {
-                        // Generar contingut de la galeria
+                        // Generar contingut
                         window.generarGaleriaHTML(plantesAmbImatges).then(() => {
-                            // Generar contingut del mapa
                             return window.generarMapaHTML();
                         }).then(() => {
-                            // Amagar loading
-                            document.getElementById('loading-overlay').classList.add('hidden');
-                            console.log('Aplicació inicialitzada correctament');
+                            console.log('✅ Aplicació inicialitzada correctament');
+                        }).catch(error => {
+                            console.error('Error inicialitzant:', error);
                         });
                     } else {
                         intents++;
-                        if (intents < 50) { // Màxim 5 segons d'espera
+                        if (intents < 50) {
                             setTimeout(esperarFuncions, 100);
                         } else {
-                            console.error('No s\'han pogut carregar les funcions necessàries');
-                            document.getElementById('loading-overlay').innerHTML = 
-                                '<div style="color: red; text-align: center;"><h3>Error carregant l\'aplicació</h3><p>Si us plau, recarrega la pàgina.</p></div>';
+                            console.error('❌ No s\'han pogut carregar les funcions necessàries');
                         }
                     }
                 };
@@ -541,15 +563,13 @@
                 esperarFuncions();
                 
             } catch (error) {
-                console.error('Error carregant dades:', error);
-                document.getElementById('loading-overlay').innerHTML = 
-                    `<div style="color: red; text-align: center;">
-                        <h3>Error carregant les dades</h3>
-                        <p>${error.message}</p>
-                        <p>Si us plau, recarrega la pàgina.</p>
-                    </div>`;
+                console.error('❌ Error carregant aplicació:', error);
             }
         });
     </script>
+    
+    <!-- Scripts originals -->
+    <script src="assets/js/galeria-botanica-original.js"></script>
+    <script src="assets/js/mapa-botanica-original.js"></script>
 </body>
 </html>
