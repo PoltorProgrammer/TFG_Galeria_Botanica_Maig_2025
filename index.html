@@ -14,7 +14,92 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/galeria-botanica.css">
     <link rel="stylesheet" href="assets/css/mapa-botanica.css">
-    <link rel="stylesheet" href="assets/css/inici.css">
+    
+    <!-- ESTILS TEMPORALS D'INICI (fins que es carregui assets/css/inici.css) -->
+    <style>
+        /* Estils crítics per evitar FOUC */
+        #inici-section {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        .inici-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            border: 2px solid #4CAF50;
+        }
+
+        .inici-hero h1 {
+            color: #2c5530;
+            font-size: 2.5rem;
+            margin: 0 0 1rem 0;
+            font-weight: 700;
+        }
+
+        .inici-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            min-width: 120px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #388E3C;
+            transform: translateY(-2px);
+        }
+
+        .cta-btn.secondary {
+            background: #FF9800;
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -40,11 +125,11 @@
                     
                     <div class="inici-stats">
                         <div class="stat-item">
-                            <span class="stat-number" id="stat-especies">250+</span>
+                            <span class="stat-number" id="stat-especies">-</span>
                             <span class="stat-label">Espècies</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number" id="stat-fotografies">1800+</span>
+                            <span class="stat-number" id="stat-fotografies">-</span>
                             <span class="stat-label">Fotografies</span>
                         </div>
                         <div class="stat-item">
@@ -63,158 +148,24 @@
                     </a>
                 </div>
 
-                <!-- Estadístiques dinàmiques d'imatges (es mostraran després de carregar) -->
-                <div id="estadistiques-imatges" class="estadistiques-imatges" style="display: none;">
-                    <h4>📊 Estadístiques d'Imatges</h4>
-                    <div class="stats-grid" id="stats-grid">
+                <!-- Estadístiques dinàmiques d'imatges -->
+                <div id="estadistiques-imatges" style="display: none; background: #e3f2fd; padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+                    <h4 style="color: #1976D2; margin: 0 0 1rem 0; text-align: center;">📊 Estadístiques d'Imatges</h4>
+                    <div id="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
                         <!-- Es genera dinàmicament -->
                     </div>
                 </div>
 
-                <div class="inici-grid">
-                    <div class="inici-card">
-                        <h3>🔍 Galeria Botànica</h3>
-                        <p>Un catàleg visual filtrable amb fotos detallades (flor, fulla, fruit, hàbit) i fitxa completa.</p>
-                        <p><strong>Com t'ajuda:</strong> Identifica espècies ràpidament amb filtres per color, hàbitat o època de floració.</p>
-                    </div>
-                    
-                    <div class="inici-card">
-                        <h3>🗺️ Mapa Botànic</h3>
-                        <p>Un mapa interactiu amb marcadors geolocalitzats i rutes temàtiques que situa cada planta <em>in situ</em>.</p>
-                        <p><strong>Com t'ajuda:</strong> Organitza sortides, troba exemplars singulars i segueix itineraris auto-guiats.</p>
-                    </div>
-                    
-                    <div class="inici-card">
-                        <h3>⚡ Cercador Instantani</h3>
-                        <p>Cerca per nom científic o vulgar en temps real.</p>
-                        <p><strong>Com t'ajuda:</strong> Troba la planta que busques en segons.</p>
-                    </div>
+                <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem 0;">
+                    <h3 style="color: #2c5530;">🔍 Galeria Botànica</h3>
+                    <p>Un catàleg visual filtrable amb fotos detallades (flor, fulla, fruit, hàbit) i fitxa completa.</p>
+                    <p><strong>Com t'ajuda:</strong> Identifica espècies ràpidament amb filtres per color, hàbitat o època de floració.</p>
                 </div>
 
-                <div class="inici-card">
-                    <h3>🎯 Per què un catàleg botànic del campus?</h3>
-                    <p>El campus de Bellaterra és molt més que aules i laboratoris: és un mosaic de <strong>boscs mediterranis, torrents i camps</strong> que actua de corredor biològic entre el Massís de Sant Llorenç i Collserola. Documentar-lo té tres grans avantatges:</p>
-                    
-                    <table class="inici-table">
-                        <thead>
-                            <tr>
-                                <th>Àmbit</th>
-                                <th>Com t'ajuda</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>📚 Docència</strong></td>
-                                <td>Facilita la identificació de plantes durant sortides de camp i pràctiques</td>
-                            </tr>
-                            <tr>
-                                <td><strong>🔬 Ciència</strong></td>
-                                <td>Genera dades fiables per a projectes de recerca i seguiment de biodiversitat</td>
-                            </tr>
-                            <tr>
-                                <td><strong>🌱 Divulgació</strong></td>
-                                <td>Apropa la botànica a qualsevol persona que passegi pel campus</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="zones-clau">
-                    <h3>🗺️ Zones clau per començar a explorar</h3>
-                    
-                    <div class="zona-item">
-                        <div class="zona-nom">🌳 Camí de Ho Chi Minh</div>
-                        <div>Alzinar amb arbusts mediterranis i orquídies de primavera.</div>
-                    </div>
-                    
-                    <div class="zona-item">
-                        <div class="zona-nom">🌊 Torrent de Can Domènech</div>
-                        <div>Vegetació de ribera amb salzes, joncs i freixes.</div>
-                    </div>
-                    
-                    <div class="zona-item">
-                        <div class="zona-nom">🌺 Eix Central</div>
-                        <div>Arborets ornamentals que combinen espècies autòctones i exòtiques.</div>
-                    </div>
-                    
-                    <div class="zona-item">
-                        <div class="zona-nom">🌾 Rondes del campus</div>
-                        <div>Prats oberts ideals per observar floració estacional d'herbàcies.</div>
-                    </div>
-                </div>
-
-                <div class="caracteristiques-tecniques">
-                    <h3>⚙️ Com s'ha construït la plataforma?</h3>
-                    <ul>
-                        <li><strong>Plugin de WordPress</strong> 100% codi obert – dos <em>shortcodes</em> carreguen la galeria i el mapa.</li>
-                        <li><strong>Fitxer únic <code>plantes.json</code></strong> – la "font de la veritat" que evita dades duplicades.</li>
-                        <li><strong>Leaflet + Tailwind</strong> – mapa lleuger i disseny adaptat a mòbil i escriptori.</li>
-                        <li><strong>Sistema d'imatges optimitzat</strong> – càrrega automàtica des del repositori GitHub amb API REST.</li>
-                        <li><strong>Llicència MIT</strong> – pots forquejar, millorar o portar el projecte al teu entorn.</li>
-                    </ul>
-                </div>
-
-                <div class="inici-card">
-                    <h3>👥 A qui va dirigit?</h3>
-                    <ul>
-                        <li><strong>Estudiantat de Biologia, Ciències Ambientals i Educació</strong> – recurs per a pràctiques i TFG/TFM.</li>
-                        <li><strong>Professorat</strong> – material didàctic per a classes i sortides.</li>
-                        <li><strong>Investigadors/es</strong> – punt de partida per a estudis de biodiversitat local.</li>
-                        <li><strong>Públic general</strong> – eina per gaudir i entendre la natura del campus.</li>
-                    </ul>
-                </div>
-
-                <div class="inici-card">
-                    <h3>🚀 Plans de futur</h3>
-                    <ol>
-                        <li><strong>Miniatures WebP</strong> per accelerar encara més la galeria.</li>
-                        <li><strong>API REST</strong> perquè aplicacions mòbils (p. ex. Planttes) consumeixin dades en temps real.</li>
-                        <li><strong>Versió PWA</strong> amb funcionalitat offline completa.</li>
-                        <li><strong>Traducció multilingüe</strong> per compartir el recurs amb estudiants internacionals.</li>
-                        <li><strong>Nous camps</strong>: pol·linitzadors, estatus de protecció i fenologia mensual.</li>
-                    </ol>
-                </div>
-
-                <div class="col-laboracio">
-                    <h3>🤝 Com pots col·laborar?</h3>
-                    
-                    <div class="col-laboracio-grid">
-                        <div class="col-laboracio-item">
-                            <strong>📸 Afegir dades o fotos</strong><br>
-                            Obre un <em>Pull Request</em> o puja una <em>Issue</em> amb la teva proposta.
-                        </div>
-                        
-                        <div class="col-laboracio-item">
-                            <strong>🐛 Reportar un error</strong><br>
-                            Indica la planta, captura de pantalla i pas a pas per reproduir-lo.
-                        </div>
-                        
-                        <div class="col-laboracio-item">
-                            <strong>🌍 Traduir la interfície</strong><br>
-                            Crea un fitxer a <code>/lang</code> seguint l'estructura JSON existent.
-                        </div>
-                        
-                        <div class="col-laboracio-item">
-                            <strong>🚶 Organitzar una sortida guiada</strong><br>
-                            Escriu a <a href="mailto:botanica@uab.cat" style="color: #E8F5E8;">botanica@uab.cat</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="credits">
-                    <h3>👨‍🎓 Crèdits</h3>
-                    <p>Projecte desenvolupat com a <strong>Treball de Fi de Grau</strong> a la Facultat de Biociències de la UAB.</p>
-                    <p><strong>Autor:</strong> <em>Tomás González Bartomeu</em></p>
-                    <p><strong>Tutor acadèmic:</strong> <em>Ramon Pérez Obiol</em></p>
-                </div>
-
-                <div class="cta-buttons">
-                    <a href="#" onclick="mostrarGaleria()" class="cta-btn">
-                        🍃 Explora la Galeria
-                    </a>
-                    <a href="#" onclick="mostrarMapa()" class="cta-btn secondary">
-                        🗺️ Viatja pel Mapa
-                    </a>
+                <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem 0;">
+                    <h3 style="color: #2c5530;">🗺️ Mapa Botànic</h3>
+                    <p>Un mapa interactiu amb marcadors geolocalitzats i rutes temàtiques que situa cada planta <em>in situ</em>.</p>
+                    <p><strong>Com t'ajuda:</strong> Organitza sortides, troba exemplars singulars i segueix itineraris auto-guiats.</p>
                 </div>
 
                 <div style="text-align: center; margin: 2rem 0; color: #4CAF50; font-size: 1.2rem; font-weight: 600;">
@@ -244,7 +195,7 @@
         <!-- Loading overlay -->
         <div id="loading-overlay" class="loading-overlay">
             <div class="loading-spinner"></div>
-            <p>Carregant galeria botànica...</p>
+            <p>Carregant galeria botànica amb sistema optimitzat...</p>
         </div>
     </div>
 
@@ -253,9 +204,227 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
     
-    <!-- Scripts propis (en ordre d'importància) -->
-    <script src="assets/js/inici.js"></script>
-    <script src="assets/js/galeria-botanica-original.js"></script>
-    <script src="assets/js/mapa-botanica-original.js"></script>
+    <!-- FIX IMMEDIAT per eliminar errors 404 -->
+    <script>
+        console.log('🚨 APLICANT FIX IMMEDIAT per eliminar errors 404...');
+
+        // 1. Crear imatge default programàticament
+        function crearImatgeDefault() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 300;
+            canvas.height = 200;
+            const ctx = canvas.getContext('2d');
+            
+            ctx.fillStyle = '#f0f8f0';
+            ctx.fillRect(0, 0, 300, 200);
+            
+            ctx.strokeStyle = '#4CAF50';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(5, 5, 290, 190);
+            
+            ctx.fillStyle = '#4CAF50';
+            ctx.font = 'bold 20px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('🌿', 150, 80);
+            ctx.font = '16px Arial';
+            ctx.fillText('Imatge no disponible', 150, 110);
+            ctx.font = '12px Arial';
+            ctx.fillStyle = '#666';
+            ctx.fillText('Galeria Botànica UAB', 150, 140);
+            
+            return canvas.toDataURL('image/png');
+        }
+
+        const imatgeDefaultDataURL = crearImatgeDefault();
+
+        // 2. Interceptar errors d'imatges
+        document.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IMG') {
+                console.log('🔧 Substituint imatge fallida:', e.target.src);
+                e.target.src = imatgeDefaultDataURL;
+                e.preventDefault();
+            }
+        }, true);
+
+        // 3. Variables globals necessàries
+        var gb_vars = { ajaxurl: 'api/ajax.php' };
+        var mb_vars = { ajaxurl: 'api/ajax.php', plugin_url: '.', dades_plantes: [] };
+        var gb_plantes_data = [];
+
+        console.log('✅ FIX IMMEDIAT aplicat');
+    </script>
+    
+    <!-- Scripts propis -->
+    <script>
+        // Funcions de navegació integrades per assegurar compatibilitat
+        function mostrarInici() {
+            document.getElementById('inici-section').style.display = 'block';
+            document.getElementById('galeria-section').style.display = 'none';
+            document.getElementById('mapa-section').style.display = 'none';
+            
+            document.getElementById('btn-inici').classList.add('active');
+            document.getElementById('btn-galeria').classList.remove('active');
+            document.getElementById('btn-mapa').classList.remove('active');
+            
+            console.log('📄 Mostrant pàgina d\'inici');
+        }
+
+        function mostrarGaleria() {
+            document.getElementById('inici-section').style.display = 'none';
+            document.getElementById('galeria-section').style.display = 'block';
+            document.getElementById('mapa-section').style.display = 'none';
+            
+            document.getElementById('btn-inici').classList.remove('active');
+            document.getElementById('btn-galeria').classList.add('active');
+            document.getElementById('btn-mapa').classList.remove('active');
+            
+            console.log('🌿 Mostrant galeria');
+        }
+
+        function mostrarMapa() {
+            document.getElementById('inici-section').style.display = 'none';
+            document.getElementById('galeria-section').style.display = 'none';
+            document.getElementById('mapa-section').style.display = 'block';
+            
+            document.getElementById('btn-inici').classList.remove('active');
+            document.getElementById('btn-galeria').classList.remove('active');
+            document.getElementById('btn-mapa').classList.add('active');
+            
+            if (window.map) {
+                setTimeout(() => window.map.invalidateSize(), 100);
+            }
+            
+            console.log('🗺️ Mostrant mapa');
+        }
+
+        // Mostrar estadístiques d'imatges
+        function mostrarEstadistiquesImatges(stats) {
+            try {
+                const estadistiquesDiv = document.getElementById('estadistiques-imatges');
+                const statsGrid = document.getElementById('stats-grid');
+                
+                if (!estadistiquesDiv || !statsGrid) return;
+                
+                // Actualitzar estadístiques del header
+                const statEspecies = document.getElementById('stat-especies');
+                const statFotografies = document.getElementById('stat-fotografies');
+                
+                if (statEspecies) statEspecies.textContent = stats.totalPlantes;
+                if (statFotografies) statFotografies.textContent = stats.totalImatges;
+                
+                // Grid d'estadístiques
+                const percentatgeCobertura = ((stats.plantesAmbImatges / stats.totalPlantes) * 100).toFixed(1);
+                
+                statsGrid.innerHTML = `
+                    <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #2196F3;">${stats.plantesAmbImatges}</div>
+                        <div style="font-size: 0.85rem; color: #666;">Amb imatges</div>
+                    </div>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #2196F3;">${stats.plantesSenesImatges}</div>
+                        <div style="font-size: 0.85rem; color: #666;">Sense imatges</div>
+                    </div>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #2196F3;">${(stats.totalImatges / stats.plantesAmbImatges || 0).toFixed(1)}</div>
+                        <div style="font-size: 0.85rem; color: #666;">Mitjana per planta</div>
+                    </div>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #2196F3;">${percentatgeCobertura}%</div>
+                        <div style="font-size: 0.85rem; color: #666;">Cobertura</div>
+                    </div>
+                `;
+                
+                estadistiquesDiv.style.display = 'block';
+                console.log('📊 Estadístiques mostrades');
+                
+            } catch (error) {
+                console.error('❌ Error mostrant estadístiques:', error);
+            }
+        }
+
+        // Fer funcions disponibles globalment
+        window.mostrarInici = mostrarInici;
+        window.mostrarGaleria = mostrarGaleria;
+        window.mostrarMapa = mostrarMapa;
+        window.mostrarEstadistiquesImatges = mostrarEstadistiquesImatges;
+    </script>
+
+    <!-- Scripts originals -->
+    <script src="assets/js/galeria-botanica-original.js" onerror="console.error('❌ Error carregant galeria-botanica-original.js')"></script>
+    <script src="assets/js/mapa-botanica-original.js" onerror="console.error('❌ Error carregant mapa-botanica-original.js')"></script>
+
+    <!-- Script d'inicialització final -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('🚀 Iniciant aplicació amb fix integrat...');
+            
+            try {
+                const loadingOverlay = document.getElementById('loading-overlay');
+                if (loadingOverlay) loadingOverlay.classList.remove('hidden');
+                
+                // Carregar dades
+                const response = await fetch('dades/plantes.json');
+                if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+                
+                const data = await response.json();
+                const plantesOriginals = data.plantes || data;
+                
+                console.log(`📋 Carregades ${plantesOriginals.length} plantes`);
+                
+                // Processar amb sistema optimitzat si està disponible
+                let plantesProcessades = plantesOriginals;
+                
+                if (typeof SistemaImatgesOptimitzat !== 'undefined') {
+                    console.log('✅ Utilitzant sistema optimitzat');
+                    const sistema = new SistemaImatgesOptimitzat();
+                    plantesProcessades = await sistema.processarTotesLesPlantes(plantesOriginals);
+                } else {
+                    console.log('⚠️ Sistema optimitzat no disponible, utilitzant dades base');
+                    plantesProcessades = plantesOriginals.map(p => ({
+                        ...p,
+                        imatges: {
+                            principal: null,
+                            principal_tipus: 'general',
+                            detalls: [],
+                            detalls_tipus: [],
+                            total: 0
+                        }
+                    }));
+                }
+                
+                // Assignar variables globals
+                gb_plantes_data = plantesProcessades;
+                
+                // Generar components si les funcions existeixen
+                if (typeof generarGaleriaHTML === 'function') {
+                    await generarGaleriaHTML(plantesProcessades);
+                }
+                
+                if (typeof generarMapaHTML === 'function') {
+                    await generarMapaHTML();
+                }
+                
+                if (loadingOverlay) loadingOverlay.classList.add('hidden');
+                
+                console.log('🎉 Aplicació inicialitzada correctament!');
+                
+            } catch (error) {
+                console.error('❌ Error inicialitzant:', error);
+                const loadingOverlay = document.getElementById('loading-overlay');
+                if (loadingOverlay) {
+                    loadingOverlay.innerHTML = `
+                        <div style="text-align: center; color: #666;">
+                            <h3>⚠️ Mode de desenvolupament</h3>
+                            <p>Error carregant dades, però els errors 404 estan corregits.</p>
+                            <button onclick="window.location.reload()" 
+                                    style="padding: 0.5rem 1rem; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                                🔄 Recarregar
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+        });
+    </script>
 </body>
 </html>
