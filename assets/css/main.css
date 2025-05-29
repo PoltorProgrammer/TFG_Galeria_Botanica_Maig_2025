@@ -27,25 +27,25 @@ body::after {
     content: '';
     position: fixed;
     top: 0;
-    width: 200px; /* Amplada de les imatges decoratives */
+    width: 200px; /* Ajusta segons l'amplada de les teves imatges */
     height: 100vh;
     z-index: -1; /* Posar darrere de tot el contingut */
     background-repeat: repeat-y;
-    background-position: top left;
-    background-size: 200px auto; /* Amplada fixa, altura automàtica */
+    background-position: top;
+    background-size: contain;
     pointer-events: none; /* Evitar que interfereixin amb la interacció */
 }
 
-/* Marge esquerre - CORREGIT: marge-esquerra.png */
+/* Marge esquerre */
 body::before {
     left: 0;
-    background-image: url('assets/imatges/marge-esquerra.png');
+    background-image: url('/assets/imatges/marge-esquerra.png');
 }
 
 /* Marge dret */
 body::after {
     right: 0;
-    background-image: url('assets/imatges/marge-dreta.png');
+    background-image: url('/assets/imatges/marge-dreta.png');
 }
 
 /* Contenidor principal de l'aplicació */
@@ -56,13 +56,6 @@ body::after {
     overflow: visible;
     position: relative;
     z-index: 1; /* Assegurar que estigui per damunt dels marges */
-    background: white;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-    /* Marges per defecte desactivats fins que es verifiquin les imatges */
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    border-radius: 0;
 }
 
 /* Header */
@@ -71,8 +64,8 @@ body::after {
     color: white;
     padding: 1rem 2rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: relative;
-    z-index: 2;
+    margin-left: 220px; /* 200px de la imatge + 20px de separació */
+    margin-right: 220px; /* 200px de la imatge + 20px de separació */
 }
 
 .app-header h1 {
@@ -119,10 +112,11 @@ body::after {
 /* Main content */
 .app-main {
     flex: 1;
-    overflow: auto;
+    overflow: auto; /* CANVIAT: de visible a auto per permetre scroll */
     position: relative;
     min-height: 0;
-    z-index: 2;
+    margin-left: 220px; /* 200px de la imatge + 20px de separació */
+    margin-right: 220px; /* 200px de la imatge + 20px de separació */
 }
 
 /* =============================================================================
@@ -375,9 +369,11 @@ body::after {
 /* Seccions específiques */
 #galeria-section {
     padding: 0;
+    /* NO afegim display aquí - es controla amb JavaScript */
 }
 
 #mapa-section {
+    /* ELIMINAT: height, min-height, overflow, display, padding */
     /* Es controla completament amb JavaScript i CSS inline */
 }
 
@@ -904,66 +900,48 @@ body::after {
 }
 
 /* =============================================================================
-   MARGES CONDICIONALS - NOMÉS SI LES IMATGES CARREGUEN
-   ========================================================================== */
-
-/* Classe aplicada per JavaScript quan les imatges carreguen correctament */
-@media (min-width: 1001px) {
-    body.marges-actius .app-container {
-        margin-left: 170px; /* 150px + 20px per pantalles mitjanes */
-        margin-right: 170px;
-        margin-top: 20px;
-        border-radius: 8px 8px 0 0;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-    }
-    
-    body.marges-actius::before,
-    body.marges-actius::after {
-        width: 150px;
-    }
-}
-
-@media (min-width: 1401px) {
-    body.marges-actius .app-container {
-        margin-left: 220px; /* 200px + 20px per pantalles grans */
-        margin-right: 220px;
-    }
-    
-    body.marges-actius::before,
-    body.marges-actius::after {
-        width: 200px;
-    }
-}
-
-@media (min-width: 1800px) {
-    body.marges-actius .app-container {
-        margin-left: 270px; /* 250px + 20px per pantalles extra grans */
-        margin-right: 270px;
-    }
-    
-    body.marges-actius::before,
-    body.marges-actius::after {
-        width: 250px;
-    }
-}
-
-/* =============================================================================
    RESPONSIVE DESIGN
    ========================================================================== */
 
 /* RESPONSIVE: Amagar els marges en pantalles petites */
-@media (max-width: 1000px) {
+@media (max-width: 1400px) {
     body::before,
     body::after {
         display: none;
     }
     
-    .app-container {
+    .app-main,
+    .app-header {
         margin-left: 0;
         margin-right: 0;
-        margin-top: 0;
-        border-radius: 0;
-        box-shadow: none;
+    }
+}
+
+/* Per pantalles mitjanes, reduir l'amplada dels marges */
+@media (min-width: 1401px) and (max-width: 1600px) {
+    body::before,
+    body::after {
+        width: 150px;
+    }
+    
+    .app-main,
+    .app-header {
+        margin-left: 170px; /* 150px + 20px */
+        margin-right: 170px;
+    }
+}
+
+/* Per pantalles grans, amplada completa */
+@media (min-width: 1601px) {
+    body::before,
+    body::after {
+        width: 200px;
+    }
+    
+    .app-main,
+    .app-header {
+        margin-left: 220px; /* 200px + 20px */
+        margin-right: 220px;
     }
 }
 
@@ -1127,76 +1105,3 @@ body::after {
         padding: 10px;
     }
 }
-
-/* =============================================================================
-   ASSEGURAR QUE EL CONTINGUT SIGUI SEMPRE VISIBLE
-   ========================================================================== */
-
-/* Tots els elements principals han de tenir z-index positiu */
-.app-header,
-.app-main,
-.planta-modal,
-.planta-lightbox,
-.loading-overlay {
-    position: relative;
-    z-index: 10;
-}
-
-/* Modal i lightbox per damunt de tot */
-.planta-modal {
-    z-index: 9999 !important;
-}
-
-.planta-lightbox {
-    z-index: 10000 !important;
-}
-
-/* Loading overlay per damunt dels marges però sota modals */
-.loading-overlay {
-    z-index: 1000 !important;
-}
-
-/* =============================================================================
-   MILLORES VISUALS ADDICIONALS
-   ========================================================================== */
-
-/* Assegurar transicions suaus quan canvien els breakpoints */
-body::before,
-body::after {
-    transition: width 0.3s ease, opacity 0.3s ease;
-}
-
-.app-container {
-    transition: margin-left 0.3s ease, margin-right 0.3s ease;
-}
-
-/* =============================================================================
-   CORRECCIÓ D'ERRORS POTENCIALS
-   ========================================================================== */
-
-/* Assegurar que les imatges de fons carreguin correctament */
-@supports (background-image: url('')) {
-    body::before {
-        background-image: url('assets/imatges/marge-esquerra.png');
-    }
-    
-    body::after {
-        background-image: url('assets/imatges/marge-dreta.png');
-    }
-}
-
-/* Fallback per si les imatges no carreguen */
-@media (min-width: 1001px) {
-    body::before,
-    body::after {
-        background-color: rgba(76, 175, 80, 0.05); /* Color verd molt subtil com a fallback */
-    }
-}
-
-/* Debug: Opcional - descomenta per veure els marges amb color de fons */
-/*
-body::before,
-body::after {
-    background-color: rgba(255, 0, 0, 0.1) !important;
-}
-*/
