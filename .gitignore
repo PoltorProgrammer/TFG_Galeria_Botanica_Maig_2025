@@ -1,0 +1,309 @@
+# Galeria Botànica UAB - Fitxers a ignorar per Git
+
+# ============================================================================
+# FITXERS TEMPORALS I CACHE
+# ============================================================================
+
+# Fitxers temporals del sistema
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache i fitxers generats
+.cache/
+*.cache
+.temp/
+temp/
+
+# ============================================================================
+# SISTEMES OPERATIUS
+# ============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ============================================================================
+# EDITORS I IDEs
+# ============================================================================
+
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# JetBrains IDEs
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Atom
+.atom/
+
+# Vim
+*.swp
+*.swo
+*~
+Session.vim
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ============================================================================
+# DESENVOLUPAMENT WEB
+# ============================================================================
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Bower
+bower_components/
+
+# Parcel
+.parcel-cache/
+dist/
+
+# Webpack
+.webpack/
+
+# Next.js
+.next/
+out/
+
+# ============================================================================
+# BASES DE DADES I CONFIGURACIÓ
+# ============================================================================
+
+# Bases de dades locals
+*.sqlite
+*.sqlite3
+*.db
+
+# Fitxers de configuració amb dades sensibles
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Fitxers de configuració específics
+config.local.json
+settings.local.json
+
+# ============================================================================
+# BACKUP I VERSIONS ANTERIORS
+# ============================================================================
+
+# Backup de fitxers
+*.backup
+*.old
+*_backup.*
+*_old.*
+backup/
+backups/
+
+# Versions anteriors
+*.v1
+*.v2
+*.orig
+
+# ============================================================================
+# FITXERS GENERATS AUTOMÀTICAMENT
+# ============================================================================
+
+# Thumbnails i miniatures
+thumbs/
+thumbnails/
+preview/
+
+# Fitxers compilats
+*.min.js
+*.min.css
+build/
+compiled/
+
+# Reports i cobertura
+coverage/
+*.lcov
+.nyc_output
+
+# ============================================================================
+# CONTINGUT ESPECÍFIC DEL PROJECTE
+# ============================================================================
+
+# Imatges temporals o de prova
+assets/imatges/temp/
+assets/imatges/test/
+assets/imatges/*.temp.*
+assets/imatges/draft_*
+
+# Dades de prova
+dades/test/
+dades/temp/
+dades/*.backup
+dades/*.old
+
+# Scripts de desenvolupament privats
+scripts/private/
+dev-scripts/
+test-scripts/
+
+# Documentació en desenvolupament
+docs/draft/
+docs/private/
+*.draft.md
+
+# ============================================================================
+# SERVIDORS I DESPLEGAMENT
+# ============================================================================
+
+# Apache
+.htaccess.backup
+.htaccess.old
+
+# Nginx
+nginx.conf.backup
+
+# SSL certificates
+*.crt
+*.key
+*.pem
+*.p12
+*.pfx
+
+# ============================================================================
+# ANALYTICS I TRACKING
+# ============================================================================
+
+# Google Analytics
+ga-*
+analytics/
+
+# Error tracking
+sentry/
+bugsnag/
+
+# ============================================================================
+# DEPENDÈNCIES EXTERNES (si s'afegeixen en el futur)
+# ============================================================================
+
+# Composer (PHP)
+/vendor/
+composer.phar
+composer.lock
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Ruby
+*.gem
+.bundle/
+vendor/bundle/
+
+# ============================================================================
+# COMENTARIS I RECORDATORIS
+# ============================================================================
+
+# Fitxers de TODO i notes de desenvolupament
+TODO.md
+NOTES.md
+TODO.txt
+NOTES.txt
+notes/
+todos/
+
+# Fitxers de reunions i planificació
+meetings/
+planning/
+*.meeting.md
+
+# ============================================================================
+# FINAL
+# ============================================================================
+
+# Afegir aquí futurs patrons específics del projecte segons sigui necessari
