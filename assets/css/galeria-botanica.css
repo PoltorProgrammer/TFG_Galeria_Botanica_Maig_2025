@@ -254,7 +254,6 @@
     transition: all 0.3s;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     background: white;
-
 }
 
 .planta-item:hover {
@@ -393,62 +392,6 @@
     transform: translateY(-2px);
 }
 
-/* Modal per a detalls */
-.planta-modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.7);
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.planta-modal.actiu {
-    opacity: 1;
-    display: block;
-}
-
-.planta-modal-contingut {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 1000px;
-    animation: slideDown 0.4s;
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-@keyframes slideDown {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.planta-modal-tancar {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.planta-modal-tancar:hover {
-    color: #333;
-}
-
 /* Indicador de càrrega */
 .planta-carregant {
     text-align: center;
@@ -487,6 +430,7 @@
     height: 400px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     position: relative;
+    cursor: pointer;
 }
 
 .planta-imatge-principal img {
@@ -507,6 +451,7 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     cursor: pointer;
     position: relative;
+    height: 120px;
 }
 
 .planta-imatge-detall img {
@@ -559,45 +504,6 @@
     margin: 30px 0;
 }
 
-/* Lightbox per a visualització d'imatges a pantalla completa */
-.planta-lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1100;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.planta-lightbox.actiu {
-    opacity: 1;
-}
-
-.planta-lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-    border: 5px solid white;
-    box-shadow: 0 0 30px rgba(0,0,0,0.8);
-    transition: transform 0.3s;
-}
-
-.planta-lightbox-tancar {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: white;
-    font-size: 40px;
-    cursor: pointer;
-    z-index: 1110;
-}
-
 /* Etiqueta de tipus en el lightbox */
 .planta-lightbox-tipus {
     position: absolute;
@@ -644,11 +550,6 @@
 
 /* Media queries per a dispositius mòbils */
 @media (max-width: 992px) {
-    .planta-modal-contingut {
-        width: 90%;
-        padding: 15px;
-    }
-    
     .planta-galeria-completa {
         grid-template-columns: 1fr;
     }
@@ -673,6 +574,10 @@
 }
 
 @media (max-width: 768px) {
+    .filtres-contenidor {
+        padding: 15px;
+    }
+    
     .filtres-barra {
         flex-direction: column;
         gap: 10px;
