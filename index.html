@@ -11,280 +11,10 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     
     <!-- Estils propis -->
+    <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/galeria-botanica.css">
     <link rel="stylesheet" href="assets/css/mapa-botanica.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    
-    <style>
-        /* Estils específics per a la pestanya d'inici */
-        #inici-section {
-            padding: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-            line-height: 1.6;
-            color: #333;
-            background: #fff;
-        }
-
-        .inici-hero {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 12px;
-            border: 2px solid #4CAF50;
-        }
-
-        .inici-hero h1 {
-            color: #2c5530;
-            font-size: 2.5rem;
-            margin: 0 0 1rem 0;
-            font-weight: 700;
-        }
-
-        .inici-hero .subtitol {
-            color: #4a7c59;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .inici-hero .descripcio {
-            font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 2rem;
-        }
-
-        .inici-stats {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 1rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            min-width: 120px;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #4CAF50;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .inici-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .inici-card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-left: 4px solid #4CAF50;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .inici-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-        }
-
-        .inici-card h3 {
-            color: #2c5530;
-            margin: 0 0 1rem 0;
-            font-size: 1.4rem;
-        }
-
-        .inici-card p {
-            margin: 0.5rem 0;
-            color: #555;
-        }
-
-        .inici-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .inici-table th {
-            background: #4CAF50;
-            color: white;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .inici-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #eee;
-        }
-
-        .inici-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .zones-clau {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-        }
-
-        .zones-clau h3 {
-            color: #2c5530;
-            margin: 0 0 1.5rem 0;
-            text-align: center;
-        }
-
-        .zona-item {
-            margin: 1rem 0;
-            padding: 1rem;
-            background: white;
-            border-radius: 8px;
-            border-left: 4px solid #FF9800;
-        }
-
-        .zona-nom {
-            font-weight: bold;
-            color: #2c5530;
-            margin-bottom: 0.5rem;
-        }
-
-        .caracteristiques-tecniques {
-            background: #e8f5e8;
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-        }
-
-        .col-laboracio {
-            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            text-align: center;
-        }
-
-        .col-laboracio h3 {
-            color: white;
-            margin-bottom: 1.5rem;
-        }
-
-        .col-laboracio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .col-laboracio-item {
-            background: rgba(255,255,255,0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .credits {
-            background: #2c5530;
-            color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            text-align: center;
-        }
-
-        .credits h3 {
-            color: #4CAF50;
-            margin-bottom: 1rem;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 2rem 0;
-        }
-
-        .cta-btn {
-            padding: 1rem 2rem;
-            background: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .cta-btn:hover {
-            background: #388E3C;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-        }
-
-        .cta-btn.secondary {
-            background: #FF9800;
-        }
-
-        .cta-btn.secondary:hover {
-            background: #F57C00;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            #inici-section {
-                padding: 1rem;
-            }
-            
-            .inici-hero h1 {
-                font-size: 2rem;
-            }
-            
-            .inici-stats {
-                gap: 1rem;
-            }
-            
-            .inici-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .col-laboracio-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/inici.css">
 </head>
 <body>
     <div class="app-container">
@@ -310,11 +40,11 @@
                     
                     <div class="inici-stats">
                         <div class="stat-item">
-                            <span class="stat-number">250+</span>
+                            <span class="stat-number" id="stat-especies">250+</span>
                             <span class="stat-label">Espècies</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">1800+</span>
+                            <span class="stat-number" id="stat-fotografies">1800+</span>
                             <span class="stat-label">Fotografies</span>
                         </div>
                         <div class="stat-item">
@@ -331,6 +61,14 @@
                     <a href="#" onclick="mostrarMapa()" class="cta-btn secondary">
                         🗺️ Viatja pel Mapa
                     </a>
+                </div>
+
+                <!-- Estadístiques dinàmiques d'imatges (es mostraran després de carregar) -->
+                <div id="estadistiques-imatges" class="estadistiques-imatges" style="display: none;">
+                    <h4>📊 Estadístiques d'Imatges</h4>
+                    <div class="stats-grid" id="stats-grid">
+                        <!-- Es genera dinàmicament -->
+                    </div>
                 </div>
 
                 <div class="inici-grid">
@@ -355,7 +93,7 @@
 
                 <div class="inici-card">
                     <h3>🎯 Per què un catàleg botànic del campus?</h3>
-                    <p>El campus de Bellaterra és molt més que aules i laboratoris: és un mosaic de <strong>boscos mediterranis, torrents i camps</strong> que actua de corredor biològic entre el Massís de Sant Llorenç i Collserola. Documentar-lo té tres grans avantatges:</p>
+                    <p>El campus de Bellaterra és molt més que aules i laboratoris: és un mosaic de <strong>boscs mediterranis, torrents i camps</strong> que actua de corredor biològic entre el Massís de Sant Llorenç i Collserola. Documentar-lo té tres grans avantatges:</p>
                     
                     <table class="inici-table">
                         <thead>
@@ -411,7 +149,7 @@
                         <li><strong>Plugin de WordPress</strong> 100% codi obert – dos <em>shortcodes</em> carreguen la galeria i el mapa.</li>
                         <li><strong>Fitxer únic <code>plantes.json</code></strong> – la "font de la veritat" que evita dades duplicades.</li>
                         <li><strong>Leaflet + Tailwind</strong> – mapa lleuger i disseny adaptat a mòbil i escriptori.</li>
-                        <li><strong>Editor offline integrat</strong> – afegeix o edita espècies sense tocar codi gràcies a la File System Access API (opcional).</li>
+                        <li><strong>Sistema d'imatges optimitzat</strong> – càrrega automàtica des del repositori GitHub amb API REST.</li>
                         <li><strong>Llicència MIT</strong> – pots forquejar, millorar o portar el projecte al teu entorn.</li>
                     </ul>
                 </div>
@@ -510,317 +248,14 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Scripts externs -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
     
-    <!-- Variables globals per compatibilitat amb WordPress -->
-    <script>
-        // Variables globals necessàries per als scripts originals
-        var gb_vars = {
-            ajaxurl: 'api/ajax.php' // Simulem l'AJAX de WordPress
-        };
-        
-        var mb_vars = {
-            ajaxurl: 'api/ajax.php',
-            plugin_url: '.',
-            dades_plantes: [] // Es carregarà dinàmicament
-        };
-        
-        // Variable global per a les dades de plantes (per la galeria)
-        var gb_plantes_data = [];
-    </script>
-    
-    <!-- Scripts originals de WordPress adaptats -->
+    <!-- Scripts propis (en ordre d'importància) -->
+    <script src="assets/js/inici.js"></script>
     <script src="assets/js/galeria-botanica-original.js"></script>
     <script src="assets/js/mapa-botanica-original.js"></script>
-    
-    <!-- Script d'inicialització (DESPRÉS de carregar els altres scripts) -->
-    <script>
-        // Sistema per assignar imatges automàticament
-        class SistemaImatges {
-            constructor() {
-                this.imatgesDisponibles = new Map(); // Mapa de nom_cientific -> llista d'imatges
-                this.tipusImatges = {
-                    'flor': 'flor',
-                    'fulla': 'fulla', 
-                    'fruit': 'fruit',
-                    'tija': 'tija',
-                    'habit': 'habit',
-                    'altre': 'altre'
-                };
-            }
-
-            // Convertir nom científic a format de fitxer
-            nomCientificAFitxer(nomCientific) {
-                return nomCientific.toLowerCase()
-                                  .replace(/\s+/g, '_')
-                                  .replace(/[^a-z0-9_]/g, '');
-            }
-
-            // Generar llista de possibles noms d'imatges per una planta
-            generarPossiblesImatges(nomCientific) {
-                const nomFitxer = this.nomCientificAFitxer(nomCientific);
-                const possiblesImatges = [];
-                
-                // Generar possibles noms per números 00-20 i tots els tipus
-                for (let num = 0; num <= 20; num++) {
-                    const numStr = num.toString().padStart(2, '0');
-                    Object.keys(this.tipusImatges).forEach(tipus => {
-                        possiblesImatges.push(`${nomFitxer}_${numStr}_${tipus}.jpg`);
-                    });
-                }
-                
-                return possiblesImatges;
-            }
-
-            // Verificar si una imatge existeix (usant una tècnica que no generi errors 404)
-            async verificarImatgeExisteix(rutaImatge) {
-                return new Promise((resolve) => {
-                    const img = new Image();
-                    img.onload = () => resolve(true);
-                    img.onerror = () => resolve(false);
-                    img.src = rutaImatge;
-                });
-            }
-
-            // Trobar totes les imatges disponibles per una planta
-            async trobarImatgesPlanta(nomCientific) {
-                const possiblesImatges = this.generarPossiblesImatges(nomCientific);
-                const imatgesTrobades = [];
-                
-                // Crear promeses per verificar totes les imatges en paral·lel
-                const verificacions = possiblesImatges.map(async (nomImatge) => {
-                    const rutaCompleta = `assets/imatges/${nomImatge}`;
-                    const existeix = await this.verificarImatgeExisteix(rutaCompleta);
-                    
-                    if (existeix) {
-                        // Extreure informació del nom del fitxer
-                        const parts = nomImatge.replace('.jpg', '').split('_');
-                        const numero = parts[parts.length - 2];
-                        const tipus = parts[parts.length - 1];
-                        
-                        return {
-                            nom: nomImatge,
-                            ruta: rutaCompleta,
-                            numero: parseInt(numero),
-                            tipus: tipus
-                        };
-                    }
-                    return null;
-                });
-                
-                // Esperar totes les verificacions
-                const resultats = await Promise.all(verificacions);
-                
-                // Filtrar nulls i ordenar per número
-                return resultats.filter(img => img !== null)
-                               .sort((a, b) => a.numero - b.numero);
-            }
-
-            // Assignar imatges a una planta
-            async assignarImatgesPlanta(planta) {
-                console.log(`Buscant imatges per: ${planta.nom_cientific}`);
-                
-                const imatgesTrobades = await this.trobarImatgesPlanta(planta.nom_cientific);
-                
-                if (imatgesTrobades.length === 0) {
-                    console.warn(`No s'han trobat imatges per: ${planta.nom_cientific}`);
-                    return {
-                        principal: null,
-                        principal_tipus: 'general',
-                        detalls: [],
-                        detalls_tipus: []
-                    };
-                }
-                
-                console.log(`Trobades ${imatgesTrobades.length} imatges per: ${planta.nom_cientific}`);
-                
-                // Assignar la primera imatge com a principal
-                const principal = imatgesTrobades[0];
-                
-                // La resta com a detalls
-                const detalls = imatgesTrobades.slice(1);
-                
-                return {
-                    principal: principal.nom,
-                    principal_tipus: principal.tipus,
-                    detalls: detalls.map(img => img.nom),
-                    detalls_tipus: detalls.map(img => img.tipus)
-                };
-            }
-
-            // Processar totes les plantes del JSON
-            async processarTotesLesPlantes(plantes) {
-                console.log('Iniciant assignació automàtica d\'imatges...');
-                const plantesAmbImatges = [];
-                
-                for (const planta of plantes) {
-                    const imatges = await this.assignarImatgesPlanta(planta);
-                    plantesAmbImatges.push({
-                        ...planta,
-                        imatges: imatges
-                    });
-                }
-                
-                console.log('Assignació d\'imatges completada!');
-                return plantesAmbImatges;
-            }
-        }
-        
-        // Funcions de navegació
-        function mostrarInici() {
-            document.getElementById('inici-section').style.display = 'block';
-            document.getElementById('galeria-section').style.display = 'none';
-            document.getElementById('mapa-section').style.display = 'none';
-            
-            document.getElementById('btn-inici').classList.add('active');
-            document.getElementById('btn-galeria').classList.remove('active');
-            document.getElementById('btn-mapa').classList.remove('active');
-        }
-
-        function mostrarGaleria() {
-            document.getElementById('inici-section').style.display = 'none';
-            document.getElementById('galeria-section').style.display = 'block';
-            document.getElementById('mapa-section').style.display = 'none';
-            
-            document.getElementById('btn-inici').classList.remove('active');
-            document.getElementById('btn-galeria').classList.add('active');
-            document.getElementById('btn-mapa').classList.remove('active');
-        }
-
-        function mostrarMapa() {
-            document.getElementById('inici-section').style.display = 'none';
-            document.getElementById('galeria-section').style.display = 'none';
-            document.getElementById('mapa-section').style.display = 'block';
-            
-            document.getElementById('btn-inici').classList.remove('active');
-            document.getElementById('btn-galeria').classList.remove('active');
-            document.getElementById('btn-mapa').classList.add('active');
-            
-            // Redimensionar el mapa si ja existeix
-            if (window.map) {
-                setTimeout(() => window.map.invalidateSize(), 100);
-            }
-        }
-        
-        // Processar dades per al mapa (format compatible)
-        function processarDadesPerMapa(plantes) {
-            return plantes.map(planta => ({
-                ...planta,
-                imatge: planta.imatges?.principal ? `assets/imatges/${planta.imatges.principal}` : '',
-                habitat_norm: planta.habitat ? planta.habitat.map(h => h.toLowerCase().replace(/\s+/g, '_').replace(/\s*\(.*?\)\s*/g, '')) : [],
-                floracio_norm: planta.caracteristiques?.floracio ? 
-                    (Array.isArray(planta.caracteristiques.floracio) ? 
-                        planta.caracteristiques.floracio.map(f => f.toLowerCase().replace(/\s*\(.*?\)\s*/g, '')) : 
-                        [planta.caracteristiques.floracio.toLowerCase().replace(/\s*\(.*?\)\s*/g, '')]) : [],
-                usos_norm: planta.usos ? planta.usos.map(u => u.toLowerCase().replace(/\s+/g, '_').replace(/\s*\(.*?\)\s*/g, '')) : [],
-                floracio: planta.caracteristiques?.floracio ? 
-                    (Array.isArray(planta.caracteristiques.floracio) ? planta.caracteristiques.floracio : [planta.caracteristiques.floracio]) : [],
-                fullatge: planta.caracteristiques?.fullatge || '',
-                info_completa: construirInfoCompleta(planta)
-            }));
-        }
-        
-        // Construir informació completa per la cerca
-        function construirInfoCompleta(planta) {
-            let info = [
-                planta.nom_comu, 
-                planta.nom_cientific, 
-                planta.familia, 
-                planta.descripcio, 
-                planta.tipus
-            ];
-            
-            if (planta.caracteristiques) {
-                Object.values(planta.caracteristiques).forEach(valor => {
-                    if (Array.isArray(valor)) {
-                        info.push(...valor);
-                    } else if (valor) {
-                        info.push(valor);
-                    }
-                });
-            }
-            
-            if (planta.usos) {
-                const usosNetejats = planta.usos.map(us => us.replace(/\s*\(.*?\)\s*/g, '').trim());
-                info.push(...usosNetejats);
-            }
-            
-            if (planta.colors) {
-                const colorsNetejats = planta.colors.map(c => c.replace(/\s*\(.*?\)\s*/g, '').trim());
-                info.push(...colorsNetejats);
-            }
-            
-            if (planta.habitat) {
-                const habitatsNetejats = planta.habitat.map(h => h.replace(/\s*\(.*?\)\s*/g, '').trim());
-                info.push(...habitatsNetejats);
-            }
-            
-            return info.filter(i => i).join(' ');
-        }
-        
-        // Carregar dades i inicialitzar DESPRÉS que tots els scripts estiguin carregats
-        document.addEventListener('DOMContentLoaded', async function() {
-            try {
-                // Mostrar loading
-                document.getElementById('loading-overlay').classList.remove('hidden');
-                
-                // Carregar dades de plantes
-                const response = await fetch('dades/plantes.json');
-                if (!response.ok) {
-                    throw new Error(`Error HTTP: ${response.status}`);
-                }
-                const data = await response.json();
-                
-                // Assignar imatges automàticament
-                const sistemaImatges = new SistemaImatges();
-                const plantesAmbImatges = await sistemaImatges.processarTotesLesPlantes(data.plantes || data);
-                
-                // Assignar a variables globals
-                gb_plantes_data = plantesAmbImatges;
-                mb_vars.dades_plantes = processarDadesPerMapa(plantesAmbImatges);
-                
-                console.log('Dades carregades:', plantesAmbImatges.length, 'plantes amb imatges');
-                
-                // Esperar que les funcions estiguin disponibles
-                let intents = 0;
-                const esperarFuncions = () => {
-                    if (typeof window.generarGaleriaHTML === 'function' && typeof window.generarMapaHTML === 'function') {
-                        // Generar contingut de la galeria
-                        window.generarGaleriaHTML(plantesAmbImatges).then(() => {
-                            // Generar contingut del mapa
-                            return window.generarMapaHTML();
-                        }).then(() => {
-                            // Amagar loading
-                            document.getElementById('loading-overlay').classList.add('hidden');
-                            console.log('Aplicació inicialitzada correctament');
-                        });
-                    } else {
-                        intents++;
-                        if (intents < 50) { // Màxim 5 segons d'espera
-                            setTimeout(esperarFuncions, 100);
-                        } else {
-                            console.error('No s\'han pogut carregar les funcions necessàries');
-                            document.getElementById('loading-overlay').innerHTML = 
-                                '<div style="color: red; text-align: center;"><h3>Error carregant l\'aplicació</h3><p>Si us plau, recarrega la pàgina.</p></div>';
-                        }
-                    }
-                };
-                
-                esperarFuncions();
-                
-            } catch (error) {
-                console.error('Error carregant dades:', error);
-                document.getElementById('loading-overlay').innerHTML = 
-                    `<div style="color: red; text-align: center;">
-                        <h3>Error carregant les dades</h3>
-                        <p>${error.message}</p>
-                        <p>Si us plau, recarrega la pàgina.</p>
-                    </div>`;
-            }
-        });
-    </script>
 </body>
 </html>
