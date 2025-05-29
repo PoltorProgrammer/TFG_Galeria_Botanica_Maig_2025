@@ -20,201 +20,14 @@
         <header class="app-header">
             <h1>Galeria Botànica UAB</h1>
             <nav class="app-nav">
-                <button onclick="mostrarInici()" class="nav-btn active" id="btn-inici">Inici</button>
-                <button onclick="mostrarGaleria()" class="nav-btn" id="btn-galeria">Galeria</button>
+                <button onclick="mostrarGaleria()" class="nav-btn active" id="btn-galeria">Galeria</button>
                 <button onclick="mostrarMapa()" class="nav-btn" id="btn-mapa">Mapa</button>
             </nav>
         </header>
 
         <main class="app-main">
-            <!-- INICI -->
-            <div id="inici-section">
-                <div class="inici-hero">
-                    <h1>🌿 Galeria i Mapa Botànica UAB</h1>
-                    <div class="subtitol">Descobreix la biodiversitat del campus de la Universitat Autònoma de Barcelona</div>
-                    <div class="descripcio">
-                        Benvinguts i benvingudes al portal que converteix els <strong>260 ha</strong> de zones verdes de la UAB 
-                        en un herbari digital interactiu.
-                    </div>
-                    
-                    <div class="inici-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">300+</span>
-                            <span class="stat-label">Espècies</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">1800+</span>
-                            <span class="stat-label">Fotografies</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">260</span>
-                            <span class="stat-label">Hectàrees</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cta-buttons">
-                    <a href="#" onclick="mostrarGaleria()" class="cta-btn">
-                        🍃 Explora la Galeria
-                    </a>
-                    <a href="#" onclick="mostrarMapa()" class="cta-btn secondary">
-                        🗺️ Viatja pel Mapa
-                    </a>
-                </div>
-
-                <div class="inici-grid">
-                    <div class="inici-card">
-                        <h3>🔍 Galeria Botànica</h3>
-                        <p>Un catàleg visual filtrable amb fotos detallades (flor, fulla, fruit, hàbit) i fitxa completa.</p>
-                        <p><strong>Com t'ajuda:</strong> Identifica espècies ràpidament amb filtres per color, hàbitat o època de floració.</p>
-                    </div>
-                    
-                    <div class="inici-card">
-                        <h3>🗺️ Mapa Botànic</h3>
-                        <p>Un mapa interactiu amb marcadors geolocalitzats i rutes temàtiques que situa cada planta <em>in situ</em>.</p>
-                        <p><strong>Com t'ajuda:</strong> Organitza sortides, troba exemplars singulars i segueix itineraris auto-guiats.</p>
-                    </div>
-                    
-                    <div class="inici-card">
-                        <h3>⚡ Cercador Instantani</h3>
-                        <p>Cerca per nom científic o vulgar en temps real.</p>
-                        <p><strong>Com t'ajuda:</strong> Troba la planta que busques en segons.</p>
-                    </div>
-                </div>
-
-                <div class="inici-card">
-                    <h3>🎯 Per què un catàleg botànic del campus?</h3>
-                    <p>El campus de Bellaterra és molt més que aules i laboratoris: és un mosaic de <strong>boscos mediterranis, torrents i camps</strong> que actua de corredor biològic entre el Massís de Sant Llorenç i Collserola. Documentar-lo té tres grans avantatges:</p>
-                    
-                    <table class="inici-table">
-                        <thead>
-                            <tr>
-                                <th>Àmbit</th>
-                                <th>Com t'ajuda</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>📚 Docència</strong></td>
-                                <td>Facilita la identificació de plantes durant sortides de camp i pràctiques</td>
-                            </tr>
-                            <tr>
-                                <td><strong>🔬 Ciència</strong></td>
-                                <td>Genera dades fiables per a projectes de recerca i seguiment de biodiversitat</td>
-                            </tr>
-                            <tr>
-                                <td><strong>🌱 Divulgació</strong></td>
-                                <td>Apropa la botànica a qualsevol persona que passegi pel campus</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="zones-clau">
-                    <h3>🗺️ Zones clau per començar a explorar</h3>
-                    
-                    <div class="zona-item">
-                        <div class="zona-nom">🌳 Camí de Ho Chi Minh</div>
-                        <div>Alzinar amb arbusts mediterranis i orquídies de primavera.</div>
-                    </div>
-                    
-                    <div class="zona-item">
-                        <div class="zona-nom">🌊 Torrent de Can Domènech</div>
-                        <div>Vegetació de ribera amb salzes, joncs i freixes.</div>
-                    </div>
-                    
-                    <div class="zona-item">
-                        <div class="zona-nom">🌺 Eix Central</div>
-                        <div>Arborets ornamentals que combinen espècies autòctones i exòtiques.</div>
-                    </div>
-                    
-                    <div class="zona-item">
-                        <div class="zona-nom">🌾 Rondes del campus</div>
-                        <div>Prats oberts ideals per observar floració estacional d'herbàcies.</div>
-                    </div>
-                </div>
-
-                <div class="caracteristiques-tecniques">
-                    <h3>⚙️ Com s'ha construït la plataforma?</h3>
-                    <ul>
-                        <li><strong>Plugin de WordPress</strong> 100% codi obert – dos <em>shortcodes</em> carreguen la galeria i el mapa.</li>
-                        <li><strong>Fitxer únic <code>plantes.json</code></strong> – la "font de la veritat" que evita dades duplicades.</li>
-                        <li><strong>Leaflet + Tailwind</strong> – mapa lleuger i disseny adaptat a mòbil i escriptori.</li>
-                        <li><strong>Editor offline integrat</strong> – afegeix o edita espècies sense tocar codi gràcies a la File System Access API (opcional).</li>
-                        <li><strong>Llicència MIT</strong> – pots forquejar, millorar o portar el projecte al teu entorn.</li>
-                    </ul>
-                </div>
-
-                <div class="inici-card">
-                    <h3>👥 A qui va dirigit?</h3>
-                    <ul>
-                        <li><strong>Estudiantat de Biologia, Ciències Ambientals i Educació</strong> – recurs per a pràctiques i TFG/TFM.</li>
-                        <li><strong>Professorat</strong> – material didàctic per a classes i sortides.</li>
-                        <li><strong>Investigadors/es</strong> – punt de partida per a estudis de biodiversitat local.</li>
-                        <li><strong>Públic general</strong> – eina per gaudir i entendre la natura del campus.</li>
-                    </ul>
-                </div>
-
-                <div class="inici-card">
-                    <h3>🚀 Plans de futur</h3>
-                    <ol>
-                        <li><strong>Miniatures WebP</strong> per accelerar encara més la galeria.</li>
-                        <li><strong>API REST</strong> perquè aplicacions mòbils (p. ex. Planttes) consumeixin dades en temps real.</li>
-                        <li><strong>Versió PWA</strong> amb funcionalitat offline completa.</li>
-                        <li><strong>Traducció multilingüe</strong> per compartir el recurs amb estudiants internacionals.</li>
-                        <li><strong>Nous camps</strong>: pol·linitzadors, estatus de protecció i fenologia mensual.</li>
-                    </ol>
-                </div>
-
-                <div class="col-laboracio">
-                    <h3>🤝 Com pots col·laborar?</h3>
-                    
-                    <div class="col-laboracio-grid">
-                        <div class="col-laboracio-item">
-                            <strong>📸 Afegir dades o fotos</strong><br>
-                            Obre un <em>Pull Request</em> o puja una <em>Issue</em> amb la teva proposta.
-                        </div>
-                        
-                        <div class="col-laboracio-item">
-                            <strong>🐛 Reportar un error</strong><br>
-                            Indica la planta, captura de pantalla i pas a pas per reproduir-lo.
-                        </div>
-                        
-                        <div class="col-laboracio-item">
-                            <strong>🌍 Traduir la interfície</strong><br>
-                            Crea un fitxer a <code>/lang</code> seguint l'estructura JSON existent.
-                        </div>
-                        
-                        <div class="col-laboracio-item">
-                            <strong>🚶 Organitzar una sortida guiada</strong><br>
-                            Escriu a <a href="mailto:botanica@uab.cat" style="color: #E8F5E8;">botanica@uab.cat</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="credits">
-                    <h3>👨‍🎓 Crèdits</h3>
-                    <p>Projecte desenvolupat com a <strong>Treball de Fi de Grau</strong> a la Facultat de Biociències de la UAB.</p>
-                    <p><strong>Autor:</strong> <em>Tomás González Bartomeu</em></p>
-                    <p><strong>Tutor acadèmic:</strong> <em>Ramon Pérez Obiol</em></p>
-                </div>
-
-                <div class="cta-buttons">
-                    <a href="#" onclick="mostrarGaleria()" class="cta-btn">
-                        🍃 Explora la Galeria
-                    </a>
-                    <a href="#" onclick="mostrarMapa()" class="cta-btn secondary">
-                        🗺️ Viatja pel Mapa
-                    </a>
-                </div>
-
-                <div style="text-align: center; margin: 2rem 0; color: #4CAF50; font-size: 1.2rem; font-weight: 600;">
-                    🌱 Ajuda'ns a fer créixer el coneixement de la flora local!
-                </div>
-            </div>
-
             <!-- GALERIA -->
-            <div id="galeria-section" class="galeria-botanica" style="display: none;">
+            <div id="galeria-section" class="galeria-botanica">
                 <!-- Els filtres i la graella es generaran dinàmicament amb JS -->
             </div>
 
@@ -265,166 +78,21 @@
     <script src="assets/js/galeria-botanica-original.js"></script>
     <script src="assets/js/mapa-botanica-original.js"></script>
     
-    <!-- Script d'inicialització (DESPRÉS de carregar els altres scripts) -->
+    <!-- Script de navegació -->
     <script>
-        // Sistema per assignar imatges automàticament
-        class SistemaImatges {
-            constructor() {
-                this.imatgesDisponibles = new Map(); // Mapa de nom_cientific -> llista d'imatges
-                this.tipusImatges = {
-                    'flor': 'flor',
-                    'fulla': 'fulla', 
-                    'fruit': 'fruit',
-                    'tija': 'tija',
-                    'habit': 'habit',
-                    'altre': 'altre'
-                };
-            }
-
-            // Convertir nom científic a format de fitxer
-            nomCientificAFitxer(nomCientific) {
-                return nomCientific.toLowerCase()
-                                  .replace(/\s+/g, '_')
-                                  .replace(/[^a-z0-9_]/g, '');
-            }
-
-            // Generar llista de possibles noms d'imatges per una planta
-            generarPossiblesImatges(nomCientific) {
-                const nomFitxer = this.nomCientificAFitxer(nomCientific);
-                const possiblesImatges = [];
-                
-                // Generar possibles noms per números 00-20 i tots els tipus
-                for (let num = 0; num <= 20; num++) {
-                    const numStr = num.toString().padStart(2, '0');
-                    Object.keys(this.tipusImatges).forEach(tipus => {
-                        possiblesImatges.push(`${nomFitxer}_${numStr}_${tipus}.jpg`);
-                    });
-                }
-                
-                return possiblesImatges;
-            }
-
-            // Verificar si una imatge existeix (usant una tècnica que no generi errors 404)
-            async verificarImatgeExisteix(rutaImatge) {
-                return new Promise((resolve) => {
-                    const img = new Image();
-                    img.onload = () => resolve(true);
-                    img.onerror = () => resolve(false);
-                    img.src = rutaImatge;
-                });
-            }
-
-            // Trobar totes les imatges disponibles per una planta
-            async trobarImatgesPlanta(nomCientific) {
-                const possiblesImatges = this.generarPossiblesImatges(nomCientific);
-                const imatgesTrobades = [];
-                
-                // Crear promeses per verificar totes les imatges en paral·lel
-                const verificacions = possiblesImatges.map(async (nomImatge) => {
-                    const rutaCompleta = `assets/imatges/${nomImatge}`;
-                    const existeix = await this.verificarImatgeExisteix(rutaCompleta);
-                    
-                    if (existeix) {
-                        // Extreure informació del nom del fitxer
-                        const parts = nomImatge.replace('.jpg', '').split('_');
-                        const numero = parts[parts.length - 2];
-                        const tipus = parts[parts.length - 1];
-                        
-                        return {
-                            nom: nomImatge,
-                            ruta: rutaCompleta,
-                            numero: parseInt(numero),
-                            tipus: tipus
-                        };
-                    }
-                    return null;
-                });
-                
-                // Esperar totes les verificacions
-                const resultats = await Promise.all(verificacions);
-                
-                // Filtrar nulls i ordenar per número
-                return resultats.filter(img => img !== null)
-                               .sort((a, b) => a.numero - b.numero);
-            }
-
-            // Assignar imatges a una planta
-            async assignarImatgesPlanta(planta) {
-                console.log(`Buscant imatges per: ${planta.nom_cientific}`);
-                
-                const imatgesTrobades = await this.trobarImatgesPlanta(planta.nom_cientific);
-                
-                if (imatgesTrobades.length === 0) {
-                    console.warn(`No s'han trobat imatges per: ${planta.nom_cientific}`);
-                    return {
-                        principal: null,
-                        principal_tipus: 'general',
-                        detalls: [],
-                        detalls_tipus: []
-                    };
-                }
-                
-                console.log(`Trobades ${imatgesTrobades.length} imatges per: ${planta.nom_cientific}`);
-                
-                // Assignar la primera imatge com a principal
-                const principal = imatgesTrobades[0];
-                
-                // La resta com a detalls
-                const detalls = imatgesTrobades.slice(1);
-                
-                return {
-                    principal: principal.nom,
-                    principal_tipus: principal.tipus,
-                    detalls: detalls.map(img => img.nom),
-                    detalls_tipus: detalls.map(img => img.tipus)
-                };
-            }
-
-            // Processar totes les plantes del JSON
-            async processarTotesLesPlantes(plantes) {
-                console.log('Iniciant assignació automàtica d\'imatges...');
-                const plantesAmbImatges = [];
-                
-                for (const planta of plantes) {
-                    const imatges = await this.assignarImatgesPlanta(planta);
-                    plantesAmbImatges.push({
-                        ...planta,
-                        imatges: imatges
-                    });
-                }
-                
-                console.log('Assignació d\'imatges completada!');
-                return plantesAmbImatges;
-            }
-        }
-        
         // Funcions de navegació
-        function mostrarInici() {
-            document.getElementById('inici-section').style.display = 'block';
-            document.getElementById('galeria-section').style.display = 'none';
-            document.getElementById('mapa-section').style.display = 'none';
-            
-            document.getElementById('btn-inici').classList.add('active');
-            document.getElementById('btn-galeria').classList.remove('active');
-            document.getElementById('btn-mapa').classList.remove('active');
-        }
-
         function mostrarGaleria() {
-            document.getElementById('inici-section').style.display = 'none';
             document.getElementById('galeria-section').style.display = 'block';
             document.getElementById('mapa-section').style.display = 'none';
             
-            document.getElementById('btn-inici').classList.remove('active');
             document.getElementById('btn-galeria').classList.add('active');
             document.getElementById('btn-mapa').classList.remove('active');
         }
 
         function mostrarMapa() {
-            document.getElementById('inici-section').style.display = 'none';
             document.getElementById('galeria-section').style.display = 'none';
             document.getElementById('mapa-section').style.display = 'block';
             
-            document.getElementById('btn-inici').classList.remove('active');
             document.getElementById('btn-galeria').classList.remove('active');
             document.getElementById('btn-mapa').classList.add('active');
             
@@ -433,6 +101,36 @@
                 setTimeout(() => window.map.invalidateSize(), 100);
             }
         }
+        
+        // Carregar dades i inicialitzar
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Mostrar loading
+                document.getElementById('loading-overlay').classList.remove('hidden');
+                
+                // Carregar dades de plantes
+                const response = await fetch('dades/plantes.json');
+                const data = await response.json();
+                
+                // Assignar a variables globals
+                gb_plantes_data = data;
+                mb_vars.dades_plantes = processarDadesPerMapa(data);
+                
+                // Generar contingut de la galeria
+                await generarGaleriaHTML(data);
+                
+                // Generar contingut del mapa
+                await generarMapaHTML();
+                
+                // Amagar loading
+                document.getElementById('loading-overlay').classList.add('hidden');
+                
+            } catch (error) {
+                console.error('Error carregant dades:', error);
+                document.getElementById('loading-overlay').innerHTML = 
+                    '<div style="color: red;">Error carregant les dades. Si us plau, recarrega la pàgina.</div>';
+            }
+        });
         
         // Processar dades per al mapa (format compatible)
         function processarDadesPerMapa(plantes) {
@@ -445,9 +143,6 @@
                         planta.caracteristiques.floracio.map(f => f.toLowerCase().replace(/\s*\(.*?\)\s*/g, '')) : 
                         [planta.caracteristiques.floracio.toLowerCase().replace(/\s*\(.*?\)\s*/g, '')]) : [],
                 usos_norm: planta.usos ? planta.usos.map(u => u.toLowerCase().replace(/\s+/g, '_').replace(/\s*\(.*?\)\s*/g, '')) : [],
-                floracio: planta.caracteristiques?.floracio ? 
-                    (Array.isArray(planta.caracteristiques.floracio) ? planta.caracteristiques.floracio : [planta.caracteristiques.floracio]) : [],
-                fullatge: planta.caracteristiques?.fullatge || '',
                 info_completa: construirInfoCompleta(planta)
             }));
         }
@@ -489,67 +184,6 @@
             
             return info.filter(i => i).join(' ');
         }
-        
-        // Carregar dades i inicialitzar DESPRÉS que tots els scripts estiguin carregats
-        document.addEventListener('DOMContentLoaded', async function() {
-            try {
-                // Mostrar loading
-                document.getElementById('loading-overlay').classList.remove('hidden');
-                
-                // Carregar dades de plantes
-                const response = await fetch('dades/plantes.json');
-                if (!response.ok) {
-                    throw new Error(`Error HTTP: ${response.status}`);
-                }
-                const data = await response.json();
-                
-                // Assignar imatges automàticament
-                const sistemaImatges = new SistemaImatges();
-                const plantesAmbImatges = await sistemaImatges.processarTotesLesPlantes(data.plantes || data);
-                
-                // Assignar a variables globals
-                gb_plantes_data = plantesAmbImatges;
-                mb_vars.dades_plantes = processarDadesPerMapa(plantesAmbImatges);
-                
-                console.log('Dades carregades:', plantesAmbImatges.length, 'plantes amb imatges');
-                
-                // Esperar que les funcions estiguin disponibles
-                let intents = 0;
-                const esperarFuncions = () => {
-                    if (typeof window.generarGaleriaHTML === 'function' && typeof window.generarMapaHTML === 'function') {
-                        // Generar contingut de la galeria
-                        window.generarGaleriaHTML(plantesAmbImatges).then(() => {
-                            // Generar contingut del mapa
-                            return window.generarMapaHTML();
-                        }).then(() => {
-                            // Amagar loading
-                            document.getElementById('loading-overlay').classList.add('hidden');
-                            console.log('Aplicació inicialitzada correctament');
-                        });
-                    } else {
-                        intents++;
-                        if (intents < 50) { // Màxim 5 segons d'espera
-                            setTimeout(esperarFuncions, 100);
-                        } else {
-                            console.error('No s\'han pogut carregar les funcions necessàries');
-                            document.getElementById('loading-overlay').innerHTML = 
-                                '<div style="color: red; text-align: center;"><h3>Error carregant l\'aplicació</h3><p>Si us plau, recarrega la pàgina.</p></div>';
-                        }
-                    }
-                };
-                
-                esperarFuncions();
-                
-            } catch (error) {
-                console.error('Error carregant dades:', error);
-                document.getElementById('loading-overlay').innerHTML = 
-                    `<div style="color: red; text-align: center;">
-                        <h3>Error carregant les dades</h3>
-                        <p>${error.message}</p>
-                        <p>Si us plau, recarrega la pàgina.</p>
-                    </div>`;
-            }
-        });
     </script>
 </body>
 </html>
