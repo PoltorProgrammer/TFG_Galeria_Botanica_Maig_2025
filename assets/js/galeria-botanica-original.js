@@ -1,6 +1,6 @@
 /**
- * Galeria Botànica UAB - Versió Completa
- * Sistema complet de filtres i funcionalitat per la galeria botànica
+ * Galeria Botànica UAB - Adaptat per funcionar sense WordPress
+ * Basat en galeria-botanica.js original
  */
 
 // Assegurar-se que les funcions són globals
@@ -292,7 +292,7 @@ function generarFiltresUsos(plantes) {
 // Generar HTML d'un item de planta
 function generarHTMLPlantaItem(planta) {
     const plantaId = planta.id || sanitizeTitle(planta.nom_cientific);
-    const imatges = planta.imatges || { principal: null, principal_tipus: 'general', detalls: [], detalls_tipus: [] };
+    const imatges = planta.imatges || { principal: 'default_planta.jpg', principal_tipus: 'general', detalls: [], detalls_tipus: [] };
     
     // Preparar atributs de dades per als filtres
     const dataAttrs = prepararDataAttributsPlanta(planta, imatges);
@@ -532,18 +532,10 @@ function configurarEventListenersGaleria() {
     });
     
     // Event listeners per tancar el modal
-    jQuery(document).on('click', '.planta-modal-tancar', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        tancarModal();
-        if (window.location.hash.startsWith('#planta-')) {
-            window.location.hash = '';
-        }
-    });
-    
-    jQuery(document).on('click', '.planta-modal', function(e) {
+    jQuery(document).on('click', '.planta-modal-tancar, .planta-modal', function(e) {
         if (e.target === this) {
             tancarModal();
+            // Eliminar hash de l'URL
             if (window.location.hash.startsWith('#planta-')) {
                 window.location.hash = '';
             }
@@ -571,6 +563,8 @@ function gestionarClicFiltre($boto) {
             console.warn("Botó sense atributs necessaris:", $boto[0]);
             return;
         }
+        
+        console.log(`Botó clicat: grup=${grupFiltre}, valor=${valorFiltre}, actiu=${$boto.hasClass('actiu')}`);
         
         // Comportament especial per al filtre d'imatges (excloent)
         if (grupFiltre === 'imatge') {
@@ -683,6 +677,8 @@ function actualitzarFiltresActius() {
                 }
             }
         });
+        
+        console.log("Filtres actius actualitzats:", filtresActius);
     } catch (error) {
         console.error("Error en actualitzarFiltresActius:", error);
         Object.keys(filtresActius).forEach(key => {
@@ -750,7 +746,7 @@ function mostrarFiltresActius() {
         console.error("Error en mostrarFiltresActius:", error);
         jQuery('.netejar-filtres').hide();
     }
-}
+}                      
 
 // Eliminar un filtre individual
 function eliminarFiltre($element) {
@@ -1130,6 +1126,7 @@ function generarHTMLDetallsPlanta(planta) {
         const imatgeUrl = `assets/imatges/${imatges.principal}`;
         html += '<div class="planta-imatge-principal">';
         html += `<img src="${imatgeUrl}" alt="${escapeHtml(planta.nom_comu)}" data-tipus="${escapeHtml(imatges.principal_tipus)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=planta-sense-imatge>Imatge no disponible</div>'">`;
+
         if (imatges.principal_tipus !== 'general') {
             html += `<span class="planta-tipus-imatge-detall">${imatges.principal_tipus.charAt(0).toUpperCase() + imatges.principal_tipus.slice(1)}</span>`;
         }
@@ -1256,6 +1253,7 @@ jQuery(document).ready(function() {
                                  
 // Cridar verificarHashURL quan es carregui la pàgina
 jQuery(window).on('load', verificarHashURL);                
+
 
 // Assegurar funcions globals per compatibilitat
 window.generarGaleriaHTML = generarGaleriaHTML;
