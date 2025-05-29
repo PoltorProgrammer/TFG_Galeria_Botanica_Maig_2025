@@ -247,41 +247,31 @@
         var gb_plantes_data = [];
 
         // Funció per verificar si les imatges dels marges existeixen
-        async function verificarImatgesMarges() {
-            const imatgeEsquerra = 'assets/imatges/marge-esquerra.png';
-            const imatgeDreta = 'assets/imatges/marge-dreta.png';
+        // Funció per verificar si la imatge del fons existeix
+        async function verificarImatgeFons() {
+            const imatgeFons = 'assets/imatges/fons_enfiladisses.png';
             
             try {
-                // Test imatge esquerra
-                const imgEsq = new Image();
-                const promiseEsq = new Promise((resolve) => {
-                    imgEsq.onload = () => resolve(true);
-                    imgEsq.onerror = () => resolve(false);
-                    imgEsq.src = imatgeEsquerra;
+                const img = new Image();
+                const promise = new Promise((resolve) => {
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = imatgeFons;
                 });
                 
-                // Test imatge dreta
-                const imgDreta = new Image();
-                const promiseDreta = new Promise((resolve) => {
-                    imgDreta.onload = () => resolve(true);
-                    imgDreta.onerror = () => resolve(false);
-                    imgDreta.src = imatgeDreta;
-                });
+                const existeix = await promise;
                 
-                // Esperar ambdues imatges
-                const [esquerraExisteix, dretaExisteix] = await Promise.all([promiseEsq, promiseDreta]);
-                
-                // Si ambdues imatges existeixen, activar els marges
-                if (esquerraExisteix && dretaExisteix) {
-                    document.body.classList.add('marges-actius');
-                    console.log('✅ Marges decoratius activats - imatges carregades correctament');
+                if (existeix) {
+                    document.body.classList.add('fons-enfiladisses-actiu');
+                    console.log('✅ Fons d\'enfiladisses activat - imatge carregada correctament');
                 } else {
-                    console.warn('⚠️ Marges decoratius desactivats - imatges no trobades');
-                    console.log(`Imatge esquerra: ${esquerraExisteix ? '✅' : '❌'}`);
-                    console.log(`Imatge dreta: ${dretaExisteix ? '✅' : '❌'}`);
+                    console.warn('⚠️ Fons d\'enfiladisses desactivat - imatge no trobada');
+                    // Opcional: afegir un fons de color sòlid com a fallback
+                    document.body.style.backgroundColor = '#f8f9fa';
                 }
             } catch (error) {
-                console.error('Error verificant imatges dels marges:', error);
+                console.error('Error verificant imatge del fons:', error);
+                document.body.style.backgroundColor = '#f8f9fa'; // Fallback
             }
         }
 
@@ -519,7 +509,7 @@
                 console.log('Iniciant aplicació...');
                 
                 // Verificar imatges dels marges
-                verificarImatgesMarges();
+                verificarImatgeFons();
                 
                 // Carregar dades de plantes
                 const response = await fetch('dades/plantes.json');
