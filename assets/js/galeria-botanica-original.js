@@ -10,9 +10,9 @@
 // MAPA D'IMATGES DISPONIBLES - OMPLE AMB DADES REALS DEL REPOSITORI
 const imatgesDisponibles = {
     // EXEMPLE D'ESTRUCTURA (substitueix amb dades reals):
-    // "quercus_ilex": ["quercus_ilex_01.jpg", "quercus_ilex_flor_02.jpg", "quercus_ilex_fruit_01.jpg"],
-    // "rosa_canina": ["rosa_canina_01.jpg", "rosa_canina_flor_01.jpg"],
-    // "platanus_hispanica": ["platanus_hispanica_01.jpg", "platanus_hispanica_escorca.jpg"],
+    // "quercus_ilex": ["quercus_ilex_01_flor.jpg", "quercus_ilex_04_fruit.jpg", "quercus_ilex_03_tija.jpg"],
+    // "rosa_canina": ["rosa_canina_01_fulla.jpg", "rosa_canina_00_flor.jpg"],
+    // "platanus_hispanica": ["platanus_hispanica_01_escorca.jpg", "platanus_hispanica_03_tija.jpg"],
     
     // TODO: Executa l'script de descobriment per omplir automàticament aquesta secció
 };
@@ -1598,39 +1598,7 @@ async function inicialitzarSistemaImatges() {
   INSTRUCCIONS FINALS
   ======================================================================== */
 
-console.log(`
-🎯 SISTEMA OPTIMITZAT D'IMATGES CARREGAT
-=======================================
-
-📋 INSTRUCCIONS D'IMPLEMENTACIÓ:
-
-1️⃣ DESCOBRIR IMATGES (PRIMER PAS):
-  - Executa: descobrirImatgesRepositori()
-  - Copia el resultat i substitueix l'objecte imatgesDisponibles
-
-2️⃣ USAR EL SISTEMA:
-  - Les plantes ja s'actualitzaran automàticament
-  - No més cerques innecessàries d'imatges
-  - Càrrega instantània d'informació d'imatges
-
-3️⃣ VERIFICAR FUNCIONAMENT:
-  - Comprova la consola per estadístiques
-  - Les imatges es carregaran només si existeixen
-  - Sistema previsible i optimitzat
-
-✨ BENEFICIS:
-- Eliminació completa de cerques d'imatges innecessàries
-- Càrrega instantània de metadades d'imatges  
-- Sistema robust i mantenible
-- Millor rendiment de l'aplicació
-- Debug i estadístiques integrades
-
-🔧 MANTENIMENT:
-- Per afegir noves imatges: actualitza l'objecte imatgesDisponibles
-- Per canviar lògica d'imatges: modifica GestorImatgesOptimitzat
-- Per estadístiques: usa GestorImatgesOptimitzat.obtenirEstadistiques()
-`);
-
+console.log(
 // Inicialització automàtica quan es carrega el script
 if (typeof window !== 'undefined') {
    // Esperar a que tot estigui carregat
