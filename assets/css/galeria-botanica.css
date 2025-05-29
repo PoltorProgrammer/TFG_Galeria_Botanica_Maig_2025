@@ -336,6 +336,19 @@
     font-style: italic;
 }
 
+.planta-sense-imatge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    background-color: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    color: #6c757d;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 4px;
+}
+
 .planta-info {
     padding: 15px;
 }
