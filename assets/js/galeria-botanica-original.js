@@ -1,15 +1,174 @@
 /**
- * Galeria Botànica UAB - Adaptat per funcionar sense WordPress
- * Basat en galeria-botanica.js original
+ * Galeria Botànica UAB - Versió Optimitzada amb Sistema Intel·ligent d'Imatges
+ * Elimina les cerques innecessàries d'imatges i optimitza el rendiment
  */
+
+/* ========================================================================
+   SISTEMA OPTIMITZAT DE GESTIÓ D'IMATGES
+   ======================================================================== */
+
+// MAPA D'IMATGES DISPONIBLES - OMPLE AMB DADES REALS DEL REPOSITORI
+const imatgesDisponibles = {
+    // EXEMPLE D'ESTRUCTURA (substitueix amb dades reals):
+    // "quercus_ilex": ["quercus_ilex_01.jpg", "quercus_ilex_flor_02.jpg", "quercus_ilex_fruit_01.jpg"],
+    // "rosa_canina": ["rosa_canina_01.jpg", "rosa_canina_flor_01.jpg"],
+    // "platanus_hispanica": ["platanus_hispanica_01.jpg", "platanus_hispanica_escorca.jpg"],
+    
+    // TODO: Executa l'script de descobriment per omplir automàticament aquesta secció
+};
+
+class GestorImatgesOptimitzat {
+    
+    /**
+     * Obtenir totes les imatges disponibles per una espècie
+     */
+    static obtenirImatgesEspecie(nomCientific) {
+        const clau = this.normalitzarNomCientific(nomCientific);
+        return imatgesDisponibles[clau] || [];
+    }
+    
+    /**
+     * Normalitzar nom científic per fer de clau
+     */
+    static normalitzarNomCientific(nomCientific) {
+        return nomCientific.toLowerCase()
+            .replace(/\s+/g, '_')
+            .replace(/[^a-z0-9_]/g, '');
+    }
+    
+    /**
+     * Obtenir la imatge principal d'una espècie
+     */
+    static obtenirImatgePrincipal(nomCientific) {
+        const imatges = this.obtenirImatgesEspecie(nomCientific);
+        if (imatges.length === 0) return null;
+        
+        const baseName = this.normalitzarNomCientific(nomCientific);
+        
+        // Ordre de preferència per a la imatge principal
+        const prioritats = [
+            `${baseName}_01.`,     // nom_cientific_01.jpg
+            `${baseName}_1.`,      // nom_cientific_1.jpg  
+            `${baseName}_general.`, // nom_cientific_general.jpg
+            `${baseName}.`,        // nom_cientific.jpg
+            `${baseName}_`         // qualsevol que comenci amb nom_cientific_
+        ];
+        
+        // Buscar per ordre de prioritat
+        for (const prioritat of prioritats) {
+            const trobada = imatges.find(img => img.toLowerCase().startsWith(prioritat));
+            if (trobada) return trobada;
+        }
+        
+        // Si no troba cap amb les prioritats, retornar la primera disponible
+        return imatges[0];
+    }
+    
+    /**
+     * Obtenir imatges per tipus específic
+     */
+    static obtenirImatgesPerTipus(nomCientific, tipus) {
+        const imatges = this.obtenirImatgesEspecie(nomCientific);
+        const baseName = this.normalitzarNomCientific(nomCientific);
+        const tipusNormalitzat = tipus.toLowerCase();
+        
+        return imatges.filter(img => {
+            const imgLower = img.toLowerCase();
+            return imgLower.includes(`${baseName}_${tipusNormalitzat}`) || 
+                   imgLower.includes(`_${tipusNormalitzat}_`) ||
+                   imgLower.includes(`_${tipusNormalitzat}.`);
+        });
+    }
+    
+    /**
+     * Determinar el tipus d'una imatge pel seu nom
+     */
+    static determinarTipusImatge(nomImatge) {
+        if (!nomImatge) return 'general';
+        
+        const nom = nomImatge.toLowerCase();
+        
+        if (nom.includes('_flor')) return 'flor';
+        if (nom.includes('_fruit')) return 'fruit';
+        if (nom.includes('_fulla')) return 'fulla';
+        if (nom.includes('_arrel')) return 'arrel';
+        if (nom.includes('_escorca')) return 'escorça';
+        if (nom.includes('_detall')) return 'detall';
+        if (nom.includes('_habitat')) return 'habitat';
+        if (nom.includes('_general')) return 'general';
+        
+        return 'general';
+    }
+    
+    /**
+     * Obtenir informació completa d'imatges per una espècie (FUNCIÓ PRINCIPAL)
+     */
+    static obtenirInfoCompletaImatges(nomCientific) {
+        const imatges = this.obtenirImatgesEspecie(nomCientific);
+        
+        if (imatges.length === 0) {
+            return {
+                principal: 'default_planta.jpg', // Imatge per defecte
+                principal_tipus: 'general',
+                detalls: [],
+                detalls_tipus: [],
+                disponibles: false,
+                total: 0
+            };
+        }
+        
+        const principal = this.obtenirImatgePrincipal(nomCientific);
+        const tipusPrincipal = this.determinarTipusImatge(principal);
+        
+        // Separar imatge principal de les de detall
+        const detalls = imatges.filter(img => img !== principal);
+        const detallsTipus = detalls.map(img => this.determinarTipusImatge(img));
+        
+        return {
+            principal: principal,
+            principal_tipus: tipusPrincipal,
+            detalls: detalls,
+            detalls_tipus: detallsTipus,
+            disponibles: true,
+            total: imatges.length
+        };
+    }
+    
+    /**
+     * Obtenir estadístiques d'imatges
+     */
+    static obtenirEstadistiques() {
+        const especies = Object.keys(imatgesDisponibles);
+        const totalImatges = Object.values(imatgesDisponibles)
+            .reduce((sum, arr) => sum + arr.length, 0);
+        
+        return {
+            totalEspecies: especies.length,
+            totalImatges: totalImatges,
+            mitjanaPerEspecie: especies.length > 0 ? (totalImatges / especies.length).toFixed(1) : 0,
+            especiesAmbImatges: especies.filter(esp => imatgesDisponibles[esp].length > 0).length,
+            especiesSenseImatges: especies.filter(esp => imatgesDisponibles[esp].length === 0).length
+        };
+    }
+}
+
+/* ========================================================================
+   FUNCIONS PRINCIPALS DE LA GALERIA
+   ======================================================================== */
 
 // Assegurar-se que les funcions són globals
 window.generarGaleriaHTML = generarGaleriaHTML;
+window.GestorImatgesOptimitzat = GestorImatgesOptimitzat;
 
 // Funció per generar el HTML de la galeria
 async function generarGaleriaHTML(plantes) {
     const galeriaContainer = document.getElementById('galeria-section');
     if (!galeriaContainer || !plantes) return;
+    
+    console.log('🚀 Iniciant generació de galeria amb sistema optimitzat...');
+    
+    // OPTIMITZACIÓ: Actualitzar imatges de totes les plantes abans de generar HTML
+    plantes = actualitzarSistemaImatges(plantes);
     
     let html = '';
     
@@ -25,18 +184,45 @@ async function generarGaleriaHTML(plantes) {
     
     html += '</div>';
     
-    // Modal per a mostrar els detalls
-    html += `<div class="planta-modal" style="display: none;">
-        <div class="planta-modal-contingut">
-            <span class="planta-modal-tancar">&times;</span>
-            <div class="planta-modal-cos"></div>
-        </div>
-    </div>`;
-    
     galeriaContainer.innerHTML = html;
     
     // Inicialitzar funcionalitat després de generar el HTML
     inicialitzarGaleria();
+    
+    console.log('✅ Galeria generada amb èxit amb sistema optimitzat');
+}
+
+/**
+ * NOVA FUNCIÓ: Actualitzar sistema d'imatges per totes les plantes
+ */
+function actualitzarSistemaImatges(plantes) {
+    console.log('🔄 Actualitzant sistema d\'imatges optimitzat...');
+    
+    let actualitzades = 0;
+    let noTrobades = 0;
+    
+    plantes.forEach(planta => {
+        const infoImagues = GestorImatgesOptimitzat.obtenirInfoCompletaImatges(planta.nom_cientific);
+        
+        // Actualitzar sempre, encara que no hi hagi imatges (tindrà default)
+        planta.imatges = infoImagues;
+        
+        if (infoImagues.disponibles) {
+            actualitzades++;
+        } else {
+            noTrobades++;
+            console.warn(`⚠️  No s'han trobat imatges per: ${planta.nom_cientific}`);
+        }
+    });
+    
+    console.log(`✅ Sistema d'imatges actualitzat:`);
+    console.log(`   - Plantes amb imatges: ${actualitzades}`);
+    console.log(`   - Plantes sense imatges: ${noTrobades}`);
+    
+    const stats = GestorImatgesOptimitzat.obtenirEstadistiques();
+    console.log(`📊 Estadístiques d'imatges:`, stats);
+    
+    return plantes;
 }
 
 // Generar HTML dels filtres
@@ -102,20 +288,23 @@ function generarFiltresTipus(plantes) {
     return html;
 }
 
-// Generar filtres d'imatge
+// Generar filtres d'imatge (OPTIMITZAT)
 function generarFiltresImatge(plantes) {
     const tipusImatges = new Set();
     
     plantes.forEach(planta => {
-        if (planta.imatges?.principal_tipus && planta.imatges.principal_tipus !== 'general') {
-            tipusImatges.add(planta.imatges.principal_tipus);
-        }
-        if (planta.imatges?.detalls_tipus) {
-            planta.imatges.detalls_tipus.forEach(tipus => {
-                if (tipus !== 'general') {
-                    tipusImatges.add(tipus);
-                }
-            });
+        // Usar el sistema optimitzat
+        if (planta.imatges?.disponibles) {
+            if (planta.imatges.principal_tipus && planta.imatges.principal_tipus !== 'general') {
+                tipusImatges.add(planta.imatges.principal_tipus);
+            }
+            if (planta.imatges.detalls_tipus) {
+                planta.imatges.detalls_tipus.forEach(tipus => {
+                    if (tipus !== 'general') {
+                        tipusImatges.add(tipus);
+                    }
+                });
+            }
         }
     });
     
@@ -289,23 +478,25 @@ function generarFiltresUsos(plantes) {
     return html;
 }
 
-// Generar HTML d'un item de planta
+// Generar HTML d'un item de planta (OPTIMITZAT)
 function generarHTMLPlantaItem(planta) {
     const plantaId = planta.id || sanitizeTitle(planta.nom_cientific);
-    const imatges = planta.imatges || { principal: 'default_planta.jpg', principal_tipus: 'general', detalls: [], detalls_tipus: [] };
+    
+    // OPTIMITZACIÓ: Usar sempre les imatges actualitzades pel sistema optimitzat
+    const imatges = planta.imatges;
     
     // Preparar atributs de dades per als filtres
     const dataAttrs = prepararDataAttributsPlanta(planta, imatges);
     
     let html = `<div class="planta-item" ${dataAttrs} id="planta-${plantaId}">`;
     
-    // Imatge principal
+    // Imatge principal (OPTIMITZAT - No més cerques innecessàries)
     html += '<div class="planta-imatge">';
     html += `<a href="#" class="planta-obrir-detall" data-planta="${plantaId}">`;
     
-    if (imatges.principal) {
+    if (imatges.disponibles && imatges.principal) {
         const imatgeUrl = `assets/imatges/${imatges.principal}`;
-        html += `<img class="planta-imatge-principal" src="${imatgeUrl}" alt="${escapeHtml(planta.nom_comu)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=planta-sense-imatge>Imatge no disponible</div>'">`;
+        html += `<img class="planta-imatge-principal" src="${imatgeUrl}" alt="${escapeHtml(planta.nom_comu)}" onerror="this.src='assets/imatges/default_planta.jpg'; this.parentElement.innerHTML='<div class=planta-sense-imatge>Imatge no disponible</div>'">`;
         
         if (imatges.principal_tipus !== 'general') {
             html += `<span class="planta-tipus-imatge">${imatges.principal_tipus.charAt(0).toUpperCase() + imatges.principal_tipus.slice(1)}</span>`;
@@ -334,15 +525,19 @@ function generarHTMLPlantaItem(planta) {
     return html;
 }
 
-// Preparar atributs de dades per als filtres
+// Preparar atributs de dades per als filtres (OPTIMITZAT)
 function prepararDataAttributsPlanta(planta, imatges) {
     let attrs = [];
     
     // Tipus de planta
     attrs.push(`data-tipus="${escapeHtml(planta.tipus)}"`);
     
-    // Tipus d'imatge principal
-    attrs.push(`data-tipus-imatge="${escapeHtml(imatges.principal_tipus)}"`);
+    // Tipus d'imatge principal (OPTIMITZAT)
+    if (imatges && imatges.principal_tipus) {
+        attrs.push(`data-tipus-imatge="${escapeHtml(imatges.principal_tipus)}"`);
+    } else {
+        attrs.push(`data-tipus-imatge="general"`);
+    }
     
     // Colors
     if (planta.colors && planta.colors.length > 0) {
@@ -385,6 +580,248 @@ function prepararDataAttributsPlanta(planta, imatges) {
     
     // Usos
     if (planta.usos && planta.usos.length > 0) {
+        html += '<div class="planta-seccio">';
+        html += '<h4>Usos</h4>';
+        html += `<p>${planta.usos.map(u => escapeHtml(u)).join(', ')}</p>`;
+        html += '</div>';
+    }
+    
+    // Colors
+    if (planta.colors && planta.colors.length > 0) {
+        html += '<div class="planta-seccio">';
+        html += '<h4>Colors</h4>';
+        html += `<p>${planta.colors.map(c => c.charAt(0).toUpperCase() + c.slice(1)).map(c => escapeHtml(c)).join(', ')}</p>`;
+        html += '</div>';
+    }
+    
+    // Hàbitat
+    if (planta.habitat && planta.habitat.length > 0) {
+        html += '<div class="planta-seccio">';
+        html += '<h4>Hàbitat al campus</h4>';
+        html += '<ul>';
+        planta.habitat.forEach(habitat => {
+            const parts = habitat.split('(');
+            let habitatPrincipal = parts[0].trim().replace(/_/g, ' ');
+            let textHabitat = habitatPrincipal.charAt(0).toUpperCase() + habitatPrincipal.slice(1);
+            
+            if (parts.length > 1) {
+                const detalls = parts[1].replace(')', '').trim().replace(/_/g, ' ');
+                textHabitat += ` (${detalls})`;
+            }
+            
+            html += `<li>${escapeHtml(textHabitat)}</li>`;
+        });
+        html += '</ul>';
+        html += '</div>';
+    }
+    
+    // Coordenades
+    if (planta.coordenades && planta.coordenades.length > 0) {
+        html += '<div class="planta-seccio">';
+        html += '<h4>Localització al campus</h4>';
+        html += '<ul>';
+        planta.coordenades.forEach(coord => {
+            const zona = coord.zona || 'Campus UAB';
+            html += `<li><strong>${escapeHtml(zona)}</strong> `;
+            html += `Coordenades: ${coord.lat}, ${coord.lng}</li>`;
+        });
+        html += '</ul>';
+        html += '</div>';
+    }
+    
+    html += '</div>'; // Fi de planta-info-completa
+    html += '</div>'; // Fi de planta-detall-individual
+    
+    return html;
+}
+
+/* ========================================================================
+   FUNCIONS D'INICIALITZACIÓ I COMPATIBILITAT
+   ======================================================================== */
+
+// Al final del fitxer, després de totes les funcions
+jQuery(document).ready(function() {
+    verificarHashURL();
+});
+
+// Cridar verificarHashURL quan es carregui la pàgina
+jQuery(window).on('load', verificarHashURL);
+
+// Assegurar funcions globals per compatibilitat
+window.generarGaleriaHTML = generarGaleriaHTML;
+window.mostrarFiltresActius = mostrarFiltresActius;
+window.GestorImatgesOptimitzat = GestorImatgesOptimitzat;
+window.actualitzarSistemaImatges = actualitzarSistemaImatges;
+
+/* ========================================================================
+   SCRIPT D'DESCOBRIMENT D'IMATGES (EXECUTAR PRIMER)
+   ======================================================================== */
+
+/**
+ * IMPORTANT: Executa aquesta funció primer per obtenir la llista d'imatges reals
+ * Copia i enganxa aquest codi a la consola del navegador per obtenir les dades
+ */
+async function descobrirImatgesRepositori() {
+    const repoUrl = 'https://api.github.com/repos/PoltorProgrammer/TFG_Galeria_Botanica_Maig_2025/contents/assets/imatges';
+    
+    try {
+        console.log('🔍 Descobrint imatges del repositori...');
+        
+        const response = await fetch(repoUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        
+        // Filtrar només fitxers d'imatge
+        const imatges = data
+            .filter(item => item.type === 'file')
+            .filter(item => {
+                const ext = item.name.toLowerCase().split('.').pop();
+                return ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'].includes(ext);
+            })
+            .map(item => item.name);
+        
+        console.log(`✅ Trobades ${imatges.length} imatges`);
+        
+        // Agrupar per nom científic
+        const agrupades = {};
+        
+        imatges.forEach(nomImatge => {
+            // Extreure nom científic (tot fins al primer underscore seguit de número/paraula específica)
+            const match = nomImatge.match(/^([a-zA-Z_]+?)(?=_\d|_flor|_fruit|_fulla|_arrel|_escorca|_detall|_general|_habitat|\.)/i);
+            
+            let nomCientific;
+            if (match) {
+                nomCientific = match[1].toLowerCase();
+            } else {
+                // Si no coincideix, agafar tot fins al primer punt
+                nomCientific = nomImatge.split('.')[0].toLowerCase();
+            }
+            
+            if (!agrupades[nomCientific]) {
+                agrupades[nomCientific] = [];
+            }
+            
+            agrupades[nomCientific].push(nomImatge);
+        });
+        
+        // Mostrar resultats
+        console.log('\n📂 IMATGES AGRUPADES PER ESPÈCIE:');
+        console.log('================================');
+        
+        Object.entries(agrupades)
+            .sort(([a], [b]) => a.localeCompare(b))
+            .forEach(([nomCientific, llistaImatges]) => {
+                console.log(`\n🌿 ${nomCientific.toUpperCase()} (${llistaImatges.length} imatges):`);
+                llistaImatges.sort().forEach(img => {
+                    console.log(`   - ${img}`);
+                });
+            });
+        
+        // Generar codi per reemplaçar
+        console.log('\n\n📋 CODI PER REEMPLAÇAR A L\'OBJECTE imatgesDisponibles:');
+        console.log('===========================================================');
+        console.log('const imatgesDisponibles = ' + JSON.stringify(agrupades, null, 2) + ';');
+        
+        // Estadístiques
+        const totalEspecies = Object.keys(agrupades).length;
+        const totalImatges = Object.values(agrupades).reduce((sum, arr) => sum + arr.length, 0);
+        
+        console.log(`\n\n📊 ESTADÍSTIQUES:`);
+        console.log(`   Total espècies: ${totalEspecies}`);
+        console.log(`   Total imatges: ${totalImatges}`);
+        console.log(`   Mitjana d'imatges per espècie: ${(totalImatges / totalEspecies).toFixed(1)}`);
+        
+        return agrupades;
+        
+    } catch (error) {
+        console.error('❌ Error:', error);
+        
+        if (error.message.includes('403') || error.message.includes('rate limit')) {
+            console.log('\n💡 SOLUCIÓ ALTERNATIVA:');
+            console.log('El GitHub API té límits. Pots:');
+            console.log('1. Esperar una mica i tornar a provar');
+            console.log('2. Crear un token personal a GitHub');
+            console.log('3. Executar aquest script localment amb Node.js');
+        }
+        
+        return null;
+    }
+}
+
+// Funció per omplir automàticament l'objecte imatgesDisponibles
+async function inicialitzarSistemaImatges() {
+    console.log('🚀 Inicialitzant sistema optimitzat d\'imatges...');
+    
+    // Si l'objecte està buit, intentar descobrir imatges
+    if (Object.keys(imatgesDisponibles).length === 0) {
+        console.log('⚠️  L\'objecte imatgesDisponibles està buit. Descobrint imatges...');
+        
+        const imatgesDescobertes = await descobrirImatgesRepositori();
+        
+        if (imatgesDescobertes) {
+            // Copiar les dades descobertes a l'objecte global
+            Object.assign(imatgesDisponibles, imatgesDescobertes);
+            console.log('✅ Objecte imatgesDisponibles actualitzat automàticament');
+        } else {
+            console.warn('⚠️  No s\'han pogut descobrir les imatges automàticament');
+            console.log('💡 Executa manualment: descobrirImatgesRepositori()');
+        }
+    } else {
+        console.log('✅ Objecte imatgesDisponibles ja està configurat');
+    }
+    
+    // Mostrar estadístiques del sistema
+    const stats = GestorImatgesOptimitzat.obtenirEstadistiques();
+    console.log('📊 Estadístiques del sistema:', stats);
+}
+
+/* ========================================================================
+   INSTRUCCIONS FINALS
+   ======================================================================== */
+
+console.log(`
+🎯 SISTEMA OPTIMITZAT D'IMATGES CARREGAT
+=======================================
+
+📋 INSTRUCCIONS D'IMPLEMENTACIÓ:
+
+1️⃣ DESCOBRIR IMATGES (PRIMER PAS):
+   - Executa: descobrirImatgesRepositori()
+   - Copia el resultat i substitueix l'objecte imatgesDisponibles
+
+2️⃣ USAR EL SISTEMA:
+   - Les plantes ja s'actualitzaran automàticament
+   - No més cerques innecessàries d'imatges
+   - Càrrega instantània d'informació d'imatges
+
+3️⃣ VERIFICAR FUNCIONAMENT:
+   - Comprova la consola per estadístiques
+   - Les imatges es carregaran només si existeixen
+   - Sistema previsible i optimitzat
+
+✨ BENEFICIS:
+- Eliminació completa de cerques d'imatges innecessàries
+- Càrrega instantània de metadades d'imatges  
+- Sistema robust i mantenible
+- Millor rendiment de l'aplicació
+- Debug i estadístiques integrades
+
+🔧 MANTENIMENT:
+- Per afegir noves imatges: actualitza l'objecte imatgesDisponibles
+- Per canviar lògica d'imatges: modifica GestorImatgesOptimitzat
+- Per estadístiques: usa GestorImatgesOptimitzat.obtenirEstadistiques()
+`);
+
+// Inicialització automàtica quan es carrega el script
+if (typeof window !== 'undefined') {
+    // Esperar a que tot estigui carregat
+    setTimeout(() => {
+        inicialitzarSistemaImatges();
+    }, 1000);
+}.usos.length > 0) {
         const usosNormalitzats = planta.usos.map(us => {
             const usPrincipal = us.replace(/\s*\(.*?\)\s*/g, '').trim();
             return usPrincipal.toLowerCase().replace(/\s+/g, '_');
@@ -396,12 +833,17 @@ function prepararDataAttributsPlanta(planta, imatges) {
     const infoCompleta = construirInfoCompletaCerca(planta);
     attrs.push(`data-info-completa="${escapeHtml(infoCompleta)}"`);
     
-    // Dades d'imatges en JSON
+    // Dades d'imatges en JSON (OPTIMITZAT)
     const imatgesJson = {
-        principal: imatges.principal,
-        [imatges.principal_tipus]: imatges.principal
+        principal: imatges.principal || 'default_planta.jpg'
     };
     
+    // Afegir imatge principal per tipus
+    if (imatges.principal_tipus) {
+        imatgesJson[imatges.principal_tipus] = imatges.principal;
+    }
+    
+    // Afegir imatges de detall agrupades per tipus
     if (imatges.detalls && imatges.detalls.length > 0) {
         imatges.detalls.forEach((img, i) => {
             const tipus = imatges.detalls_tipus[i] || 'general';
@@ -746,7 +1188,7 @@ function mostrarFiltresActius() {
         console.error("Error en mostrarFiltresActius:", error);
         jQuery('.netejar-filtres').hide();
     }
-}                      
+}
 
 // Eliminar un filtre individual
 function eliminarFiltre($element) {
@@ -942,7 +1384,7 @@ function aplicarFiltres() {
     }
 }
 
-// Aplicar canvis d'imatges segons el filtre d'imatges seleccionat
+// Aplicar canvis d'imatges segons el filtre d'imatges seleccionat (OPTIMITZAT)
 function aplicarCanviImatges(tipusImatge) {
     try {
         jQuery('.planta-item').each(function() {
@@ -956,21 +1398,18 @@ function aplicarCanviImatges(tipusImatge) {
                 let novaImatge = '';
                 
                 if (tipusImatge === 'tots') {
-                    novaImatge = imatgesData.principal;
+                    novaImatge = imatgesData.principal || 'default_planta.jpg';
                 } else {
                     if (imatgesData[tipusImatge]) {
                         novaImatge = imatgesData[tipusImatge];
                     } else {
-                        novaImatge = imatgesData.principal || '';
+                        novaImatge = imatgesData.principal || 'default_planta.jpg';
                     }
                 }
                 
                 if (novaImatge && $img.length) {
-                    const src = $img.attr('src');
-                    if (src) {
-                        const urlBase = src.substring(0, src.lastIndexOf('/') + 1);
-                        $img.attr('src', urlBase + novaImatge);
-                    }
+                    const urlBase = 'assets/imatges/';
+                    $img.attr('src', urlBase + novaImatge);
                 }
                 
                 if (tipusImatge !== 'tots' && tipusImatge !== 'general') {
@@ -989,9 +1428,9 @@ function aplicarCanviImatges(tipusImatge) {
     }
 }
 
-// Obrir modal de detalls de planta (sense AJAX)
+// Obrir modal de detalls de planta (OPTIMITZAT)
 function obrirDetallsPlanta(plantaId) {
-    // Buscar la planta a les dades
+    // Buscar la planta a les dades globals
     const planta = gb_plantes_data.find(p => 
         p.id === plantaId || 
         sanitizeTitle(p.nom_cientific) === plantaId ||
@@ -1015,7 +1454,7 @@ function obrirDetallsPlanta(plantaId) {
         `);
     }
     
-    // Generar HTML dels detalls
+    // Generar HTML dels detalls amb sistema optimitzat
     const htmlDetalls = generarHTMLDetallsPlanta(planta);
     
     // Mostrar el modal
@@ -1035,7 +1474,7 @@ function tancarModal() {
     jQuery('body').css('overflow', 'auto');
 }
 
-// Activar lightbox per a les imatges de detall (versió galeria)
+// Activar lightbox per a les imatges de detall
 function activarLightboxGaleria() {
     try {
         jQuery('.planta-imatge-detall img, .planta-imatge-principal img').on('click', function() {
@@ -1107,10 +1546,18 @@ function verificarHashURL() {
     }
 }
 
-// Funció per generar HTML dels detalls de planta (reutilitzable)
+// Funció per generar HTML dels detalls de planta (OPTIMITZAT)
 function generarHTMLDetallsPlanta(planta) {
     const plantaId = planta.id || sanitizeTitle(planta.nom_cientific);
-    const imatges = planta.imatges || { principal: 'default_planta.jpg', principal_tipus: 'general', detalls: [], detalls_tipus: [] };
+    
+    // OPTIMITZACIÓ: Usar sempre les imatges del sistema optimitzat
+    const imatges = planta.imatges || {
+        principal: 'default_planta.jpg',
+        principal_tipus: 'general',
+        detalls: [],
+        detalls_tipus: [],
+        disponibles: false
+    };
     
     let html = '<div class="planta-detall-individual">';
     
@@ -1118,14 +1565,14 @@ function generarHTMLDetallsPlanta(planta) {
     html += `<h2>${escapeHtml(planta.nom_comu)}</h2>`;
     html += `<h3 class="nom-cientific">${escapeHtml(planta.nom_cientific)}</h3>`;
     
-    // Galeria d'imatges
+    // Galeria d'imatges (OPTIMITZADA)
     html += '<div class="planta-galeria-completa">';
     
     // Imatge principal
-    if (imatges.principal) {
+    if (imatges.disponibles && imatges.principal) {
         const imatgeUrl = `assets/imatges/${imatges.principal}`;
         html += '<div class="planta-imatge-principal">';
-        html += `<img src="${imatgeUrl}" alt="${escapeHtml(planta.nom_comu)}" data-tipus="${escapeHtml(imatges.principal_tipus)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=planta-sense-imatge>Imatge no disponible</div>'">`;
+        html += `<img src="${imatgeUrl}" alt="${escapeHtml(planta.nom_comu)}" data-tipus="${escapeHtml(imatges.principal_tipus)}" onerror="this.src='assets/imatges/default_planta.jpg'">`;
 
         if (imatges.principal_tipus !== 'general') {
             html += `<span class="planta-tipus-imatge-detall">${imatges.principal_tipus.charAt(0).toUpperCase() + imatges.principal_tipus.slice(1)}</span>`;
@@ -1138,13 +1585,13 @@ function generarHTMLDetallsPlanta(planta) {
     }
     
     // Imatges de detall
-    if (imatges.detalls && imatges.detalls.length > 0) {
+    if (imatges.disponibles && imatges.detalls && imatges.detalls.length > 0) {
         html += '<div class="planta-imatges-detall-galeria">';
         imatges.detalls.forEach((imatge, i) => {
             const imatgeUrl = `assets/imatges/${imatge}`;
             const tipus = imatges.detalls_tipus[i] || 'general';
             html += `<div class="planta-imatge-detall" data-tipus="${escapeHtml(tipus)}">`;
-            html += `<img src="${imatgeUrl}" alt="Detall de ${escapeHtml(planta.nom_comu)}" data-tipus="${escapeHtml(tipus)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=planta-sense-imatge>Imatge no disponible</div>'">`;
+            html += `<img src="${imatgeUrl}" alt="Detall de ${escapeHtml(planta.nom_comu)}" data-tipus="${escapeHtml(tipus)}" onerror="this.src='assets/imatges/default_planta.jpg'">`;
             if (tipus !== 'general') {
                 html += `<span class="planta-tipus-imatge-detall">${tipus.charAt(0).toUpperCase() + tipus.slice(1)}</span>`;
             }
@@ -1190,71 +1637,4 @@ function generarHTMLDetallsPlanta(planta) {
     }
     
     // Usos
-    if (planta.usos && planta.usos.length > 0) {
-        html += '<div class="planta-seccio">';
-        html += '<h4>Usos</h4>';
-        html += `<p>${planta.usos.map(u => escapeHtml(u)).join(', ')}</p>`;
-        html += '</div>';
-    }
-    
-    // Colors
-    if (planta.colors && planta.colors.length > 0) {
-        html += '<div class="planta-seccio">';
-        html += '<h4>Colors</h4>';
-        html += `<p>${planta.colors.map(c => c.charAt(0).toUpperCase() + c.slice(1)).map(c => escapeHtml(c)).join(', ')}</p>`;
-        html += '</div>';
-    }
-    
-    // Hàbitat
-    if (planta.habitat && planta.habitat.length > 0) {
-        html += '<div class="planta-seccio">';
-        html += '<h4>Hàbitat al campus</h4>';
-        html += '<ul>';
-        planta.habitat.forEach(habitat => {
-            const parts = habitat.split('(');
-            let habitatPrincipal = parts[0].trim().replace(/_/g, ' ');
-            let textHabitat = habitatPrincipal.charAt(0).toUpperCase() + habitatPrincipal.slice(1);
-            
-            if (parts.length > 1) {
-                const detalls = parts[1].replace(')', '').trim().replace(/_/g, ' ');
-                textHabitat += ` (${detalls})`;
-            }
-            
-            html += `<li>${escapeHtml(textHabitat)}</li>`;
-        });
-        html += '</ul>';
-        html += '</div>';
-    }
-    
-    // Coordenades
-    if (planta.coordenades && planta.coordenades.length > 0) {
-        html += '<div class="planta-seccio">';
-        html += '<h4>Localització al campus</h4>';
-        html += '<ul>';
-        planta.coordenades.forEach(coord => {
-            const zona = coord.zona || 'Campus UAB';
-            html += `<li><strong>${escapeHtml(zona)}</strong> `;
-            html += `Coordenades: ${coord.lat}, ${coord.lng}</li>`;
-        });
-        html += '</ul>';
-        html += '</div>';
-    }
-    
-    html += '</div>'; // Fi de planta-info-completa
-    html += '</div>'; // Fi de planta-detall-individual
-    
-    return html;
-}
-
-// Al final del fitxer, després de totes les funcions
-jQuery(document).ready(function() {
-    verificarHashURL();
-});
-                                 
-// Cridar verificarHashURL quan es carregui la pàgina
-jQuery(window).on('load', verificarHashURL);                
-
-
-// Assegurar funcions globals per compatibilitat
-window.generarGaleriaHTML = generarGaleriaHTML;
-window.mostrarFiltresActius = mostrarFiltresActius;
+    if (planta.usos && planta
