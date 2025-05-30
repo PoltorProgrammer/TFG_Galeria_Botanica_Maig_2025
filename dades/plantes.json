@@ -7342,14 +7342,14 @@
     {
       "id": "plataner",
       "nom_comu": "Plataner",
-      "nom_cientific": "Platanus × hispanica",
+      "nom_cientific": "Platanus hispanica",
       "familia": "Platanaceae",
       "tipus": "arbre",
       "habitat": [
         "zones_enjardinades (plantat en avingudes i places)",
         "eix_central (arbres ornamentals del campus)"
       ],
-      "descripcio": "També anomenada Platanus × acerifolia, arbre caducifoli de gran port, que pot arribar als 30 metres d'alçada. Té una escorça característica que es desprèn en plaques, deixant zones de colors clars. Les fulles són grans, palmades i lobulades. Produïx fruits esfèrics i espinosos en grups de 2 a 6.",
+      "descripcio": "També anomenada Platanus acerifolia, arbre caducifoli de gran port, que pot arribar als 30 metres d'alçada. Té una escorça característica que es desprèn en plaques, deixant zones de colors clars. Les fulles són grans, palmades i lobulades. Produïx fruits esfèrics i espinosos en grups de 2 a 6.",
       "caracteristiques": {
         "floracio": [
           "primavera"
