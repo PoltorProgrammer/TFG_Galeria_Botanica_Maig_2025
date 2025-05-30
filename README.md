@@ -2,7 +2,7 @@
 
 **Plataforma interactiva per explorar la flora del campus de la Universitat Autònoma de Barcelona**
 
-[![GitHub](https://img.shields.io/badge/GitHub-Page-black)](https://poltorprogrammer.github.io/TFG_Galeria_Botanica_Maig_2025)
+[![GitHub](https://img.shields.io/badge/GitHub-Deployer-black)](https://poltorprogrammer.github.io/TFG_Galeria_Botanica_Maig_2025)
 [![Versió](https://img.shields.io/badge/versió-2.0-green.svg)](https://github.com/PoltorProgrammer/TFG_Galeria_Botanica_Maig_2025)
 [![Llicència MIT](https://img.shields.io/badge/llicència-MIT-blue.svg)](LICENSE.md)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-black.svg)](https://github.com/PoltorProgrammer/TFG_Galeria_Botanica_Maig_2025)
