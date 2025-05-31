@@ -1,4 +1,4 @@
-/* Estils principals per a l'aplicació Galeria Botànica UAB */
+/* Estils principals per a l'aplicació Galeria Botànica UAB - VERSIÓ MILLORADA */
 
 /* Reset bàsic */
 * {
@@ -8,44 +8,64 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', 'Helvetica Neue', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa;
+    color: #2c3e50;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
-    position: relative; /* Necessari per als pseudoelements */
+    position: relative;
 }
 
 /* =============================================================================
-   MARGES DECORATIUS AMB ENFILADISSES
+   MARGES DECORATIUS AMB ENFILADISSES - MILLORATS
    ========================================================================== */
 
-/* Pseudoelements per als marges decoratius */
+/* Pseudoelements per als marges decoratius amb efecte de paral·laxi */
 body::before,
 body::after {
     content: '';
     position: fixed;
     top: 0;
-    width: 200px; /* Ajusta segons l'amplada de les teves imatges */
+    width: 200px;
     height: 100vh;
-    z-index: -1; /* Posar darrere de tot el contingut */
+    z-index: -1;
     background-repeat: repeat-y;
     background-position: top;
     background-size: contain;
-    pointer-events: none; /* Evitar que interfereixin amb la interacció */
+    pointer-events: none;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+body:hover::before,
+body:hover::after {
+    opacity: 0.8;
 }
 
 /* Marge esquerre */
 body::before {
     left: 0;
     background-image: url('/assets/imatges/marge-esquerra.png');
+    animation: floatLeft 6s ease-in-out infinite;
 }
 
 /* Marge dret */
 body::after {
     right: 0;
     background-image: url('/assets/imatges/marge-dreta.png');
+    animation: floatRight 6s ease-in-out infinite reverse;
+}
+
+@keyframes floatLeft {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes floatRight {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
 }
 
 /* Contenidor principal de l'aplicació */
@@ -55,86 +75,196 @@ body::after {
     flex-direction: column;
     overflow: visible;
     position: relative;
-    z-index: 1; /* Assegurar que estigui per damunt dels marges */
+    z-index: 1;
+    backdrop-filter: blur(0.5px);
 }
 
-/* Header */
+/* =============================================================================
+   HEADER MILLORAT AMB EFECTES MODERNS
+   ========================================================================== */
+
 .app-header {
-    background: linear-gradient(135deg, #2c5530 0%, #4a7c59 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #2c5530 100%);
     color: white;
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-left: 220px; /* 200px de la imatge + 20px de separació */
-    margin-right: 220px; /* 200px de la imatge + 20px de separació */
+    padding: 1.5rem 2rem;
+    box-shadow: 
+        0 8px 32px rgba(44, 85, 48, 0.3),
+        0 2px 16px rgba(0, 0, 0, 0.1);
+    margin-left: 220px;
+    margin-right: 220px;
+    border-radius: 0 0 24px 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecte de llum de fons animat */
+.app-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
 .app-header h1 {
-    margin: 0 0 1rem 0;
-    font-size: 2rem;
-    font-weight: 700;
+    margin: 0 0 1.5rem 0;
+    font-size: 2.5rem;
+    font-weight: 800;
     text-align: center;
+    background: linear-gradient(45deg, #ffffff, #e8f5e8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
 }
 
-/* Navegació */
+/* =============================================================================
+   NAVEGACIÓ MILLORADA AMB LOGO
+   ========================================================================== */
+
 .app-nav {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
 }
 
+/* Botó del logo TFG */
+.logo-tfg-btn {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.logo-tfg-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-50%) scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.logo-tfg-btn img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.logo-tfg-btn:hover img {
+    transform: scale(1.1);
+}
+
+/* Botons de navegació millorats */
 .nav-btn {
     background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 25px;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
     cursor: pointer;
     font-size: 1rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.nav-btn:hover::before {
+    left: 100%;
 }
 
 .nav-btn:hover {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .nav-btn.active {
-    background: white;
+    background: linear-gradient(135deg, #ffffff, #e8f5e8);
     color: #2c5530;
-    border-color: white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-color: #ffffff;
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
 }
 
-/* Main content */
-.app-main {
-    flex: 1;
-    overflow: auto; /* CANVIAT: de visible a auto per permetre scroll */
-    position: relative;
-    min-height: 0;
-    margin-left: 220px; /* 200px de la imatge + 20px de separació */
-    margin-right: 220px; /* 200px de la imatge + 20px de separació */
+.nav-btn.active:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+        0 12px 30px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 /* =============================================================================
-   SECCIONS - CONTROL DE PESTANYES
+   MAIN CONTENT MILLORAT
    ========================================================================== */
 
-/* Seccions específiques */
+.app-main {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+    min-height: 0;
+    margin-left: 220px;
+    margin-right: 220px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 24px 24px 0 0;
+    box-shadow: 
+        0 -4px 20px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* =============================================================================
+   SECCIONS - CONTROL DE PESTANYES MILLORAT
+   ========================================================================== */
+
 #galeria-section {
     padding: 0;
-    /* NO afegim display aquí - es controla amb JavaScript */
 }
 
-#mapa-section {
-    /* ELIMINAT: height, min-height, overflow, display, padding */
-    /* Es controla completament amb JavaScript i CSS inline */
-}
-
-/* Quan el mapa està visible, assegurem que tingui l'estructura correcta */
 #mapa-section:not([style*="display: none"]) {
     height: auto;
     min-height: calc(100vh - 140px);
@@ -145,286 +275,520 @@ body::after {
     box-sizing: border-box;
 }
 
-/* Contingut de la secció d'inici */
+/* =============================================================================
+   CONTINGUT DE LA SECCIÓ D'INICI MILLORAT
+   ========================================================================== */
+
 #inici-section {
-    padding: 2rem;
-    max-width: 1000px;
+    padding: 3rem 2rem;
+    max-width: 1200px;
     margin: 0 auto;
     line-height: 1.6;
-    color: #333;
-    background: #fff;
+    color: #2c3e50;
+    background: transparent;
 }
 
 .inici-hero {
     text-align: center;
-    margin-bottom: 3rem;
-    padding: 2rem;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 12px;
-    border: 2px solid #4CAF50;
+    margin-bottom: 4rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, 
+        rgba(102, 126, 234, 0.1) 0%, 
+        rgba(118, 75, 162, 0.1) 50%, 
+        rgba(76, 175, 80, 0.1) 100%);
+    border-radius: 24px;
+    border: 2px solid rgba(76, 175, 80, 0.2);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+}
+
+.inici-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(76, 175, 80, 0.05) 0%, transparent 70%);
+    animation: pulse 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
 }
 
 .inici-hero h1 {
     color: #2c5530;
-    font-size: 2.5rem;
-    margin: 0 0 1rem 0;
-    font-weight: 700;
+    font-size: 3rem;
+    margin: 0 0 1.5rem 0;
+    font-weight: 800;
+    background: linear-gradient(135deg, #2c5530, #4CAF50, #667eea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 2;
 }
 
 .inici-hero .subtitol {
     color: #4a7c59;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
 }
 
 .inici-hero .descripcio {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #555;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+/* Estadístiques millorades */
 .inici-stats {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 2.5rem;
     flex-wrap: wrap;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .stat-item {
     text-align: center;
-    padding: 1rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    min-width: 120px;
+    padding: 2rem 1.5rem;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 20px;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    min-width: 140px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid rgba(76, 175, 80, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4CAF50, #667eea, #764ba2);
+    border-radius: 20px 20px 0 0;
+}
+
+.stat-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border-color: rgba(76, 175, 80, 0.3);
 }
 
 .stat-number {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #4CAF50;
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #4CAF50, #667eea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     display: block;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover .stat-number {
+    transform: scale(1.1);
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #666;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-top: 0.5rem;
 }
 
+/* Grid millorat */
 .inici-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin: 3rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin: 4rem 0;
 }
 
 .inici-card {
-    background: white;
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    border-left: 4px solid #4CAF50;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(76, 175, 80, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.inici-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4CAF50, #667eea, #764ba2);
+    border-radius: 20px 20px 0 0;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.inici-card:hover::before {
+    transform: scaleX(1);
 }
 
 .inici-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    transform: translateY(-8px);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border-color: rgba(76, 175, 80, 0.3);
 }
 
 .inici-card h3 {
     color: #2c5530;
-    margin: 0 0 1rem 0;
-    font-size: 1.4rem;
+    margin: 0 0 1.5rem 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #2c5530, #4CAF50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .inici-card p {
-    margin: 0.5rem 0;
+    margin: 1rem 0;
     color: #555;
+    line-height: 1.7;
 }
 
+/* Taula millorada */
 .inici-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 1.5rem 0;
-    background: white;
-    border-radius: 8px;
+    margin: 2rem 0;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .inici-table th {
-    background: #4CAF50;
+    background: linear-gradient(135deg, #4CAF50, #667eea);
     color: white;
-    padding: 1rem;
+    padding: 1.5rem;
     text-align: left;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .inici-table td {
-    padding: 1rem;
-    border-bottom: 1px solid #eee;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    vertical-align: top;
+    transition: background-color 0.3s ease;
 }
 
 .inici-table tr:last-child td {
     border-bottom: none;
 }
 
+.inici-table tr:hover td {
+    background-color: rgba(76, 175, 80, 0.05);
+}
+
+/* Zones clau millorades */
 .zones-clau {
-    background: #f8f9fa;
-    padding: 2rem;
-    border-radius: 12px;
-    margin: 2rem 0;
+    background: linear-gradient(135deg, 
+        rgba(248, 249, 250, 0.9) 0%, 
+        rgba(233, 236, 239, 0.9) 100%);
+    padding: 3rem;
+    border-radius: 20px;
+    margin: 3rem 0;
+    border: 2px solid rgba(76, 175, 80, 0.1);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
 }
 
 .zones-clau h3 {
     color: #2c5530;
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 2rem 0;
     text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #2c5530, #4CAF50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .zona-item {
-    margin: 1rem 0;
-    padding: 1rem;
-    background: white;
-    border-radius: 8px;
-    border-left: 4px solid #FF9800;
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 16px;
+    border-left: 5px solid #FF9800;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.zona-item:hover {
+    transform: translateX(8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    border-left-width: 8px;
 }
 
 .zona-nom {
-    font-weight: bold;
+    font-weight: 700;
     color: #2c5530;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
 }
 
+/* Botons CTA millorats */
+.cta-buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 3rem 0;
+}
+
+.cta-btn {
+    padding: 1.2rem 3rem;
+    background: linear-gradient(135deg, #4CAF50, #667eea);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 
+        0 10px 30px rgba(76, 175, 80, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.cta-btn:hover::before {
+    left: 100%;
+}
+
+.cta-btn:hover {
+    background: linear-gradient(135deg, #388E3C, #5a67d8);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+        0 20px 40px rgba(76, 175, 80, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    color: white;
+}
+
+.cta-btn.secondary {
+    background: linear-gradient(135deg, #FF9800, #f093fb);
+}
+
+.cta-btn.secondary:hover {
+    background: linear-gradient(135deg, #F57C00, #f093fb);
+    box-shadow: 
+        0 20px 40px rgba(255, 152, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Seccions especials millorades */
 .caracteristiques-tecniques {
-    background: #e8f5e8;
-    padding: 2rem;
-    border-radius: 12px;
-    margin: 2rem 0;
+    background: linear-gradient(135deg, 
+        rgba(232, 245, 232, 0.9) 0%, 
+        rgba(200, 230, 201, 0.9) 100%);
+    padding: 3rem;
+    border-radius: 20px;
+    margin: 3rem 0;
+    border: 2px solid rgba(76, 175, 80, 0.2);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.caracteristiques-tecniques h3 {
+    color: #2c5530;
+    margin: 0 0 1.5rem 0;
+    font-size: 1.6rem;
+    font-weight: 700;
 }
 
 .col-laboracio {
-    background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+    background: linear-gradient(135deg, #4CAF50 0%, #667eea 50%, #388E3C 100%);
     color: white;
-    padding: 2rem;
-    border-radius: 12px;
-    margin: 2rem 0;
+    padding: 3rem;
+    border-radius: 20px;
+    margin: 3rem 0;
     text-align: center;
+    box-shadow: 
+        0 15px 35px rgba(76, 175, 80, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.col-laboracio::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .col-laboracio h3 {
     color: white;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: 800;
+    position: relative;
+    z-index: 2;
 }
 
 .col-laboracio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-top: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .col-laboracio-item {
-    background: rgba(255,255,255,0.1);
-    padding: 1rem;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 1.5rem;
+    border-radius: 16px;
     text-align: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.col-laboracio-item:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .credits {
-    background: #2c5530;
+    background: linear-gradient(135deg, #2c5530 0%, #1a1a2e 100%);
     color: white;
-    padding: 2rem;
-    border-radius: 12px;
-    margin: 2rem 0;
+    padding: 3rem;
+    border-radius: 20px;
+    margin: 3rem 0;
     text-align: center;
+    box-shadow: 
+        0 15px 35px rgba(44, 85, 48, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .credits h3 {
     color: #4CAF50;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 700;
 }
 
-.cta-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
+/* Estat de càrrega millorat */
+.loading-stats {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    border: 2px solid rgba(255, 193, 7, 0.3);
+    border-radius: 16px;
+    padding: 1.5rem;
     margin: 2rem 0;
-}
-
-.cta-btn {
-    padding: 1rem 2rem;
-    background: #4CAF50;
-    color: white;
-    text-decoration: none;
-    border-radius: 25px;
+    text-align: center;
     font-weight: 600;
     transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.cta-btn:hover {
-    background: #388E3C;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-}
-
-.cta-btn.secondary {
-    background: #FF9800;
-}
-
-.cta-btn.secondary:hover {
-    background: #F57C00;
-}
-
-/* Estils per les estadístiques d'imatges */
-.loading-stats {
-    background: #fff3cd;
-    border: 1px solid #ffeaa7;
-    border-radius: 8px;
-    padding: 1rem;
-    margin: 1rem 0;
-    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .loading-stats.success {
-    background: #d4edda;
-    border-color: #c3e6cb;
+    background: linear-gradient(135deg, #d4edda, #c8e6c9);
+    border-color: rgba(76, 175, 80, 0.3);
     color: #155724;
 }
 
 .loading-stats.error {
-    background: #f8d7da;
-    border-color: #f5c6cb;
+    background: linear-gradient(135deg, #f8d7da, #ffcdd2);
+    border-color: rgba(244, 67, 54, 0.3);
     color: #721c24;
 }
 
 /* =============================================================================
-   MODALS I LIGHTBOX GLOBALS
+   MODALS I LIGHTBOX GLOBALS MILLORATS
    ========================================================================== */
 
-/* Modal global */
 .planta-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
 }
 
 .planta-modal.actiu {
@@ -432,111 +796,64 @@ body::after {
 }
 
 .planta-modal-contingut {
-    background: white;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
     width: 90%;
-    max-width: 800px;
+    max-width: 900px;
     max-height: 90%;
-    border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border-radius: 24px;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
     position: relative;
     overflow: hidden;
-    animation: modalSlideIn 0.3s ease;
+    animation: modalSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @keyframes modalSlideIn {
     from {
-        transform: translateY(-50px);
+        transform: translateY(-100px) scale(0.8);
         opacity: 0;
     }
     to {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
     }
 }
 
 .planta-modal-tancar {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 30px;
+    top: 20px;
+    right: 25px;
+    font-size: 32px;
     font-weight: bold;
     color: #666;
     cursor: pointer;
     z-index: 10001;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
     line-height: 1;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .planta-modal-tancar:hover {
     color: #333;
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
 }
 
 .planta-modal-cos {
-    padding: 2rem;
-    max-height: calc(90vh - 4rem);
+    padding: 3rem;
+    max-height: calc(90vh - 6rem);
     overflow-y: auto;
 }
 
-/* Lightbox global */
-.planta-lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.planta-lightbox.actiu {
-    opacity: 1;
-}
-
-.planta-lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.planta-lightbox-tancar {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: white;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10001;
-    transition: color 0.3s ease;
-}
-
-.planta-lightbox-tancar:hover {
-    color: #ccc;
-}
-
-.planta-lightbox-tipus {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: capitalize;
-}
-
 /* =============================================================================
-   LOADING OVERLAY
+   LOADING OVERLAY MILLORAT
    ========================================================================== */
 
 .loading-overlay {
@@ -545,13 +862,15 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(248, 249, 250, 0.95);
+    background: linear-gradient(135deg, 
+        rgba(248, 249, 250, 0.95) 0%, 
+        rgba(233, 236, 239, 0.95) 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(20px);
 }
 
 .loading-overlay.hidden {
@@ -559,13 +878,13 @@ body::after {
 }
 
 .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid #e9ecef;
-    border-top: 4px solid #2c5530;
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(76, 175, 80, 0.2);
+    border-top: 4px solid #4CAF50;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 @keyframes spin {
@@ -575,45 +894,23 @@ body::after {
 
 .loading-overlay p {
     color: #2c5530;
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-size: 1.2rem;
+    font-weight: 600;
     margin: 0;
 }
 
 /* =============================================================================
-   SCROLL PERSONALITZAT
-   ========================================================================== */
-
-.planta-modal-cos::-webkit-scrollbar {
-    width: 8px;
-}
-
-.planta-modal-cos::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-}
-
-.planta-modal-cos::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 4px;
-}
-
-.planta-modal-cos::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
-}
-
-/* =============================================================================
-   ANIMACIONS
+   ANIMACIONS GLOBALS MILLORADES
    ========================================================================== */
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideUp {
     from {
-        transform: translateY(20px);
+        transform: translateY(30px);
         opacity: 0;
     }
     to {
@@ -623,18 +920,17 @@ body::after {
 }
 
 .fade-in {
-    animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .slide-up {
-    animation: slideUp 0.3s ease;
+    animation: slideUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* =============================================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN MILLORAT
    ========================================================================== */
 
-/* RESPONSIVE: Amagar els marges en pantalles petites */
 @media (max-width: 1400px) {
     body::before,
     body::after {
@@ -648,7 +944,6 @@ body::after {
     }
 }
 
-/* Per pantalles mitjanes, reduir l'amplada dels marges */
 @media (min-width: 1401px) and (max-width: 1600px) {
     body::before,
     body::after {
@@ -657,12 +952,11 @@ body::after {
     
     .app-main,
     .app-header {
-        margin-left: 170px; /* 150px + 20px */
+        margin-left: 170px;
         margin-right: 170px;
     }
 }
 
-/* Per pantalles grans, amplada completa */
 @media (min-width: 1601px) {
     body::before,
     body::after {
@@ -671,107 +965,214 @@ body::after {
     
     .app-main,
     .app-header {
-        margin-left: 220px; /* 200px + 20px */
+        margin-left: 220px;
         margin-right: 220px;
     }
 }
 
 @media (max-width: 768px) {
     .app-header {
-        padding: 1rem;
+        padding: 1.5rem 1rem;
+        border-radius: 0 0 16px 16px;
     }
     
     .app-header h1 {
-        font-size: 1.5rem;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .app-nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .logo-tfg-btn {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        margin-bottom: 1rem;
     }
     
     .nav-btn {
-        padding: 0.5rem 1rem;
+        padding: 0.7rem 1.5rem;
         font-size: 0.9rem;
+        width: 100%;
+        max-width: 250px;
     }
     
-    /* Ajustos per al mapa quan és visible */
     #mapa-section:not([style*="display: none"]) {
-        min-height: calc(100vh - 180px);
+        min-height: calc(100vh - 200px);
         padding: 15px;
     }
     
-    /* Modal responsive */
     .planta-modal-contingut {
         width: 95%;
         max-height: 95%;
         margin: 2.5vh auto;
+        border-radius: 16px;
     }
     
     .planta-modal-cos {
-        padding: 1rem;
-        max-height: calc(95vh - 2rem);
+        padding: 2rem 1.5rem;
+        max-height: calc(95vh - 3rem);
     }
     
-    /* Lightbox responsive */
-    .planta-lightbox img {
-        max-width: 95%;
-        max-height: 85%;
-    }
-    
-    .planta-lightbox-tancar {
-        top: 10px;
-        right: 15px;
-        font-size: 30px;
-    }
-    
-    /* Responsive - Mateixos marges */
     #galeria-section,
     #mapa-section:not([style*="display: none"]) {
         padding: 0 15px;
     }
     
-    /* Inici responsive */
     #inici-section {
-        padding: 1rem;
+        padding: 2rem 1rem;
+    }
+    
+    .inici-hero {
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
     }
     
     .inici-hero h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     
     .inici-stats {
-        gap: 1rem;
+        gap: 1.5rem;
+    }
+    
+    .stat-item {
+        padding: 1.5rem 1rem;
+        min-width: 120px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
     }
     
     .inici-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 2rem;
+    }
+    
+    .inici-card {
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
     }
     
     .cta-buttons {
         flex-direction: column;
         align-items: center;
+        gap: 1.5rem;
+    }
+    
+    .cta-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+        padding: 1rem 2rem;
     }
     
     .col-laboracio-grid {
         grid-template-columns: 1fr;
     }
+    
+    .zones-clau {
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+    }
+    
+    .zona-item {
+        padding: 1.2rem;
+        border-radius: 12px;
+    }
+    
+    .inici-table th,
+    .inici-table td {
+        padding: 1rem 0.8rem;
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 480px) {
-    .app-nav {
-        flex-direction: column;
-        align-items: center;
+    #inici-section {
+        padding: 1rem 0.5rem;
     }
     
-    .nav-btn {
-        width: 100%;
-        max-width: 200px;
+    .inici-hero {
+        padding: 1.5rem 1rem;
+        border-radius: 12px;
     }
     
-    /* Ajustos per al mapa quan és visible */
-    #mapa-section:not([style*="display: none"]) {
-        padding: 10px;
+    .inici-hero h1 {
+        font-size: 1.8rem;
     }
     
-    #galeria-section,
-    #mapa-section:not([style*="display: none"]) {
-        padding: 0 10px;
+    .stat-number {
+        font-size: 1.8rem;
     }
+    
+    .stat-label {
+        font-size: 0.85rem;
+    }
+    
+    .inici-card {
+        padding: 1.5rem 1rem;
+        border-radius: 12px;
+    }
+    
+    .inici-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .col-laboracio,
+    .credits,
+    .caracteristiques-tecniques {
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+    }
+    
+    .zones-clau {
+        padding: 1.5rem 1rem;
+        border-radius: 12px;
+    }
+}
+
+/* =============================================================================
+   SCROLL PERSONALITZAT MILLORAT
+   ========================================================================== */
+
+.planta-modal-cos::-webkit-scrollbar {
+    width: 8px;
+}
+
+.planta-modal-cos::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 0.5);
+    border-radius: 4px;
+}
+
+.planta-modal-cos::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #4CAF50, #667eea);
+    border-radius: 4px;
+}
+
+.planta-modal-cos::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #388E3C, #5a67d8);
+}
+
+/* Scroll principal de l'aplicació */
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(248, 249, 250, 0.8);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #4CAF50, #667eea);
+    border-radius: 6px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #388E3C, #5a67d8);
 }
