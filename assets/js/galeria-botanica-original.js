@@ -1,6 +1,6 @@
 /**
  * Galeria Botànica UAB - Adaptat per funcionar sense WordPress
- * Basat en galeria-botanica.js original
+ * Basat en galeria-botanica.js original - FILTRES CORREGITS
  */
 
 // Assegurar-se que les funcions són globals
@@ -468,7 +468,7 @@ function construirInfoCompletaCerca(planta) {
 }
 
 /* ========================================================================
-   EVENTS I FUNCIONALITAT DE LA GALERIA BOTÀNICA
+   EVENTS I FUNCIONALITAT DE LA GALERIA BOTÀNICA - FILTRES CORREGITS
    ======================================================================== */
 
 // Variables globals de la galeria
@@ -553,7 +553,7 @@ function configurarEventListenersGaleria() {
     });
 }
 
-// Gestionar clic en botons de filtre
+// FUNCIÓ CORREGIDA: Gestionar clic en botons de filtre
 function gestionarClicFiltre($boto) {
     try {
         const grupFiltre = $boto.data('group');
@@ -589,23 +589,30 @@ function gestionarClicFiltre($boto) {
             return;
         }
         
-        // Per a filtres multi-selecció
-        if ($boto.hasClass('actiu') && valorFiltre !== 'tots') {
-            $boto.removeClass('actiu');
-            
-            if (jQuery(`.filtre-boto[data-group="${grupFiltre}"].actiu`).length === 0) {
-                jQuery(`.filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
-                filtresActius[grupFiltre] = 'tots';
-            }
+        // Per a filtres multi-selecció (tipus, color, habitat, floracio, usos)
+        if (valorFiltre === 'tots') {
+            // Si cliquem "Tots", desactivar tots els altres i activar només "Tots"
+            jQuery(`.filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
+            $boto.addClass('actiu');
+            filtresActius[grupFiltre] = 'tots';
         } else {
-            if (valorFiltre === 'tots') {
-                jQuery(`.filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
-                $boto.addClass('actiu');
-                filtresActius[grupFiltre] = 'tots';
+            // Si cliquem una opció específica
+            if ($boto.hasClass('actiu')) {
+                // Si ja estava activa, la desactivem
+                $boto.removeClass('actiu');
+                
+                // Si no queda cap opció activa, activar "Tots"
+                const botonsActius = jQuery(`.filtre-boto[data-group="${grupFiltre}"].actiu:not([data-filtre="tots"])`);
+                if (botonsActius.length === 0) {
+                    jQuery(`.filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
+                    filtresActius[grupFiltre] = 'tots';
+                }
             } else {
+                // Si no estava activa, l'activem
                 jQuery(`.filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).removeClass('actiu');
                 $boto.addClass('actiu');
                 
+                // CORRECCIÓ: Verificar si hem seleccionat totes les opcions
                 setTimeout(function() {
                     if (verificarTotesOpcionsSeleccionades(grupFiltre)) {
                         activarBotoTots(grupFiltre);
@@ -622,15 +629,18 @@ function gestionarClicFiltre($boto) {
     }
 }
 
-// Verificar si s'han seleccionat totes les opcions d'un filtre
+// FUNCIÓ CORREGIDA: Verificar si s'han seleccionat totes les opcions d'un filtre
 function verificarTotesOpcionsSeleccionades(grupFiltre) {
     try {
+        // No aplica per filtres excloents
         if (grupFiltre === 'imatge' || grupFiltre === 'fullatge') {
             return false;
         }
         
         const botonsGrup = jQuery(`.filtre-boto[data-group="${grupFiltre}"]:not([data-filtre="tots"])`);
         const botonsActius = jQuery(`.filtre-boto[data-group="${grupFiltre}"].actiu:not([data-filtre="tots"])`);
+        
+        console.log(`🔍 Verificant ${grupFiltre}: ${botonsActius.length}/${botonsGrup.length} opcions seleccionades`);
         
         return botonsGrup.length > 0 && botonsGrup.length === botonsActius.length;
     } catch (error) {
@@ -639,9 +649,11 @@ function verificarTotesOpcionsSeleccionades(grupFiltre) {
     }
 }
 
-// Activar el botó "Tots" d'un grup específic
+// FUNCIÓ CORREGIDA: Activar el botó "Tots" d'un grup específic
 function activarBotoTots(grupFiltre) {
     try {
+        console.log(`✅ Activant "Tots" per ${grupFiltre} (totes les opcions seleccionades)`);
+        
         jQuery(`.filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
         jQuery(`.filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
         filtresActius[grupFiltre] = 'tots';
@@ -650,15 +662,17 @@ function activarBotoTots(grupFiltre) {
     }
 }
 
-// Actualitzar l'objecte de filtres actius
+// FUNCIÓ CORREGIDA: Actualitzar l'objecte de filtres actius
 function actualitzarFiltresActius() {
     try {
         ['tipus', 'imatge', 'color', 'habitat', 'floracio', 'fullatge', 'usos'].forEach(grup => {
             if (grup === 'imatge' || grup === 'fullatge') {
+                // Filtres excloents
                 const filtreActiu = jQuery(`.filtre-boto[data-group="${grup}"].actiu`);
                 const valorFiltre = filtreActiu.data('filtre');
                 filtresActius[grup] = valorFiltre || 'tots';
             } else {
+                // Filtres multi-selecció
                 if (jQuery(`.filtre-boto[data-group="${grup}"][data-filtre="tots"]`).hasClass('actiu')) {
                     filtresActius[grup] = 'tots';
                 } else {
@@ -687,7 +701,7 @@ function actualitzarFiltresActius() {
     }
 }
 
-// Mostrar filtres actius
+// FUNCIÓ CORREGIDA: Mostrar filtres actius
 function mostrarFiltresActius() {
     try {
         const contFiltre = jQuery('.filtres-actius');
@@ -712,7 +726,8 @@ function mostrarFiltresActius() {
                 }
                 
                 if (grup === 'imatge' || grup === 'fullatge') {
-                    if (valors) {
+                    // Filtres excloents - només mostrar si no és "tots"
+                    if (valors && valors !== 'tots') {
                         const valorStr = String(valors);
                         const valorText = valorStr.charAt(0).toUpperCase() + valorStr.slice(1).replace(/_/g, ' ');
                         const etiqueta = jQuery(`<span class="filtre-actiu" data-group="${grup}" data-filtre="${valorStr}">
@@ -721,6 +736,7 @@ function mostrarFiltresActius() {
                         contFiltre.append(etiqueta);
                     }
                 } else if (Array.isArray(valors)) {
+                    // Filtres multi-selecció - només mostrar si no és "tots"
                     valors.forEach(valor => {
                         if (valor) {
                             const valorStr = String(valor);
@@ -742,13 +758,15 @@ function mostrarFiltresActius() {
         } else {
             jQuery('.netejar-filtres').hide();
         }
+        
+        console.log("🏷️ Filtres actius mostrats:", hiHaFiltresActius ? "Sí" : "No");
     } catch (error) {
         console.error("❌ Error en mostrarFiltresActius:", error);
         jQuery('.netejar-filtres').hide();
     }
-}                      
+}
 
-// Eliminar un filtre individual
+// FUNCIÓ CORREGIDA: Eliminar un filtre individual
 function eliminarFiltre($element) {
     try {
         const $etiqueta = $element.parent();
@@ -760,12 +778,18 @@ function eliminarFiltre($element) {
             return;
         }
         
+        console.log(`❌ Eliminant filtre: ${grup}=${valor}`);
+        
+        // Desactivar el botó corresponent
         jQuery(`.filtre-boto[data-group="${grup}"][data-filtre="${valor}"]`).removeClass('actiu');
         
+        // Si no queda cap botó actiu en aquest grup, activar "Tots"
         if (jQuery(`.filtre-boto[data-group="${grup}"].actiu`).length === 0) {
             jQuery(`.filtre-boto[data-group="${grup}"][data-filtre="tots"]`).addClass('actiu');
+            filtresActius[grup] = 'tots';
         }
         
+        // Verificar si totes les opcions segueixen seleccionades després d'eliminar una
         setTimeout(function() {
             if (verificarTotesOpcionsSeleccionades(grup)) {
                 activarBotoTots(grup);
@@ -780,7 +804,7 @@ function eliminarFiltre($element) {
     }
 }
 
-// Netejar tots els filtres
+// FUNCIÓ CORREGIDA: Netejar tots els filtres
 function netejarTotsFiltres() {
     try {
         console.log("🧹 Netejant tots els filtres");
@@ -829,18 +853,20 @@ function aplicarFiltres() {
                     }
                 }
                 
-                // Filtre de colors (EXCLOENT)
+                // Filtre de colors
                 if (passaFiltres && filtresActius.color !== 'tots') {
                     const colorsPlanta = $planta.data('colors');
                     if (colorsPlanta) {
                         const arrColors = String(colorsPlanta).split(' ');
                         if (Array.isArray(filtresActius.color)) {
+                            let passaColor = false;
                             for (const colorFiltre of filtresActius.color) {
-                                if (!arrColors.includes(colorFiltre)) {
-                                    passaFiltres = false;
+                                if (arrColors.includes(colorFiltre)) {
+                                    passaColor = true;
                                     break;
                                 }
                             }
+                            passaFiltres = passaFiltres && passaColor;
                         } else {
                             passaFiltres = passaFiltres && arrColors.includes(filtresActius.color);
                         }
@@ -1253,7 +1279,7 @@ jQuery(document).ready(function() {
 // Cridar verificarHashURL quan es carregui la pàgina
 jQuery(window).on('load', verificarHashURL);                
 
-
 // Assegurar funcions globals per compatibilitat
 window.generarGaleriaHTML = generarGaleriaHTML;
 window.mostrarFiltresActius = mostrarFiltresActius;
+window.obrirDetallsPlanta = obrirDetallsPlanta;
