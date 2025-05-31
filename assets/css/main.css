@@ -151,8 +151,8 @@ body::after {
     background: rgba(255, 255, 255, 0.15);
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -171,10 +171,12 @@ body::after {
 }
 
 .logo-tfg-btn img {
-    width: 35px;
-    height: 35px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     transition: transform 0.3s ease;
+    object-fit: cover;
+    object-position: center;
 }
 
 .logo-tfg-btn:hover img {
@@ -992,6 +994,13 @@ body::after {
         top: auto;
         transform: none;
         margin-bottom: 1rem;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .logo-tfg-btn img {
+        width: 25px;
+        height: 25px;
     }
     
     .nav-btn {
@@ -1096,6 +1105,17 @@ body::after {
 @media (max-width: 480px) {
     #inici-section {
         padding: 1rem 0.5rem;
+    }
+    
+    .logo-tfg-btn {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 0.8rem;
+    }
+    
+    .logo-tfg-btn img {
+        width: 22px;
+        height: 22px;
     }
     
     .inici-hero {
