@@ -1,6 +1,6 @@
 /**
- * Mapa Botànica UAB - Adaptat per funcionar sense WordPress
- * Basat en mapa-botanica.js original - FILTRES CORREGITS
+ * Mapa Botànica UAB - VERSIÓ CORREGIDA AMB SELECTORS ESPECÍFICS
+ * Soluciona els problemes de filtres compartits entre galeria i mapa
  */
 
 // Variables globals del mapa
@@ -37,7 +37,7 @@ async function generarMapaHTML() {
 async function generarHTMLFiltresMapa() {
     const plantes = mb_vars.dades_plantes || [];
     
-    let html = '<div class="mapa-filtres">';
+    let html = '<div class="mapa-filtres mapa-filtres-contenidor">';
     html += '<div class="filtres-grup">';
     
     // 1. PRIMER: Generar filtres
@@ -50,15 +50,15 @@ async function generarHTMLFiltresMapa() {
     html += '</div>'; // Fi filtres-grup
     
     // 2. SEGON: Filtres actius
-    html += `<div class="filtres-actius-contenidor">
+    html += `<div class="filtres-actius-contenidor mapa-filtres-actius-contenidor">
         <span class="etiqueta-filtres-actius">Filtres actius:</span>
-        <div class="filtres-actius"></div>
-        <button class="netejar-filtres" style="display:none;">Netejar tots els filtres</button>
+        <div class="filtres-actius mapa-filtres-actius"></div>
+        <button class="netejar-filtres mapa-netejar-filtres" style="display:none;">Netejar tots els filtres</button>
     </div>`;
     
     // 3. TERCER: Cercador (AL FINAL, com a la galeria)
     html += `<div class="cerca-contenidor">
-        <input type="text" id="mapa-cerca" placeholder="Cercar per paraules clau..." class="cerca-input" />
+        <input type="text" id="mapa-cerca-plantes" placeholder="Cercar per paraules clau..." class="cerca-input mapa-cerca-input" />
     </div>`;
     
     html += '</div>'; // Fi mapa-filtres
@@ -73,11 +73,11 @@ function generarFiltresTipusMapa(plantes) {
     let html = '<div class="grup-filtre tipus-planta-filtre">';
     html += '<span class="etiqueta-filtre">Tipus:</span>';
     html += '<div class="botons-filtre">';
-    html += '<button class="filtre-boto actiu" data-group="tipus" data-filtre="tots">Totes les plantes</button>';
+    html += '<button class="filtre-boto mapa-filtre-boto actiu" data-group="tipus" data-filtre="tots">Totes les plantes</button>';
     
     tipus.forEach(tipus => {
         const nomTipus = tipus.charAt(0).toUpperCase() + tipus.slice(1);
-        html += `<button class="filtre-boto" data-group="tipus" data-filtre="${tipus}">${nomTipus}</button>`;
+        html += `<button class="filtre-boto mapa-filtre-boto" data-group="tipus" data-filtre="${tipus}">${nomTipus}</button>`;
     });
     
     html += '</div></div>';
@@ -105,12 +105,12 @@ function generarFiltresHabitatMapa(plantes) {
     let html = '<div class="grup-filtre habitat-filtre">';
     html += '<span class="etiqueta-filtre">Hàbitat:</span>';
     html += '<div class="botons-filtre">';
-    html += '<button class="filtre-boto actiu" data-group="habitat" data-filtre="tots">Tots</button>';
+    html += '<button class="filtre-boto mapa-filtre-boto actiu" data-group="habitat" data-filtre="tots">Tots</button>';
     
     [...habitats.entries()].sort((a, b) => a[1].localeCompare(b[1])).forEach(([habitatNorm, habitatNom]) => {
         const nomMostrar = habitatNom.replace(/_/g, ' ');
         const nomCapitalitzat = nomMostrar.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-        html += `<button class="filtre-boto" data-group="habitat" data-filtre="${habitatNorm}">${nomCapitalitzat}</button>`;
+        html += `<button class="filtre-boto mapa-filtre-boto" data-group="habitat" data-filtre="${habitatNorm}">${nomCapitalitzat}</button>`;
     });
     
     html += '</div></div>';
@@ -135,11 +135,11 @@ function generarFiltresFloracioMapa(plantes) {
     let html = '<div class="grup-filtre floracio-filtre">';
     html += '<span class="etiqueta-filtre">Floració:</span>';
     html += '<div class="botons-filtre">';
-    html += '<button class="filtre-boto actiu" data-group="floracio" data-filtre="tots">Totes</button>';
+    html += '<button class="filtre-boto mapa-filtre-boto actiu" data-group="floracio" data-filtre="tots">Totes</button>';
     
     [...floracions].sort().forEach(floracio => {
         const nomFloracio = floracio.charAt(0).toUpperCase() + floracio.slice(1);
-        html += `<button class="filtre-boto" data-group="floracio" data-filtre="${floracio}">${nomFloracio}</button>`;
+        html += `<button class="filtre-boto mapa-filtre-boto" data-group="floracio" data-filtre="${floracio}">${nomFloracio}</button>`;
     });
     
     html += '</div></div>';
@@ -167,10 +167,10 @@ function generarFiltresUsosMapa(plantes) {
     let html = '<div class="grup-filtre usos-filtre">';
     html += '<span class="etiqueta-filtre">Usos:</span>';
     html += '<div class="botons-filtre">';
-    html += '<button class="filtre-boto actiu" data-group="usos" data-filtre="tots">Tots</button>';
+    html += '<button class="filtre-boto mapa-filtre-boto actiu" data-group="usos" data-filtre="tots">Tots</button>';
     
     [...usos.entries()].sort((a, b) => a[1].localeCompare(b[1])).forEach(([usNorm, usNom]) => {
-        html += `<button class="filtre-boto" data-group="usos" data-filtre="${usNorm}">${usNom.charAt(0).toUpperCase() + usNom.slice(1)}</button>`;
+        html += `<button class="filtre-boto mapa-filtre-boto" data-group="usos" data-filtre="${usNorm}">${usNom.charAt(0).toUpperCase() + usNom.slice(1)}</button>`;
     });
     
     html += '</div></div>';
@@ -192,11 +192,11 @@ function generarFiltresFullatgeMapa(plantes) {
     let html = '<div class="grup-filtre fullatge-filtre">';
     html += '<span class="etiqueta-filtre">Fullatge:</span>';
     html += '<div class="botons-filtre">';
-    html += '<button class="filtre-boto actiu" data-group="fullatge" data-filtre="tots">Tots</button>';
+    html += '<button class="filtre-boto mapa-filtre-boto actiu" data-group="fullatge" data-filtre="tots">Tots</button>';
     
     [...fullatges].sort().forEach(fullatge => {
         const nomFullatge = fullatge.charAt(0).toUpperCase() + fullatge.slice(1);
-        html += `<button class="filtre-boto" data-group="fullatge" data-filtre="${fullatge}">${nomFullatge}</button>`;
+        html += `<button class="filtre-boto mapa-filtre-boto" data-group="fullatge" data-filtre="${fullatge}">${nomFullatge}</button>`;
     });
     
     html += '</div></div>';
@@ -504,23 +504,23 @@ function actualitzarControlCapes(habitats) {
 
 // Configurar event listeners del mapa
 function configurarEventListenersMapa() {
-    // Events per als botons de filtre (delegació d'esdeveniments)
-    jQuery(document).on('click', '.mapa-botanica-contenidor .filtre-boto', function() {
+    // Events ESPECÍFICS per als botons de filtre del MAPA
+    jQuery(document).on('click', '.mapa-filtres-contenidor .mapa-filtre-boto', function() {
         gestionarClicFiltreMapa(jQuery(this));
     });
     
-    // Event per netejar filtres
-    jQuery(document).on('click', '.mapa-botanica-contenidor .netejar-filtres', function() {
+    // Event per netejar filtres del MAPA
+    jQuery(document).on('click', '.mapa-netejar-filtres', function() {
         netejarTotsFiltresMapa();
     });
     
-    // Event per eliminar filtres individuals
-    jQuery(document).on('click', '.mapa-botanica-contenidor .eliminar-filtre', function() {
+    // Event per eliminar filtres individuals del MAPA
+    jQuery(document).on('click', '.mapa-filtres-actius .eliminar-filtre', function() {
         eliminarFiltreMapa(jQuery(this));
     });
     
-    // Event per a la cerca
-    jQuery(document).on('input', '#mapa-cerca', function() {
+    // Event per a la cerca del MAPA
+    jQuery(document).on('input', '#mapa-cerca-plantes', function() {
         console.log("🔍 Aplicant filtre de text al mapa:", jQuery(this).val());
         aplicarFiltresMapa();
     });
@@ -542,7 +542,7 @@ function configurarEventListenersMapa() {
     });
 }
 
-// Variables dels filtres del mapa - CORREGIDES
+// Variables dels filtres del mapa - CORREGIDES I SEPARADES
 const filtresActiusMapa = {
     tipus: 'tots',
     habitat: 'tots', 
@@ -551,22 +551,22 @@ const filtresActiusMapa = {
     fullatge: 'tots'
 };
 
-// FUNCIÓ CORREGIDA: Gestionar clic en botons de filtre del mapa
+// FUNCIÓ CORREGIDA: Gestionar clic en botons de filtre del MAPA
 function gestionarClicFiltreMapa($boto) {
     try {
         const grupFiltre = $boto.data('group');
         const valorFiltre = $boto.data('filtre');
         
         if (!grupFiltre || !valorFiltre) {
-            console.warn("⚠️ Botó sense atributs necessaris:", $boto[0]);
+            console.warn("⚠️ Botó mapa sense atributs necessaris:", $boto[0]);
             return;
         }
         
-        console.log(`🔘 Filtre mapa clicat: ${grupFiltre}=${valorFiltre}, actiu=${$boto.hasClass('actiu')}`);
+        console.log(`🔘 Filtre MAPA clicat: ${grupFiltre}=${valorFiltre}, actiu=${$boto.hasClass('actiu')}`);
         
         // Comportament especial per al filtre de fullatge (excloent)
         if (grupFiltre === 'fullatge') {
-            jQuery('.mapa-botanica-contenidor .filtre-boto[data-group="fullatge"]').removeClass('actiu');
+            jQuery('.mapa-filtres-contenidor .mapa-filtre-boto[data-group="fullatge"]').removeClass('actiu');
             $boto.addClass('actiu');
             filtresActiusMapa.fullatge = valorFiltre;
             
@@ -578,7 +578,7 @@ function gestionarClicFiltreMapa($boto) {
         // Per a filtres multi-selecció (tipus, habitat, floracio, usos)
         if (valorFiltre === 'tots') {
             // Si cliquem "Tots", desactivar tots els altres i activar només "Tots"
-            jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
+            jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
             $boto.addClass('actiu');
             filtresActiusMapa[grupFiltre] = 'tots';
         } else {
@@ -588,22 +588,22 @@ function gestionarClicFiltreMapa($boto) {
                 $boto.removeClass('actiu');
                 
                 // Si no queda cap opció activa, activar "Tots"
-                const botonsActius = jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"].actiu:not([data-filtre="tots"])`);
+                const botonsActius = jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grupFiltre}"].actiu:not([data-filtre="tots"])`);
                 if (botonsActius.length === 0) {
-                    jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
+                    jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
                     filtresActiusMapa[grupFiltre] = 'tots';
                 }
             } else {
                 // Si no estava activa, l'activem
-                jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).removeClass('actiu');
+                jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).removeClass('actiu');
                 $boto.addClass('actiu');
                 
-                // CORRECCIÓ: Verificar si hem seleccionat totes les opcions
+                // CORRECCIÓ: Verificar si hem seleccionat totes les opcions DESPRÉS d'un petit delay
                 setTimeout(function() {
                     if (verificarTotesOpcionsSeleccionadesMapa(grupFiltre)) {
                         activarBotoTotsMapa(grupFiltre);
                     }
-                }, 10);
+                }, 50); // Augmentat el delay per assegurar que l'estat està actualitzat
             }
         }
         
@@ -615,7 +615,7 @@ function gestionarClicFiltreMapa($boto) {
     }
 }
 
-// FUNCIÓ CORREGIDA: Verificar si s'han seleccionat totes les opcions d'un filtre del mapa
+// FUNCIÓ CORREGIDA: Verificar si s'han seleccionat totes les opcions d'un filtre del MAPA
 function verificarTotesOpcionsSeleccionadesMapa(grupFiltre) {
     try {
         // No aplica per filtres excloents
@@ -623,46 +623,48 @@ function verificarTotesOpcionsSeleccionadesMapa(grupFiltre) {
             return false;
         }
         
-        const botonsGrup = jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"]:not([data-filtre="tots"])`);
-        const botonsActius = jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"].actiu:not([data-filtre="tots"])`);
+        const botonsGrup = jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grupFiltre}"]:not([data-filtre="tots"])`);
+        const botonsActius = jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grupFiltre}"].actiu:not([data-filtre="tots"])`);
         
-        console.log(`🔍 Verificant mapa ${grupFiltre}: ${botonsActius.length}/${botonsGrup.length} opcions seleccionades`);
+        const totesSeleccionades = botonsGrup.length > 0 && botonsGrup.length === botonsActius.length;
         
-        return botonsGrup.length > 0 && botonsGrup.length === botonsActius.length;
+        console.log(`🔍 Verificant MAPA ${grupFiltre}: ${botonsActius.length}/${botonsGrup.length} opcions seleccionades = ${totesSeleccionades}`);
+        
+        return totesSeleccionades;
     } catch (error) {
         console.error("❌ Error en verificarTotesOpcionsSeleccionadesMapa:", error);
         return false;
     }
 }
 
-// FUNCIÓ CORREGIDA: Activar el botó "Tots" d'un grup específic del mapa
+// FUNCIÓ CORREGIDA: Activar el botó "Tots" d'un grup específic del MAPA
 function activarBotoTotsMapa(grupFiltre) {
     try {
-        console.log(`✅ Activant "Tots" per ${grupFiltre} al mapa (totes les opcions seleccionades)`);
+        console.log(`✅ Activant "Tots" per ${grupFiltre} al MAPA (totes les opcions seleccionades)`);
         
-        jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
-        jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
+        jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
+        jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
         filtresActiusMapa[grupFiltre] = 'tots';
     } catch (error) {
         console.error("❌ Error en activarBotoTotsMapa:", error);
     }
 }
 
-// FUNCIÓ CORREGIDA: Actualitzar l'objecte de filtres actius del mapa
+// FUNCIÓ CORREGIDA: Actualitzar l'objecte de filtres actius del MAPA
 function actualitzarFiltresActiusMapa() {
     try {
         ['tipus', 'habitat', 'floracio', 'usos', 'fullatge'].forEach(grup => {
             if (grup === 'fullatge') {
                 // Filtre excloent
-                const filtreActiu = jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grup}"].actiu`);
+                const filtreActiu = jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grup}"].actiu`);
                 const valorFiltre = filtreActiu.data('filtre');
                 filtresActiusMapa[grup] = valorFiltre || 'tots';
             } else {
                 // Filtres multi-selecció
-                if (jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grup}"][data-filtre="tots"]`).hasClass('actiu')) {
+                if (jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grup}"][data-filtre="tots"]`).hasClass('actiu')) {
                     filtresActiusMapa[grup] = 'tots';
                 } else {
-                    const filtresGrup = jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grup}"].actiu:not([data-filtre="tots"])`);
+                    const filtresGrup = jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grup}"].actiu:not([data-filtre="tots"])`);
                     
                     if (filtresGrup.length === 0) {
                         filtresActiusMapa[grup] = 'tots';
@@ -678,7 +680,7 @@ function actualitzarFiltresActiusMapa() {
             }
         });
         
-        console.log("🔄 Filtres mapa actualitzats:", filtresActiusMapa);
+        console.log("🔄 Filtres MAPA actualitzats:", filtresActiusMapa);
     } catch (error) {
         console.error("❌ Error en actualitzarFiltresActiusMapa:", error);
         Object.keys(filtresActiusMapa).forEach(key => {
@@ -687,10 +689,10 @@ function actualitzarFiltresActiusMapa() {
     }
 }
 
-// FUNCIÓ CORREGIDA: Mostrar filtres actius del mapa
+// FUNCIÓ CORREGIDA: Mostrar filtres actius del MAPA
 function mostrarFiltresActiusMapa() {
     try {
-        const contFiltre = jQuery('.mapa-botanica-contenidor .filtres-actius');
+        const contFiltre = jQuery('.mapa-filtres-actius');
         contFiltre.empty();
         
         let hiHaFiltresActius = false;
@@ -738,15 +740,15 @@ function mostrarFiltresActiusMapa() {
         });
         
         if (hiHaFiltresActius) {
-            jQuery('.mapa-botanica-contenidor .netejar-filtres').show();
+            jQuery('.mapa-netejar-filtres').show();
         } else {
-            jQuery('.mapa-botanica-contenidor .netejar-filtres').hide();
+            jQuery('.mapa-netejar-filtres').hide();
         }
         
-        console.log("🏷️ Filtres actius mapa mostrats:", hiHaFiltresActius ? "Sí" : "No");
+        console.log("🏷️ Filtres actius MAPA mostrats:", hiHaFiltresActius ? "Sí" : "No");
     } catch (error) {
         console.error("❌ Error en mostrarFiltresActiusMapa:", error);
-        jQuery('.mapa-botanica-contenidor .netejar-filtres').hide();
+        jQuery('.mapa-netejar-filtres').hide();
     }
 }
 
@@ -754,7 +756,7 @@ function mostrarFiltresActiusMapa() {
 function aplicarFiltresMapa() {
     try {
         // Obtenir text de cerca
-        const textCerca = String(jQuery('#mapa-cerca').val() || '').toLowerCase().trim();
+        const textCerca = String(jQuery('#mapa-cerca-plantes').val() || '').toLowerCase().trim();
         
         // Netejar marcadors actuals
         markers.clearLayers();
@@ -846,7 +848,7 @@ function aplicarFiltresMapa() {
             }
         });
         
-        console.log(`🗺️ Filtres mapa aplicats: ${marcadorsVisibles} marcadors visibles`);
+        console.log(`🗺️ Filtres MAPA aplicats: ${marcadorsVisibles} marcadors visibles`);
         
     } catch (error) {
         console.error("❌ Error en aplicarFiltresMapa:", error);
@@ -858,19 +860,19 @@ function aplicarFiltresMapa() {
     }
 }
 
-// FUNCIÓ CORREGIDA: Netejar tots els filtres del mapa
+// FUNCIÓ CORREGIDA: Netejar tots els filtres del MAPA
 function netejarTotsFiltresMapa() {
     try {
-        console.log("🧹 Netejant filtres del mapa");
+        console.log("🧹 Netejant filtres del MAPA");
         
-        jQuery('.mapa-botanica-contenidor .filtre-boto').removeClass('actiu');
-        jQuery('.mapa-botanica-contenidor .filtre-boto[data-filtre="tots"]').addClass('actiu');
+        jQuery('.mapa-filtres-contenidor .mapa-filtre-boto').removeClass('actiu');
+        jQuery('.mapa-filtres-contenidor .mapa-filtre-boto[data-filtre="tots"]').addClass('actiu');
         
         Object.keys(filtresActiusMapa).forEach(key => {
             filtresActiusMapa[key] = 'tots';
         });
         
-        jQuery('#mapa-cerca').val('');
+        jQuery('#mapa-cerca-plantes').val('');
         
         aplicarFiltresMapa();
         mostrarFiltresActiusMapa();
@@ -880,7 +882,7 @@ function netejarTotsFiltresMapa() {
     }
 }
 
-// FUNCIÓ CORREGIDA: Eliminar un filtre individual del mapa
+// FUNCIÓ CORREGIDA: Eliminar un filtre individual del MAPA
 function eliminarFiltreMapa($element) {
     try {
         const $etiqueta = $element.parent();
@@ -888,18 +890,18 @@ function eliminarFiltreMapa($element) {
         const valor = $etiqueta.data('filtre');
         
         if (!grup || valor === undefined) {
-            console.warn("⚠️ Etiqueta sense atributs necessaris:", $etiqueta);
+            console.warn("⚠️ Etiqueta mapa sense atributs necessaris:", $etiqueta);
             return;
         }
         
-        console.log(`❌ Eliminant filtre mapa: ${grup}=${valor}`);
+        console.log(`❌ Eliminant filtre MAPA: ${grup}=${valor}`);
         
         // Desactivar el botó corresponent
-        jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grup}"][data-filtre="${valor}"]`).removeClass('actiu');
+        jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grup}"][data-filtre="${valor}"]`).removeClass('actiu');
         
         // Si no queda cap botó actiu en aquest grup, activar "Tots"
-        if (jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grup}"].actiu`).length === 0) {
-            jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grup}"][data-filtre="tots"]`).addClass('actiu');
+        if (jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grup}"].actiu`).length === 0) {
+            jQuery(`.mapa-filtres-contenidor .mapa-filtre-boto[data-group="${grup}"][data-filtre="tots"]`).addClass('actiu');
             filtresActiusMapa[grup] = 'tots';
         }
         
@@ -908,7 +910,7 @@ function eliminarFiltreMapa($element) {
             if (verificarTotesOpcionsSeleccionadesMapa(grup)) {
                 activarBotoTotsMapa(grup);
             }
-        }, 10);
+        }, 50);
         
         actualitzarFiltresActiusMapa();
         aplicarFiltresMapa();
