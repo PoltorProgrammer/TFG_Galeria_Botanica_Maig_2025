@@ -1,6 +1,6 @@
 /**
- * Galeria Botànica UAB - Adaptat per funcionar sense WordPress
- * Basat en galeria-botanica.js original - FILTRES CORREGITS
+ * Galeria Botànica UAB - VERSIÓ CORREGIDA AMB SELECTORS ESPECÍFICS
+ * Soluciona els problemes de filtres compartits entre galeria i mapa
  */
 
 // Assegurar-se que les funcions són globals
@@ -41,7 +41,7 @@ async function generarGaleriaHTML(plantes) {
 
 // Generar HTML dels filtres
 function generarHTMLFiltres(plantes) {
-    let html = '<div class="filtres-contenidor">';
+    let html = '<div class="filtres-contenidor galeria-filtres-contenidor">';
     html += '<div class="filtres-barra">';
     
     // Filtre per tipus de planta
@@ -68,15 +68,15 @@ function generarHTMLFiltres(plantes) {
     html += '</div>'; // Fi filtres-barra
     
     // Secció per mostrar filtres actius
-    html += `<div class="filtres-actius-contenidor">
+    html += `<div class="filtres-actius-contenidor galeria-filtres-actius-contenidor">
         <span class="etiqueta-filtres-actius">Filtres actius:</span>
-        <div class="filtres-actius"></div>
-        <button class="netejar-filtres" style="display: none;">Netejar tots els filtres</button>
+        <div class="filtres-actius galeria-filtres-actius"></div>
+        <button class="netejar-filtres galeria-netejar-filtres" style="display: none;">Netejar tots els filtres</button>
     </div>`;
     
     // Barra de cerca
     html += `<div class="cerca-contenidor">
-        <input type="text" id="cerca-plantes" placeholder="Cercar per paraules clau..." class="cerca-input" />
+        <input type="text" id="galeria-cerca-plantes" placeholder="Cercar per paraules clau..." class="cerca-input galeria-cerca-input" />
     </div>`;
     
     html += '</div>'; // Fi filtres-contenidor
@@ -91,11 +91,11 @@ function generarFiltresTipus(plantes) {
     let html = '<div class="grup-filtre tipus-planta-filtre">';
     html += '<span class="etiqueta-filtre">Tipus:</span>';
     html += '<div class="botons-filtre">';
-    html += '<button class="filtre-boto actiu" data-group="tipus" data-filtre="tots">Totes les plantes</button>';
+    html += '<button class="filtre-boto galeria-filtre-boto actiu" data-group="tipus" data-filtre="tots">Totes les plantes</button>';
     
     tipus.forEach(tipus => {
         const nomTipus = tipus.charAt(0).toUpperCase() + tipus.slice(1);
-        html += `<button class="filtre-boto" data-group="tipus" data-filtre="${tipus}">${nomTipus}</button>`;
+        html += `<button class="filtre-boto galeria-filtre-boto" data-group="tipus" data-filtre="${tipus}">${nomTipus}</button>`;
     });
     
     html += '</div></div>';
@@ -124,11 +124,11 @@ function generarFiltresImatge(plantes) {
     let html = '<div class="grup-filtre tipus-imatge-filtre">';
     html += '<span class="etiqueta-filtre">Imatges:</span>';
     html += '<div class="botons-filtre botons-filtre-imatges">';
-    html += '<button class="filtre-boto filtre-imatge actiu" data-group="imatge" data-filtre="tots">Totes</button>';
+    html += '<button class="filtre-boto galeria-filtre-boto filtre-imatge actiu" data-group="imatge" data-filtre="tots">Totes</button>';
     
     [...tipusImatges].sort().forEach(tipus => {
         const nomTipus = tipus.charAt(0).toUpperCase() + tipus.slice(1);
-        html += `<button class="filtre-boto filtre-imatge" data-group="imatge" data-filtre="${tipus}">${nomTipus}</button>`;
+        html += `<button class="filtre-boto galeria-filtre-boto filtre-imatge" data-group="imatge" data-filtre="${tipus}">${nomTipus}</button>`;
     });
     
     html += '</div></div>';
@@ -153,11 +153,11 @@ function generarFiltresColors(plantes) {
     let html = '<div class="grup-filtre colors-filtre">';
     html += '<span class="etiqueta-filtre">Colors:</span>';
     html += '<div class="botons-filtre">';
-    html += '<button class="filtre-boto actiu" data-group="color" data-filtre="tots">Tots</button>';
+    html += '<button class="filtre-boto galeria-filtre-boto actiu" data-group="color" data-filtre="tots">Tots</button>';
     
     [...colors].sort().forEach(color => {
         const nomColor = color.charAt(0).toUpperCase() + color.slice(1);
-        html += `<button class="filtre-boto" data-group="color" data-filtre="${color}">${nomColor}</button>`;
+        html += `<button class="filtre-boto galeria-filtre-boto" data-group="color" data-filtre="${color}">${nomColor}</button>`;
     });
     
     html += '</div></div>';
@@ -185,12 +185,12 @@ function generarFiltresHabitat(plantes) {
     let html = '<div class="grup-filtre habitat-filtre">';
     html += '<span class="etiqueta-filtre">Hàbitat:</span>';
     html += '<div class="botons-filtre">';
-    html += '<button class="filtre-boto actiu" data-group="habitat" data-filtre="tots">Tots</button>';
+    html += '<button class="filtre-boto galeria-filtre-boto actiu" data-group="habitat" data-filtre="tots">Tots</button>';
     
     [...habitats.entries()].sort((a, b) => a[1].localeCompare(b[1])).forEach(([habitatNorm, habitatNom]) => {
         const nomMostrar = habitatNom.replace(/_/g, ' ');
         const nomCapitalitzat = nomMostrar.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-        html += `<button class="filtre-boto" data-group="habitat" data-filtre="${habitatNorm}">${nomCapitalitzat}</button>`;
+        html += `<button class="filtre-boto galeria-filtre-boto" data-group="habitat" data-filtre="${habitatNorm}">${nomCapitalitzat}</button>`;
     });
     
     html += '</div></div>';
@@ -221,11 +221,11 @@ function generarFiltresFloracio(plantes) {
     let html = '<div class="grup-filtre floracio-filtre">';
     html += '<span class="etiqueta-filtre">Floració:</span>';
     html += '<div class="botons-filtre">';
-    html += '<button class="filtre-boto actiu" data-group="floracio" data-filtre="tots">Totes</button>';
+    html += '<button class="filtre-boto galeria-filtre-boto actiu" data-group="floracio" data-filtre="tots">Totes</button>';
     
     [...floracions].sort().forEach(floracio => {
         const nomFloracio = floracio.charAt(0).toUpperCase() + floracio.slice(1);
-        html += `<button class="filtre-boto" data-group="floracio" data-filtre="${floracio}">${nomFloracio}</button>`;
+        html += `<button class="filtre-boto galeria-filtre-boto" data-group="floracio" data-filtre="${floracio}">${nomFloracio}</button>`;
     });
     
     html += '</div></div>';
@@ -247,11 +247,11 @@ function generarFiltresFullatge(plantes) {
     let html = '<div class="grup-filtre fullatge-filtre">';
     html += '<span class="etiqueta-filtre">Fullatge:</span>';
     html += '<div class="botons-filtre">';
-    html += '<button class="filtre-boto actiu" data-group="fullatge" data-filtre="tots">Tots</button>';
+    html += '<button class="filtre-boto galeria-filtre-boto actiu" data-group="fullatge" data-filtre="tots">Tots</button>';
     
     [...fullatges].sort().forEach(fullatge => {
         const nomFullatge = fullatge.charAt(0).toUpperCase() + fullatge.slice(1);
-        html += `<button class="filtre-boto" data-group="fullatge" data-filtre="${fullatge}">${nomFullatge}</button>`;
+        html += `<button class="filtre-boto galeria-filtre-boto" data-group="fullatge" data-filtre="${fullatge}">${nomFullatge}</button>`;
     });
     
     html += '</div></div>';
@@ -279,10 +279,10 @@ function generarFiltresUsos(plantes) {
     let html = '<div class="grup-filtre usos-filtre">';
     html += '<span class="etiqueta-filtre">Usos:</span>';
     html += '<div class="botons-filtre">';
-    html += '<button class="filtre-boto actiu" data-group="usos" data-filtre="tots">Tots</button>';
+    html += '<button class="filtre-boto galeria-filtre-boto actiu" data-group="usos" data-filtre="tots">Tots</button>';
     
     [...usos.entries()].sort((a, b) => a[1].localeCompare(b[1])).forEach(([usNorm, usNom]) => {
-        html += `<button class="filtre-boto" data-group="usos" data-filtre="${usNorm}">${usNom.charAt(0).toUpperCase() + usNom.slice(1)}</button>`;
+        html += `<button class="filtre-boto galeria-filtre-boto" data-group="usos" data-filtre="${usNorm}">${usNom.charAt(0).toUpperCase() + usNom.slice(1)}</button>`;
     });
     
     html += '</div></div>';
@@ -468,12 +468,12 @@ function construirInfoCompletaCerca(planta) {
 }
 
 /* ========================================================================
-   EVENTS I FUNCIONALITAT DE LA GALERIA BOTÀNICA - FILTRES CORREGITS
+   EVENTS I FUNCIONALITAT DE LA GALERIA BOTÀNICA - SELECTORS ESPECÍFICS
    ======================================================================== */
 
 // Variables globals de la galeria
 let modalObert = false;
-const filtresActius = {
+const filtresActiusGaleria = {
     tipus: 'tots',
     imatge: 'tots',
     color: 'tots',
@@ -487,37 +487,37 @@ const filtresActius = {
 function inicialitzarGaleria() {
     console.log("🎯 Inicialitzant funcionalitat de la galeria...");
     
-    // Configurar event listeners
+    // Configurar event listeners específics per a la galeria
     configurarEventListenersGaleria();
     
     // Aplicar filtres inicials
-    actualitzarFiltresActius();
-    aplicarFiltres();
-    mostrarFiltresActius();
+    actualitzarFiltresActiusGaleria();
+    aplicarFiltresGaleria();
+    mostrarFiltresActiusGaleria();
     
     console.log("✅ Galeria inicialitzada correctament");
 }
 
-// Configurar event listeners de la galeria
+// Configurar event listeners específics de la galeria
 function configurarEventListenersGaleria() {
-    // Event listeners per als botons de filtre
-    jQuery(document).on('click', '.galeria-botanica .filtre-boto', function() {
-        gestionarClicFiltre(jQuery(this));
+    // Event listeners ESPECÍFICS per als botons de filtre de la GALERIA
+    jQuery(document).on('click', '.galeria-filtres-contenidor .galeria-filtre-boto', function() {
+        gestionarClicFiltreGaleria(jQuery(this));
     });
     
-    // Event listener per al botó de neteja
-    jQuery(document).on('click', '.galeria-botanica .netejar-filtres', function() {
-        netejarTotsFiltres();
+    // Event listener per al botó de neteja de la GALERIA
+    jQuery(document).on('click', '.galeria-netejar-filtres', function() {
+        netejarTotsFiltresGaleria();
     });
     
-    // Event listeners per eliminar filtres individuals
-    jQuery(document).on('click', '.galeria-botanica .eliminar-filtre', function() {
-        eliminarFiltre(jQuery(this));
+    // Event listeners per eliminar filtres individuals de la GALERIA
+    jQuery(document).on('click', '.galeria-filtres-actius .eliminar-filtre', function() {
+        eliminarFiltreGaleria(jQuery(this));
     });
     
-    // Event listener per al camp de cerca
-    jQuery(document).on('input', '#cerca-plantes', function() {
-        aplicarFiltres();
+    // Event listener per al camp de cerca de la GALERIA
+    jQuery(document).on('input', '#galeria-cerca-plantes', function() {
+        aplicarFiltresGaleria();
     });
     
     // Event listeners per obrir detalls de planta
@@ -553,48 +553,48 @@ function configurarEventListenersGaleria() {
     });
 }
 
-// FUNCIÓ CORREGIDA: Gestionar clic en botons de filtre
-function gestionarClicFiltre($boto) {
+// FUNCIÓ CORREGIDA: Gestionar clic en botons de filtre de la GALERIA
+function gestionarClicFiltreGaleria($boto) {
     try {
         const grupFiltre = $boto.data('group');
         const valorFiltre = $boto.data('filtre');
         
         if (!grupFiltre || !valorFiltre) {
-            console.warn("⚠️ Botó sense atributs necessaris:", $boto[0]);
+            console.warn("⚠️ Botó galeria sense atributs necessaris:", $boto[0]);
             return;
         }
         
-        console.log(`🔘 Filtre clicat: ${grupFiltre}=${valorFiltre}, actiu=${$boto.hasClass('actiu')}`);
+        console.log(`🔘 Filtre GALERIA clicat: ${grupFiltre}=${valorFiltre}, actiu=${$boto.hasClass('actiu')}`);
         
         // Comportament especial per al filtre d'imatges (excloent)
         if (grupFiltre === 'imatge') {
-            jQuery('.filtre-boto[data-group="imatge"]').removeClass('actiu');
+            jQuery('.galeria-filtres-contenidor .galeria-filtre-boto[data-group="imatge"]').removeClass('actiu');
             $boto.addClass('actiu');
-            filtresActius.imatge = valorFiltre;
+            filtresActiusGaleria.imatge = valorFiltre;
             
-            aplicarCanviImatges(valorFiltre);
-            aplicarFiltres();
-            mostrarFiltresActius();
+            aplicarCanviImatgesGaleria(valorFiltre);
+            aplicarFiltresGaleria();
+            mostrarFiltresActiusGaleria();
             return;
         }
         
         // Comportament especial per al filtre de fullatge (excloent)
         if (grupFiltre === 'fullatge') {
-            jQuery('.filtre-boto[data-group="fullatge"]').removeClass('actiu');
+            jQuery('.galeria-filtres-contenidor .galeria-filtre-boto[data-group="fullatge"]').removeClass('actiu');
             $boto.addClass('actiu');
-            filtresActius.fullatge = valorFiltre;
+            filtresActiusGaleria.fullatge = valorFiltre;
             
-            aplicarFiltres();
-            mostrarFiltresActius();
+            aplicarFiltresGaleria();
+            mostrarFiltresActiusGaleria();
             return;
         }
         
         // Per a filtres multi-selecció (tipus, color, habitat, floracio, usos)
         if (valorFiltre === 'tots') {
             // Si cliquem "Tots", desactivar tots els altres i activar només "Tots"
-            jQuery(`.filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
+            jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
             $boto.addClass('actiu');
-            filtresActius[grupFiltre] = 'tots';
+            filtresActiusGaleria[grupFiltre] = 'tots';
         } else {
             // Si cliquem una opció específica
             if ($boto.hasClass('actiu')) {
@@ -602,114 +602,116 @@ function gestionarClicFiltre($boto) {
                 $boto.removeClass('actiu');
                 
                 // Si no queda cap opció activa, activar "Tots"
-                const botonsActius = jQuery(`.filtre-boto[data-group="${grupFiltre}"].actiu:not([data-filtre="tots"])`);
+                const botonsActius = jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grupFiltre}"].actiu:not([data-filtre="tots"])`);
                 if (botonsActius.length === 0) {
-                    jQuery(`.filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
-                    filtresActius[grupFiltre] = 'tots';
+                    jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
+                    filtresActiusGaleria[grupFiltre] = 'tots';
                 }
             } else {
                 // Si no estava activa, l'activem
-                jQuery(`.filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).removeClass('actiu');
+                jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).removeClass('actiu');
                 $boto.addClass('actiu');
                 
-                // CORRECCIÓ: Verificar si hem seleccionat totes les opcions
+                // CORRECCIÓ: Verificar si hem seleccionat totes les opcions DESPRÉS d'un petit delay
                 setTimeout(function() {
-                    if (verificarTotesOpcionsSeleccionades(grupFiltre)) {
-                        activarBotoTots(grupFiltre);
+                    if (verificarTotesOpcionsSeleccionadesGaleria(grupFiltre)) {
+                        activarBotoTotsGaleria(grupFiltre);
                     }
-                }, 10);
+                }, 50); // Augmentat el delay per assegurar que l'estat està actualitzat
             }
         }
         
-        actualitzarFiltresActius();
-        aplicarFiltres();
-        mostrarFiltresActius();
+        actualitzarFiltresActiusGaleria();
+        aplicarFiltresGaleria();
+        mostrarFiltresActiusGaleria();
     } catch (error) {
-        console.error("❌ Error en clic a botó de filtre:", error);
+        console.error("❌ Error en clic a botó de filtre de la galeria:", error);
     }
 }
 
-// FUNCIÓ CORREGIDA: Verificar si s'han seleccionat totes les opcions d'un filtre
-function verificarTotesOpcionsSeleccionades(grupFiltre) {
+// FUNCIÓ CORREGIDA: Verificar si s'han seleccionat totes les opcions d'un filtre de la GALERIA
+function verificarTotesOpcionsSeleccionadesGaleria(grupFiltre) {
     try {
         // No aplica per filtres excloents
         if (grupFiltre === 'imatge' || grupFiltre === 'fullatge') {
             return false;
         }
         
-        const botonsGrup = jQuery(`.filtre-boto[data-group="${grupFiltre}"]:not([data-filtre="tots"])`);
-        const botonsActius = jQuery(`.filtre-boto[data-group="${grupFiltre}"].actiu:not([data-filtre="tots"])`);
+        const botonsGrup = jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grupFiltre}"]:not([data-filtre="tots"])`);
+        const botonsActius = jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grupFiltre}"].actiu:not([data-filtre="tots"])`);
         
-        console.log(`🔍 Verificant ${grupFiltre}: ${botonsActius.length}/${botonsGrup.length} opcions seleccionades`);
+        const totesSeleccionades = botonsGrup.length > 0 && botonsGrup.length === botonsActius.length;
         
-        return botonsGrup.length > 0 && botonsGrup.length === botonsActius.length;
+        console.log(`🔍 Verificant GALERIA ${grupFiltre}: ${botonsActius.length}/${botonsGrup.length} opcions seleccionades = ${totesSeleccionades}`);
+        
+        return totesSeleccionades;
     } catch (error) {
-        console.error("❌ Error en verificarTotesOpcionsSeleccionades:", error);
+        console.error("❌ Error en verificarTotesOpcionsSeleccionadesGaleria:", error);
         return false;
     }
 }
 
-// FUNCIÓ CORREGIDA: Activar el botó "Tots" d'un grup específic
-function activarBotoTots(grupFiltre) {
+// FUNCIÓ CORREGIDA: Activar el botó "Tots" d'un grup específic de la GALERIA
+function activarBotoTotsGaleria(grupFiltre) {
     try {
-        console.log(`✅ Activant "Tots" per ${grupFiltre} (totes les opcions seleccionades)`);
+        console.log(`✅ Activant "Tots" per ${grupFiltre} a la GALERIA (totes les opcions seleccionades)`);
         
-        jQuery(`.filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
-        jQuery(`.filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
-        filtresActius[grupFiltre] = 'tots';
+        jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
+        jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
+        filtresActiusGaleria[grupFiltre] = 'tots';
     } catch (error) {
-        console.error("❌ Error en activarBotoTots:", error);
+        console.error("❌ Error en activarBotoTotsGaleria:", error);
     }
 }
 
-// FUNCIÓ CORREGIDA: Actualitzar l'objecte de filtres actius
-function actualitzarFiltresActius() {
+// FUNCIÓ CORREGIDA: Actualitzar l'objecte de filtres actius de la GALERIA
+function actualitzarFiltresActiusGaleria() {
     try {
         ['tipus', 'imatge', 'color', 'habitat', 'floracio', 'fullatge', 'usos'].forEach(grup => {
             if (grup === 'imatge' || grup === 'fullatge') {
                 // Filtres excloents
-                const filtreActiu = jQuery(`.filtre-boto[data-group="${grup}"].actiu`);
+                const filtreActiu = jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grup}"].actiu`);
                 const valorFiltre = filtreActiu.data('filtre');
-                filtresActius[grup] = valorFiltre || 'tots';
+                filtresActiusGaleria[grup] = valorFiltre || 'tots';
             } else {
                 // Filtres multi-selecció
-                if (jQuery(`.filtre-boto[data-group="${grup}"][data-filtre="tots"]`).hasClass('actiu')) {
-                    filtresActius[grup] = 'tots';
+                if (jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grup}"][data-filtre="tots"]`).hasClass('actiu')) {
+                    filtresActiusGaleria[grup] = 'tots';
                 } else {
-                    const filtresGrup = jQuery(`.filtre-boto[data-group="${grup}"].actiu:not([data-filtre="tots"])`);
+                    const filtresGrup = jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grup}"].actiu:not([data-filtre="tots"])`);
                     
                     if (filtresGrup.length === 0) {
-                        filtresActius[grup] = 'tots';
+                        filtresActiusGaleria[grup] = 'tots';
                     } else {
                         const valors = [];
                         filtresGrup.each(function() {
                             const valorFiltre = jQuery(this).data('filtre');
                             if (valorFiltre) valors.push(valorFiltre);
                         });
-                        filtresActius[grup] = valors.length > 0 ? valors : 'tots';
+                        filtresActiusGaleria[grup] = valors.length > 0 ? valors : 'tots';
                     }
                 }
             }
         });
         
-        console.log("🔄 Filtres actius actualitzats:", filtresActius);
+        console.log("🔄 Filtres actius GALERIA actualitzats:", filtresActiusGaleria);
     } catch (error) {
-        console.error("❌ Error en actualitzarFiltresActius:", error);
-        Object.keys(filtresActius).forEach(key => {
-            filtresActius[key] = 'tots';
+        console.error("❌ Error en actualitzarFiltresActiusGaleria:", error);
+        Object.keys(filtresActiusGaleria).forEach(key => {
+            filtresActiusGaleria[key] = 'tots';
         });
     }
 }
 
-// FUNCIÓ CORREGIDA: Mostrar filtres actius
-function mostrarFiltresActius() {
+// FUNCIÓ CORREGIDA: Mostrar filtres actius de la GALERIA
+function mostrarFiltresActiusGaleria() {
     try {
-        const contFiltre = jQuery('.filtres-actius');
+        const contFiltre = jQuery('.galeria-filtres-actius');
         contFiltre.empty();
         
         let hiHaFiltresActius = false;
         
-        Object.entries(filtresActius).forEach(([grup, valors]) => {
+        Object.entries(filtresActiusGaleria).forEach(([grup, valors]) => {
             if (valors !== 'tots') {
                 hiHaFiltresActius = true;
                 
@@ -754,85 +756,85 @@ function mostrarFiltresActius() {
         });
         
         if (hiHaFiltresActius) {
-            jQuery('.netejar-filtres').show();
+            jQuery('.galeria-netejar-filtres').show();
         } else {
-            jQuery('.netejar-filtres').hide();
+            jQuery('.galeria-netejar-filtres').hide();
         }
         
-        console.log("🏷️ Filtres actius mostrats:", hiHaFiltresActius ? "Sí" : "No");
+        console.log("🏷️ Filtres actius GALERIA mostrats:", hiHaFiltresActius ? "Sí" : "No");
     } catch (error) {
-        console.error("❌ Error en mostrarFiltresActius:", error);
-        jQuery('.netejar-filtres').hide();
+        console.error("❌ Error en mostrarFiltresActiusGaleria:", error);
+        jQuery('.galeria-netejar-filtres').hide();
     }
 }
 
-// FUNCIÓ CORREGIDA: Eliminar un filtre individual
-function eliminarFiltre($element) {
+// FUNCIÓ CORREGIDA: Eliminar un filtre individual de la GALERIA
+function eliminarFiltreGaleria($element) {
     try {
         const $etiqueta = $element.parent();
         const grup = $etiqueta.data('group');
         const valor = $etiqueta.data('filtre');
         
         if (!grup || valor === undefined) {
-            console.warn("⚠️ Etiqueta sense atributs necessaris:", $etiqueta);
+            console.warn("⚠️ Etiqueta galeria sense atributs necessaris:", $etiqueta);
             return;
         }
         
-        console.log(`❌ Eliminant filtre: ${grup}=${valor}`);
+        console.log(`❌ Eliminant filtre GALERIA: ${grup}=${valor}`);
         
         // Desactivar el botó corresponent
-        jQuery(`.filtre-boto[data-group="${grup}"][data-filtre="${valor}"]`).removeClass('actiu');
+        jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grup}"][data-filtre="${valor}"]`).removeClass('actiu');
         
         // Si no queda cap botó actiu en aquest grup, activar "Tots"
-        if (jQuery(`.filtre-boto[data-group="${grup}"].actiu`).length === 0) {
-            jQuery(`.filtre-boto[data-group="${grup}"][data-filtre="tots"]`).addClass('actiu');
-            filtresActius[grup] = 'tots';
+        if (jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grup}"].actiu`).length === 0) {
+            jQuery(`.galeria-filtres-contenidor .galeria-filtre-boto[data-group="${grup}"][data-filtre="tots"]`).addClass('actiu');
+            filtresActiusGaleria[grup] = 'tots';
         }
         
         // Verificar si totes les opcions segueixen seleccionades després d'eliminar una
         setTimeout(function() {
-            if (verificarTotesOpcionsSeleccionades(grup)) {
-                activarBotoTots(grup);
+            if (verificarTotesOpcionsSeleccionadesGaleria(grup)) {
+                activarBotoTotsGaleria(grup);
             }
-        }, 10);
+        }, 50);
         
-        actualitzarFiltresActius();
-        aplicarFiltres();
-        mostrarFiltresActius();
+        actualitzarFiltresActiusGaleria();
+        aplicarFiltresGaleria();
+        mostrarFiltresActiusGaleria();
     } catch (error) {
-        console.error("❌ Error en eliminar filtre:", error);
+        console.error("❌ Error en eliminar filtre de la galeria:", error);
     }
 }
 
-// FUNCIÓ CORREGIDA: Netejar tots els filtres
-function netejarTotsFiltres() {
+// FUNCIÓ CORREGIDA: Netejar tots els filtres de la GALERIA
+function netejarTotsFiltresGaleria() {
     try {
-        console.log("🧹 Netejant tots els filtres");
+        console.log("🧹 Netejant filtres de la GALERIA");
         
-        jQuery('.filtre-boto').removeClass('actiu');
-        jQuery('.filtre-boto[data-filtre="tots"]').addClass('actiu');
+        jQuery('.galeria-filtres-contenidor .galeria-filtre-boto').removeClass('actiu');
+        jQuery('.galeria-filtres-contenidor .galeria-filtre-boto[data-filtre="tots"]').addClass('actiu');
         
-        Object.keys(filtresActius).forEach(key => {
-            filtresActius[key] = 'tots';
+        Object.keys(filtresActiusGaleria).forEach(key => {
+            filtresActiusGaleria[key] = 'tots';
         });
         
-        jQuery('#cerca-plantes').val('');
+        jQuery('#galeria-cerca-plantes').val('');
         
-        aplicarCanviImatges('tots');
-        aplicarFiltres();
-        mostrarFiltresActius();
+        aplicarCanviImatgesGaleria('tots');
+        aplicarFiltresGaleria();
+        mostrarFiltresActiusGaleria();
         
     } catch (error) {
-        console.error("❌ Error en netejar filtres:", error);
+        console.error("❌ Error en netejar filtres de la galeria:", error);
     }
 }
 
-// Aplicar filtres a les plantes
-function aplicarFiltres() {
+// Aplicar filtres a les plantes de la GALERIA
+function aplicarFiltresGaleria() {
     try {
         jQuery('.planta-item').fadeOut(200);
         
-        const textCerca = String(jQuery('#cerca-plantes').val() || '').toLowerCase().trim();
+        const textCerca = String(jQuery('#galeria-cerca-plantes').val() || '').toLowerCase().trim();
         
         setTimeout(function() {
             let plantesVisibles = 0;
@@ -842,25 +844,25 @@ function aplicarFiltres() {
                 let passaFiltres = true;
                 
                 // Filtre de tipus de planta
-                if (filtresActius.tipus !== 'tots') {
+                if (filtresActiusGaleria.tipus !== 'tots') {
                     const tipusPlanta = $planta.data('tipus');
                     if (!tipusPlanta) {
                         passaFiltres = false;
-                    } else if (Array.isArray(filtresActius.tipus)) {
-                        passaFiltres = passaFiltres && filtresActius.tipus.includes(tipusPlanta);
+                    } else if (Array.isArray(filtresActiusGaleria.tipus)) {
+                        passaFiltres = passaFiltres && filtresActiusGaleria.tipus.includes(tipusPlanta);
                     } else {
-                        passaFiltres = passaFiltres && (tipusPlanta === filtresActius.tipus);
+                        passaFiltres = passaFiltres && (tipusPlanta === filtresActiusGaleria.tipus);
                     }
                 }
                 
                 // Filtre de colors
-                if (passaFiltres && filtresActius.color !== 'tots') {
+                if (passaFiltres && filtresActiusGaleria.color !== 'tots') {
                     const colorsPlanta = $planta.data('colors');
                     if (colorsPlanta) {
                         const arrColors = String(colorsPlanta).split(' ');
-                        if (Array.isArray(filtresActius.color)) {
+                        if (Array.isArray(filtresActiusGaleria.color)) {
                             let passaColor = false;
-                            for (const colorFiltre of filtresActius.color) {
+                            for (const colorFiltre of filtresActiusGaleria.color) {
                                 if (arrColors.includes(colorFiltre)) {
                                     passaColor = true;
                                     break;
@@ -868,7 +870,7 @@ function aplicarFiltres() {
                             }
                             passaFiltres = passaFiltres && passaColor;
                         } else {
-                            passaFiltres = passaFiltres && arrColors.includes(filtresActius.color);
+                            passaFiltres = passaFiltres && arrColors.includes(filtresActiusGaleria.color);
                         }
                     } else {
                         passaFiltres = false;
@@ -876,20 +878,20 @@ function aplicarFiltres() {
                 }
                 
                 // Filtre d'hàbitat
-                if (passaFiltres && filtresActius.habitat !== 'tots') {
+                if (passaFiltres && filtresActiusGaleria.habitat !== 'tots') {
                     const habitatsPlanta = $planta.data('habitats');
                     if (habitatsPlanta) {
                         const arrHabitats = String(habitatsPlanta).split(' ');
                         let passaHabitat = false;
-                        if (Array.isArray(filtresActius.habitat)) {
+                        if (Array.isArray(filtresActiusGaleria.habitat)) {
                             for (const habitat of arrHabitats) {
-                                if (filtresActius.habitat.includes(habitat)) {
+                                if (filtresActiusGaleria.habitat.includes(habitat)) {
                                     passaHabitat = true;
                                     break;
                                 }
                             }
                         } else {
-                            passaHabitat = arrHabitats.includes(filtresActius.habitat);
+                            passaHabitat = arrHabitats.includes(filtresActiusGaleria.habitat);
                         }
                         passaFiltres = passaFiltres && passaHabitat;
                     } else {
@@ -898,20 +900,20 @@ function aplicarFiltres() {
                 }
                 
                 // Filtre de floració
-                if (passaFiltres && filtresActius.floracio !== 'tots') {
+                if (passaFiltres && filtresActiusGaleria.floracio !== 'tots') {
                     const floracioPlanta = $planta.data('floracio');
                     if (floracioPlanta) {
                         const arrFloracio = String(floracioPlanta).split(' ');
                         let passaFloracio = false;
-                        if (Array.isArray(filtresActius.floracio)) {
+                        if (Array.isArray(filtresActiusGaleria.floracio)) {
                             for (const floracio of arrFloracio) {
-                                if (filtresActius.floracio.includes(floracio)) {
+                                if (filtresActiusGaleria.floracio.includes(floracio)) {
                                     passaFloracio = true;
                                     break;
                                 }
                             }
                         } else {
-                            passaFloracio = arrFloracio.includes(filtresActius.floracio);
+                            passaFloracio = arrFloracio.includes(filtresActiusGaleria.floracio);
                         }
                         passaFiltres = passaFiltres && passaFloracio;
                     } else {
@@ -920,26 +922,26 @@ function aplicarFiltres() {
                 }
                 
                 // Filtre de fullatge (excloent)
-                if (passaFiltres && filtresActius.fullatge !== 'tots') {
+                if (passaFiltres && filtresActiusGaleria.fullatge !== 'tots') {
                     const fullatgePlanta = $planta.data('fullatge');
-                    passaFiltres = passaFiltres && (fullatgePlanta === filtresActius.fullatge);
+                    passaFiltres = passaFiltres && (fullatgePlanta === filtresActiusGaleria.fullatge);
                 }
                 
                 // Filtre d'usos
-                if (passaFiltres && filtresActius.usos !== 'tots') {
+                if (passaFiltres && filtresActiusGaleria.usos !== 'tots') {
                     const usosPlanta = $planta.data('usos');
                     if (usosPlanta) {
                         const arrUsos = String(usosPlanta).split(' ');
                         let passaUsos = false;
-                        if (Array.isArray(filtresActius.usos)) {
+                        if (Array.isArray(filtresActiusGaleria.usos)) {
                             for (const us of arrUsos) {
-                                if (filtresActius.usos.includes(us)) {
+                                if (filtresActiusGaleria.usos.includes(us)) {
                                     passaUsos = true;
                                     break;
                                 }
                             }
                         } else {
-                            passaUsos = arrUsos.includes(filtresActius.usos);
+                            passaUsos = arrUsos.includes(filtresActiusGaleria.usos);
                         }
                         passaFiltres = passaFiltres && passaUsos;
                     } else {
@@ -959,17 +961,17 @@ function aplicarFiltres() {
                 }
             });
             
-            console.log(`🔍 Filtres aplicats: ${plantesVisibles} plantes visibles`);
+            console.log(`🔍 Filtres GALERIA aplicats: ${plantesVisibles} plantes visibles`);
         }, 200);
         
     } catch (error) {
-        console.error("❌ Error en aplicarFiltres:", error);
+        console.error("❌ Error en aplicarFiltresGaleria:", error);
         jQuery('.planta-item').fadeIn(300);
     }
 }
 
-// Aplicar canvis d'imatges segons el filtre d'imatges seleccionat
-function aplicarCanviImatges(tipusImatge) {
+// Aplicar canvis d'imatges segons el filtre d'imatges seleccionat de la GALERIA
+function aplicarCanviImatgesGaleria(tipusImatge) {
     try {
         jQuery('.planta-item').each(function() {
             const $planta = jQuery(this);
@@ -1011,7 +1013,7 @@ function aplicarCanviImatges(tipusImatge) {
             }
         });
     } catch (error) {
-        console.error("❌ Error en aplicarCanviImatges:", error);
+        console.error("❌ Error en aplicarCanviImatgesGaleria:", error);
     }
 }
 
@@ -1281,5 +1283,5 @@ jQuery(window).on('load', verificarHashURL);
 
 // Assegurar funcions globals per compatibilitat
 window.generarGaleriaHTML = generarGaleriaHTML;
-window.mostrarFiltresActius = mostrarFiltresActius;
+window.mostrarFiltresActiusGaleria = mostrarFiltresActiusGaleria;
 window.obrirDetallsPlanta = obrirDetallsPlanta;
