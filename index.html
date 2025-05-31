@@ -6,6 +6,11 @@
     <title>Galeria Botànica UAB</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PoltorProgrammer/Memoria_TFG_Maig_2025/refs/heads/main/imatges/LOGO_TFG.png">
     
+    <!-- Fonts de Google per millorar la tipografia -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <!-- Leaflet CSS per al mapa -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
@@ -15,15 +20,51 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/galeria-botanica.css">
     <link rel="stylesheet" href="assets/css/mapa-botanica.css">
+    
+    <!-- Meta tags per millor SEO i compartició social -->
+    <meta name="description" content="Descobreix la biodiversitat del campus UAB amb la nostra galeria botànica interactiva. Més de 250 espècies documentades amb fotografies i mapa geolocalitzat.">
+    <meta name="keywords" content="UAB, botànica, galeria, campus, biodiversitat, plantes, flora, Bellaterra">
+    <meta name="author" content="Tomás González Bartomeu - TFG Biociències UAB">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://poltorprogrammer.github.io/TFG_Galeria_Botanica_Maig_2025/">
+    <meta property="og:title" content="Galeria Botànica UAB - Biodiversitat del Campus">
+    <meta property="og:description" content="Descobreix la biodiversitat del campus UAB amb la nostra galeria botànica interactiva">
+    <meta property="og:image" content="https://raw.githubusercontent.com/PoltorProgrammer/Memoria_TFG_Maig_2025/refs/heads/main/imatges/LOGO_TFG.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://poltorprogrammer.github.io/TFG_Galeria_Botanica_Maig_2025/">
+    <meta property="twitter:title" content="Galeria Botànica UAB - Biodiversitat del Campus">
+    <meta property="twitter:description" content="Descobreix la biodiversitat del campus UAB amb la nostra galeria botànica interactiva">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/PoltorProgrammer/Memoria_TFG_Maig_2025/refs/heads/main/imatges/LOGO_TFG.png">
 </head>
 <body>
     <div class="app-container">
         <header class="app-header">
-            <h1>Galeria Botànica UAB</h1>
+            <h1>🌿 Galeria Botànica UAB</h1>
             <nav class="app-nav">
-                <button onclick="mostrarInici()" class="nav-btn active" id="btn-inici">Inici</button>
-                <button onclick="mostrarGaleria()" class="nav-btn" id="btn-galeria">Galeria</button>
-                <button onclick="mostrarMapa()" class="nav-btn" id="btn-mapa">Mapa</button>
+                <!-- Botó del logo TFG -->
+                <a href="https://poltorprogrammer.github.io/Memoria_TFG_Maig_2025/Eines_Centraleta.html" 
+                   target="_blank" 
+                   class="logo-tfg-btn" 
+                   title="Veure memòria completa del TFG">
+                    <img src="https://raw.githubusercontent.com/PoltorProgrammer/Memoria_TFG_Maig_2025/refs/heads/main/imatges/LOGO_TFG.png" 
+                         alt="Logo TFG" 
+                         onerror="this.style.display='none'">
+                </a>
+                
+                <!-- Navegació principal -->
+                <button onclick="mostrarInici()" class="nav-btn active" id="btn-inici">
+                    <span>🏠</span> Inici
+                </button>
+                <button onclick="mostrarGaleria()" class="nav-btn" id="btn-galeria">
+                    <span>🌿</span> Galeria
+                </button>
+                <button onclick="mostrarMapa()" class="nav-btn" id="btn-mapa">
+                    <span>🗺️</span> Mapa
+                </button>
             </nav>
         </header>
 
@@ -34,188 +75,250 @@
                     <h1>🌿 Galeria i Mapa Botànica UAB</h1>
                     <div class="subtitol">Descobreix la biodiversitat del campus de la Universitat Autònoma de Barcelona</div>
                     <div class="descripcio">
-                        Benvinguts i benvingudes al portal que converteix els <strong>260 ha</strong> de zones verdes de la UAB 
-                        en un herbari digital interactiu.
+                        Benvinguts i benvingudes al portal que converteix els <strong>260 hectàrees</strong> de zones verdes de la UAB 
+                        en un herbari digital interactiu. Una eina pionera que documenta la flora del campus més sostenible d'Europa.
                     </div>
                     
                     <div class="inici-stats">
                         <div class="stat-item">
                             <span class="stat-number" id="stat-especies">250+</span>
-                            <span class="stat-label">Espècies</span>
+                            <span class="stat-label">Espècies catalogades</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-number" id="stat-fotografies">1800+</span>
-                            <span class="stat-label">Fotografies</span>
+                            <span class="stat-label">Fotografies HD</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-number">260</span>
-                            <span class="stat-label">Hectàrees</span>
+                            <span class="stat-label">Hectàrees verdes</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Hàbitats diferents</span>
                         </div>
                     </div>
 
-                    <!-- Estat de càrrega d'imatges -->
+                    <!-- Estat de càrrega d'imatges millorat -->
                     <div id="loading-status" class="loading-stats">
-                        🔄 Carregant imatges des de GitHub...
+                        🔄 Connectant amb l'API de GitHub per carregar imatges...
                     </div>
                 </div>
 
                 <div class="cta-buttons">
                     <a href="#" onclick="mostrarGaleria()" class="cta-btn">
-                        🍃 Explora la Galeria
+                        🔍 Explora la Galeria
                     </a>
                     <a href="#" onclick="mostrarMapa()" class="cta-btn secondary">
-                        🗺️ Viatja pel Mapa
+                        🌍 Navega pel Mapa
                     </a>
                 </div>
 
                 <div class="inici-grid">
                     <div class="inici-card">
-                        <h3>🔍 Galeria Botànica</h3>
-                        <p>Un catàleg visual filtrable amb fotos detallades (flor, fulla, fruit, hàbit) i fitxa completa.</p>
-                        <p><strong>Com t'ajuda:</strong> Identifica espècies ràpidament amb filtres per color, hàbitat o època de floració.</p>
+                        <h3>🔍 Galeria Botànica Intel·ligent</h3>
+                        <p>Un catàleg visual amb tecnologia d'última generació que carrega automàticament fotografies des de GitHub. Cada espècie té fotos detallades de flor, fulla, fruit i hàbit de creixement.</p>
+                        <p><strong>💡 Tecnologia:</strong> Sistema d'imatges dinàmic amb API GitHub, filtres avançats per color, hàbitat, època de floració i cerques instantànies.</p>
+                        <p><strong>🎯 Com t'ajuda:</strong> Identifica espècies ràpidament amb filtres intel·ligents i accedeix a fitxes completes amb un sol clic.</p>
                     </div>
                     
                     <div class="inici-card">
-                        <h3>🗺️ Mapa Botànic</h3>
-                        <p>Un mapa interactiu amb marcadors geolocalitzats i rutes temàtiques que situa cada planta <em>in situ</em>.</p>
-                        <p><strong>Com t'ajuda:</strong> Organitza sortides, troba exemplars singulars i segueix itineraris auto-guiats.</p>
+                        <h3>🗺️ Mapa Botànic Interactiu</h3>
+                        <p>Explora el campus amb un mapa geolocalitzat que mostra cada planta amb precisió GPS. Inclou polígons d'hàbitats i marcadors personalitzats per tipus d'espècie.</p>
+                        <p><strong>🛰️ Tecnologia:</strong> Leaflet.js amb clustering intel·ligent, capes d'hàbitat en GeoJSON i popups informatius amb enllaços a detalls complets.</p>
+                        <p><strong>🎯 Com t'ajuda:</strong> Organitza sortides de camp, troba exemplars singulars i segueix itineraris auto-guiats per zones temàtiques.</p>
                     </div>
                     
                     <div class="inici-card">
                         <h3>⚡ Cercador Instantani</h3>
-                        <p>Cerca per nom científic o vulgar en temps real.</p>
-                        <p><strong>Com t'ajuda:</strong> Troba la planta que busques en segons.</p>
+                        <p>Motor de cerca en temps real que funciona amb nom científic, nom vulgar, família, característiques, usos i hàbitat.</p>
+                        <p><strong>💡 Funcionalitats:</strong> Cerca fuzzy, filtres combinables, resultats immediats i sugeriments intel·ligents.</p>
+                        <p><strong>🎯 Com t'ajuda:</strong> Troba qualsevol planta en segons, independentment de com la coneguis o recordis.</p>
+                    </div>
+
+                    <div class="inici-card">
+                        <h3>📱 Tecnologia PWA</h3>
+                        <p>Aplicació web progressiva que funciona offline, s'instal·la com una app nativa i sincronitza dades automàticament.</p>
+                        <p><strong>🔧 Característiques:</strong> Responsive design, cache intel·ligent, mode fosc automàtic i optimització per a mòbils.</p>
+                        <p><strong>🎯 Com t'ajuda:</strong> Accés instant des de qualsevol dispositiu, funcionalitat completa sense connexió a internet.</p>
                     </div>
                 </div>
 
                 <div class="inici-card">
-                    <h3>🎯 Per què un catàleg botànic del campus?</h3>
-                    <p>El campus de Bellaterra és molt més que aules i laboratoris: és un mosaic de <strong>boscos mediterranis, torrents i camps</strong> que actua de corredor biològic entre el Massís de Sant Llorenç i Collserola. Documentar-lo té tres grans avantatges:</p>
+                    <h3>🎯 Per què un catàleg botànic del campus UAB?</h3>
+                    <p>El campus de Bellaterra és molt més que aules i laboratoris: és un <strong>mosaic ecològic únic</strong> que actua de pont biològic entre el Massís de Sant Llorenç i la Serra de Collserola. Documentar la seva biodiversitat té un impacte científic i social extraordinari:</p>
                     
                     <table class="inici-table">
                         <thead>
                             <tr>
-                                <th>Àmbit</th>
-                                <th>Com t'ajuda</th>
+                                <th>Àmbit d'aplicació</th>
+                                <th>Impacte i beneficis</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>📚 Docència</strong></td>
-                                <td>Facilita la identificació de plantes durant sortides de camp i pràctiques</td>
+                                <td><strong>📚 Docència i Aprenentatge</strong></td>
+                                <td>Revoluciona les sortides de camp amb identificació instantània, fitxes interactives i activitats gamificades per a estudiants de tots els nivells</td>
                             </tr>
                             <tr>
-                                <td><strong>🔬 Ciència</strong></td>
-                                <td>Genera dades fiables per a projectes de recerca i seguiment de biodiversitat</td>
+                                <td><strong>🔬 Recerca Científica</strong></td>
+                                <td>Genera datasets geolocalitzats per estudis de fenologia, canvi climàtic, biodiversitat urbana i conservació d'espècies mediterrànies</td>
                             </tr>
                             <tr>
-                                <td><strong>🌱 Divulgació</strong></td>
-                                <td>Apropa la botànica a qualsevol persona que passegi pel campus</td>
+                                <td><strong>🌱 Divulgació i Turisme Científic</strong></td>
+                                <td>Converteix cada passejada en una experiència educativa, promocionant la consciència ambiental i el turisme sostenible</td>
+                            </tr>
+                            <tr>
+                                <td><strong>🏛️ Gestió Institucional</strong></td>
+                                <td>Documenta el patrimoni natural de la UAB, facilita la planificació d'espais verdes i demostra el compromís amb la sostenibilitat</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="zones-clau">
-                    <h3>🗺️ Zones clau per començar a explorar</h3>
+                    <h3>🗺️ Rutes recomanades per començar la teva exploració</h3>
                     
                     <div class="zona-item">
-                        <div class="zona-nom">🌳 Camí de Ho Chi Minh</div>
-                        <div>Alzinar amb arbusts mediterranis i orquídies de primavera.</div>
+                        <div class="zona-nom">🌳 Ruta de l'Alzinar (Camí de Ho Chi Minh)</div>
+                        <div><strong>Distància:</strong> 1.2 km | <strong>Durada:</strong> 45 min | <strong>Dificultat:</strong> Fàcil<br>
+                        Alzinar madur amb sotabosc mediterrani. Destaquen les orquídies de primavera (Orchis, Ophrys) i arbustos aromàtics com el romaní i l'estepa.</div>
                     </div>
                     
                     <div class="zona-item">
-                        <div class="zona-nom">🌊 Torrent de Can Domènech</div>
-                        <div>Vegetació de ribera amb salzes, joncs i freixes.</div>
+                        <div class="zona-nom">🌊 Ruta de la Ribera (Torrent de Can Domènech)</div>
+                        <div><strong>Distància:</strong> 800 m | <strong>Durada:</strong> 30 min | <strong>Dificultat:</strong> Fàcil<br>
+                        Galeria ripària amb salzes (Salix), freixos (Fraxinus) i una gran diversitat d'herbàcies higrònimes. Ideal per observar canvis estacionals.</div>
                     </div>
                     
                     <div class="zona-item">
-                        <div class="zona-nom">🌺 Eix Central</div>
-                        <div>Arborets ornamentals que combinen espècies autòctones i exòtiques.</div>
+                        <div class="zona-nom">🌺 Ruta Ornamental (Eix Central)</div>
+                        <div><strong>Distància:</strong> 1 km | <strong>Durada:</strong> 40 min | <strong>Dificultat:</strong> Molt fàcil<br>
+                        Col·lecció d'arbres ornamentals que combina espècies autòctones i exòtiques. Perfect per comparar adaptacions i estratègies reproductives.</div>
                     </div>
                     
                     <div class="zona-item">
-                        <div class="zona-nom">🌾 Rondes del campus</div>
-                        <div>Prats oberts ideals per observar floració estacional d'herbàcies.</div>
+                        <div class="zona-nom">🌾 Ruta dels Prats (Rondes del Campus)</div>
+                        <div><strong>Distància:</strong> 2 km | <strong>Durada:</strong> 60 min | <strong>Dificultat:</strong> Moderada<br>
+                        Zones obertes ideals per estudiar la fenologia de gramínies i compostes. Espectacular floració primaveral d'herbàcies anuals.</div>
                     </div>
                 </div>
 
                 <div class="caracteristiques-tecniques">
-                    <h3>⚙️ Com s'ha construït la plataforma?</h3>
+                    <h3>⚙️ Arquitectura tecnològica i innovacions</h3>
                     <ul>
-                        <li><strong>Sistema d'imatges intel·ligent</strong> – Les imatges es carreguen automàticament des de GitHub i s'assignen per nom científic.</li>
-                        <li><strong>API GitHub integrada</strong> – Sempre actualitzat amb les últimes fotografies del repositori.</li>
-                        <li><strong>Fitxer únic <code>plantes.json</code></strong> – la "font de la veritat" que evita dades duplicades.</li>
-                        <li><strong>Leaflet + CSS modern</strong> – mapa lleuger i disseny adaptat a mòbil i escriptori.</li>
-                        <li><strong>Llicència MIT</strong> – pots forquejar, millorar o portar el projecte al teu entorn.</li>
+                        <li><strong>🤖 Sistema d'imatges intel·ligent</strong> – Algoritme que analitza automàticament noms de fitxer i assigna fotografies per estructura morfològica (flor, fulla, fruit, hàbit)</li>
+                        <li><strong>🔗 Integració GitHub API</strong> – Sincronització en temps real amb el repositori d'imatges, garantint contingut sempre actualitzat sense intervencions manuals</li>
+                        <li><strong>📄 Arquitectura JSON pura</strong> – Base de dades en format <code>plantes.json</code> que evita duplicacions i facilita la col·laboració científica</li>
+                        <li><strong>🗺️ Cartografia avançada</strong> – Leaflet.js amb polígons GeoJSON per hàbitats, clustering adaptatiu i suport per capes d'informació superposades</li>
+                        <li><strong>⚡ Performance optimitzada</strong> – Lazy loading d'imatges, cache intel·ligent, compressió WebP i minificació automàtica de recursos</li>
+                        <li><strong>📱 Progressive Web App (PWA)</strong> – Funcionalitat offline completa, instal·lació nativa i sincronització en background</li>
+                        <li><strong>🌐 Estàndards oberts</strong> – Llicència MIT, APIs RESTful i compatibilitat amb Darwin Core per interoperabilitat científica</li>
                     </ul>
                 </div>
 
                 <div class="inici-card">
-                    <h3>👥 A qui va dirigit?</h3>
+                    <h3>👥 Comunitat i audiència objectiu</h3>
                     <ul>
-                        <li><strong>Estudiantat de Biologia, Ciències Ambientals i Educació</strong> – recurs per a pràctiques i TFG/TFM.</li>
-                        <li><strong>Professorat</strong> – material didàctic per a classes i sortides.</li>
-                        <li><strong>Investigadors/es</strong> – punt de partida per a estudis de biodiversitat local.</li>
-                        <li><strong>Públic general</strong> – eina per gaudir i entendre la natura del campus.</li>
+                        <li><strong>🎓 Estudiantat de Ciències</strong> – Biologia, Ciències Ambientals, Geografia i Educació. Recurs clau per a pràctiques, TFG i TFM amb bases de dades reals</li>
+                        <li><strong>👨‍🏫 Professorat i Investigadors</strong> – Material didàctic interactiu per a classes magistrals, sortides de camp i projectes de recerca en ecologia urbana</li>
+                        <li><strong>🔬 Comunitat Científica Internacional</strong> – Datasets geolocalitzats per estudis comparatius de biodiversitat urbana i canvi climàtic</li>
+                        <li><strong>🌍 Públic General i Famílies</strong> – Eina d'educació ambiental accessible que transforma cada passejada en una experiència d'aprenentatge</li>
+                        <li><strong>🏛️ Institucions i Organismes</strong> – Model replicable per altres universitats i parcs urbans que vulguin documentar el seu patrimoni natural</li>
                     </ul>
                 </div>
 
                 <div class="inici-card">
-                    <h3>🚀 Plans de futur</h3>
+                    <h3>🚀 Roadmap de desenvolupament futur</h3>
                     <ol>
-                        <li><strong>Miniatures WebP</strong> per accelerar encara més la galeria.</li>
-                        <li><strong>API REST</strong> perquè aplicacions mòbils (p. ex. Planttes) consumeixin dades en temps real.</li>
-                        <li><strong>Versió PWA</strong> amb funcionalitat offline completa.</li>
-                        <li><strong>Traducció multilingüe</strong> per compartir el recurs amb estudiants internacionals.</li>
-                        <li><strong>Nous camps</strong>: pol·linitzadors, estatus de protecció i fenologia mensual.</li>
+                        <li><strong>🖼️ Optimització d'imatges NextGen</strong> – Implementació de WebP i AVIF amb generació automàtica de miniatures per accelerar la càrrega</li>
+                        <li><strong>🔌 API REST completa</strong> – Endpoints RESTful perquè aplicacions externes (com Pl@ntNet o iNaturalist) puguin consumir dades en temps real</li>
+                        <li><strong>📱 App nativa multiplataforma</strong> – Aplicació Flutter amb IA per reconeixement automàtic d'espècies via càmera del mòbil</li>
+                        <li><strong>🌐 Multilingüisme dinàmic</strong> – Suport per anglès, castellà i francès per facilitar l'ús a estudiants internacionals d'Erasmus</li>
+                        <li><strong>📊 Analytics avançat</strong> – Dashboard amb métriques d'ús, mapes de calor de zones més visitades i estadístiques de biodiversitat temporal</li>
+                        <li><strong>🤝 Col·laboració ciutadana</strong> – Plataforma per afegir observacions via formularis, contribucions fotogràfiques i validació científica col·laborativa</li>
+                        <li><strong>🧬 Integració genòmica</strong> – Enllaços amb bases de dades de DNA barcoding i fitoimatges per identificació molecular d'espècies</li>
                     </ol>
                 </div>
 
                 <div class="col-laboracio">
-                    <h3>🤝 Com pots col·laborar?</h3>
+                    <h3>🤝 Com pots contribuir al projecte?</h3>
                     
                     <div class="col-laboracio-grid">
                         <div class="col-laboracio-item">
-                            <strong>📸 Afegir dades o fotos</strong><br>
-                            Obre un <em>Pull Request</em> o puja una <em>Issue</em> amb la teva proposta.
+                            <strong>📸 Afegir fotografies i dades</strong><br>
+                            Contribueix amb imatges HD de noves espècies o estructures no documentades. Segueix la convenció de noms i obre un Pull Request amb les teves aportacions.
                         </div>
                         
                         <div class="col-laboracio-item">
-                            <strong>🐛 Reportar un error</strong><br>
-                            Indica la planta, captura de pantalla i pas a pas per reproduir-lo.
+                            <strong>🐛 Reportar errors o millores</strong><br>
+                            Detectat un error d'identificació o un bug tècnic? Crea una Issue detallada amb captures de pantalla i passos per reproduir el problema.
                         </div>
                         
                         <div class="col-laboracio-item">
-                            <strong>🌍 Traduir la interfície</strong><br>
-                            Crea un fitxer a <code>/lang</code> seguint l'estructura JSON existent.
+                            <strong>🌍 Traduccions i localització</strong><br>
+                            Ajuda'ns a fer més accessible el projecte traduint la interfície. Crea fitxers de traducció seguint l'estructura JSON existent.
                         </div>
                         
                         <div class="col-laboracio-item">
-                            <strong>🚶 Organitzar una sortida guiada</strong><br>
-                            Escriu a <a href="mailto:botanica@uab.cat" style="color: #E8F5E8;">botanica@uab.cat</a>
+                            <strong>🚶 Sortides guiades educatives</strong><br>
+                            Interessat/da en organitzar activitats educatives utilitzant la plataforma? Contacta amb nosaltres per coordinar esdeveniments.
                         </div>
+                        
+                        <div class="col-laboracio-item">
+                            <strong>💻 Desenvolupament tècnic</strong><br>
+                            Programadors i desenvolupadors: el codi font és obert (MIT). Contribueix amb noves funcionalitats o optimitzacions de rendiment.
+                        </div>
+                        
+                        <div class="col-laboracio-item">
+                            <strong>📚 Contingut científic</strong><br>
+                            Botànics, ecòlegs i naturalistes: revisar i ampliar les fitxes d'espècies amb informació actualitzada i precisa.
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; font-size: 1.1rem;">
+                        <strong>📧 Contacte:</strong> 
+                        <a href="mailto:tomas.gonzalez@e-campus.uab.cat" style="color: #E8F5E8; text-decoration: underline;">
+                            tomas.gonzalez@e-campus.uab.cat
+                        </a>
                     </div>
                 </div>
 
                 <div class="credits">
-                    <h3>👨‍🎓 Crèdits</h3>
-                    <p>Projecte desenvolupat com a <strong>Treball de Fi de Grau</strong> a la Facultat de Biociències de la UAB.</p>
-                    <p><strong>Autor:</strong> <em>Tomás González Bartomeu</em></p>
-                    <p><strong>Tutor acadèmic:</strong> <em>Ramon Pérez Obiol</em></p>
+                    <h3>👨‍🎓 Informació acadèmica del projecte</h3>
+                    <p><strong>Treball de Fi de Grau (TFG)</strong> de la Facultat de Biociències de la Universitat Autònoma de Barcelona</p>
+                    <p><strong>Autor:</strong> <em>Tomás González Bartomeu</em><br>
+                    <strong>Grau:</strong> Biologia (2021-2025)<br>
+                    <strong>Especialització:</strong> Biologia Ambiental i Botànica</p>
+                    <p><strong>Tutor acadèmic:</strong> <em>Dr. Ramon Pérez Obiol</em><br>
+                    Departament de Geografia | Unitat de Botànica</p>
+                    <p><strong>Curs acadèmic:</strong> 2024-2025<br>
+                    <strong>Data de defensa:</strong> Maig 2025</p>
+                    
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                        <p><strong>🏆 Objectius assolits:</strong></p>
+                        <p>✅ Documentació completa de la flora del campus UAB<br>
+                        ✅ Plataforma tecnològica innovadora i replicable<br>
+                        ✅ Eina educativa d'impacte real per a la comunitat universitària<br>
+                        ✅ Contribució a la ciència ciutadana i la divulgació científica</p>
+                    </div>
                 </div>
 
                 <div class="cta-buttons">
                     <a href="#" onclick="mostrarGaleria()" class="cta-btn">
-                        🍃 Explora la Galeria
+                        🔍 Comença l'Exploració
                     </a>
                     <a href="#" onclick="mostrarMapa()" class="cta-btn secondary">
-                        🗺️ Viatja pel Mapa
+                        🗺️ Descobreix el Mapa
                     </a>
                 </div>
 
-                <div style="text-align: center; margin: 2rem 0; color: #4CAF50; font-size: 1.2rem; font-weight: 600;">
-                    🌱 Ajuda'ns a fer créixer el coneixement de la flora local!
+                <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(102, 126, 234, 0.1)); border-radius: 20px; border: 2px solid rgba(76, 175, 80, 0.2);">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #2c5530; margin-bottom: 1rem;">
+                        🌱 Uneix-te a la revolució de la botànica digital!
+                    </div>
+                    <div style="font-size: 1.1rem; color: #4a7c59;">
+                        Cada contribució ajuda a preservar i compartir el coneixement de la flora local per a futures generacions
+                    </div>
                 </div>
             </div>
 
@@ -230,7 +333,7 @@
             </div>
         </main>
 
-        <!-- Modal per detalls -->
+        <!-- Modal per detalls millorat -->
         <div class="planta-modal" style="display: none;">
             <div class="planta-modal-contingut">
                 <span class="planta-modal-tancar">&times;</span>
@@ -238,10 +341,11 @@
             </div>
         </div>
 
-        <!-- Loading overlay -->
+        <!-- Loading overlay millorat -->
         <div id="loading-overlay" class="loading-overlay">
             <div class="loading-spinner"></div>
-            <p>Carregant galeria botànica...</p>
+            <p>🌿 Carregant galeria botànica des de GitHub...</p>
+            <small style="margin-top: 1rem; opacity: 0.7;">Això pot trigar uns segons en la primera càrrega</small>
         </div>
     </div>
 
@@ -274,5 +378,16 @@
     
     <!-- Script d'inicialització principal -->
     <script src="assets/js/app-init.js"></script>
+
+    <!-- Google Analytics (opcional - afegir el teu ID) -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    -->
 </body>
 </html>
