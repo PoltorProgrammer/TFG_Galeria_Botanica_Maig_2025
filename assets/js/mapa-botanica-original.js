@@ -1,6 +1,6 @@
 /**
  * Mapa Botànica UAB - Adaptat per funcionar sense WordPress
- * Basat en mapa-botanica.js original
+ * Basat en mapa-botanica.js original - FILTRES CORREGITS
  */
 
 // Variables globals del mapa
@@ -542,7 +542,7 @@ function configurarEventListenersMapa() {
     });
 }
 
-// Variables dels filtres del mapa
+// Variables dels filtres del mapa - CORREGIDES
 const filtresActiusMapa = {
     tipus: 'tots',
     habitat: 'tots', 
@@ -551,7 +551,7 @@ const filtresActiusMapa = {
     fullatge: 'tots'
 };
 
-// Gestionar clic en botons de filtre del mapa
+// FUNCIÓ CORREGIDA: Gestionar clic en botons de filtre del mapa
 function gestionarClicFiltreMapa($boto) {
     try {
         const grupFiltre = $boto.data('group');
@@ -575,22 +575,35 @@ function gestionarClicFiltreMapa($boto) {
             return;
         }
         
-        // Per a filtres multi-selecció
-        if ($boto.hasClass('actiu') && valorFiltre !== 'tots') {
-            $boto.removeClass('actiu');
-            
-            if (jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"].actiu`).length === 0) {
-                jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
-                filtresActiusMapa[grupFiltre] = 'tots';
-            }
+        // Per a filtres multi-selecció (tipus, habitat, floracio, usos)
+        if (valorFiltre === 'tots') {
+            // Si cliquem "Tots", desactivar tots els altres i activar només "Tots"
+            jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
+            $boto.addClass('actiu');
+            filtresActiusMapa[grupFiltre] = 'tots';
         } else {
-            if (valorFiltre === 'tots') {
-                jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
-                $boto.addClass('actiu');
-                filtresActiusMapa[grupFiltre] = 'tots';
+            // Si cliquem una opció específica
+            if ($boto.hasClass('actiu')) {
+                // Si ja estava activa, la desactivem
+                $boto.removeClass('actiu');
+                
+                // Si no queda cap opció activa, activar "Tots"
+                const botonsActius = jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"].actiu:not([data-filtre="tots"])`);
+                if (botonsActius.length === 0) {
+                    jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
+                    filtresActiusMapa[grupFiltre] = 'tots';
+                }
             } else {
+                // Si no estava activa, l'activem
                 jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).removeClass('actiu');
                 $boto.addClass('actiu');
+                
+                // CORRECCIÓ: Verificar si hem seleccionat totes les opcions
+                setTimeout(function() {
+                    if (verificarTotesOpcionsSeleccionadesMapa(grupFiltre)) {
+                        activarBotoTotsMapa(grupFiltre);
+                    }
+                }, 10);
             }
         }
         
@@ -602,15 +615,50 @@ function gestionarClicFiltreMapa($boto) {
     }
 }
 
-// Actualitzar l'objecte de filtres actius del mapa
+// FUNCIÓ CORREGIDA: Verificar si s'han seleccionat totes les opcions d'un filtre del mapa
+function verificarTotesOpcionsSeleccionadesMapa(grupFiltre) {
+    try {
+        // No aplica per filtres excloents
+        if (grupFiltre === 'fullatge') {
+            return false;
+        }
+        
+        const botonsGrup = jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"]:not([data-filtre="tots"])`);
+        const botonsActius = jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"].actiu:not([data-filtre="tots"])`);
+        
+        console.log(`🔍 Verificant mapa ${grupFiltre}: ${botonsActius.length}/${botonsGrup.length} opcions seleccionades`);
+        
+        return botonsGrup.length > 0 && botonsGrup.length === botonsActius.length;
+    } catch (error) {
+        console.error("❌ Error en verificarTotesOpcionsSeleccionadesMapa:", error);
+        return false;
+    }
+}
+
+// FUNCIÓ CORREGIDA: Activar el botó "Tots" d'un grup específic del mapa
+function activarBotoTotsMapa(grupFiltre) {
+    try {
+        console.log(`✅ Activant "Tots" per ${grupFiltre} al mapa (totes les opcions seleccionades)`);
+        
+        jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"]`).removeClass('actiu');
+        jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`).addClass('actiu');
+        filtresActiusMapa[grupFiltre] = 'tots';
+    } catch (error) {
+        console.error("❌ Error en activarBotoTotsMapa:", error);
+    }
+}
+
+// FUNCIÓ CORREGIDA: Actualitzar l'objecte de filtres actius del mapa
 function actualitzarFiltresActiusMapa() {
     try {
         ['tipus', 'habitat', 'floracio', 'usos', 'fullatge'].forEach(grup => {
             if (grup === 'fullatge') {
+                // Filtre excloent
                 const filtreActiu = jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grup}"].actiu`);
                 const valorFiltre = filtreActiu.data('filtre');
                 filtresActiusMapa[grup] = valorFiltre || 'tots';
             } else {
+                // Filtres multi-selecció
                 if (jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grup}"][data-filtre="tots"]`).hasClass('actiu')) {
                     filtresActiusMapa[grup] = 'tots';
                 } else {
@@ -639,7 +687,7 @@ function actualitzarFiltresActiusMapa() {
     }
 }
 
-// Mostrar filtres actius del mapa
+// FUNCIÓ CORREGIDA: Mostrar filtres actius del mapa
 function mostrarFiltresActiusMapa() {
     try {
         const contFiltre = jQuery('.mapa-botanica-contenidor .filtres-actius');
@@ -662,7 +710,8 @@ function mostrarFiltresActiusMapa() {
                 }
                 
                 if (grup === 'fullatge') {
-                    if (valors) {
+                    // Filtre excloent - només mostrar si no és "tots"
+                    if (valors && valors !== 'tots') {
                         const valorStr = String(valors);
                         const valorText = valorStr.charAt(0).toUpperCase() + valorStr.slice(1).replace(/_/g, ' ');
                         const etiqueta = jQuery(`<span class="filtre-actiu" data-group="${grup}" data-filtre="${valorStr}">
@@ -671,6 +720,7 @@ function mostrarFiltresActiusMapa() {
                         contFiltre.append(etiqueta);
                     }
                 } else if (Array.isArray(valors)) {
+                    // Filtres multi-selecció - només mostrar si no és "tots"
                     valors.forEach(valor => {
                         if (valor) {
                             const valorStr = String(valor);
@@ -692,6 +742,8 @@ function mostrarFiltresActiusMapa() {
         } else {
             jQuery('.mapa-botanica-contenidor .netejar-filtres').hide();
         }
+        
+        console.log("🏷️ Filtres actius mapa mostrats:", hiHaFiltresActius ? "Sí" : "No");
     } catch (error) {
         console.error("❌ Error en mostrarFiltresActiusMapa:", error);
         jQuery('.mapa-botanica-contenidor .netejar-filtres').hide();
@@ -806,7 +858,7 @@ function aplicarFiltresMapa() {
     }
 }
 
-// Netejar tots els filtres del mapa
+// FUNCIÓ CORREGIDA: Netejar tots els filtres del mapa
 function netejarTotsFiltresMapa() {
     try {
         console.log("🧹 Netejant filtres del mapa");
@@ -828,7 +880,7 @@ function netejarTotsFiltresMapa() {
     }
 }
 
-// Eliminar un filtre individual del mapa
+// FUNCIÓ CORREGIDA: Eliminar un filtre individual del mapa
 function eliminarFiltreMapa($element) {
     try {
         const $etiqueta = $element.parent();
@@ -840,11 +892,23 @@ function eliminarFiltreMapa($element) {
             return;
         }
         
+        console.log(`❌ Eliminant filtre mapa: ${grup}=${valor}`);
+        
+        // Desactivar el botó corresponent
         jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grup}"][data-filtre="${valor}"]`).removeClass('actiu');
         
+        // Si no queda cap botó actiu en aquest grup, activar "Tots"
         if (jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grup}"].actiu`).length === 0) {
             jQuery(`.mapa-botanica-contenidor .filtre-boto[data-group="${grup}"][data-filtre="tots"]`).addClass('actiu');
+            filtresActiusMapa[grup] = 'tots';
         }
+        
+        // Verificar si totes les opcions segueixen seleccionades després d'eliminar una
+        setTimeout(function() {
+            if (verificarTotesOpcionsSeleccionadesMapa(grup)) {
+                activarBotoTotsMapa(grup);
+            }
+        }, 10);
         
         actualitzarFiltresActiusMapa();
         aplicarFiltresMapa();
