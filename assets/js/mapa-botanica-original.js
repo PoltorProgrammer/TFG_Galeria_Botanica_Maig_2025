@@ -1,7 +1,5 @@
 /**
- * Mapa Botànica UAB - VERSIÓ CORREGIDA AMB SELECTORS ESPECÍFICS
- * Soluciona els problemes de filtres compartits entre galeria i mapa
- * ACTUALITZACIÓ: Millora en el sistema de filtres per gestionar grups i parèntesis
+ * Mapa Botànica UAB - 
  */
 
 // Variables globals del mapa
