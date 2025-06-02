@@ -1,6 +1,7 @@
 /**
  * Mapa Botànica UAB - VERSIÓ CORREGIDA AMB SELECTORS ESPECÍFICS
  * Soluciona els problemes de filtres compartits entre galeria i mapa
+ * ACTUALITZACIÓ: Millora en el sistema de filtres per gestionar grups i parèntesis
  */
 
 // Variables globals del mapa
@@ -11,6 +12,92 @@ var habitatsLayers = {};
 
 // Fer accessible globalment
 window.generarMapaHTML = generarMapaHTML;
+
+// ========================================================================
+// FUNCIONS D'UTILITAT PER A FILTRES MILLORATS
+// ========================================================================
+
+/**
+ * Normalitza un valor eliminant parèntesis i text extra
+ * Exemple: "usos productius (producció de carbó)" -> "usos_productius"
+ */
+function normalitzarValor(valor) {
+    if (!valor) return '';
+    
+    // Eliminar contingut entre parèntesis
+    let valorNet = valor.replace(/\s*\(.*?\)\s*/g, '').trim();
+    
+    // Convertir a minúscules i reemplaçar espais per guions baixos
+    return valorNet.toLowerCase().replace(/\s+/g, '_');
+}
+
+/**
+ * Comprova si un valor coincideix amb un filtre, tenint en compte grups
+ * @param {string} valorPlanta - Valor de la planta (pot incloure parèntesis)
+ * @param {string} valorFiltre - Valor del filtre (grup o valor específic)
+ * @returns {boolean}
+ */
+function coincideixAmbFiltre(valorPlanta, valorFiltre) {
+    // Normalitzar ambdós valors
+    const plantaNorm = normalitzarValor(valorPlanta);
+    const filtreNorm = normalitzarValor(valorFiltre);
+    
+    // Comparació exacta
+    if (plantaNorm === filtreNorm) {
+        return true;
+    }
+    
+    // Comprovar si el filtre és un grup que conté el valor de la planta
+    // Per exemple: filtre "usos_productius" hauria de coincidir amb "usos_productius_*"
+    if (plantaNorm.startsWith(filtreNorm + '_') || plantaNorm.startsWith(filtreNorm)) {
+        return true;
+    }
+    
+    // També comprovar al revés per casos especials
+    // Si el valor de la planta és més general que el filtre
+    if (filtreNorm.startsWith(plantaNorm + '_')) {
+        return true;
+    }
+    
+    return false;
+}
+
+/**
+ * Comprova si una llista de valors de planta coincideix amb els filtres actius
+ * @param {Array} valorsPlanta - Array de valors de la planta
+ * @param {string|Array} filtresActius - Filtre(s) actiu(s)
+ * @returns {boolean}
+ */
+function passaFiltreMultiple(valorsPlanta, filtresActius) {
+    if (!valorsPlanta || valorsPlanta.length === 0) {
+        return false;
+    }
+    
+    // Si filtresActius és un array
+    if (Array.isArray(filtresActius)) {
+        // La planta ha de coincidir amb ALGUN dels filtres actius (OR)
+        for (const filtre of filtresActius) {
+            for (const valorPlanta of valorsPlanta) {
+                if (coincideixAmbFiltre(valorPlanta, filtre)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    } else {
+        // Si és un sol filtre
+        for (const valorPlanta of valorsPlanta) {
+            if (coincideixAmbFiltre(valorPlanta, filtresActius)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+// ========================================================================
+// FUNCIONS PRINCIPALS DEL MAPA
+// ========================================================================
 
 // Funció per generar el HTML del mapa
 async function generarMapaHTML() {
@@ -752,7 +839,7 @@ function mostrarFiltresActiusMapa() {
     }
 }
 
-// Aplicar filtres als marcadors del mapa
+// FUNCIÓ ACTUALITZADA: Aplicar filtres als marcadors del mapa
 function aplicarFiltresMapa() {
     try {
         // Obtenir text de cerca
@@ -778,55 +865,25 @@ function aplicarFiltresMapa() {
                 }
             }
             
-            // Filtre d'hàbitat
+            // FILTRE D'HÀBITAT MILLORAT
             if (passaFiltres && filtresActiusMapa.habitat !== 'tots') {
-                const habitatsPlanta = planta.habitat_norm || [];
-                let passaHabitat = false;
-                if (Array.isArray(filtresActiusMapa.habitat)) {
-                    for (const habitat of habitatsPlanta) {
-                        if (filtresActiusMapa.habitat.includes(habitat)) {
-                            passaHabitat = true;
-                            break;
-                        }
-                    }
-                } else {
-                    passaHabitat = habitatsPlanta.includes(filtresActiusMapa.habitat);
-                }
-                passaFiltres = passaFiltres && passaHabitat;
+                // Utilitzar els valors originals de planta.habitat en lloc de habitat_norm
+                const habitatsPlanta = planta.habitat || [];
+                passaFiltres = passaFiltres && passaFiltreMultiple(habitatsPlanta, filtresActiusMapa.habitat);
             }
             
-            // Filtre de floració
+            // FILTRE DE FLORACIÓ MILLORAT
             if (passaFiltres && filtresActiusMapa.floracio !== 'tots') {
-                const floracioPlanta = planta.floracio_norm || [];
-                let passaFloracio = false;
-                if (Array.isArray(filtresActiusMapa.floracio)) {
-                    for (const floracio of floracioPlanta) {
-                        if (filtresActiusMapa.floracio.includes(floracio)) {
-                            passaFloracio = true;
-                            break;
-                        }
-                    }
-                } else {
-                    passaFloracio = floracioPlanta.includes(filtresActiusMapa.floracio);
-                }
-                passaFiltres = passaFiltres && passaFloracio;
+                // Utilitzar els valors originals de planta.floracio
+                const floracioPlanta = planta.floracio || [];
+                passaFiltres = passaFiltres && passaFiltreMultiple(floracioPlanta, filtresActiusMapa.floracio);
             }
             
-            // Filtre d'usos
+            // FILTRE D'USOS MILLORAT
             if (passaFiltres && filtresActiusMapa.usos !== 'tots') {
-                const usosPlanta = planta.usos_norm || [];
-                let passaUsos = false;
-                if (Array.isArray(filtresActiusMapa.usos)) {
-                    for (const us of usosPlanta) {
-                        if (filtresActiusMapa.usos.includes(us)) {
-                            passaUsos = true;
-                            break;
-                        }
-                    }
-                } else {
-                    passaUsos = usosPlanta.includes(filtresActiusMapa.usos);
-                }
-                passaFiltres = passaFiltres && passaUsos;
+                // Utilitzar els valors originals de planta.usos
+                const usosPlanta = planta.usos || [];
+                passaFiltres = passaFiltres && passaFiltreMultiple(usosPlanta, filtresActiusMapa.usos);
             }
             
             // Filtre de fullatge (excloent)
@@ -849,6 +906,17 @@ function aplicarFiltresMapa() {
         });
         
         console.log(`🗺️ Filtres MAPA aplicats: ${marcadorsVisibles} marcadors visibles`);
+        
+        // Log detallat per depuració
+        if (marcadorsVisibles === 0 && (filtresActiusMapa.habitat !== 'tots' || filtresActiusMapa.usos !== 'tots')) {
+            console.log('🔍 DEPURACIÓ - Filtres actius:', filtresActiusMapa);
+            console.log('🔍 DEPURACIÓ - Exemple de valors de plantes:');
+            const plantaExemple = mb_vars.dades_plantes[0];
+            if (plantaExemple) {
+                console.log('  - Hàbitats:', plantaExemple.habitat);
+                console.log('  - Usos:', plantaExemple.usos);
+            }
+        }
         
     } catch (error) {
         console.error("❌ Error en aplicarFiltresMapa:", error);
