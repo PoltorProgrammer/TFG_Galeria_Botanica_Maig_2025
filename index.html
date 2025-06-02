@@ -18,6 +18,7 @@
     
     <!-- Estils propis -->
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/inici.css">
     <link rel="stylesheet" href="assets/css/galeria-botanica.css">
     <link rel="stylesheet" href="assets/css/mapa-botanica.css">
     
@@ -334,7 +335,7 @@
         </main>
 
         <!-- Modal per detalls millorat -->
-        <div class="planta-modal" style="display: none;">
+        <div class="planta-modal" id="modal-detalls-planta" style="display: none;">
             <div class="planta-modal-contingut">
                 <span class="planta-modal-tancar">&times;</span>
                 <div class="planta-modal-cos"></div>
@@ -358,29 +359,35 @@
     <script>
         // Variables globals necessàries per als scripts originals
         var gb_vars = {
-            ajaxurl: 'api/ajax.php' // Simulem l'AJAX de WordPress
+            ajaxurl: 'api/ajax.php',
+            nonce: 'galeria_botanica_nonce',
+            version: '2.1.0'
         };
         
         var mb_vars = {
             ajaxurl: 'api/ajax.php',
             plugin_url: '.',
-            dades_plantes: [] // Es carregarà dinàmicament
+            dades_plantes: [],
+            version: '2.1.0'
         };
         
         // Variable global per a les dades de plantes (per la galeria)
         var gb_plantes_data = [];
     </script>
     
-    <!-- Scripts del sistema -->
+    <!-- ORDEM CORREGIT DELS SCRIPTS -->
+    <!-- 1. Sistema d'imatges -->
     <script src="assets/js/sistema-imatges-github.js"></script>
+    
+    <!-- 2. Popup fixes ABANS dels altres components -->
+    <script src="assets/js/popup-fixes.js"></script>
+    
+    <!-- 3. Components principals -->
     <script src="assets/js/galeria-botanica-original.js"></script>
     <script src="assets/js/mapa-botanica-original.js"></script>
     
-    <!-- Script d'inicialització principal -->
+    <!-- 4. Inicialització -->
     <script src="assets/js/app-init.js"></script>
-    
-    <!-- CORRECCIÓ DELS POPUPS - NOU SCRIPT -->
-    <script src="assets/js/popup-fixes.js"></script>
 
     <!-- Google Analytics (opcional - afegir el teu ID) -->
     <!-- 
@@ -392,6 +399,5 @@
         gtag('config', 'GA_MEASUREMENT_ID');
     </script>
     -->
-    <script src="assets/js/popup-fixes.js"></script>
 </body>
 </html>
