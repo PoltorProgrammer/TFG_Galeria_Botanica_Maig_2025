@@ -1,5 +1,6 @@
 /**
  * Mapa Botànica UAB - 
+
  */
 
 // Variables globals del mapa
@@ -40,24 +41,54 @@ function coincideixAmbFiltre(valorPlanta, valorFiltre) {
     const plantaNorm = normalitzarValor(valorPlanta);
     const filtreNorm = normalitzarValor(valorFiltre);
     
+    console.log(`🔍 Comparant: "${valorPlanta}" (norm: "${plantaNorm}") amb filtre "${valorFiltre}" (norm: "${filtreNorm}")`);
+    
     // Comparació exacta
     if (plantaNorm === filtreNorm) {
+        console.log(`✅ Match exacte!`);
         return true;
     }
     
-    // Comprovar si el filtre és un grup que conté el valor de la planta
-    // Per exemple: filtre "usos_productius" hauria de coincidir amb "usos_productius_*"
-    if (plantaNorm.startsWith(filtreNorm + '_') || plantaNorm.startsWith(filtreNorm)) {
+    // Comprovar si el valor de la planta comença amb el filtre
+    // Això permet que "usos_agricoles" coincideixi amb "usos_agricoles_i_millora_del_sol"
+    if (plantaNorm.startsWith(filtreNorm)) {
+        console.log(`✅ Match per prefix (planta comença amb filtre)!`);
         return true;
     }
     
-    // També comprovar al revés per casos especials
-    // Si el valor de la planta és més general que el filtre
-    if (filtreNorm.startsWith(plantaNorm + '_')) {
+    // Comprovar al revés: si el filtre comença amb el valor de la planta
+    // Això permet que "usos_agricoles_i_millora_del_sol" coincideixi amb plantes que tenen "usos agricoles"
+    if (filtreNorm.startsWith(plantaNorm)) {
+        console.log(`✅ Match per prefix (filtre comença amb planta)!`);
         return true;
     }
     
+    // Cas especial per gestionar diferències en com es normalitzen els valors
+    // Per exemple: "usos agrícoles i millora del sòl" -> "usos_agricoles_i_millora_del_sol"
+    // però el filtre podria ser "usos_agricoles_i_millora_del_sòl" (amb accent)
+    const plantaNormSenseAccents = eliminarAccents(plantaNorm);
+    const filtreNormSenseAccents = eliminarAccents(filtreNorm);
+    
+    if (plantaNormSenseAccents === filtreNormSenseAccents) {
+        console.log(`✅ Match sense accents!`);
+        return true;
+    }
+    
+    if (plantaNormSenseAccents.startsWith(filtreNormSenseAccents) || 
+        filtreNormSenseAccents.startsWith(plantaNormSenseAccents)) {
+        console.log(`✅ Match per prefix sense accents!`);
+        return true;
+    }
+    
+    console.log(`❌ No match`);
     return false;
+}
+
+/**
+ * Elimina accents d'un text
+ */
+function eliminarAccents(text) {
+    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
 /**
@@ -68,8 +99,11 @@ function coincideixAmbFiltre(valorPlanta, valorFiltre) {
  */
 function passaFiltreMultiple(valorsPlanta, filtresActius) {
     if (!valorsPlanta || valorsPlanta.length === 0) {
+        console.log('❌ Planta sense valors per aquest camp');
         return false;
     }
+    
+    console.log(`🔍 Comprovant ${valorsPlanta.length} valors de planta amb filtres:`, filtresActius);
     
     // Si filtresActius és un array
     if (Array.isArray(filtresActius)) {
@@ -77,18 +111,22 @@ function passaFiltreMultiple(valorsPlanta, filtresActius) {
         for (const filtre of filtresActius) {
             for (const valorPlanta of valorsPlanta) {
                 if (coincideixAmbFiltre(valorPlanta, filtre)) {
+                    console.log(`✅ Planta passa el filtre!`);
                     return true;
                 }
             }
         }
+        console.log(`❌ Planta NO passa cap filtre`);
         return false;
     } else {
         // Si és un sol filtre
         for (const valorPlanta of valorsPlanta) {
             if (coincideixAmbFiltre(valorPlanta, filtresActius)) {
+                console.log(`✅ Planta passa el filtre!`);
                 return true;
             }
         }
+        console.log(`❌ Planta NO passa el filtre`);
         return false;
     }
 }
@@ -234,6 +272,7 @@ function generarFiltresFloracioMapa(plantes) {
 // Generar filtres d'usos per al mapa
 function generarFiltresUsosMapa(plantes) {
     const usos = new Map();
+    const grups = new Map(); // Per detectar grups de categories
     
     plantes.forEach(planta => {
         if (planta.usos) {
@@ -242,12 +281,27 @@ function generarFiltresUsosMapa(plantes) {
                 const usNormalitzat = usPrincipal.toLowerCase().replace(/\s+/g, '_');
                 if (usNormalitzat) {
                     usos.set(usNormalitzat, usPrincipal);
+                    
+                    // Detectar grups (ex: "usos_agricoles", "usos_productius", etc.)
+                    const parts = usNormalitzat.split('_');
+                    if (parts.length > 1 && parts[0] === 'usos') {
+                        const grupBase = parts.slice(0, 2).join('_'); // "usos_agricoles", "usos_productius", etc.
+                        if (!grups.has(grupBase)) {
+                            grups.set(grupBase, new Set());
+                        }
+                        grups.get(grupBase).add(usNormalitzat);
+                    }
                 }
             });
         }
     });
     
     if (usos.size === 0) return '';
+    
+    // Logging per depuració
+    console.log('🔍 USOS DETECTATS:');
+    console.log('  - Únics:', [...usos.entries()].map(([k,v]) => `${k} = "${v}"`));
+    console.log('  - Grups:', [...grups.entries()].map(([k,v]) => `${k} (${v.size} variants)`));
     
     let html = '<div class="grup-filtre usos-filtre">';
     html += '<span class="etiqueta-filtre">Usos:</span>';
@@ -909,11 +963,24 @@ function aplicarFiltresMapa() {
         if (marcadorsVisibles === 0 && (filtresActiusMapa.habitat !== 'tots' || filtresActiusMapa.usos !== 'tots')) {
             console.log('🔍 DEPURACIÓ - Filtres actius:', filtresActiusMapa);
             console.log('🔍 DEPURACIÓ - Exemple de valors de plantes:');
-            const plantaExemple = mb_vars.dades_plantes[0];
-            if (plantaExemple) {
-                console.log('  - Hàbitats:', plantaExemple.habitat);
-                console.log('  - Usos:', plantaExemple.usos);
+            
+            // Mostrar exemples de diverses plantes
+            let plantesAmbUsos = 0;
+            for (let i = 0; i < Math.min(5, mb_vars.dades_plantes.length); i++) {
+                const planta = mb_vars.dades_plantes[i];
+                if (planta.usos && planta.usos.length > 0) {
+                    console.log(`  🌱 ${planta.nom_cientific}:`);
+                    console.log('    - Usos originals:', planta.usos);
+                    console.log('    - Usos normalitzats:', planta.usos.map(u => normalitzarValor(u)));
+                    plantesAmbUsos++;
+                }
             }
+            
+            if (plantesAmbUsos === 0) {
+                console.log('  ⚠️ Cap planta amb usos trobada en els primers 5 exemples');
+            }
+            
+            console.log('🔍 DEPURACIÓ - Filtre d\'usos actiu:', filtresActiusMapa.usos);
         }
         
     } catch (error) {
