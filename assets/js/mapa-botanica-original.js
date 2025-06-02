@@ -1,6 +1,6 @@
 /**
- * Mapa Botànica UAB - 
-
+ * Mapa Botànica UAB - VERSIÓ ACTUALITZADA AMB CORRECCIONS DELS POPUPS
+ * Integra les correccions dels modals amb el sistema popup-fixes.js
  */
 
 // Variables globals del mapa
@@ -510,8 +510,8 @@ function crearPopupHTML(planta) {
     
     html += '</div>';
     
-    // Botó per veure detalls
-    html += `<a href="#" class="boto-veure-detalls" data-planta-id="${plantaId}" data-planta-nom="${escapeHtml(planta.nom_cientific)}">Veure detalls</a>`;
+    // Botó per veure detalls - CORRECCIÓ: usar atributs compatibles amb popup-fixes.js
+    html += `<a href="#" class="boto-veure-detalls" data-planta-id="${plantaId}" data-planta="${plantaId}" data-planta-nom="${escapeHtml(planta.nom_cientific)}">Veure detalls</a>`;
     
     html += '</div>';
     
@@ -664,21 +664,8 @@ function configurarEventListenersMapa() {
         aplicarFiltresMapa();
     });
     
-    // Event per al botó "Veure detalls" als popups
-    jQuery(document).on('click', '.boto-veure-detalls', function(e) {
-        e.preventDefault();
-        
-        const plantaId = jQuery(this).data('planta-id');
-        const plantaNom = jQuery(this).data('planta-nom');
-        
-        console.log("🌱 Obrint detalls de planta des del mapa:", { plantaId, plantaNom });
-        
-        // Tancar popup del mapa
-        map.closePopup();
-        
-        // Obrir modal de detalls (simulem la funció AJAX)
-        obrirDetallsPlantaMapa(plantaId, plantaNom);
-    });
+    // CORRECCIÓ: Els event listeners dels popups ara estan gestionats per popup-fixes.js
+    console.log('🗺️ Event listeners del mapa configurats (els modals són gestionats per popup-fixes.js)');
 }
 
 // Variables dels filtres del mapa - CORREGIDES I SEPARADES
@@ -1053,242 +1040,6 @@ function eliminarFiltreMapa($element) {
     }
 }
 
-// Obrir detalls de planta (simulació sense AJAX de WordPress)
-function obrirDetallsPlantaMapa(plantaId, plantaNom) {
-    // Buscar la planta a les dades
-    const planta = gb_plantes_data.find(p => 
-        p.id === plantaId || 
-        sanitizeTitle(p.nom_cientific) === plantaId ||
-        p.nom_cientific.toLowerCase().replace(/\s+/g, '_') === plantaId
-    );
-    
-    if (!planta) {
-        console.error(`❌ No s'ha trobat la planta amb ID: ${plantaId}`);
-        return;
-    }
-    
-    // Generar HTML dels detalls
-    const htmlDetalls = generarHTMLDetallsPlanta(planta);
-    
-    // Assegurar-se que l'element modal existeix
-    if (jQuery('.planta-modal').length === 0) {
-        jQuery('body').append(`
-            <div class="planta-modal" style="display: none;">
-                <div class="planta-modal-contingut">
-                    <span class="planta-modal-tancar">&times;</span>
-                    <div class="planta-modal-cos"></div>
-                </div>
-            </div>
-        `);
-    }
-    
-    // Mostrar el modal amb els detalls
-    jQuery('.planta-modal-cos').html(htmlDetalls);
-    jQuery('.planta-modal').fadeIn(300).addClass('actiu');
-    jQuery('body').css('overflow', 'hidden');
-    
-    // Activar lightbox per a les imatges
-    activarLightbox();
-}
-
-// Generar HTML dels detalls d'una planta
-function generarHTMLDetallsPlanta(planta) {
-    const plantaId = planta.id || sanitizeTitle(planta.nom_cientific);
-    const imatges = planta.imatges || { principal: 'default_planta.jpg', principal_tipus: 'general', detalls: [], detalls_tipus: [] };
-    
-    let html = '<div class="planta-detall-individual">';
-    
-    // Informació principal
-    html += `<h2>${escapeHtml(planta.nom_comu)}</h2>`;
-    html += `<h3 class="nom-cientific">${escapeHtml(planta.nom_cientific)}</h3>`;
-    
-    // Galeria d'imatges
-    html += '<div class="planta-galeria-completa">';
-    
-    // Imatge principal
-    if (imatges.principal) {
-        const imatgeUrl = `assets/imatges/${imatges.principal}`;
-        html += '<div class="planta-imatge-principal">';
-        html += `<img src="${imatgeUrl}" alt="${escapeHtml(planta.nom_comu)}" data-tipus="${escapeHtml(imatges.principal_tipus)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=planta-sense-imatge>Imatge no disponible</div>'">`;
-
-        if (imatges.principal_tipus !== 'general') {
-            html += `<span class="planta-tipus-imatge-detall">${imatges.principal_tipus.charAt(0).toUpperCase() + imatges.principal_tipus.slice(1)}</span>`;
-        }
-        html += '</div>';
-    } else {
-        html += '<div class="planta-imatge-principal planta-sense-imatge">';
-        html += '<div>Imatge no disponible</div>';
-        html += '</div>';
-    }
-    
-    // Imatges de detall
-    if (imatges.detalls && imatges.detalls.length > 0) {
-        html += '<div class="planta-imatges-detall-galeria">';
-        imatges.detalls.forEach((imatge, i) => {
-            const imatgeUrl = `assets/imatges/${imatge}`;
-            const tipus = imatges.detalls_tipus[i] || 'general';
-            html += '<div class="planta-imatge-detall" data-tipus="' + escapeHtml(tipus) + '">';
-            html += `<img src="${imatgeUrl}" alt="Detall de ${escapeHtml(planta.nom_comu)}" data-tipus="${escapeHtml(tipus)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=planta-sense-imatge>Imatge no disponible</div>'">`;
-
-            if (tipus !== 'general') {
-                html += `<span class="planta-tipus-imatge-detall">${tipus.charAt(0).toUpperCase() + tipus.slice(1)}</span>`;
-            }
-            html += '</div>';
-        });
-        html += '</div>';
-    }
-    
-    html += '</div>'; // Fi de la galeria
-    
-    // Informació completa
-    html += '<div class="planta-info-completa">';
-    
-    // Descripció
-    html += '<div class="planta-seccio">';
-    html += '<h4>Descripció</h4>';
-    html += `<p>${escapeHtml(planta.descripcio)}</p>`;
-    html += '</div>';
-    
-    // Classificació
-    html += '<div class="planta-seccio">';
-    html += '<h4>Classificació</h4>';
-    html += `<p><strong>Família:</strong> ${escapeHtml(planta.familia)}</p>`;
-    html += `<p><strong>Tipus:</strong> ${planta.tipus.charAt(0).toUpperCase() + planta.tipus.slice(1)}</p>`;
-    html += '</div>';
-    
-    // Característiques
-    if (planta.caracteristiques && Object.keys(planta.caracteristiques).length > 0) {
-        html += '<div class="planta-seccio">';
-        html += '<h4>Característiques</h4>';
-        html += '<ul>';
-        
-        for (const [clau, valor] of Object.entries(planta.caracteristiques)) {
-            if (valor !== null && valor !== undefined && valor !== '') {
-                const clauFormatada = clau.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-                const valorFormatat = Array.isArray(valor) ? valor.map(v => escapeHtml(v)).join(', ') : escapeHtml(valor);
-                html += `<li><strong>${clauFormatada}:</strong> ${valorFormatat}</li>`;
-            }
-        }
-        
-        html += '</ul>';
-        html += '</div>';
-    }
-    
-    // Usos
-    if (planta.usos && planta.usos.length > 0) {
-        html += '<div class="planta-seccio">';
-        html += '<h4>Usos</h4>';
-        html += `<p>${planta.usos.map(u => escapeHtml(u)).join(', ')}</p>`;
-        html += '</div>';
-    }
-    
-    // Colors
-    if (planta.colors && planta.colors.length > 0) {
-        html += '<div class="planta-seccio">';
-        html += '<h4>Colors</h4>';
-        html += `<p>${planta.colors.map(c => c.charAt(0).toUpperCase() + c.slice(1)).map(c => escapeHtml(c)).join(', ')}</p>`;
-        html += '</div>';
-    }
-    
-    // Hàbitat
-    if (planta.habitat && planta.habitat.length > 0) {
-        html += '<div class="planta-seccio">';
-        html += '<h4>Hàbitat al campus</h4>';
-        html += '<ul>';
-        planta.habitat.forEach(habitat => {
-            const parts = habitat.split('(');
-            let habitatPrincipal = parts[0].trim().replace(/_/g, ' ');
-            let textHabitat = habitatPrincipal.charAt(0).toUpperCase() + habitatPrincipal.slice(1);
-            
-            if (parts.length > 1) {
-                const detalls = parts[1].replace(')', '').trim().replace(/_/g, ' ');
-                textHabitat += ` (${detalls})`;
-            }
-            
-            html += `<li>${escapeHtml(textHabitat)}</li>`;
-        });
-        html += '</ul>';
-        html += '</div>';
-    }
-    
-    // Coordenades
-    if (planta.coordenades && planta.coordenades.length > 0) {
-        html += '<div class="planta-seccio">';
-        html += '<h4>Localització al campus</h4>';
-        html += '<ul>';
-        planta.coordenades.forEach(coord => {
-            const zona = coord.zona || 'Campus UAB';
-            html += `<li><strong>${escapeHtml(zona)}</strong> `;
-            html += `Coordenades: ${coord.lat}, ${coord.lng}</li>`;
-        });
-        html += '</ul>';
-        html += '</div>';
-    }
-    
-    html += '</div>'; // Fi de planta-info-completa
-    html += '</div>'; // Fi de planta-detall-individual
-    
-    return html;
-}
-
-// Funcions del lightbox per a les imatges
-function activarLightbox() {
-    jQuery('.planta-imatge-detall img, .planta-imatge-principal img').on('click', function() {
-        const imgSrc = jQuery(this).attr('src');
-        const tipusImatge = jQuery(this).data('tipus') || 'general';
-        
-        // Crear el lightbox
-        const lightbox = jQuery('<div class="planta-lightbox">');
-        const img = jQuery('<img>').attr('src', imgSrc);
-        const tancaBtn = jQuery('<span class="planta-lightbox-tancar">&times;</span>');
-        
-        // Afegir elements al DOM
-        lightbox.append(img).append(tancaBtn).appendTo('body');
-        
-        // Mostrar amb animació
-        setTimeout(function() {
-            lightbox.addClass('actiu');
-        }, 10);
-        
-        // Afegir etiqueta de tipus si no és general
-        if (tipusImatge && tipusImatge !== 'general') {
-            const tipusEtiqueta = jQuery('<div class="planta-lightbox-tipus">' + tipusImatge + '</div>');
-            lightbox.append(tipusEtiqueta);
-        }
-        
-        // Esdeveniments de tancament
-        tancaBtn.on('click', function(e) {
-            e.stopPropagation();
-            tancarLightbox(lightbox);
-        });
-        
-        lightbox.on('click', function() {
-            tancarLightbox(lightbox);
-        });
-        
-        // Aturar la propagació del clic a la imatge
-        img.on('click', function(e) {
-            e.stopPropagation();
-        });
-        
-        // Tancar amb ESC
-        jQuery(document).on('keydown.lightbox', function(e) {
-            if (e.key === "Escape") {
-                tancarLightbox(lightbox);
-            }
-        });
-    });
-}
-
-// Funció per tancar el lightbox
-function tancarLightbox(lightbox) {
-    lightbox.removeClass('actiu');
-    setTimeout(function() {
-        lightbox.remove();
-        jQuery(document).off('keydown.lightbox');
-    }, 300);
-}
-
 // Funcions d'utilitat (duplicades per assegurar compatibilitat)
 function escapeHtml(text) {
     if (typeof text !== 'string') return text;
@@ -1304,3 +1055,5 @@ function sanitizeTitle(text) {
                .replace(/\-+/g, '-')
                .replace(/^-|-$/g, '');
 }
+
+console.log('✅ Mapa botànic carregat (versió actualitzada amb popup-fixes integrat)');
