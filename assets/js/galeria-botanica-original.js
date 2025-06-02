@@ -1,6 +1,7 @@
 /**
  * Galeria Botànica UAB - VERSIÓ CORREGIDA AMB SELECTORS ESPECÍFICS
  * Soluciona els problemes de filtres compartits entre galeria i mapa
+ * ACTUALITZAT: Correccions dels popups aplicades
  */
 
 // Assegurar-se que les funcions són globals
@@ -25,13 +26,14 @@ async function generarGaleriaHTML(plantes) {
     
     html += '</div>';
     
-    // Modal per a mostrar els detalls
-    html += `<div class="planta-modal" style="display: none;">
-        <div class="planta-modal-contingut">
-            <span class="planta-modal-tancar">&times;</span>
-            <div class="planta-modal-cos"></div>
-        </div>
-    </div>`;
+    // CORRECCIÓ: El modal ja existeix al HTML principal, no el duplicar
+    // Comentat per evitar duplicats:
+    // html += `<div class="planta-modal" style="display: none;">
+    //     <div class="planta-modal-contingut">
+    //         <span class="planta-modal-tancar">&times;</span>
+    //         <div class="planta-modal-cos"></div>
+    //     </div>
+    // </div>`;
     
     galeriaContainer.innerHTML = html;
     
@@ -469,6 +471,7 @@ function construirInfoCompletaCerca(planta) {
 
 /* ========================================================================
    EVENTS I FUNCIONALITAT DE LA GALERIA BOTÀNICA - SELECTORS ESPECÍFICS
+   ACTUALITZAT: Correccions dels popups aplicades
    ======================================================================== */
 
 // Variables globals de la galeria
@@ -489,6 +492,9 @@ function inicialitzarGaleria() {
     
     // Configurar event listeners específics per a la galeria
     configurarEventListenersGaleria();
+    
+    // CORRECCIÓ: No inicialitzar modal aquí (es fa al popup-fixes.js)
+    // inicialitzarModalGaleria();
     
     // Aplicar filtres inicials
     actualitzarFiltresActiusGaleria();
@@ -520,35 +526,21 @@ function configurarEventListenersGaleria() {
         aplicarFiltresGaleria();
     });
     
-    // Event listeners per obrir detalls de planta
+    // CORRECCIÓ: Event listeners per obrir detalls de planta millorats
+    // Aquests es gestionen millor al popup-fixes.js, però mantenim compatibilitat
     jQuery(document).on('click', '.galeria-botanica .planta-obrir-detall', function(e) {
         e.preventDefault();
         const plantaId = jQuery(this).data('planta');
         if (plantaId) {
-            obrirDetallsPlanta(plantaId);
+            // Comprovar si la funció global existeix (del popup-fixes.js)
+            if (typeof window.obrirDetallsPlanta === 'function') {
+                window.obrirDetallsPlanta(plantaId);
+            } else {
+                // Fallback a la funció local
+                obrirDetallsPlantaLocal(plantaId);
+            }
             // Actualitzar URL amb hash
             window.location.hash = `planta-${plantaId}`;
-        }
-    });
-    
-    // Event listeners per tancar el modal
-    jQuery(document).on('click', '.planta-modal-tancar, .planta-modal', function(e) {
-        if (e.target === this) {
-            tancarModal();
-            // Eliminar hash de l'URL
-            if (window.location.hash.startsWith('#planta-')) {
-                window.location.hash = '';
-            }
-        }
-    });
-    
-    // Tancar modal amb ESC
-    jQuery(document).keydown(function(e) {
-        if (e.key === "Escape" && modalObert) {
-            tancarModal();
-            if (window.location.hash.startsWith('#planta-')) {
-                window.location.hash = '';
-            }
         }
     });
 }
@@ -617,7 +609,7 @@ function gestionarClicFiltreGaleria($boto) {
                     if (verificarTotesOpcionsSeleccionadesGaleria(grupFiltre)) {
                         activarBotoTotsGaleria(grupFiltre);
                     }
-                }, 50); // Augmentat el delay per assegurar que l'estat està actualitzat
+                }, 50);
             }
         }
         
@@ -1017,8 +1009,11 @@ function aplicarCanviImatgesGaleria(tipusImatge) {
     }
 }
 
-// Obrir modal de detalls de planta (sense AJAX)
-function obrirDetallsPlanta(plantaId) {
+// CORRECCIÓ: Funció de fallback per obrir detalls localment
+// Aquesta funció s'utilitzarà només si popup-fixes.js no està carregat
+function obrirDetallsPlantaLocal(plantaId) {
+    console.log('⚠️ Usant funció local per obrir detalls (popup-fixes.js no disponible)');
+    
     // Buscar la planta a les dades
     const planta = gb_plantes_data.find(p => 
         p.id === plantaId || 
@@ -1031,8 +1026,9 @@ function obrirDetallsPlanta(plantaId) {
         return;
     }
     
-    // Assegurar-se que l'element modal existeix
-    if (jQuery('.planta-modal').length === 0) {
+    // Buscar o crear modal
+    let $modal = jQuery('.planta-modal');
+    if ($modal.length === 0) {
         jQuery('body').append(`
             <div class="planta-modal" style="display: none;">
                 <div class="planta-modal-contingut">
@@ -1041,87 +1037,36 @@ function obrirDetallsPlanta(plantaId) {
                 </div>
             </div>
         `);
+        $modal = jQuery('.planta-modal');
     }
     
     // Generar HTML dels detalls
     const htmlDetalls = generarHTMLDetallsPlanta(planta);
     
     // Mostrar el modal
-    jQuery('.planta-modal-cos').html(htmlDetalls);
-    jQuery('.planta-modal').fadeIn(300).addClass('actiu');
+    $modal.find('.planta-modal-cos').html(htmlDetalls);
+    $modal.css('display', 'flex').addClass('actiu');
     modalObert = true;
     jQuery('body').css('overflow', 'hidden');
     
-    // Activar lightbox per a les imatges
-    activarLightboxGaleria();
+    console.log('✅ Modal local obert');
 }
 
-// Tancar modal
-function tancarModal() {
-    jQuery('.planta-modal').fadeOut(300).removeClass('actiu');
-    modalObert = false;
-    jQuery('body').css('overflow', 'auto');
-}
-
-// Activar lightbox per a les imatges de detall (versió galeria)
-function activarLightboxGaleria() {
-    try {
-        jQuery('.planta-imatge-detall img, .planta-imatge-principal img').on('click', function() {
-            const imgSrc = jQuery(this).attr('src');
-            const tipusImatge = jQuery(this).data('tipus') || 'general';
-            
-            const lightbox = jQuery('<div class="planta-lightbox">');
-            const img = jQuery('<img>').attr('src', imgSrc);
-            const tancaBtn = jQuery('<span class="planta-lightbox-tancar">&times;</span>');
-            
-            lightbox.append(img).append(tancaBtn).appendTo('body');
-            
-            setTimeout(function() {
-                lightbox.addClass('actiu');
-            }, 10);
-            
-            if (tipusImatge && tipusImatge !== 'general') {
-                const tipusEtiqueta = jQuery('<div class="planta-lightbox-tipus">' + tipusImatge + '</div>');
-                lightbox.append(tipusEtiqueta);
-            }
-            
-            tancaBtn.on('click', function(e) {
-                e.stopPropagation();
-                tancarLightboxGaleria(lightbox);
-            });
-            
-            lightbox.on('click', function() {
-                tancarLightboxGaleria(lightbox);
-            });
-            
-            img.on('click', function(e) {
-                e.stopPropagation();
-            });
-            
-            jQuery(document).on('keydown.lightboxGaleria', function(e) {
-                if (e.key === "Escape") {
-                    tancarLightboxGaleria(lightbox);
-                }
-            });
-        });
-    } catch (error) {
-        console.error("❌ Error en activarLightboxGaleria:", error);
-    }
-}
-
-// Tancar lightbox de la galeria
-function tancarLightboxGaleria(lightbox) {
-    try {
-        lightbox.removeClass('actiu');
-        setTimeout(function() {
-            lightbox.remove();
-            jQuery(document).off('keydown.lightboxGaleria');
-        }, 300);
-    } catch (error) {
-        console.error("❌ Error en tancarLightboxGaleria:", error);
-        lightbox.remove();
-        jQuery(document).off('keydown.lightboxGaleria');
-    }
+// CORRECCIÓ: Funció local per tancar modal
+function tancarModalLocal() {
+    const $modal = jQuery('.planta-modal');
+    
+    if ($modal.length === 0) return;
+    
+    console.log('🚪 Tancant modal local...');
+    
+    $modal.removeClass('actiu');
+    setTimeout(() => {
+        $modal.css('display', 'none');
+        modalObert = false;
+        jQuery('body').css('overflow', 'auto');
+        $modal.find('.planta-modal-cos').empty();
+    }, 300);
 }
 
 // Verificar si hi ha un hash a l'URL per obrir directament una planta
@@ -1130,7 +1075,12 @@ function verificarHashURL() {
     if (hash && hash.startsWith('#planta-')) {
         const plantaId = hash.substring(8);
         setTimeout(function() {
-            obrirDetallsPlanta(plantaId);
+            // Prioritzar la funció global si existeix
+            if (typeof window.obrirDetallsPlanta === 'function') {
+                window.obrirDetallsPlanta(plantaId);
+            } else {
+                obrirDetallsPlantaLocal(plantaId);
+            }
         }, 500);
     }
 }
@@ -1284,4 +1234,11 @@ jQuery(window).on('load', verificarHashURL);
 // Assegurar funcions globals per compatibilitat
 window.generarGaleriaHTML = generarGaleriaHTML;
 window.mostrarFiltresActiusGaleria = mostrarFiltresActiusGaleria;
-window.obrirDetallsPlanta = obrirDetallsPlanta;
+window.generarHTMLDetallsPlanta = generarHTMLDetallsPlanta; // CORRECCIÓ: Fer aquesta funció global
+
+// CORRECCIÓ: No fer aquestes funcions globals si popup-fixes.js està present
+if (typeof window.obrirDetallsPlanta === 'undefined') {
+    window.obrirDetallsPlanta = obrirDetallsPlantaLocal;
+}
+
+console.log('✅ galeria-botanica-original.js carregat amb correccions aplicades');
