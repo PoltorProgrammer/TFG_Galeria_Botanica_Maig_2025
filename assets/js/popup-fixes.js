@@ -1,43 +1,294 @@
 /**
- * Correccions dels Popups - Galeria Botànica UAB
- * Fitxer que soluciona els problemes dels modals i lightbox
- * 
- * PROBLEMES SOLUCIONATS:
- * 1. Galeria: Pantalla negra sense contingut del modal
- * 2. Mapa: Modal descentrat i mal posicionat
- * 3. Lightbox: Z-index incorrecte i problemes d'esdeveniments
- * 
- * INSTRUCCIONS:
- * - Afegir aquest script DESPRÉS dels altres scripts a index.html
- * - No modificar les funcions existents, aquest script les substitueix
- * 
- * @author Correccions per Claude AI
- * @version 2.0
+ * Correccions dels Popups - VERSIÓ ROBUSTA
+ * Soluciona definitivamente tots els problemes de popups i modals
+ * IMPORTANT: Aquest script prevé duplicats i conflictes
  */
 
 (function() {
     'use strict';
     
-    console.log('🔧 === CARREGANT CORRECCIONS DELS POPUPS ===');
+    // Prevenir execució múltiple
+    if (window.POPUP_FIXES_LOADED) {
+        console.warn('⚠️ popup-fixes.js ja està carregat, evitant duplicat');
+        return;
+    }
+    window.POPUP_FIXES_LOADED = true;
     
-    // Variable global per controlar l'estat del modal
+    console.log('🔧 === INICIANT CORRECCIONS ROBUSTES DELS POPUPS ===');
+    
+    // Variables globals
     window.modalObert = false;
+    let modalElement = null;
     
     // ========================================================================
-    // FUNCIONS CORREGIDES PRINCIPALS
+    // APLICAR ESTILS CSS CRÍTICS IMMEDIATAMENT
+    // ========================================================================
+    
+    function aplicarEstilsImportants() {
+        const estilsId = 'popup-fixes-critical-styles';
+        
+        // Eliminar estils anteriors
+        const estilAnterior = document.getElementById(estilsId);
+        if (estilAnterior) {
+            estilAnterior.remove();
+        }
+        
+        const estils = document.createElement('style');
+        estils.id = estilsId;
+        estils.innerHTML = `
+            /* ESTILS CRÍTICS PER CORRECCIONS DE POPUP */
+            .planta-modal {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                background: rgba(0, 0, 0, 0.85) !important;
+                display: none !important;
+                align-items: center !important;
+                justify-content: center !important;
+                z-index: 999999 !important;
+                opacity: 0 !important;
+                transition: opacity 0.3s ease !important;
+                backdrop-filter: blur(5px) !important;
+                padding: 2vh !important;
+                box-sizing: border-box !important;
+                overflow: auto !important;
+            }
+            
+            .planta-modal.actiu {
+                display: flex !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+            
+            .planta-modal-contingut {
+                position: relative !important;
+                max-width: 90vw !important;
+                width: 900px !important;
+                max-height: 90vh !important;
+                background: white !important;
+                border-radius: 12px !important;
+                overflow: hidden !important;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important;
+                transform: scale(0.9) !important;
+                transition: transform 0.3s ease !important;
+                margin: auto !important;
+            }
+            
+            .planta-modal.actiu .planta-modal-contingut {
+                transform: scale(1) !important;
+            }
+            
+            .planta-modal-tancar {
+                position: absolute !important;
+                top: 15px !important;
+                right: 20px !important;
+                font-size: 28px !important;
+                font-weight: bold !important;
+                color: #666 !important;
+                cursor: pointer !important;
+                z-index: 1000000 !important;
+                transition: all 0.3s ease !important;
+                line-height: 1 !important;
+                width: 40px !important;
+                height: 40px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                border-radius: 50% !important;
+                background: rgba(255, 255, 255, 0.9) !important;
+                backdrop-filter: blur(5px) !important;
+            }
+            
+            .planta-modal-tancar:hover {
+                color: #333 !important;
+                background: rgba(255, 255, 255, 1) !important;
+                transform: scale(1.1) !important;
+            }
+            
+            .planta-modal-cos {
+                padding: 2rem !important;
+                max-height: calc(90vh - 4rem) !important;
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+            }
+            
+            /* LIGHTBOX CORRECCIONS */
+            .planta-lightbox {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                background: rgba(0, 0, 0, 0.9) !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                z-index: 1000000 !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+                transition: all 0.3s ease !important;
+                cursor: pointer !important;
+                padding: 2vh !important;
+                box-sizing: border-box !important;
+            }
+            
+            .planta-lightbox.actiu {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+            
+            .planta-lightbox img,
+            .planta-lightbox .lightbox-image {
+                max-width: 90vw !important;
+                max-height: 90vh !important;
+                object-fit: contain !important;
+                border-radius: 8px !important;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+                cursor: default !important;
+                transform: scale(0.9) !important;
+                transition: transform 0.3s ease !important;
+            }
+            
+            .planta-lightbox.actiu img,
+            .planta-lightbox.actiu .lightbox-image {
+                transform: scale(1) !important;
+            }
+            
+            .planta-lightbox-tancar {
+                position: absolute !important;
+                top: 30px !important;
+                right: 30px !important;
+                color: white !important;
+                font-size: 40px !important;
+                font-weight: bold !important;
+                cursor: pointer !important;
+                z-index: 1000001 !important;
+                transition: all 0.3s ease !important;
+                line-height: 1 !important;
+                width: 50px !important;
+                height: 50px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                border-radius: 50% !important;
+                background: rgba(0, 0, 0, 0.7) !important;
+                backdrop-filter: blur(10px) !important;
+            }
+            
+            .planta-lightbox-tancar:hover {
+                background: rgba(0, 0, 0, 0.9) !important;
+                transform: scale(1.1) !important;
+            }
+            
+            .planta-lightbox-tipus {
+                position: absolute !important;
+                bottom: 30px !important;
+                left: 30px !important;
+                background: rgba(33, 150, 243, 0.9) !important;
+                color: white !important;
+                padding: 10px 20px !important;
+                border-radius: 25px !important;
+                font-size: 16px !important;
+                font-weight: 600 !important;
+                text-transform: capitalize !important;
+                z-index: 1000001 !important;
+                backdrop-filter: blur(10px) !important;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+            }
+            
+            /* RESPONSIVE */
+            @media (max-width: 768px) {
+                .planta-modal {
+                    padding: 1vh !important;
+                }
+                
+                .planta-modal-contingut {
+                    width: 95vw !important;
+                    max-height: 95vh !important;
+                }
+                
+                .planta-modal-cos {
+                    padding: 1.5rem !important;
+                    max-height: calc(95vh - 3rem) !important;
+                }
+                
+                .planta-modal-tancar {
+                    top: 10px !important;
+                    right: 15px !important;
+                    width: 35px !important;
+                    height: 35px !important;
+                    font-size: 24px !important;
+                }
+                
+                .planta-lightbox {
+                    padding: 1vh !important;
+                }
+                
+                .planta-lightbox img,
+                .planta-lightbox .lightbox-image {
+                    max-width: 95vw !important;
+                    max-height: 95vh !important;
+                }
+                
+                .planta-lightbox-tancar {
+                    top: 20px !important;
+                    right: 20px !important;
+                    width: 40px !important;
+                    height: 40px !important;
+                    font-size: 32px !important;
+                }
+                
+                .planta-lightbox-tipus {
+                    bottom: 20px !important;
+                    left: 20px !important;
+                    padding: 8px 16px !important;
+                    font-size: 14px !important;
+                }
+            }
+            
+            /* OVERRIDES PER LEAFLET */
+            .leaflet-container {
+                z-index: 1 !important;
+            }
+            
+            .leaflet-control-container {
+                z-index: 1000 !important;
+            }
+            
+            .leaflet-popup {
+                z-index: 1010 !important;
+            }
+            
+            /* ASSEGURAR COMPATIBILITAT */
+            body.modal-obert {
+                overflow: hidden !important;
+            }
+        `;
+        
+        // Afegir al head immediatament
+        document.head.appendChild(estils);
+        console.log('🎨 Estils crítics aplicats immediatament');
+    }
+    
+    // Aplicar estils immediatament
+    aplicarEstilsImportants();
+    
+    // ========================================================================
+    // FUNCIONS PRINCIPALS
     // ========================================================================
     
     /**
-     * CORRECCIÓ PRINCIPAL: Obrir modal de detalls de planta
-     * Funciona tant per galeria com per mapa
+     * Obrir modal de detalls de planta (VERSIÓ ROBUSTA)
      */
     window.obrirDetallsPlanta = function(plantaId) {
-        console.log('🌱 Obrint detalls de planta:', plantaId);
+        console.log('🌱 [ROBUST] Obrint detalls de planta:', plantaId);
         
-        // Buscar la planta a les dades globals
+        // Buscar la planta
         if (!window.gb_plantes_data || window.gb_plantes_data.length === 0) {
             console.error('❌ gb_plantes_data no disponible');
-            return;
+            return false;
         }
         
         const planta = window.gb_plantes_data.find(p => 
@@ -47,369 +298,254 @@
         );
         
         if (!planta) {
-            console.error(`❌ No s'ha trobat la planta amb ID: ${plantaId}`);
-            return;
+            console.error(`❌ Planta no trobada: ${plantaId}`);
+            return false;
         }
         
         // Assegurar que el modal existeix
-        let $modal = jQuery('.planta-modal');
-        if ($modal.length === 0) {
-            // Crear modal si no existeix
-            crearModalPredefinit();
-            $modal = jQuery('.planta-modal');
-        }
+        modalElement = obtenirOCrearModal();
         
-        // Generar HTML dels detalls
+        // Generar contingut
         const htmlDetalls = generarHTMLDetallsPlanta(planta);
         
-        // CORRECCIÓ: Seqüència correcta d'obertura
-        $modal.find('.planta-modal-cos').html(htmlDetalls);
-        $modal.css({
-            'display': 'flex',
-            'opacity': '0',
-            'visibility': 'visible'
-        }).removeClass('actiu');
+        // SEQÜÈNCIA ROBUSTA D'OBERTURA
+        const modalCos = modalElement.querySelector('.planta-modal-cos');
+        if (modalCos) {
+            modalCos.innerHTML = htmlDetalls;
+        }
         
-        // Forçar reflow i després animar
-        $modal[0].offsetHeight;
+        // Mostrar modal amb seqüència controlada
+        modalElement.style.display = 'flex';
+        modalElement.style.opacity = '0';
+        modalElement.classList.remove('actiu');
         
+        // Forçar reflow
+        modalElement.offsetHeight;
+        
+        // Animar entrada amb timeout més llarg
         setTimeout(() => {
-            $modal.addClass('actiu').css('opacity', '1');
+            modalElement.classList.add('actiu');
+            modalElement.style.opacity = '1';
             window.modalObert = true;
-            jQuery('body').css('overflow', 'hidden');
+            document.body.classList.add('modal-obert');
             
-            console.log('✅ Modal obert correctament');
+            console.log('✅ [ROBUST] Modal obert correctament');
             
-            // Activar lightbox millorat
-            activarLightboxMillorat();
+            // Configurar lightbox
+            configurarLightboxRobus();
             
-            // Centrar modal amb delay per assegurar que el contingut s'ha renderitzat
-            setTimeout(() => centrarModal($modal), 100);
-        }, 50);
+            // Centrar modal
+            setTimeout(() => centrarModalRobus(), 100);
+        }, 100);
         
         return true;
     };
     
     /**
-     * Versió específica per al mapa (manté compatibilitat)
-     */
-    window.obrirDetallsPlantaMapa = function(plantaId, plantaNom) {
-        console.log('🗺️ Obrint detalls des del mapa:', { plantaId, plantaNom });
-        
-        // Tancar popup del mapa primer
-        if (window.map && typeof window.map.closePopup === 'function') {
-            window.map.closePopup();
-        }
-        
-        // Usar la funció principal
-        return window.obrirDetallsPlanta(plantaId);
-    };
-    
-    /**
-     * CORRECCIÓ: Tancar modal
+     * Tancar modal (VERSIÓ ROBUSTA)
      */
     window.tancarModal = function() {
-        const $modal = jQuery('.planta-modal');
+        if (!modalElement || !window.modalObert) return false;
         
-        if ($modal.length === 0 || !window.modalObert) return;
+        console.log('🚪 [ROBUST] Tancant modal...');
         
-        console.log('🚪 Tancant modal...');
-        
-        // Animar sortida
-        $modal.removeClass('actiu').css('opacity', '0');
+        modalElement.classList.remove('actiu');
+        modalElement.style.opacity = '0';
         
         setTimeout(() => {
-            $modal.css({
-                'display': 'none',
-                'visibility': 'hidden'
-            });
+            modalElement.style.display = 'none';
             window.modalObert = false;
-            jQuery('body').css('overflow', 'auto');
+            document.body.classList.remove('modal-obert');
             
-            // Netejar contingut per alliberar memòria
-            $modal.find('.planta-modal-cos').empty();
+            // Netejar contingut
+            const modalCos = modalElement.querySelector('.planta-modal-cos');
+            if (modalCos) {
+                modalCos.innerHTML = '';
+            }
             
             // Eliminar event listeners del lightbox
-            jQuery(document).off('keydown.lightbox');
+            document.removeEventListener('keydown', lightboxEscapeHandler);
             
-            console.log('✅ Modal tancat correctament');
+            console.log('✅ [ROBUST] Modal tancat correctament');
         }, 300);
+        
+        return true;
     };
     
     // ========================================================================
-    // FUNCIONS D'UTILITAT
+    // FUNCIONS D'UTILITAT ROBUSTES
     // ========================================================================
     
     /**
-     * Crear modal predefinit si no existeix
+     * Obtenir o crear modal de manera robusta
      */
-    function crearModalPredefinit() {
-        if (jQuery('.planta-modal').length > 0) return;
+    function obtenirOCrearModal() {
+        let modal = document.querySelector('.planta-modal');
         
-        const modalHTML = `
-            <div class="planta-modal" style="display: none;">
+        if (!modal) {
+            console.log('🏗️ Creant modal nou...');
+            modal = document.createElement('div');
+            modal.className = 'planta-modal';
+            modal.style.display = 'none';
+            modal.innerHTML = `
                 <div class="planta-modal-contingut">
                     <span class="planta-modal-tancar">&times;</span>
                     <div class="planta-modal-cos"></div>
                 </div>
-            </div>
-        `;
+            `;
+            document.body.appendChild(modal);
+        }
         
-        jQuery('body').append(modalHTML);
-        console.log('🏗️ Modal predefinit creat');
+        return modal;
     }
     
     /**
-     * Centrar modal correctament segons el contingut
+     * Centrar modal de manera robusta
      */
-    function centrarModal($modal) {
+    function centrarModalRobus() {
+        if (!modalElement) return;
+        
         try {
-            const $contingut = $modal.find('.planta-modal-contingut');
-            const windowHeight = jQuery(window).height();
-            const modalHeight = $contingut.outerHeight();
+            const contingut = modalElement.querySelector('.planta-modal-contingut');
+            const modalCos = modalElement.querySelector('.planta-modal-cos');
             
-            // Si el modal és massa alt, alinear a dalt amb scroll
+            if (!contingut || !modalCos) return;
+            
+            const windowHeight = window.innerHeight;
+            const modalHeight = contingut.offsetHeight;
+            
+            console.log('📐 [ROBUST] Centrant modal:', { windowHeight, modalHeight });
+            
             if (modalHeight > windowHeight * 0.85) {
-                $modal.css({
-                    'align-items': 'flex-start',
-                    'padding-top': '2vh',
-                    'padding-bottom': '2vh'
-                });
-                $contingut.css({
-                    'max-height': '96vh',
-                    'overflow-y': 'auto'
-                });
+                // Modal massa alt: scroll
+                modalElement.style.alignItems = 'flex-start';
+                modalElement.style.paddingTop = '2vh';
+                modalCos.style.maxHeight = '85vh';
             } else {
-                // Sinó, centrar verticalment
-                $modal.css({
-                    'align-items': 'center',
-                    'padding-top': '2vh',
-                    'padding-bottom': '2vh'
-                });
-                $contingut.css({
-                    'max-height': '90vh',
-                    'overflow-y': 'auto'
-                });
+                // Modal normal: centrat
+                modalElement.style.alignItems = 'center';
+                modalElement.style.paddingTop = '2vh';
+                modalCos.style.maxHeight = '80vh';
             }
-            
-            console.log('📐 Modal centrat:', { modalHeight, windowHeight });
         } catch (error) {
             console.error('❌ Error centrant modal:', error);
         }
     }
     
     /**
-     * CORRECCIÓ: Activar lightbox millorat
+     * Configurar lightbox robus
      */
-    function activarLightboxMillorat() {
+    function configurarLightboxRobus() {
         try {
-            // Eliminar event listeners anteriors per evitar duplicats
-            jQuery('.planta-imatge-detall img, .planta-imatge-principal img').off('click.lightbox-millorat');
+            // Eliminar event listeners anteriors
+            const imatges = modalElement.querySelectorAll('.planta-imatge-detall img, .planta-imatge-principal img');
             
-            jQuery('.planta-imatge-detall img, .planta-imatge-principal img').on('click.lightbox-millorat', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const $img = jQuery(this);
-                const imgSrc = $img.attr('src');
-                const tipusImatge = $img.data('tipus') || $img.parent().data('tipus') || 'general';
-                
-                if (!imgSrc) {
-                    console.warn('⚠️ No s\'ha trobat src de la imatge');
-                    return;
-                }
-                
-                console.log('🖼️ Obrint lightbox per:', imgSrc, 'Tipus:', tipusImatge);
-                
-                // Crear lightbox amb estructura millor
-                const lightboxHTML = `
-                    <div class="planta-lightbox" style="z-index: 10001;">
-                        <div class="lightbox-container">
-                            <img src="${imgSrc}" alt="Imatge ampliada" class="lightbox-image">
-                            <span class="planta-lightbox-tancar">&times;</span>
-                            ${tipusImatge !== 'general' ? 
-                                `<div class="planta-lightbox-tipus">${tipusImatge.charAt(0).toUpperCase() + tipusImatge.slice(1)}</div>` : 
-                                ''
-                            }
-                        </div>
-                    </div>
-                `;
-                
-                const $lightbox = jQuery(lightboxHTML);
-                
-                // Afegir al DOM
-                $lightbox.appendTo('body');
-                
-                // Animar entrada
-                setTimeout(() => {
-                    $lightbox.addClass('actiu');
-                }, 10);
-                
-                // Event listeners per tancar
-                configurarEventListenersLightbox($lightbox);
+            imatges.forEach(img => {
+                // Eliminar event listeners anteriors
+                img.removeEventListener('click', lightboxClickHandler);
+                // Afegir nou event listener
+                img.addEventListener('click', lightboxClickHandler);
             });
             
-            console.log('✅ Lightbox millorat activat');
+            console.log('🖼️ [ROBUST] Lightbox configurat per', imatges.length, 'imatges');
         } catch (error) {
-            console.error("❌ Error activant lightbox:", error);
+            console.error('❌ Error configurant lightbox:', error);
         }
     }
     
     /**
-     * Configurar event listeners del lightbox
+     * Handler per clic a imatge (lightbox)
      */
-    function configurarEventListenersLightbox($lightbox) {
-        // Tancar amb botó X
-        $lightbox.find('.planta-lightbox-tancar').on('click', function(e) {
+    function lightboxClickHandler(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const img = e.target;
+        const imgSrc = img.src;
+        const tipusImatge = img.dataset.tipus || img.parentElement.dataset.tipus || 'general';
+        
+        if (!imgSrc) {
+            console.warn('⚠️ No src trobat per lightbox');
+            return;
+        }
+        
+        console.log('🖼️ [ROBUST] Obrint lightbox:', imgSrc);
+        
+        // Crear lightbox
+        const lightbox = document.createElement('div');
+        lightbox.className = 'planta-lightbox';
+        lightbox.innerHTML = `
+            <div class="lightbox-container">
+                <img src="${imgSrc}" alt="Imatge ampliada" class="lightbox-image">
+                <span class="planta-lightbox-tancar">&times;</span>
+                ${tipusImatge !== 'general' ? 
+                    `<div class="planta-lightbox-tipus">${tipusImatge.charAt(0).toUpperCase() + tipusImatge.slice(1)}</div>` : 
+                    ''
+                }
+            </div>
+        `;
+        
+        // Afegir al DOM
+        document.body.appendChild(lightbox);
+        
+        // Animar entrada
+        setTimeout(() => {
+            lightbox.classList.add('actiu');
+        }, 10);
+        
+        // Event listeners per tancar
+        const tancarBtn = lightbox.querySelector('.planta-lightbox-tancar');
+        tancarBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            tancarLightbox($lightbox);
+            tancarLightbox(lightbox);
         });
         
-        // Tancar amb clic a l'overlay (però no a la imatge)
-        $lightbox.on('click', function(e) {
-            if (e.target === this || e.target.classList.contains('lightbox-container')) {
-                tancarLightbox($lightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.classList.contains('lightbox-container')) {
+                tancarLightbox(lightbox);
             }
         });
         
-        // Evitar tancar quan es clica la imatge
-        $lightbox.find('.lightbox-image').on('click', function(e) {
-            e.stopPropagation();
-        });
-        
-        // Tancar amb ESC
-        jQuery(document).off('keydown.lightbox').on('keydown.lightbox', function(e) {
-            if (e.key === "Escape") {
-                tancarLightbox($lightbox);
-            }
-        });
+        // ESC key
+        document.addEventListener('keydown', lightboxEscapeHandler);
+        lightbox.lightboxEscapeHandler = lightboxEscapeHandler; // Guardar referència
     }
     
     /**
-     * Tancar lightbox amb animació
+     * Handler per ESC key
      */
-    function tancarLightbox($lightbox) {
+    function lightboxEscapeHandler(e) {
+        if (e.key === 'Escape') {
+            const lightbox = document.querySelector('.planta-lightbox.actiu');
+            if (lightbox) {
+                tancarLightbox(lightbox);
+            }
+        }
+    }
+    
+    /**
+     * Tancar lightbox
+     */
+    function tancarLightbox(lightbox) {
         try {
-            console.log('🚪 Tancant lightbox...');
+            console.log('🚪 [ROBUST] Tancant lightbox...');
             
-            $lightbox.removeClass('actiu');
+            lightbox.classList.remove('actiu');
             setTimeout(() => {
-                $lightbox.remove();
-                jQuery(document).off('keydown.lightbox');
-                console.log('✅ Lightbox tancat');
+                lightbox.remove();
+                document.removeEventListener('keydown', lightboxEscapeHandler);
+                console.log('✅ [ROBUST] Lightbox tancat');
             }, 300);
         } catch (error) {
-            console.error("❌ Error tancant lightbox:", error);
-            $lightbox.remove();
-            jQuery(document).off('keydown.lightbox');
+            console.error('❌ Error tancant lightbox:', error);
+            lightbox.remove();
         }
     }
     
     // ========================================================================
-    // EVENT LISTENERS GLOBALS
+    // FUNCIONS D'UTILITAT NECESSÀRIES
     // ========================================================================
     
-    /**
-     * Configurar tots els event listeners necessaris
-     */
-    function configurarEventListenersGlobals() {
-        // Eliminar event listeners anteriors per evitar duplicats
-        jQuery(document).off('click.modal-global');
-        jQuery(document).off('click.modal-close-global');
-        jQuery(document).off('keydown.modal-global');
-        jQuery(document).off('click.mapa-detalls-global');
-        
-        // Tancar modal amb clic a l'overlay
-        jQuery(document).on('click.modal-global', '.planta-modal', function(e) {
-            if (e.target === this) {
-                window.tancarModal();
-                eliminarHashURL();
-            }
-        });
-        
-        // Tancar modal amb botó X
-        jQuery(document).on('click.modal-close-global', '.planta-modal-tancar', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            window.tancarModal();
-            eliminarHashURL();
-        });
-        
-        // Tancar modal amb ESC
-        jQuery(document).on('keydown.modal-global', function(e) {
-            if (e.key === "Escape" && window.modalObert) {
-                window.tancarModal();
-                eliminarHashURL();
-            }
-        });
-        
-        // Event listeners per als botons "Veure detalls" del mapa
-        jQuery(document).on('click.mapa-detalls-global', '.boto-veure-detalls', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const plantaId = jQuery(this).data('planta-id') || jQuery(this).data('planta');
-            const plantaNom = jQuery(this).data('planta-nom');
-            
-            if (!plantaId) {
-                console.error('❌ plantaId no trobat en:', this);
-                return;
-            }
-            
-            console.log("🌱 Detalls des del mapa:", { plantaId, plantaNom });
-            
-            // Obrir modal
-            window.obrirDetallsPlantaMapa(plantaId, plantaNom);
-            
-            // Actualitzar URL amb hash
-            window.location.hash = `planta-${plantaId}`;
-        });
-        
-        // Event listeners per als botons "Veure detalls" de la galeria
-        jQuery(document).on('click.galeria-detalls-global', '.planta-obrir-detall', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const plantaId = jQuery(this).data('planta');
-            
-            if (!plantaId) {
-                console.error('❌ plantaId no trobat en botó galeria:', this);
-                return;
-            }
-            
-            console.log("🌱 Detalls des de la galeria:", plantaId);
-            
-            // Obrir modal
-            window.obrirDetallsPlanta(plantaId);
-            
-            // Actualitzar URL amb hash
-            window.location.hash = `planta-${plantaId}`;
-        });
-        
-        console.log('✅ Event listeners globals configurats');
-    }
-    
-    /**
-     * Eliminar hash de l'URL si és de planta
-     */
-    function eliminarHashURL() {
-        if (window.location.hash.startsWith('#planta-')) {
-            // Usar replaceState per no afegir entrada a l'historial
-            if (history.replaceState) {
-                history.replaceState(null, null, window.location.pathname + window.location.search);
-            } else {
-                window.location.hash = '';
-            }
-        }
-    }
-    
-    // ========================================================================
-    // FUNCIONS D'UTILITAT (necessàries per compatibilitat)
-    // ========================================================================
-    
-    /**
-     * Sanititzar títol per crear ID
-     */
     function sanitizeTitle(text) {
         if (!text) return '';
         return text.toLowerCase()
@@ -419,9 +555,6 @@
                    .replace(/^-|-$/g, '');
     }
     
-    /**
-     * Escape HTML per seguretat
-     */
     function escapeHtml(text) {
         if (typeof text !== 'string') return text;
         const div = document.createElement('div');
@@ -430,23 +563,15 @@
     }
     
     /**
-     * Generar HTML dels detalls de planta
-     * Utilitza la funció global si existeix, sinó versió simplificada
+     * Generar HTML dels detalls (versió robusta)
      */
     function generarHTMLDetallsPlanta(planta) {
-        // Intentar usar la funció global primer
-        if (typeof window.generarHTMLDetallsPlanta === 'function') {
-            try {
-                return window.generarHTMLDetallsPlanta(planta);
-            } catch (error) {
-                console.warn('⚠️ Error amb funció global, usant fallback:', error);
-            }
+        // Prioritzar funció global si existeix
+        if (typeof window.generarHTMLDetallsPlanta === 'function' && window.generarHTMLDetallsPlanta !== generarHTMLDetallsPlanta) {
+            return window.generarHTMLDetallsPlanta(planta);
         }
         
-        // Fallback: versió simplificada
-        console.warn('⚠️ Usant versió simplificada de generarHTMLDetallsPlanta');
-        
-        const plantaId = planta.id || sanitizeTitle(planta.nom_cientific);
+        // Versió fallback robusta
         const imatges = planta.imatges || { principal: null, detalls: [] };
         
         let html = '<div class="planta-detall-individual">';
@@ -455,322 +580,236 @@
         html += `<h2>${escapeHtml(planta.nom_comu || planta.nom_cientific)}</h2>`;
         html += `<h3 class="nom-cientific">${escapeHtml(planta.nom_cientific)}</h3>`;
         
-        // Imatge principal si està disponible
+        // Galeria d'imatges
+        html += '<div class="planta-galeria-completa">';
+        
+        // Imatge principal
         if (imatges.principal) {
-            html += `<div class="planta-imatge-principal">
-                <img src="assets/imatges/${imatges.principal}" 
-                     alt="${escapeHtml(planta.nom_comu)}" 
-                     data-tipus="${escapeHtml(imatges.principal_tipus || 'general')}"
-                     onerror="this.style.display='none'">
-            </div>`;
+            html += '<div class="planta-imatge-principal">';
+            html += `<img src="assets/imatges/${imatges.principal}" 
+                         alt="${escapeHtml(planta.nom_comu)}" 
+                         data-tipus="${escapeHtml(imatges.principal_tipus || 'general')}"
+                         onerror="this.style.display='none'">`;
+            html += '</div>';
         }
         
-        // Descripció
-        if (planta.descripcio) {
-            html += `<div class="planta-seccio">
-                <h4>Descripció</h4>
-                <p>${escapeHtml(planta.descripcio)}</p>
-            </div>`;
-        }
-        
-        // Classificació
-        html += `<div class="planta-seccio">
-            <h4>Classificació</h4>
-            <p><strong>Família:</strong> ${escapeHtml(planta.familia || 'No especificada')}</p>
-            <p><strong>Tipus:</strong> ${escapeHtml((planta.tipus || 'desconegut').charAt(0).toUpperCase() + (planta.tipus || 'desconegut').slice(1))}</p>
-        </div>`;
-        
-        // Imatges de detall si n'hi ha
+        // Imatges de detall
         if (imatges.detalls && imatges.detalls.length > 0) {
-            html += '<div class="planta-seccio"><h4>Més imatges</h4><div class="planta-imatges-detall-galeria">';
-            imatges.detalls.forEach((img, i) => {
+            html += '<div class="planta-imatges-detall-galeria">';
+            imatges.detalls.forEach((imatge, i) => {
                 const tipus = imatges.detalls_tipus ? imatges.detalls_tipus[i] : 'general';
-                html += `<div class="planta-imatge-detall">
-                    <img src="assets/imatges/${img}" 
-                         alt="Detall ${tipus}" 
-                         data-tipus="${escapeHtml(tipus)}"
-                         onerror="this.style.display='none'">
-                </div>`;
+                html += `<div class="planta-imatge-detall" data-tipus="${escapeHtml(tipus || 'general')}">`;
+                html += `<img src="assets/imatges/${imatge}" 
+                             alt="Detall de ${escapeHtml(planta.nom_comu)}" 
+                             data-tipus="${escapeHtml(tipus || 'general')}"
+                             onerror="this.style.display='none'">`;
+                html += '</div>';
             });
-            html += '</div></div>';
+            html += '</div>';
         }
         
+        html += '</div>'; // Fi galeria
+        
+        // Informació bàsica
+        html += '<div class="planta-info-completa">';
+        
+        if (planta.descripcio) {
+            html += '<div class="planta-seccio">';
+            html += '<h4>Descripció</h4>';
+            html += `<p>${escapeHtml(planta.descripcio)}</p>`;
+            html += '</div>';
+        }
+        
+        html += '<div class="planta-seccio">';
+        html += '<h4>Classificació</h4>';
+        html += `<p><strong>Família:</strong> ${escapeHtml(planta.familia || 'No especificada')}</p>`;
+        html += `<p><strong>Tipus:</strong> ${escapeHtml((planta.tipus || 'desconegut').charAt(0).toUpperCase() + (planta.tipus || 'desconegut').slice(1))}</p>`;
         html += '</div>';
+        
+        html += '</div>'; // Fi info-completa
+        html += '</div>'; // Fi detall-individual
         
         return html;
     }
     
     // ========================================================================
-    // CSS CORRECCIONS PROGRAMÀTIQUES
+    // EVENT LISTENERS GLOBALS ROBUSTOS
     // ========================================================================
     
     /**
-     * Aplicar estils de correcció programàticament
+     * Configurar event listeners globals
      */
-    function aplicarEstilsCorreccio() {
-        const estilsId = 'popup-fixes-dynamic-styles';
+    function configurarEventListenersRobusts() {
+        // Eliminar event listeners anteriors
+        document.removeEventListener('click', globalClickHandler);
+        document.removeEventListener('keydown', globalKeyHandler);
         
-        // Eliminar estils anteriors si existeixen
-        jQuery(`#${estilsId}`).remove();
+        // Event listener global per clicks
+        document.addEventListener('click', globalClickHandler);
         
-        const estils = `
-            <style id="${estilsId}">
-                /* Correccions crítiques del modal */
-                .planta-modal {
-                    position: fixed !important;
-                    top: 0 !important;
-                    left: 0 !important;
-                    width: 100% !important;
-                    height: 100% !important;
-                    background: rgba(0, 0, 0, 0.8) !important;
-                    display: none !important;
-                    align-items: center !important;
-                    justify-content: center !important;
-                    z-index: 9999 !important;
-                    opacity: 0 !important;
-                    transition: opacity 0.3s ease !important;
-                    backdrop-filter: blur(10px) !important;
-                    padding: 2vh !important;
-                    box-sizing: border-box !important;
-                }
-                
-                .planta-modal.actiu {
-                    display: flex !important;
-                    opacity: 1 !important;
-                    visibility: visible !important;
-                }
-                
-                .planta-modal-contingut {
-                    position: relative !important;
-                    max-width: 900px !important;
-                    width: 100% !important;
-                    max-height: 90vh !important;
-                    background: white !important;
-                    border-radius: 12px !important;
-                    overflow: hidden !important;
-                    box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important;
-                    transform: scale(0.8) !important;
-                    transition: transform 0.3s ease !important;
-                }
-                
-                .planta-modal.actiu .planta-modal-contingut {
-                    transform: scale(1) !important;
-                }
-                
-                .planta-modal-cos {
-                    max-height: 80vh !important;
-                    overflow-y: auto !important;
-                    padding: 2rem !important;
-                }
-                
-                .planta-modal-tancar {
-                    position: absolute !important;
-                    top: 15px !important;
-                    right: 15px !important;
-                    font-size: 28px !important;
-                    font-weight: bold !important;
-                    color: #666 !important;
-                    cursor: pointer !important;
-                    z-index: 10001 !important;
-                    width: 35px !important;
-                    height: 35px !important;
-                    display: flex !important;
-                    align-items: center !important;
-                    justify-content: center !important;
-                    border-radius: 50% !important;
-                    background: rgba(255, 255, 255, 0.9) !important;
-                    transition: all 0.3s ease !important;
-                }
-                
-                .planta-modal-tancar:hover {
-                    background: rgba(255, 255, 255, 1) !important;
-                    color: #333 !important;
-                    transform: scale(1.1) !important;
-                }
-                
-                /* Correccions del lightbox */
-                .planta-lightbox {
-                    position: fixed !important;
-                    top: 0 !important;
-                    left: 0 !important;
-                    width: 100% !important;
-                    height: 100% !important;
-                    background: rgba(0, 0, 0, 0.9) !important;
-                    display: flex !important;
-                    align-items: center !important;
-                    justify-content: center !important;
-                    z-index: 10001 !important;
-                    opacity: 0 !important;
-                    visibility: hidden !important;
-                    transition: all 0.3s ease !important;
-                    cursor: pointer !important;
-                }
-                
-                .planta-lightbox.actiu {
-                    opacity: 1 !important;
-                    visibility: visible !important;
-                }
-                
-                .planta-lightbox img,
-                .planta-lightbox .lightbox-image {
-                    max-width: 90vw !important;
-                    max-height: 90vh !important;
-                    object-fit: contain !important;
-                    border-radius: 8px !important;
-                    cursor: default !important;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
-                }
-                
-                .planta-lightbox-tancar {
-                    position: absolute !important;
-                    top: 20px !important;
-                    right: 20px !important;
-                    color: white !important;
-                    font-size: 32px !important;
-                    font-weight: bold !important;
-                    cursor: pointer !important;
-                    z-index: 10002 !important;
-                    width: 40px !important;
-                    height: 40px !important;
-                    display: flex !important;
-                    align-items: center !important;
-                    justify-content: center !important;
-                    border-radius: 50% !important;
-                    background: rgba(0, 0, 0, 0.7) !important;
-                    transition: all 0.3s ease !important;
-                }
-                
-                .planta-lightbox-tancar:hover {
-                    background: rgba(0, 0, 0, 0.9) !important;
-                    transform: scale(1.1) !important;
-                }
-                
-                .planta-lightbox-tipus {
-                    position: absolute !important;
-                    bottom: 20px !important;
-                    left: 20px !important;
-                    background: rgba(33, 150, 243, 0.9) !important;
-                    color: white !important;
-                    padding: 8px 16px !important;
-                    border-radius: 20px !important;
-                    font-size: 14px !important;
-                    font-weight: 600 !important;
-                    text-transform: capitalize !important;
-                    z-index: 10002 !important;
-                }
-                
-                /* Responsive */
-                @media (max-width: 768px) {
-                    .planta-modal {
-                        padding: 1vh !important;
-                    }
-                    
-                    .planta-modal-contingut {
-                        width: 95vw !important;
-                        max-height: 95vh !important;
-                    }
-                    
-                    .planta-modal-cos {
-                        padding: 1.5rem !important;
-                        max-height: 85vh !important;
-                    }
-                    
-                    .planta-modal-tancar {
-                        top: 10px !important;
-                        right: 10px !important;
-                        width: 30px !important;
-                        height: 30px !important;
-                        font-size: 24px !important;
-                    }
-                }
-            </style>
-        `;
+        // Event listener global per teclat
+        document.addEventListener('keydown', globalKeyHandler);
         
-        jQuery('head').append(estils);
-        console.log('🎨 Estils de correcció aplicats');
+        console.log('✅ [ROBUST] Event listeners globals configurats');
+    }
+    
+    /**
+     * Handler global per clicks
+     */
+    function globalClickHandler(e) {
+        // Tancar modal amb clic a overlay
+        if (e.target.classList.contains('planta-modal')) {
+            window.tancarModal();
+            eliminarHashURL();
+            return;
+        }
+        
+        // Tancar modal amb botó X
+        if (e.target.classList.contains('planta-modal-tancar')) {
+            e.preventDefault();
+            e.stopPropagation();
+            window.tancarModal();
+            eliminarHashURL();
+            return;
+        }
+        
+        // Botó "Veure detalls" del mapa
+        if (e.target.classList.contains('boto-veure-detalls')) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const plantaId = e.target.dataset.plantaId || e.target.dataset.planta;
+            if (plantaId) {
+                console.log("🌱 [ROBUST] Detalls des del mapa:", plantaId);
+                
+                // Tancar popup del mapa
+                if (window.map && typeof window.map.closePopup === 'function') {
+                    window.map.closePopup();
+                }
+                
+                window.obrirDetallsPlanta(plantaId);
+                window.location.hash = `planta-${plantaId}`;
+            }
+            return;
+        }
+        
+        // Botó "Veure detalls" de la galeria
+        if (e.target.classList.contains('planta-obrir-detall')) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const plantaId = e.target.dataset.planta;
+            if (plantaId) {
+                console.log("🌱 [ROBUST] Detalls des de la galeria:", plantaId);
+                window.obrirDetallsPlanta(plantaId);
+                window.location.hash = `planta-${plantaId}`;
+            }
+            return;
+        }
+    }
+    
+    /**
+     * Handler global per teclat
+     */
+    function globalKeyHandler(e) {
+        if (e.key === 'Escape') {
+            if (window.modalObert) {
+                window.tancarModal();
+                eliminarHashURL();
+            }
+        }
+    }
+    
+    /**
+     * Eliminar hash de l'URL
+     */
+    function eliminarHashURL() {
+        if (window.location.hash.startsWith('#planta-')) {
+            if (history.replaceState) {
+                history.replaceState(null, null, window.location.pathname + window.location.search);
+            } else {
+                window.location.hash = '';
+            }
+        }
     }
     
     // ========================================================================
     // GESTIÓ D'HASH URLs
     // ========================================================================
     
-    /**
-     * Gestionar hash URL per obrir plantes directament
-     */
     function gestionarHashURL() {
         const hash = window.location.hash;
         if (hash && hash.startsWith('#planta-')) {
-            const plantaId = hash.substring(8); // Eliminar '#planta-'
-            console.log('🔗 Hash URL detectat:', plantaId);
+            const plantaId = hash.substring(8);
+            console.log('🔗 [ROBUST] Hash URL detectat:', plantaId);
             
-            // Esperar que les dades estiguin carregades
-            setTimeout(() => {
+            // Esperar que les dades estiguin disponibles
+            let intents = 0;
+            const maxIntents = 50; // 5 segons màxim
+            
+            const verificarDades = () => {
                 if (window.gb_plantes_data && window.gb_plantes_data.length > 0) {
-                    window.obrirDetallsPlanta(plantaId);
+                    setTimeout(() => window.obrirDetallsPlanta(plantaId), 100);
                 } else {
-                    console.warn('⚠️ Dades no disponibles per hash URL');
+                    intents++;
+                    if (intents < maxIntents) {
+                        setTimeout(verificarDades, 100);
+                    } else {
+                        console.warn('⚠️ [ROBUST] Timeout esperant dades per hash URL');
+                    }
                 }
-            }, 1000);
+            };
+            
+            verificarDades();
         }
     }
     
     // Event listener per canvis d'hash
-    jQuery(window).on('hashchange', function() {
-        gestionarHashURL();
-    });
+    window.addEventListener('hashchange', gestionarHashURL);
     
     // ========================================================================
     // INICIALITZACIÓ
     // ========================================================================
     
     /**
-     * Funció principal d'inicialització
+     * Inicialitzar correccions robustes
      */
-    function inicialitzarCorreccionsPopups() {
-        console.log('🔧 Inicialitzant correccions dels popups...');
-        
-        // Aplicar estils de correcció
-        aplicarEstilsCorreccio();
+    function inicialitzarCorreccionsRobustes() {
+        console.log('🔧 [ROBUST] Inicialitzant correccions...');
         
         // Configurar event listeners
-        configurarEventListenersGlobals();
+        configurarEventListenersRobusts();
         
-        // Crear modal si no existeix
-        crearModalPredefinit();
+        // Obtenir o crear modal
+        modalElement = obtenirOCrearModal();
         
         // Gestionar hash URL inicial
         gestionarHashURL();
         
-        console.log('✅ Correccions dels popups inicialitzades correctament');
+        console.log('✅ [ROBUST] Correccions inicialitzades correctament');
         
-        // Test de funcionament
-        if (typeof window.gb_plantes_data !== 'undefined') {
-            console.log(`📊 Dades disponibles: ${window.gb_plantes_data.length} plantes`);
-        } else {
-            console.warn('⚠️ gb_plantes_data no disponible encara');
-        }
+        // Informació de debug
+        setTimeout(() => {
+            if (window.gb_plantes_data) {
+                console.log(`📊 [ROBUST] Dades disponibles: ${window.gb_plantes_data.length} plantes`);
+            } else {
+                console.warn('⚠️ [ROBUST] gb_plantes_data no disponible encara');
+            }
+        }, 1000);
     }
     
     // ========================================================================
     // PUNT D'ENTRADA
     // ========================================================================
     
-    /**
-     * Esperar que jQuery estigui disponible i inicialitzar
-     */
-    function esperarJQueryInicialitzar() {
-        if (typeof jQuery !== 'undefined') {
-            jQuery(document).ready(function() {
-                inicialitzarCorreccionsPopups();
-            });
-        } else {
-            setTimeout(esperarJQueryInicialitzar, 100);
-        }
+    // Esperar que el DOM estigui llest
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', inicialitzarCorreccionsRobustes);
+    } else {
+        // DOM ja carregat
+        setTimeout(inicialitzarCorreccionsRobustes, 100);
     }
     
-    // Iniciar el procés
-    esperarJQueryInicialitzar();
-    
-    console.log('🔧 Correccions dels popups carregades i llestes');
+    console.log('🔧 [ROBUST] Correccions dels popups carregades i llestes');
     
 })();
