@@ -1,0 +1,659 @@
+/**
+ * MAPA.CSS - Mapa Botànica UAB Local
+ * Estils específics per al mapa interactiu
+ * Adaptat de mapa-botanica.css
+ */
+
+/* =============================================================================
+   CONTENIDOR PRINCIPAL DEL MAPA
+   ========================================================================== */
+
+.mapa-botanica-contenidor {
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+}
+
+/* =============================================================================
+   MAPA LEAFLET
+   ========================================================================== */
+
+#mapa-botanica {
+    width: 100%;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+/* =============================================================================
+   SISTEMA DE FILTRES DEL MAPA
+   ========================================================================== */
+
+.mapa-filtres {
+    background: #f8f9fa;
+    padding: 40px;
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin: 20px 0 40px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.filtres-grup {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Grups de filtres */
+.mapa-filtres .grup-filtre {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.mapa-filtres .etiqueta-filtre {
+    font-weight: 600;
+    color: #555;
+    margin-right: 5px;
+}
+
+.mapa-filtres .botons-filtre {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Botons de filtre */
+.mapa-filtres .filtre-boto {
+    padding: 6px 12px;
+    background: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 13px;
+    line-height: 1.25;
+    user-select: none;
+    box-shadow: none;
+    color: #333;
+    font-family: inherit;
+}
+
+.mapa-filtres .filtre-boto:hover {
+    background: #e0e0e0;
+    transform: translateY(-1px);
+}
+
+.mapa-filtres .filtre-boto.actiu {
+    background: #4CAF50;
+    border-color: #388E3C;
+    color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Colors específics per grups */
+.mapa-filtres .tipus-planta-filtre .filtre-boto.actiu {
+    background: #4CAF50;
+    border-color: #388E3C;
+}
+
+.mapa-filtres .habitat-filtre .filtre-boto.actiu {
+    background: #FF9800;
+    border-color: #EF6C00;
+}
+
+.mapa-filtres .floracio-filtre .filtre-boto.actiu {
+    background: #E91E63;
+    border-color: #C2185B;
+}
+
+.mapa-filtres .usos-filtre .filtre-boto.actiu {
+    background: #00BCD4;
+    border-color: #0097A7;
+}
+
+.mapa-filtres .fullatge-filtre .filtre-boto.actiu {
+    background: #795548;
+    border-color: #5D4037;
+}
+
+/* =============================================================================
+   FILTRES ACTIUS DEL MAPA
+   ========================================================================== */
+
+.mapa-filtres .filtres-actius-contenidor {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.mapa-filtres .etiqueta-filtres-actius {
+    font-weight: 600;
+    color: #555;
+}
+
+.mapa-filtres .filtres-actius {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mapa-filtres .filtre-actiu {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    background: #e0e0e0;
+    color: #333;
+}
+
+.mapa-filtres .filtre-actiu[data-group="tipus"] {
+    background: rgba(76,175,80,.2);
+    border: 1px solid rgba(76,175,80,.5);
+}
+
+.mapa-filtres .filtre-actiu[data-group="habitat"] {
+    background: rgba(255,152,0,.2);
+    border: 1px solid rgba(255,152,0,.5);
+}
+
+.mapa-filtres .filtre-actiu[data-group="floracio"] {
+    background: rgba(233,30,99,.2);
+    border: 1px solid rgba(233,30,99,.5);
+}
+
+.mapa-filtres .filtre-actiu[data-group="usos"] {
+    background: rgba(0,188,212,.2);
+    border: 1px solid rgba(0,188,212,.5);
+}
+
+.mapa-filtres .filtre-actiu[data-group="fullatge"] {
+    background: rgba(121,85,72,.2);
+    border: 1px solid rgba(121,85,72,.5);
+}
+
+.mapa-filtres .eliminar-filtre {
+    margin-left: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    line-height: 14px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.mapa-filtres .eliminar-filtre:hover {
+    background: rgba(0,0,0,.1);
+}
+
+/* Botó netejar */
+.mapa-filtres .netejar-filtres {
+    padding: 6px 14px;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .25s;
+    font-family: inherit;
+}
+
+.mapa-filtres .netejar-filtres:hover {
+    background: #e0e0e0;
+}
+
+/* =============================================================================
+   CERCADOR DEL MAPA
+   ========================================================================== */
+
+.cerca-contenidor {
+    display: flex;
+    width: 100%;
+}
+
+#mapa-cerca {
+    flex: 1 1 auto;
+    padding: 9px 15px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 15px;
+    transition: border .25s;
+    font-family: inherit;
+}
+
+#mapa-cerca:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+#mapa-cerca::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* =============================================================================
+   POPUPS I MARCADORS
+   ========================================================================== */
+
+.leaflet-popup-content {
+    width: 280px !important;
+}
+
+.planta-popup {
+    text-align: center;
+}
+
+.planta-popup-imatge {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.planta-popup h3 {
+    margin: 10px 0 5px;
+    color: #28a745;
+    font-size: 18px;
+}
+
+.planta-popup .nom-cientific {
+    font-style: italic;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.planta-popup-info {
+    text-align: left;
+    margin: 10px 0;
+}
+
+.planta-popup-info p {
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.boto-veure-detalls {
+    display: inline-block !important;
+    padding: 8px 16px !important;
+    background: #4CAF50 !important;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    transition: all 0.3s;
+    margin-top: 10px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.boto-veure-detalls:hover {
+    background: #388E3C !important;
+    transform: translateY(-2px);
+}
+
+/* =============================================================================
+   MARCADORS PERSONALITZATS
+   ========================================================================== */
+
+.marcador-planta {
+    background: #fff;
+    border: 3px solid #28a745;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.2);
+}
+
+.marcador-arbre {
+    border-color: #228b22;
+}
+
+.marcador-arbust {
+    border-color: #32cd32;
+}
+
+.marcador-herba {
+    border-color: #90ee90;
+}
+
+.marcador-liana {
+    border-color: #32cd32;
+}
+
+/* =============================================================================
+   CLUSTERS DE MARCADORS
+   ========================================================================== */
+
+.marker-cluster {
+    background-clip: padding-box;
+    border-radius: 50%;
+}
+
+.marker-cluster div {
+    background: #28a745;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.marker-cluster span {
+    color: #fff;
+    line-height: 1;
+}
+
+/* =============================================================================
+   POLÍGONS D'HÀBITATS
+   ========================================================================== */
+
+.habitat-popup {
+    text-align: center;
+}
+
+.habitat-popup h3 {
+    margin: 0 0 8px;
+    color: #333;
+    font-size: 16px;
+}
+
+.habitat-popup p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.habitat-id {
+    color: #666;
+    font-size: 12px;
+    font-style: italic;
+}
+
+/* =============================================================================
+   LLEGENDA
+   ========================================================================== */
+
+.mapa-llegenda {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.1);
+    z-index: 1000;
+    max-width: 200px;
+}
+
+.mapa-llegenda h4 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.llegenda-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.llegenda-item .habitat-color {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.icona-arbre,
+.icona-arbust,
+.icona-herba {
+    font-size: 16px;
+}
+
+/* Colors per hàbitats a la llegenda */
+.habitat-llegenda {
+    margin-top: 15px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.habitat-llegenda-titol {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+/* =============================================================================
+   CONTROL DE CAPES LEAFLET PERSONALITZAT
+   ========================================================================== */
+
+.leaflet-control-layers {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.1);
+}
+
+.leaflet-control-layers-expanded {
+    padding: 10px 15px;
+}
+
+.leaflet-control-layers label {
+    font-size: 14px;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.leaflet-control-layers input[type="radio"],
+.leaflet-control-layers input[type="checkbox"] {
+    margin: 0;
+}
+
+/* =============================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .mapa-filtres {
+        padding: 15px;
+    }
+    
+    .mapa-filtres .grup-filtre {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .mapa-filtres .botons-filtre {
+        width: 100%;
+        gap: 8px;
+    }
+    
+    .mapa-filtres .filtre-boto {
+        font-size: 13px;
+    }
+    
+    .cerca-contenidor {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    #mapa-cerca {
+        width: 100%;
+    }
+    
+    .mapa-llegenda {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        margin-top: 20px;
+        max-width: 100%;
+    }
+    
+    .leaflet-popup-content {
+        width: 250px !important;
+    }
+    
+    .planta-popup-imatge {
+        height: 120px;
+    }
+    
+    .marcador-planta {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mapa-filtres .filtre-boto {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    
+    .mapa-filtres .filtres-actius-contenidor {
+        gap: 6px;
+    }
+    
+    .mapa-filtres .filtre-actiu {
+        font-size: 11px;
+    }
+    
+    #mapa-botanica {
+        height: 400px !important;
+        border-radius: 4px;
+    }
+    
+    .leaflet-popup-content {
+        width: 200px !important;
+    }
+    
+    .planta-popup h3 {
+        font-size: 16px;
+    }
+    
+    .planta-popup-info p {
+        font-size: 12px;
+    }
+    
+    .boto-veure-detalls {
+        font-size: 13px !important;
+        padding: 6px 12px !important;
+    }
+    
+    .marcador-planta {
+        width: 25px;
+        height: 25px;
+        font-size: 14px;
+    }
+    
+    .mapa-llegenda {
+        padding: 10px;
+        font-size: 12px;
+    }
+    
+    .mapa-llegenda h4 {
+        font-size: 14px;
+    }
+    
+    .llegenda-item {
+        font-size: 12px;
+        gap: 6px;
+    }
+}
+
+/* =============================================================================
+   ESTILS ADDICIONALS PER A LEAFLET
+   ========================================================================== */
+
+/* Millorar la visibilitat dels controls de zoom */
+.leaflet-control-zoom a {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.leaflet-control-zoom a:hover {
+    background: #fff;
+    color: #4CAF50;
+}
+
+/* Estils per atribucions */
+.leaflet-control-attribution {
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 11px;
+}
+
+/* Personalització dels tooltips */
+.leaflet-tooltip {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    padding: 4px 8px;
+}
+
+.leaflet-tooltip-top:before {
+    border-top-color: rgba(0, 0, 0, 0.8);
+}
+
+.leaflet-tooltip-bottom:before {
+    border-bottom-color: rgba(0, 0, 0, 0.8);
+}
+
+.leaflet-tooltip-left:before {
+    border-left-color: rgba(0, 0, 0, 0.8);
+}
+
+.leaflet-tooltip-right:before {
+    border-right-color: rgba(0, 0, 0, 0.8);
+}
+
+/* =============================================================================
+   ESTILS PER AL MODAL DE DETALLS DEL MAPA
+   ========================================================================== */
+
+/* Enllaços dins del modal de detalls del mapa */
+.planta-seccio a {
+    color: #4CAF50;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.planta-seccio a:hover {
+    color: #388E3C;
+    text-decoration: underline;
+}
+
+/* Enllaços de coordenades */
+.coordenades-link {
+    font-size: 0.9em;
+    font-style: italic;
+    margin-left: 5px;
+}
+
+.coordenades-link:hover {
+    background: rgba(76, 175, 80, 0.1);
+    padding: 2px 4px;
+    border-radius: 3px;
+}
