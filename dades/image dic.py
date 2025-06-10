@@ -1,26 +1,27 @@
 import os
 import json
 from collections import defaultdict
-from datetime import datetime
 
-# Directori d'entrada
-dir_imatges = r'C:\______=====\imatges'
+# Carpeta on es troba aquest script
+directori_script = os.path.dirname(os.path.abspath(__file__))
 
-# Crear fitxer de sortida amb nom dinàmic
-timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-fitxer_sortida = fr'C:\______=====\diccionari-imatges.json'
+# Carpeta 'imatges' dins del mateix directori que el script
+dir_imatges = os.path.join(directori_script, 'imatges')
+
+# Fitxer de sortida a la mateixa carpeta que el script
+fitxer_sortida = os.path.join(directori_script, 'diccionari-imatges.json')
 
 # Crear estructura per guardar dades
 plantes = defaultdict(lambda: {"principal": None, "detalls": []})
 
-# Obtenir fitxers .jpg i .png
+# Obtenir fitxers .jpg, .png, .jpeg, .webp
 try:
     tots_els_fitxers = sorted(os.listdir(dir_imatges))
 except FileNotFoundError:
     print(f"Directori no trobat: {dir_imatges}")
     exit(1)
 
-fitxers_imatge = [f for f in tots_els_fitxers if f.lower().endswith(('.jpg', '.png'))]
+fitxers_imatge = [f for f in tots_els_fitxers if f.lower().endswith(('.jpg', '.png', '.jpeg', '.webp'))]
 
 # Processar fitxers
 for fitxer in fitxers_imatge:
