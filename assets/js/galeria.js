@@ -100,7 +100,10 @@ class GaleriaBotanica {
                 </div>
                 
                 <div class="cerca-contenidor">
-                    <input type="text" id="cerca-plantes" placeholder="Cercar per paraules clau..." class="cerca-input" />
+                    <div class="cerca-input-wrapper">
+                        <input type="text" id="cerca-plantes" placeholder="Cercar per paraules clau..." class="cerca-input" />
+                        <span class="cerca-clear" style="display: none;">&times;</span>
+                    </div>
                 </div>
             </div>
         `;
@@ -274,12 +277,17 @@ class GaleriaBotanica {
                 e.preventDefault();
                 this.handleOpenDetails(e.target);
             }
+            
+            if (e.target.matches('.cerca-clear')) {
+                this.clearSearchInput();
+            }
         });
         
         // Cerca
         const cercaInput = document.getElementById('cerca-plantes');
         if (cercaInput) {
             cercaInput.addEventListener('input', () => {
+                this.updateSearchClearButton();
                 this.aplicarFiltres();
             });
         }
@@ -293,14 +301,28 @@ class GaleriaBotanica {
         const value = button.dataset.filtre;
         
         if (group === 'imatge' || group === 'fullatge') {
-            // Comportament excloent
-            document.querySelectorAll(`.filtre-boto[data-group="${group}"]`)
-                .forEach(btn => btn.classList.remove('actiu'));
-            button.classList.add('actiu');
-            this.filtresActius[group] = value;
-            
-            if (group === 'imatge') {
-                this.aplicarCanviImatges(value);
+            // Comportament excloent amb reinici
+            if (button.classList.contains('actiu') && value !== 'tots') {
+                // Si ja està actiu i no és "tots", restablir a "tots"
+                document.querySelectorAll(`.filtre-boto[data-group="${group}"]`)
+                    .forEach(btn => btn.classList.remove('actiu'));
+                document.querySelector(`.filtre-boto[data-group="${group}"][data-filtre="tots"]`)
+                    .classList.add('actiu');
+                this.filtresActius[group] = 'tots';
+                
+                if (group === 'imatge') {
+                    this.aplicarCanviImatges('tots');
+                }
+            } else {
+                // Comportament normal d'activació
+                document.querySelectorAll(`.filtre-boto[data-group="${group}"]`)
+                    .forEach(btn => btn.classList.remove('actiu'));
+                button.classList.add('actiu');
+                this.filtresActius[group] = value;
+                
+                if (group === 'imatge') {
+                    this.aplicarCanviImatges(value);
+                }
             }
             
             this.updateActiveFilters();
@@ -1202,8 +1224,40 @@ class GaleriaBotanica {
         const searchInput = document.getElementById('cerca-plantes');
         if (searchInput) {
             searchInput.addEventListener('input', () => {
+                this.updateSearchClearButton();
                 this.aplicarFiltres();
             });
+            
+            // Inicialitzar estat de la creueta
+            this.updateSearchClearButton();
+        }
+    }
+
+    /**
+     * Netejar camp de cerca
+     */
+    clearSearchInput() {
+        const searchInput = document.getElementById('cerca-plantes');
+        if (searchInput) {
+            searchInput.value = '';
+            this.updateSearchClearButton();
+            this.aplicarFiltres();
+        }
+    }
+
+    /**
+     * Actualitzar visibilitat de la creueta de cerca
+     */
+    updateSearchClearButton() {
+        const searchInput = document.getElementById('cerca-plantes');
+        const clearButton = document.querySelector('.cerca-clear');
+        
+        if (searchInput && clearButton) {
+            if (searchInput.value.trim() !== '') {
+                clearButton.style.display = 'block';
+            } else {
+                clearButton.style.display = 'none';
+            }
         }
     }
 
