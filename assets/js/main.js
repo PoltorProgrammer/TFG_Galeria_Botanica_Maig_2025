@@ -2,6 +2,7 @@
  * MAIN.JS - Galeria Botànica UAB Local
  * Controlador principal de l'aplicació
  * Gestiona: càrrega de dades, pestanyes, inicialització global
+ * ACTUALITZAT: Preparació de dades de colors per al mapa
  */
 
 class GaleriaBotanicaApp {
@@ -69,8 +70,8 @@ class GaleriaBotanicaApp {
                 // Trigger resize en cas que el mapa necessiti reajustar-se
                 if (targetTab === 'mapa' && this.components.mapa) {
                     setTimeout(() => {
-                        if (this.components.mapa.invalidateSize) {
-                            this.components.mapa.invalidateSize();
+                        if (this.components.mapa.map && this.components.mapa.map.invalidateSize) {
+                            this.components.mapa.map.invalidateSize();
                         }
                     }, 100);
                 }
@@ -184,7 +185,7 @@ class GaleriaBotanicaApp {
     }
 
     /**
-     * Preparar dades per al mapa
+     * Preparar dades per al mapa (ACTUALITZAT PER AFEGIR COLORS)
      */
     prepareMapData() {
         return this.dades.plantes.map(planta => {
@@ -194,6 +195,7 @@ class GaleriaBotanicaApp {
             return {
                 ...planta,
                 imatge: img_url,
+                colors_norm: this.normalizeArray(planta.colors),                    // AFEGIT PER COLORS
                 habitat_norm: this.normalizeArray(planta.habitat),
                 floracio_norm: this.normalizeArray(planta.caracteristiques?.floracio),
                 usos_norm: this.normalizeArray(planta.usos),
