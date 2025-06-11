@@ -59,18 +59,18 @@ galeria-botanica-uab/
 ├── index.html                 # Pàgina principal
 ├── assets/
 │   ├── css/
-│   │   ├── main.css          # Estils base i sistema de pestanyes
-│   │   ├── galeria.css       # Estils específics de la galeria
-│   │   └── mapa.css          # Estils específics del mapa
+│   │   ├── main.css             # Estils base i sistema de pestanyes
+│   │   ├── galeria.css          # Estils específics de la galeria
+│   │   └── mapa.css             # Estils específics del mapa
 │   └── js/
-│       ├── main.js           # Controlador principal i gestió de dades
-│       ├── galeria.js        # Lògica de la galeria i filtres
-│       └── mapa.js           # Lògica del mapa interactiu
+│       ├── main.js              # Controlador principal i gestió de dades
+│       ├── galeria.js           # Lògica de la galeria i filtres
+│       └── mapa.js              # Lògica del mapa interactiu
 └── dades/
-    ├── plantes.json          # Base de dades de plantes
+    ├── plantes.json             # Base de dades de plantes
     ├── diccionari-imatges.json  # Índex d'imatges per espècie
-    ├── imatges/              # Col·lecció d'imatges de plantes
-    └── geojson/              # Fitxers de zones d'hàbitat
+    ├── imatges/                 # Col·lecció d'imatges de plantes
+    └── geojson/                 # Fitxers de zones d'hàbitat
 ```
 
 ## 🚀 Com Executar Localment
