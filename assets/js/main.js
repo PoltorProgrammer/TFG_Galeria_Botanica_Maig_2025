@@ -1,6 +1,8 @@
 /**
  * MAIN.JS - Galeria Botànica UAB Local
  * Controlador principal de l'aplicació
+ * VERSIÓ MILLORADA AMB PÀGINA D'INICI
+ * Gestiona: càrrega de dades, pestanyes, inicialització global, funcionalitats d'inici
  */
 
 class GaleriaBotanicaApp {
@@ -165,17 +167,19 @@ class GaleriaBotanicaApp {
      */
     async loadTabComponent(tab) {
         if (tab === 'galeria' && !this.components.galeria) {
+            console.log('🌿 Inicialitzant galeria...');
             await this.loadEssentialData();
             if (typeof GaleriaBotanica !== 'undefined') {
                 this.components.galeria = new GaleriaBotanica();
-                console.log('✅ Galeria inicialitzada');
+                console.log('✅ Galeria inicialitzada amb dades');
             }
         } else if (tab === 'mapa' && !this.components.mapa) {
+            console.log('🗺️ Inicialitzant mapa...');
             await this.loadEssentialData();
             setTimeout(() => {
                 if (typeof MapaBotanica !== 'undefined') {
                     this.components.mapa = new MapaBotanica();
-                    console.log('✅ Mapa inicialitzat');
+                    console.log('✅ Mapa inicialitzat amb dades');
                 }
             }, 100);
         }
@@ -504,10 +508,11 @@ class GaleriaBotanicaApp {
     }
 
     /**
-     * Càrrega de dades essencials (quan es necessiti)
+     * Carregar dades essencials (quan es necessiti)
      */
     async loadEssentialData() {
         if (this.dades.plantes && this.dades.diccionariImatges) {
+            console.log('📋 Dades ja carregades, reutilitzant...');
             return; // Ja carregades
         }
 
@@ -530,8 +535,10 @@ class GaleriaBotanicaApp {
             // Carregar GeoJSON files (opcional)
             await this.loadGeoJSONFiles();
             
-            // Crear variables globals que esperen els components
+            // Crear variables globals IMMEDIATAMENT després de carregar dades
             this.createGlobalVariables();
+            
+            console.log('🎯 Dades carregades i variables globals creades');
             
         } catch (error) {
             console.error('❌ Error carregant dades essencials:', error);
@@ -543,6 +550,9 @@ class GaleriaBotanicaApp {
      * Crear variables globals per als components
      */
     createGlobalVariables() {
+        // Assegurar que window.galeriaBotanicaApp estigui disponible
+        window.galeriaBotanicaApp = this;
+        
         window.gb_vars = {
             ajaxurl: null, // No necessari en versió local
             dades_plantes: this.dades.plantes,
@@ -555,6 +565,12 @@ class GaleriaBotanicaApp {
             dades_plantes: this.prepareMapData(),
             geojson_habitats: this.dades.geojsonHabitats
         };
+        
+        console.log('🌐 Variables globals creades:', {
+            plantes: this.dades.plantes?.length || 0,
+            imatges: Object.keys(this.dades.diccionariImatges || {}).length,
+            geojson: Object.keys(this.dades.geojsonHabitats).length
+        });
     }
 
     /**
@@ -762,17 +778,33 @@ class GaleriaBotanicaApp {
      * Funcions d'utilitat per als components
      */
     static obtenirDetallsPlanta(plantaId) {
+        console.log('🔍 Buscant detalls per:', plantaId);
+        
         const app = window.galeriaBotanicaApp;
-        if (!app || !app.dades.plantes) return null;
+        if (!app) {
+            console.error('❌ window.galeriaBotanicaApp no disponible');
+            return null;
+        }
+        
+        if (!app.dades.plantes) {
+            console.error('❌ Dades de plantes no carregades');
+            return null;
+        }
         
         const planta = app.dades.plantes.find(p => 
             p.id === plantaId || 
             app.sanitizeTitle(p.nom_cientific) === plantaId
         );
         
-        if (!planta) return null;
+        if (!planta) {
+            console.error('❌ Planta no trobada:', plantaId);
+            console.log('📋 Plantes disponibles:', app.dades.plantes.map(p => ({ id: p.id, nom: p.nom_cientific, sanitized: app.sanitizeTitle(p.nom_cientific) })));
+            return null;
+        }
         
         const imatges = app.obtenirImatgesPlanta(planta.nom_cientific);
+        
+        console.log('✅ Detalls trobats per:', planta.nom_comu);
         
         return {
             planta: planta,
@@ -795,7 +827,11 @@ class GaleriaBotanicaApp {
  * Inicialització quan el DOM estigui carregat
  */
 document.addEventListener('DOMContentLoaded', () => {
+    // Crear la instància principal
     window.galeriaBotanicaApp = new GaleriaBotanicaApp();
+    
+    // Assegurar que la referència estigui disponible globalment
+    console.log('🌍 Instància principal creada i disponible globalment');
 });
 
 /**
