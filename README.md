@@ -138,9 +138,9 @@ Aquest projecte té una clara vocació **educativa i divulgativa**. Si ets docen
 
 Per a més informació sobre el projecte, col·laboracions o adaptacions:
 
-- **Email**: [tu-email@uab.cat]
-- **LinkedIn**: [El teu perfil]
-- **Memòria completa**: [Enllaç al document acadèmic]
+[![Email](https://img.shields.io/badge/📧%20Contacta%20per%20Email-UAB-red?style=for-the-badge)](mailto:1642196@uab.cat)
+[![LinkedIn](https://img.shields.io/badge/💼%20LinkedIn%20Profile-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tom%C3%A1s-gonz%C3%A1lez-bartomeu-573a98222/)
+[![Memòria TFG](https://img.shields.io/badge/📖%20Memòria%20Digital%20TFG-28a745?style=for-the-badge&logo=github&logoColor=white)](https://poltorprogrammer.github.io/Memoria_TFG_Maig_2025/Memoria_Digital.html)
 
 ---
 
