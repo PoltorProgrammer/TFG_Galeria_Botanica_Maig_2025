@@ -10,6 +10,7 @@ class MapaBotanica {
         this.markers = null;
         this.totsElsMarcadors = [];
         this.habitatsLayers = {};
+        this.habitatsVisible = true; // NOU: Controlar visibilitat dels hàbitats
         
         // FILTRES CORREGITS: Multi-selecció per tots excepte fullatge
         this.filtresActius = {
@@ -31,8 +32,10 @@ class MapaBotanica {
             this.initializeMap();
             await this.loadMarkers();
             await this.loadHabitats();
+            this.addHabitatToggleControl(); // NOU: Afegir control d'hàbitats
             this.setupEventListeners();
             this.setupModal();
+            this.initSearchFunctionality(); // NOU: Inicialitzar cerca millorada
             
             console.log("Mapa inicialitzat correctament");
         } catch (error) {
@@ -256,8 +259,172 @@ class MapaBotanica {
     }
 
     /**
-     * Carregar hàbitats GeoJSON
+     * AFEGIR CONTROL TOGGLE PER HÀBITATS - NOVA FUNCIONALITAT
      */
+    addHabitatToggleControl() {
+        // Afegir estils CSS per al control
+        this.addHabitatControlStyles();
+        
+        // Crear control personalitzat per als hàbitats
+        const HabitatControl = L.Control.extend({
+            options: {
+                position: 'topright'
+            },
+            
+            onAdd: function(map) {
+                const container = L.DomUtil.create('div', 'leaflet-control-habitat leaflet-bar');
+                
+                const button = L.DomUtil.create('a', 'leaflet-control-habitat-toggle', container);
+                button.innerHTML = '🏞️'; // Icona de paisatge
+                button.href = '#';
+                button.title = 'Mostrar/Amagar zones d\'hàbitat';
+                button.setAttribute('role', 'button');
+                button.setAttribute('aria-label', 'Toggle habitat zones visibility');
+                
+                // Event per commutació
+                L.DomEvent.on(button, 'click', function(e) {
+                    L.DomEvent.stopPropagation(e);
+                    L.DomEvent.preventDefault(e);
+                    
+                    // Accés a la instància del mapa a través del context
+                    const mapaInstance = window.mapaBotanicaInstance;
+                    if (mapaInstance) {
+                        mapaInstance.toggleHabitats();
+                        
+                        // Actualitzar aparença del botó
+                        if (mapaInstance.habitatsVisible) {
+                            button.classList.remove('habitat-hidden');
+                            button.title = 'Amagar zones d\'hàbitat';
+                        } else {
+                            button.classList.add('habitat-hidden');
+                            button.title = 'Mostrar zones d\'hàbitat';
+                        }
+                    }
+                });
+                
+                return container;
+            }
+        });
+        
+        // Afegir control al mapa i guardar referència a la instància
+        new HabitatControl().addTo(this.map);
+        window.mapaBotanicaInstance = this;
+        
+        console.log('✅ Control d\'hàbitats afegit');
+    }
+
+    /**
+     * AFEGIR ESTILS CSS PER AL CONTROL D'HÀBITATS
+     */
+    addHabitatControlStyles() {
+        const styles = `
+            /* Control d'hàbitats */
+            .leaflet-control-habitat {
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 4px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                margin-bottom: 5px;
+            }
+            
+            .leaflet-control-habitat-toggle {
+                background: #fff;
+                color: #333;
+                display: block;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                text-decoration: none;
+                font-size: 16px;
+                border-radius: 4px;
+                transition: all 0.2s ease;
+                cursor: pointer;
+                border: 1px solid rgba(0,0,0,0.1);
+            }
+            
+            .leaflet-control-habitat-toggle:hover {
+                background: #f0f0f0;
+                transform: scale(1.05);
+            }
+            
+            .leaflet-control-habitat-toggle.habitat-hidden {
+                background: #666;
+                color: #fff;
+                opacity: 0.7;
+            }
+            
+            .leaflet-control-habitat-toggle.habitat-hidden:hover {
+                background: #555;
+                opacity: 1;
+            }
+        `;
+        
+        // Afegir estils al document si no existeixen
+        const styleId = 'habitat-control-styles';
+        if (!document.getElementById(styleId)) {
+            const styleSheet = document.createElement('style');
+            styleSheet.type = 'text/css';
+            styleSheet.id = styleId;
+            styleSheet.innerHTML = styles;
+            document.head.appendChild(styleSheet);
+        }
+    }
+
+    /**
+     * TOGGLE VISIBILITAT HÀBITATS - NOVA FUNCIONALITAT
+     */
+    toggleHabitats() {
+        this.habitatsVisible = !this.habitatsVisible;
+        
+        console.log(`🏞️ ${this.habitatsVisible ? 'Mostrant' : 'Amagant'} hàbitats`);
+        
+        Object.values(this.habitatsLayers).forEach(layer => {
+            if (this.habitatsVisible) {
+                // Mostrar hàbitat
+                if (!this.map.hasLayer(layer)) {
+                    this.map.addLayer(layer);
+                }
+            } else {
+                // Amagar hàbitat
+                if (this.map.hasLayer(layer)) {
+                    this.map.removeLayer(layer);
+                }
+            }
+        });
+        
+        console.log(`📊 Hàbitats ara ${this.habitatsVisible ? 'visibles' : 'amagats'}`);
+    }
+
+    /**
+     * INICIALITZAR FUNCIONALITAT DE CERCA MILLORADA - NOVA FUNCIONALITAT
+     */
+    initSearchFunctionality() {
+        const searchInput = document.getElementById('mapa-cerca');
+        const clearButton = document.querySelector('.mapa-filtres .cerca-clear');
+        
+        if (!searchInput || !clearButton) {
+            console.warn('Elements de cerca no trobats per inicialització millorada');
+            return;
+        }
+        
+        // Event de input per actualitzar creueta
+        searchInput.addEventListener('input', () => {
+            this.updateSearchClearButton();
+            this.aplicarFiltres();
+        });
+        
+        // Event per netejar amb Enter
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.clearSearchInput();
+            }
+        });
+        
+        // Inicialitzar estat de la creueta
+        this.updateSearchClearButton();
+        
+        console.log('🔍 Funcionalitat de cerca millorada inicialitzada');
+    }
     async loadHabitats() {
         const geojsonData = window.mb_vars?.geojson_habitats || {};
         
@@ -371,8 +538,9 @@ class MapaBotanica {
                 return;
             }
             
-            // Netejar cerca
-            if (e.target.matches('.cerca-clear')) {
+            // Netejar cerca - MILLORAT per selector específic
+            if (e.target.matches('.mapa-filtres .cerca-clear')) {
+                console.log(`🧹 Netejant cerca via creueta`);
                 this.clearSearchInput();
                 return;
             }
@@ -1327,25 +1495,41 @@ class MapaBotanica {
         }));
     }
 
+    /**
+     * NETEJAR CAMP DE CERCA - MILLORAT
+     */
     clearSearchInput() {
         const searchInput = document.getElementById('mapa-cerca');
         if (searchInput) {
+            console.log('🧹 Netejant camp de cerca');
             searchInput.value = '';
+            searchInput.focus(); // Mantenir focus per UX millorada
             this.updateSearchClearButton();
             this.aplicarFiltres();
         }
     }
 
+    /**
+     * ACTUALITZAR VISIBILITAT CREUETA DE CERCA - MILLORAT
+     */
     updateSearchClearButton() {
         const searchInput = document.getElementById('mapa-cerca');
-        const clearButton = document.querySelector('.cerca-clear');
+        const clearButton = document.querySelector('.mapa-filtres .cerca-clear');
         
         if (searchInput && clearButton) {
-            if (searchInput.value.trim() !== '') {
-                clearButton.style.display = 'block';
+            const hasText = searchInput.value.trim() !== '';
+            
+            clearButton.style.display = hasText ? 'block' : 'none';
+            
+            // Millorar accessibilitat
+            if (hasText) {
+                clearButton.setAttribute('aria-label', `Netejar cerca: "${searchInput.value}"`);
             } else {
-                clearButton.style.display = 'none';
+                clearButton.removeAttribute('aria-label');
             }
+            
+            // Debug visual opcional
+            // console.log(`🔍 Creueta de cerca: ${hasText ? 'visible' : 'amagada'}`);
         }
     }
 
