@@ -1,352 +1,147 @@
-# 🌿 Galeria Botànica UAB
+# Galeria i Mapa Botànic del Campus UAB 🌿
 
-**Plataforma interactiva per explorar la flora del campus de la Universitat Autònoma de Barcelona**
+> **Versió HTML estàtica d'un plugin WordPress desenvolupat per al TFG en Biologia Ambiental**
 
-[![GitHub](https://img.shields.io/badge/GitHub-Deployer-darkgreen)](https://poltorprogrammer.github.io/TFG_Galeria_Botanica_Maig_2025)
-[![Versió](https://img.shields.io/badge/versió-2.0-green.svg)](https://github.com/PoltorProgrammer/TFG_Galeria_Botanica_Maig_2025)
-[![Llicència MIT](https://img.shields.io/badge/llicència-MIT-blue.svg)](LICENSE.md)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-black.svg)](https://github.com/PoltorProgrammer/TFG_Galeria_Botanica_Maig_2025)
+[![Deploy](https://img.shields.io/badge/🔗%20Web-Galeria%20i%20Mapa-darkgreen)](https://poltorprogrammer.github.io/Memoria_TFG_Maig_2025/Eines_Centraleta.html)
 
----
+Una aplicació web interactiva per descobrir i catalogar la flora del campus de la Universitat Autònoma de Barcelona. Aquest projecte combina una galeria visual filtrable amb un mapa geolocalitzat per oferir una experiència educativa i divulgativa sobre la biodiversitat del campus.
 
-## 📋 Descripció
+## 📋 Sobre Aquest Projecte
 
-La **Galeria Botànica UAB** és una aplicació web que converteix els 260 ha de zones verdes del campus de Bellaterra en un herbari digital interactiu. Combina una galeria filtrable amb un mapa geolocalitzat per facilitar la identificació i localització de les espècies vegetals presents al campus.
+Aquest repositori conté la **versió HTML autònoma** del plugin WordPress que vaig desenvolupar com a part del meu **Treball de Fi de Grau en Biologia Ambiental** (UAB, Maig 2025). L'aplicació original va ser creada per integrar-se directament amb WordPress mitjançant shortcodes, però aquesta versió permet experimentar amb totes les funcionalitats de manera independent.
 
-### ✨ Característiques principals
+### 🎯 Objectius del Projecte
 
-- 🔍 **Galeria filtrable** amb més de 250 espècies catalogades
-- 🗺️ **Mapa interactiu** amb marcadors geolocalitzats
-- 📸 **Sistema d'imatges intel·ligent** connectat a GitHub
-- 🔎 **Cerca instantània** per nom científic o vulgar
-- 📱 **Disseny responsive** adaptat a tots els dispositius
-- ⚡ **Rendiment optimitzat** amb càrrega dinàmica
+- **Educatiu**: Recurs complementari per a assignatures de Botànica, Ecologia i Educació Ambiental
+- **Divulgatiu**: Facilitar rutes guiades i visites autònomes del campus
+- **Científic**: Primera base de dades geolocalitzada de flora del campus UAB
 
----
+## ✨ Característiques Principals
 
-## 🚀 Instal·lació i ús
+### 🖼️ Galeria Botànica
+- **Filtres avançats**: Per tipus, colors, hàbitat, floració, fullatge i usos
+- **Cerca intel·ligent**: Per paraules clau amb camp de neteja automàtica
+- **Modal de detalls**: Informació completa de cada espècie amb galeria d'imatges
+- **Lightbox**: Visualització ampliada d'imatges amb navegació
 
-### Requisits previs
-- Navegador web modern (Chrome, Firefox, Safari, Edge)
-- Connexió a internet per carregar imatges des de GitHub
+### 🗺️ Mapa Interactiu
+- **Geolocalització**: Marcadors de plantes amb coordenades reals del campus
+- **Clusters dinàmics**: Agrupació automàtica de marcadors per millor visualització
+- **Capes GeoJSON**: Zones d'hàbitat amb control de visibilitat
+- **Popups informatius**: Previsualització ràpida amb enllaç a detalls complets
 
-### Instal·lació ràpida
+### 🔧 Funcionalitats Tècniques
+- **Responsive Design**: Optimitzat per desktop, tablet i mòbil
+- **Filtres sincronitzats**: Coherència entre galeria i mapa
+- **Sistema de pestanyes**: Navegació fluida entre vistes
+- **Accessibilitat**: Compleix estàndards WCAG 2.1 AA
 
-1. **Clona el repositori:**
+## 🏆 Validació d'Usabilitat
+
+El projecte va ser avaluat mitjançant l'escala **System Usability Scale (SUS)** amb 90 participants:
+
+- **Puntuació mitjana**: 94.9/100 (**Excel·lent**)
+- **"Molt fàcil d'usar"**: 92% d'acord
+- **Comentari més freqüent**: *"Filtrar per colors m'ha ajudat molt"*
+
+## 🛠️ Stack Tecnològic
+
+- **Frontend**: HTML5, CSS3 (Variables CSS), JavaScript (ES6+)
+- **Mapa**: Leaflet 1.9 + MarkerCluster
+- **Dades**: JSON estructurat amb diccionari d'imatges
+- **Estils**: CSS modular amb sistema de variables
+- **Responsive**: Mobile-first design
+
+## 📁 Estructura del Projecte
+
+```
+galeria-botanica-uab/
+├── index.html                 # Pàgina principal
+├── assets/
+│   ├── css/
+│   │   ├── main.css          # Estils base i sistema de pestanyes
+│   │   ├── galeria.css       # Estils específics de la galeria
+│   │   └── mapa.css          # Estils específics del mapa
+│   └── js/
+│       ├── main.js           # Controlador principal i gestió de dades
+│       ├── galeria.js        # Lògica de la galeria i filtres
+│       └── mapa.js           # Lògica del mapa interactiu
+└── dades/
+    ├── plantes.json          # Base de dades de plantes
+    ├── diccionari-imatges.json  # Índex d'imatges per espècie
+    ├── imatges/              # Col·lecció d'imatges de plantes
+    └── geojson/              # Fitxers de zones d'hàbitat
+```
+
+## 🚀 Com Executar Localment
+
+1. **Clona el repositori**:
    ```bash
-   git clone https://github.com/PoltorProgrammer/TFG_Galeria_Botanica_Maig_2025.git
-   cd TFG_Galeria_Botanica_Maig_2025
+   git clone https://github.com/TuUsuari/galeria-botanica-uab.git
+   cd galeria-botanica-uab
    ```
 
-2. **Obre directament al navegador:**
+2. **Serveix l'aplicació** (recomanat per CORS):
    ```bash
-   # Opció 1: Obrir fitxer directament
-   open index.html
-   
-   # Opció 2: Servidor local (recomanat)
+   # Amb Python 3
    python -m http.server 8000
-   # O amb Node.js:
-   npx serve .
+   
+   # Amb Node.js
+   npx http-server
+   
+   # Amb PHP
+   php -S localhost:8000
    ```
 
-3. **Accedeix a l'aplicació:**
-   - Directament: `file:///path/to/index.html`
-   - Servidor local: `http://localhost:8000`
+3. **Obre el navegador**: `http://localhost:8000`
 
-### 🎯 Ús de l'aplicació
+## 📖 Context Acadèmic
 
-#### Galeria
-- Filtra per **tipus de planta**, **color**, **hàbitat**, **època de floració**, etc.
-- Utilitza la **barra de cerca** per trobar espècies específiques
-- Clica **"Veure detalls"** per informació completa i galeria d'imatges
+**Autor**: Tomás González Bartomeu  
+**Tutor**: Ramon Pérez Obiol  
+**Titulació**: Grau en Biologia Ambiental, UAB  
+**Data**: Maig 2025  
 
-#### Mapa
-- Explora les **zones del campus** amb marcadors interactius
-- Filtra plantes per ubicació i característiques
-- Clica els **marcadors** per veure informació ràpida
+Aquest projecte forma part d'una iniciativa més àmplia per posar en valor els **260 hectàrees de patrimoni natural** del campus UAB, alineant-se amb els **Objectius de Desenvolupament Sostenible** (ODS 4: Educació de Qualitat; ODS 15: Vida Terrestre).
 
----
+## 🌍 Projecte Original WordPress
 
-## 📁 Estructura del projecte
+Aquest codi HTML és una adaptació de l'**plugin WordPress** original desenvolupat per la meva tesi. El plugin complet inclou:
 
-```
-TFG_Galeria_Botanica_Maig_2025/
-├── 📄 index.html                      # Pàgina principal
-├── 📁 assets/
-│   ├── 📁 css/
-│   │   ├── 📄 main.css                # Estils globals
-│   │   ├── 📄 galeria-botanica.css    # Estils de la galeria
-│   │   └── 📄 mapa-botanica.css       # Estils del mapa
-│   ├── 📁 js/
-│   │   ├── 📄 sistema-imatges-github.js # Sistema d'imatges intel·ligent
-│   │   ├── 📄 galeria-botanica-original.js # Funcionalitat galeria
-│   │   ├── 📄 mapa-botanica-original.js # Funcionalitat mapa
-│   │   └── 📄 app-init.js             # Inicialització de l'app
-│   └── 📁 imatges/                    # Fotografies de les plantes
-├── 📁 dades/
-│   ├── 📄 plantes.json                # Base de dades de plantes
-│   └── 📁 geojson/                    # Dades geogràfiques
-└── 📄 README.md                       # Aquest fitxer
-```
+- Integració nativa amb WordPress (shortcodes, hooks)
+- Aplicació de gestió offline amb File System Access API
+- Sistema de CRUD per a administradors
+- Exportació a formats científics (GBIF, Darwin Core)
 
----
+## 📊 Impacte i Resultats
 
-## 🖼️ Sistema d'imatges
+- **300+ espècies** catalogades amb fitxes il·lustrades
+- **90 usuaris** van participar en la validació
+- **SUS 94.9/100** (classificació "Excel·lent")
+- **Primera base de dades geolocalitzada** de flora del campus UAB
 
-### Nomenclatura de fitxers
-Les imatges segueixen el format estàndard:
-```
-{nom_cientific}_{numero:02d}_{estructura}.jpg
-```
+## 🤝 Contribucions
 
-#### Exemples:
-- `platanus_hispanica_00_flor.jpg`
-- `quercus_ilex_01_fulla.jpg`
-- `rosmarinus_officinalis_02_fruit.jpg`
+Aquest projecte té una clara vocació **educativa i divulgativa**. Si ets docent, estudiant o investigador interessat en la biodiversitat del campus UAB:
 
-#### Estructures vàlides:
-- `flor` - Inflorescències i flors (prioritat 1)
-- `habit` - Hàbit general de la planta (prioritat 2)
-- `fulla` - Detalls del fullatge (prioritat 3)
-- `fruit` - Fruits i llavors (prioritat 4)
-- `tija` - Detalls de tija i escorça (prioritat 5)
-- `altre` - Altres detalls (prioritat 6)
+- 🐛 **Reporta errors**: Obre un issue si trobes algún problema
+- 💡 **Suggereix millores**: Les teves idees són benvingudes
+- 📚 **Utilitza per ensenyar**: Contacta per adaptar-lo a les teves necessitats
 
-### Assignació automàtica
-El sistema assigna automàticament:
-1. **Imatge principal**: La de major prioritat disponible
-2. **Imatges de detall**: La resta d'imatges ordenades per número
+## 📜 Llicència
+
+**Codi**: MIT License  
+**Continguts**: Creative Commons CC-BY-SA 4.0  
+**Imatges**: Propietat de l'autor, ús educatiu permès
+
+## 📞 Contacte
+
+Per a més informació sobre el projecte, col·laboracions o adaptacions:
+
+- **Email**: [tu-email@uab.cat]
+- **LinkedIn**: [El teu perfil]
+- **Memòria completa**: [Enllaç al document acadèmic]
 
 ---
 
-## 🛠️ Tecnologies utilitzades
-
-### Frontend
-- **HTML5** - Estructura semàntica
-- **CSS3** - Estils moderns amb Flexbox i Grid
-- **JavaScript ES6+** - Funcionalitat interactiva
-- **jQuery 3.6** - Manipulació DOM i esdeveniments
-
-### Mapa
-- **Leaflet 1.9.4** - Cartografia interactiva
-- **Leaflet.MarkerCluster** - Agrupació de marcadors
-- **OpenStreetMap** - Capa de mapa base
-- **ArcGIS World Imagery** - Capa satèl·lit
-
-### Dades
-- **JSON** - Emmagatzematge estructurat
-- **GeoJSON** - Dades geogràfiques dels hàbitats
-- **GitHub API** - Càrrega dinàmica d'imatges
-
----
-
-## 📊 Dades de plantes
-
-### Estructura JSON
-```json
-{
-  "plantes": [
-    {
-      "id": "platanus_hispanica",
-      "nom_comu": "Plàtan comú",
-      "nom_cientific": "Platanus hispanica",
-      "familia": "Platanaceae",
-      "tipus": "arbre",
-      "descripcio": "Arbre de gran port amb escorça que s'escama...",
-      "caracteristiques": {
-        "floracio": ["abril", "maig"],
-        "fullatge": "caducifoli"
-      },
-      "colors": ["groc", "verd"],
-      "habitat": ["eix_central", "zones_assolellades"],
-      "usos": ["ornamental", "ombra"],
-      "coordenades": [
-        {
-          "lat": 41.50085,
-          "lng": 2.09342,
-          "zona": "Eix Central"
-        }
-      ]
-    }
-  ]
-}
-```
-
-### Camps obligatoris
-- `nom_cientific` - Nom científic de l'espècie
-- `nom_comu` - Nom comú en català
-- `familia` - Família botànica
-- `tipus` - Tipus de planta (arbre, arbust, herba, liana)
-- `descripcio` - Descripció de l'espècie
-
-### Camps opcionals
-- `caracteristiques` - Detalls morfològics i fenològics
-- `colors` - Colors de flors, fruits o fulles
-- `habitat` - Zones del campus on es troba
-- `usos` - Aplicacions de la planta
-- `coordenades` - Localització GPS
-
----
-
-## 🎨 Personalització
-
-### Afegir noves plantes
-
-1. **Edita `dades/plantes.json`:**
-   ```json
-   {
-     "nom_cientific": "Nova especie",
-     "nom_comu": "Nom comú",
-     "familia": "Familia",
-     "tipus": "arbre",
-     "descripcio": "Descripció..."
-   }
-   ```
-
-2. **Afegeix imatges seguint la nomenclatura:**
-   ```
-   nova_especie_00_flor.jpg
-   nova_especie_01_fulla.jpg
-   ```
-
-3. **L'aplicació detectarà automàticament** les noves dades i imatges.
-
-### Modificar estils
-- **Colors globals**: Edita variables CSS a `assets/css/main.css`
-- **Galeria**: Personalitza `assets/css/galeria-botanica.css`
-- **Mapa**: Modifica `assets/css/mapa-botanica.css`
-
----
-
-## 🔧 Desenvolupament
-
-### Estructura del codi
-- **Modular**: Cada funcionalitat en fitxers separats
-- **Orientat a esdeveniments**: Sistema de listeners jQuery
-- **Cache intel·ligent**: Optimització de càrrega d'imatges
-- **Responsive**: Adaptat a dispositius mòbils
-
-### APIs externes utilitzades
-- **GitHub Contents API**: Llistat d'imatges
-- **OpenStreetMap Tiles**: Mapa base
-- **ArcGIS World Imagery**: Imatges satèl·lit
-
-### Variables globals
-```javascript
-// Dades de plantes per la galeria
-window.gb_plantes_data = [...];
-
-// Configuració del mapa
-window.mb_vars = {
-    dades_plantes: [...],
-    plugin_url: '.'
-};
-```
-
----
-
-## 🐛 Resolució de problemes
-
-### Problemes comuns
-
-#### Les imatges no es carreguen
-- **Verifica** que les imatges segueixen la nomenclatura correcta
-- **Comprova** la connexió a internet (imatges des de GitHub)
-- **Consulta** la consola del navegador per errors
-
-#### El mapa no apareix
-- **Assegura't** que Leaflet està carregat correctament
-- **Verifica** les coordenades a `plantes.json`
-- **Comprova** que el contenidor `#mapa-botanica` existeix
-
-#### Filtres no funcionen
-- **Revisa** que jQuery està carregat
-- **Verifica** que les dades tenen els camps necessaris
-- **Comprova** la consola per errors JavaScript
-
-### Logs de desenvolupament
-L'aplicació genera logs detallats a la consola:
-```javascript
-console.log('🔍 Filtres aplicats: X plantes visibles');
-console.log('📍 Carregats X marcadors');
-console.log('🖼️ Assignades X imatges a: Nom planta');
-```
-
----
-
-## 📝 Llicència
-
-Aquest projecte està licenciat sota la **Llicència MIT**. Consulta [LICENSE.md](LICENSE.md) per més detalls.
-
-### Permisos
-- ✅ Ús comercial
-- ✅ Modificació
-- ✅ Distribució
-- ✅ Ús privat
-
-### Limitacions
-- ❌ Responsabilitat
-- ❌ Garantia
-
----
-
-## 👥 Contribució
-
-### Com contribuir
-
-1. **Fork** el repositori
-2. **Crea** una branca per la teva funcionalitat
-3. **Realitza** els canvis i commits
-4. **Envia** un Pull Request
-
-### Tipus de contribucions benvingudes
-- 🐛 Correccions d'errors
-- ✨ Noves funcionalitats
-- 📝 Millores de documentació
-- 🌱 Noves espècies de plantes
-- 📸 Fotografies de qualitat
-
-### Directrius
-- Segueix l'estil de codi existent
-- Inclou comentaris descriptius
-- Testa els canvis abans d'enviar
-
----
-
-## 📞 Contacte i suport
-
-### Informació del projecte
-- **Autor**: Tomás González Bartomeu
-- **Tutor acadèmic**: Ramon Pérez Obiol
-- **Institució**: Facultat de Biociències - UAB
-
-### Enllaços útils
-- 🌐 [Repositori GitHub](https://github.com/PoltorProgrammer/TFG_Galeria_Botanica_Maig_2025)
-- 📧 [Contacte del projecte](mailto:botanica@uab.cat)
-- 🏫 [Universitat Autònoma de Barcelona](https://www.uab.cat)
-
-### Reconeixements
-- **OpenStreetMap** per les dades cartogràfiques
-- **Leaflet** per la biblioteca de mapes
-- **GitHub** per l'allotjament d'imatges
-- **Comunitat UAB** per les fotografies i dades
-
----
-
-## 🔄 Historial de versions
-
-### v2.0.0 (Maig 2025)
-- ✨ Sistema d'imatges intel·ligent amb GitHub API
-- 🔧 Arquitectura modular millorada
-- 📱 Millores en responsive design
-- ⚡ Optimització de rendiment
-
-### v1.0.0 (Desembre 2024)
-- 🎉 Versió inicial
-- 🖼️ Galeria bàsica amb filtres
-- 🗺️ Mapa amb marcadors
-- 📊 Sistema de dades JSON
-
----
-
-**🌱 Ajuda'ns a fer créixer el coneixement de la flora local!**
+*Desenvolupat amb 💚 per a la comunitat UAB i la divulgació de la biodiversitat local*
