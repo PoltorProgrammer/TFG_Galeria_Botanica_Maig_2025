@@ -1,7 +1,7 @@
 /**
  * GALERIA.CSS - Galeria Botànica UAB Local
  * Estils específics per a la galeria de plantes
- * Adaptat de galeria-botanica.css
+ * VERSIÓ CORREGIDA - Camp de cerca posicionat correctament
  */
 
 /* =============================================================================
@@ -226,7 +226,7 @@
 }
 
 /* =============================================================================
-   CAMP DE CERCA
+   CAMP DE CERCA - VERSIÓ CORREGIDA
    ========================================================================== */
 
 .cerca-contenidor {
@@ -234,15 +234,22 @@
     width: 100%;
 }
 
+.cerca-input-wrapper {
+    position: relative; /* CORRECCIÓ CLAU: Estableix context per posicionament absolut */
+    width: 100%;
+    display: block;
+}
+
 .cerca-input {
     width: 100%;
-    padding: 10px 15px;
+    padding: 10px 40px 10px 15px; /* Padding dret per fer espai a la creueta */
     font-size: 16px;
     border: 2px solid #e0e0e0;
     border-radius: 25px;
     transition: all 0.3s;
     box-sizing: border-box;
     font-family: inherit;
+    background: #fff;
 }
 
 .cerca-input:focus {
@@ -253,6 +260,41 @@
 .cerca-input::placeholder {
     color: #999;
     font-style: italic;
+}
+
+/* Creueta per netejar cerca - POSICIONAMENT CORREGIT */
+.cerca-clear {
+    position: absolute; /* CORRECCIÓ: Posicionament absolut dins del wrapper relatiu */
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #999;
+    width: 20px;
+    height: 20px;
+    display: none; /* Amagada per defecte */
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+    user-select: none;
+    line-height: 1;
+    z-index: 10; /* Assegurar que estigui per sobre */
+    background: transparent;
+    border: none;
+    font-weight: bold;
+}
+
+.cerca-clear:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: #666;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Quan hi ha text, mostrar la creueta amb flex per millor alineació */
+.cerca-clear[style*="flex"] {
+    display: flex !important;
 }
 
 /* =============================================================================
@@ -734,7 +776,14 @@
     
     .cerca-input {
         font-size: 14px;
-        padding: 8px 12px;
+        padding: 8px 35px 8px 12px;
+    }
+    
+    .cerca-clear {
+        right: 12px;
+        font-size: 16px;
+        width: 18px;
+        height: 18px;
     }
 }
 
@@ -771,4 +820,41 @@
     .planta-info-completa {
         max-height: 40vh;
     }
+    
+    .cerca-input {
+        padding: 6px 30px 6px 10px;
+        font-size: 14px;
+    }
+    
+    .cerca-clear {
+        right: 10px;
+        font-size: 16px;
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* =============================================================================
+   CORRECCIONS ADDICIONALS PER EVITAR CONFLICTES
+   ========================================================================== */
+
+.cerca-input-wrapper * {
+    box-sizing: border-box;
+}
+
+/* Assegurar que la creueta no sigui seleccionable */
+.cerca-clear::selection {
+    background: transparent;
+}
+
+/* Forçar posicionament en cas de conflictes */
+.filtres-contenidor .cerca-input-wrapper {
+    position: relative !important;
+}
+
+.filtres-contenidor .cerca-clear {
+    position: absolute !important;
+    right: 15px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
 }
