@@ -2,7 +2,7 @@
 
 > **Versió HTML estàtica d'un plugin WordPress desenvolupat per al TFG en Biologia Ambiental**
 
-[![Deploy](https://img.shields.io/badge/🔗%20Web-Galeria%20i%20Mapa-darkgreen)](https://poltorprogrammer.github.io/Memoria_TFG_Maig_2025/Eines_Centraleta.html)
+[![Deploy](https://img.shields.io/badge/🔗%20Visita-Galeria%20i%20Mapa-darkgreen)](https://poltorprogrammer.github.io/Memoria_TFG_Maig_2025/Eines_Centraleta.html)
 
 Una aplicació web interactiva per descobrir i catalogar la flora del campus de la Universitat Autònoma de Barcelona. Aquest projecte combina una galeria visual filtrable amb un mapa geolocalitzat per oferir una experiència educativa i divulgativa sobre la biodiversitat del campus.
 
