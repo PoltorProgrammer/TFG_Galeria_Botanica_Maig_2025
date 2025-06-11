@@ -1,7 +1,5 @@
 /**
  * MAPA.JS - Mapa Botànica UAB Local
- * Sistema de filtres uniformitzat amb la galeria
- * CORREGIT: Comportament multi-selecció i feedback visual
  */
 
 class MapaBotanica {
