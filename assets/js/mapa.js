@@ -1,7 +1,7 @@
 /**
  * MAPA.JS - Mapa Botànica UAB Local
  * Sistema de filtres uniformitzat amb la galeria
- * CANVIS: Afegit filtre colors, eliminats hàbitat/imatges, lògica multi-selecció completa
+ * CORREGIT: Comportament multi-selecció i feedback visual
  */
 
 class MapaBotanica {
@@ -11,12 +11,12 @@ class MapaBotanica {
         this.totsElsMarcadors = [];
         this.habitatsLayers = {};
         
-        // FILTRES UNIFORMITZATS AMB LA GALERIA (sense hàbitat i imatges)
+        // FILTRES CORREGITS: Multi-selecció per tots excepte fullatge
         this.filtresActius = {
             tipus: 'tots',
-            color: 'tots',      // AFEGIT
+            color: 'tots',
             floracio: 'tots',
-            fullatge: 'tots',
+            fullatge: 'tots',  // EXCLOENT
             usos: 'tots'
         };
         
@@ -70,11 +70,11 @@ class MapaBotanica {
     }
 
     /**
-     * Construir HTML dels filtres (UNIFORMITZAT AMB GALERIA)
+     * Construir HTML dels filtres
      */
     buildFiltersHTML(plantes) {
         const tipus = this.extractUniqueValues(plantes, 'tipus');
-        const colors = this.extractColors(plantes);           // AFEGIT
+        const colors = this.extractColors(plantes);
         const floracions = this.extractFloracions(plantes);
         const usos = this.extractUsos(plantes);
         const fullatges = this.extractFullatges(plantes);
@@ -106,7 +106,7 @@ class MapaBotanica {
     }
 
     /**
-     * Construir grup de filtres (COPIAT DE GALERIA)
+     * Construir grup de filtres
      */
     buildFilterGroup(group, label, values, className) {
         const buttons = values.map(value => 
@@ -118,7 +118,7 @@ class MapaBotanica {
                 <span class="etiqueta-filtre">${label}:</span>
                 <div class="botons-filtre">
                     <button class="filtre-boto actiu" data-group="${group}" data-filtre="tots">
-                        ${group === 'fullatge' ? 'Tots' : 'Tots'}
+                        Tots
                     </button>
                     ${buttons}
                 </div>
@@ -336,32 +336,37 @@ class MapaBotanica {
     }
 
     /**
-     * Setup event listeners (CORREGIT - Event delegation millorat)
+     * Setup event listeners CORREGIT AMB PREVENCIÓ D'INTERFERÈNCIES
      */
     setupEventListeners() {
-        // Event delegation amb contenidor específic
         const container = document.getElementById('mapa-botanica-container');
         if (!container) {
             console.error('Container del mapa no trobat per als event listeners');
             return;
         }
 
-        // Filtres - Event delegation dins del contenidor
+        // Event delegation dins del contenidor
         container.addEventListener('click', (e) => {
+            // Prevenir propagació múltiple
+            e.stopPropagation();
+            
             // Filtres de botons
             if (e.target.matches('.filtre-boto')) {
+                console.log(`🎯 Event clic detectat en filtre: ${e.target.dataset.group}=${e.target.dataset.filtre}`);
                 this.handleFilterClick(e.target);
                 return;
             }
             
             // Eliminar filtre individual
             if (e.target.matches('.eliminar-filtre')) {
+                console.log(`🗑️ Eliminant filtre individual`);
                 this.handleRemoveFilter(e.target);
                 return;
             }
             
             // Netejar tots els filtres
             if (e.target.matches('.netejar-filtres')) {
+                console.log(`🧹 Netejant tots els filtres`);
                 this.handleClearAllFilters();
                 return;
             }
@@ -384,128 +389,344 @@ class MapaBotanica {
         const searchInput = document.getElementById('mapa-cerca');
         if (searchInput) {
             searchInput.addEventListener('input', (e) => {
-                console.log('Cerca del mapa:', e.target.value); // Debug
                 this.updateSearchClearButton();
                 this.aplicarFiltres();
             });
-        } else {
-            console.warn('Camp de cerca del mapa no trobat');
         }
 
         console.log('Event listeners del mapa configurats correctament');
     }
 
     /**
-     * Gestionar clic en filtre (AMB DEBUG VISUAL EXTENS)
+     * GESTIONAR CLIC EN FILTRE - SIMPLIFCAT I ROBUST
      */
     handleFilterClick(button) {
         const group = button.dataset.group;
         const value = button.dataset.filtre;
         
         console.log(`\n🔘 CLIC EN FILTRE: ${group} = ${value}`);
-        console.log(`Botó clicat té classe 'actiu': ${button.classList.contains('actiu')}`);
         
-        // Debug estat inicial
-        this.debugVisualState(group, 'ABANS');
+        // Debug estat abans
+        this.debugGroupState(group);
         
+        // PROCESAR EL CLIC SEGONS EL COMPORTAMENT DEL GRUP
         if (group === 'fullatge') {
-            // Comportament excloent amb reinici (IGUAL QUE GALERIA - només fullatge)
-            if (button.classList.contains('actiu') && value !== 'tots') {
-                // Si ja està actiu i no és "tots", restablir a "tots"
-                document.querySelectorAll(`.mapa-filtres .filtre-boto[data-group="${group}"]`)
-                    .forEach(btn => btn.classList.remove('actiu'));
-                document.querySelector(`.mapa-filtres .filtre-boto[data-group="${group}"][data-filtre="tots"]`)
-                    .classList.add('actiu');
-                this.filtresActius[group] = 'tots';
-            } else {
-                // Comportament normal d'activació
-                document.querySelectorAll(`.mapa-filtres .filtre-boto[data-group="${group}"]`)
-                    .forEach(btn => btn.classList.remove('actiu'));
-                button.classList.add('actiu');
-                this.filtresActius[group] = value;
-            }
-            
-            this.updateActiveFilters();
-            this.aplicarFiltres();
-            this.mostrarFiltresActius();
+            // FULLATGE: Comportament excloent
+            this.handleExclusiveFilterSimple(button, group, value);
         } else {
-            // Comportament multi-selecció (TOTS ELS ALTRES: tipus, color, floracio, usos)
-            this.handleMultiSelectFilter(button, group, value);
-            
-            // Debug estat després de multi-selecció
-            this.debugVisualState(group, 'DESPRÉS MULTI-SELECCIÓ');
-            
-            // Actualitzar filtres actius
-            this.updateActiveFilters();
-            
-            // Verificar si s'ha fet auto-reinici
-            const autoReiniciExecutat = this.verificarTotesOpcionsSeleccionades(group);
-            
-            // Només aplicar filtres si NO s'ha fet auto-reinici
-            if (!autoReiniciExecutat) {
-                this.aplicarFiltres();
-                this.mostrarFiltresActius();
-            }
+            // ALTRES: Comportament multi-selecció
+            this.handleMultiSelectFilterSimple(button, group, value);
         }
         
-        // Debug estat final
-        this.debugVisualState(group, 'FINAL');
+        // Debug estat després
+        console.log(`⬇️ ESTAT DESPRÉS DE PROCESSAR:`);
+        this.debugGroupState(group);
+        
+        // Actualitzar estat NOMÉS del grup modificat
+        this.updateSingleGroupFilter(group);
+        
+        // Aplicar filtres i actualitzar interfície
+        this.aplicarFiltres();
+        this.mostrarFiltresActius();
+        
+        console.log(`📊 Estat final:`, JSON.stringify(this.filtresActius));
     }
 
     /**
-     * DEBUG: Mostrar estat visual dels botons
+     * GESTIÓ EXCLOENT SIMPLIFICADA (només fullatge)
      */
-    debugVisualState(group, moment) {
-        console.log(`\n--- ESTAT VISUAL ${moment} (${group}) ---`);
-        const buttons = document.querySelectorAll(`.mapa-filtres .filtre-boto[data-group="${group}"]`);
-        buttons.forEach(btn => {
+    handleExclusiveFilterSimple(button, group, value) {
+        if (button.classList.contains('actiu') && value !== 'tots') {
+            // Si ja està actiu i no és "tots", restablir a "tots"
+            this.resetGroupToAll(group);
+        } else {
+            // Activar només aquest botó
+            this.setOnlyActiveButton(group, value);
+        }
+    }
+
+    /**
+     * GESTIÓ MULTI-SELECCIÓ SIMPLIFICADA I ROBUSTA
+     */
+    handleMultiSelectFilterSimple(button, group, value) {
+        if (value === 'tots') {
+            // CLIC A "TOTS": Reset complet del grup
+            console.log(`   🔄 Reset a "tots" per ${group}`);
+            this.resetGroupToAll(group);
+        } else {
+            // CLIC A OPCIÓ ESPECÍFICA
+            const wasActive = button.classList.contains('actiu');
+            
+            if (wasActive) {
+                // DESACTIVAR aquesta opció
+                console.log(`   ➖ Desactivant ${value}`);
+                button.classList.remove('actiu');
+                
+                // Si no queden opcions, activar "tots"
+                const remainingActive = document.querySelectorAll(
+                    `.mapa-filtres .filtre-boto[data-group="${group}"].actiu:not([data-filtre="tots"])`
+                );
+                if (remainingActive.length === 0) {
+                    console.log(`   🔄 No queden opcions a ${group}, activant "tots"`);
+                    this.activateTotsButton(group);
+                }
+            } else {
+                // ACTIVAR aquesta opció (sense tocar les altres)
+                console.log(`   ➕ Activant ${value}`);
+                
+                // 1. Desactivar "tots" si estava actiu
+                const totsButton = document.querySelector(
+                    `.mapa-filtres .filtre-boto[data-group="${group}"][data-filtre="tots"]`
+                );
+                if (totsButton && totsButton.classList.contains('actiu')) {
+                    console.log(`   🔄 Desactivant "tots" a ${group}`);
+                    totsButton.classList.remove('actiu');
+                }
+                
+                // 2. Activar aquest botó (SENSE tocar els altres)
+                button.classList.add('actiu');
+                
+                // 3. Verificar auto-reinici
+                const allButtons = document.querySelectorAll(
+                    `.mapa-filtres .filtre-boto[data-group="${group}"]:not([data-filtre="tots"])`
+                );
+                const activeButtons = document.querySelectorAll(
+                    `.mapa-filtres .filtre-boto[data-group="${group}"].actiu:not([data-filtre="tots"])`
+                );
+                
+                if (allButtons.length === activeButtons.length) {
+                    console.log(`   ⚡ Auto-reinici: totes les opcions de ${group} estan actives`);
+                    this.resetGroupToAll(group);
+                }
+            }
+        }
+    }
+
+    /**
+     * GESTIONAR FILTRE EXCLOENT (només fullatge) - CORREGIT
+     */
+    handleExclusiveFilter(button, group, value) {
+        if (button.classList.contains('actiu') && value !== 'tots') {
+            // Si ja està actiu i no és "tots", restablir a "tots"
+            this.resetGroupToAll(group);
+        } else {
+            // Activar només aquest botó
+            this.setOnlyActiveButton(group, value);
+        }
+    }
+
+    /**
+     * GESTIONAR FILTRES MULTI-SELECCIÓ - CORREGIT PER PERMETRE MÚLTIPLES OPCIONS DEL MATEIX GRUP
+     */
+    handleMultiSelectFilter(button, group, value) {
+        console.log(`📋 Multi-selecció dins de ${group}: ${value}`);
+        
+        if (value === 'tots') {
+            // Si fem clic a "tots", desactivar tots els altres i activar només "tots"
+            console.log(`   → Reset a "tots" per ${group}`);
+            this.resetGroupToAll(group);
+        } else {
+            // Si fem clic en una opció específica
+            if (button.classList.contains('actiu')) {
+                // Si ja està actiu, desactivar NOMÉS aquest botó
+                console.log(`   → Desactivant ${value} (ja estava actiu)`);
+                button.classList.remove('actiu');
+                
+                // Si no queda cap opció activa, activar "tots"
+                const activeSpecific = document.querySelectorAll(
+                    `.mapa-filtres .filtre-boto[data-group="${group}"].actiu:not([data-filtre="tots"])`
+                );
+                if (activeSpecific.length === 0) {
+                    console.log(`   → No queden opcions actives a ${group}, activant "tots"`);
+                    this.activateTotsButton(group);
+                }
+            } else {
+                // Si no està actiu, activar-lo SENSE tocar les altres opcions del grup
+                console.log(`   → Activant ${value} (nou)`);
+                button.classList.add('actiu');
+                
+                // Desactivar "tots" NOMÉS si estava actiu
+                const totsButton = document.querySelector(
+                    `.mapa-filtres .filtre-boto[data-group="${group}"][data-filtre="tots"]`
+                );
+                if (totsButton && totsButton.classList.contains('actiu')) {
+                    console.log(`   → Desactivant "tots" a ${group}`);
+                    totsButton.classList.remove('actiu');
+                }
+                
+                // Verificar auto-reinici NOMÉS si cal
+                const shouldAutoReset = this.checkAllOptionsSelected(group);
+                if (shouldAutoReset) {
+                    console.log(`   → Auto-reinici executat per ${group}`);
+                    return; // Sortir aquí perquè l'auto-reinici ja ha gestionat tot
+                }
+            }
+        }
+        
+        // Debug: mostrar estat actual dels botons del grup
+        this.debugGroupState(group);
+    }
+
+    /**
+     * DEBUG: Mostrar estat actual dels botons d'un grup
+     */
+    debugGroupState(group) {
+        console.log(`🔍 Estat botons de ${group}:`);
+        const allButtons = document.querySelectorAll(`.mapa-filtres .filtre-boto[data-group="${group}"]`);
+        allButtons.forEach(btn => {
             const value = btn.dataset.filtre;
             const isActive = btn.classList.contains('actiu');
-            const style = window.getComputedStyle(btn);
-            const backgroundColor = style.backgroundColor;
-            console.log(`  ${value}: actiu=${isActive}, color=${backgroundColor}`);
+            console.log(`     ${value}: ${isActive ? '✅ ACTIU' : '❌ inactiu'}`);
         });
     }
 
     /**
-     * Gestionar filtres multi-selecció (LÒGICA EXACTA DE LA GALERIA)
+     * VERIFICAR SI TOTES LES OPCIONS ESTAN SELECCIONADES - CORREGIT AMB MÉS CONTROL
      */
-    handleMultiSelectFilter(button, group, value) {
-        console.log(`Multi-selecció mapa: ${group} = ${value}, actiu: ${button.classList.contains('actiu')}`); // Debug
+    /**
+     * VERIFICAR SI TOTES LES OPCIONS ESTAN SELECCIONADES - CORREGIT AMB MÉS CONTROL
+     */
+    checkAllOptionsSelected(group) {
+        const allButtons = document.querySelectorAll(
+            `.mapa-filtres .filtre-boto[data-group="${group}"]:not([data-filtre="tots"])`
+        );
+        const activeButtons = document.querySelectorAll(
+            `.mapa-filtres .filtre-boto[data-group="${group}"].actiu:not([data-filtre="tots"])`
+        );
         
-        if (button.classList.contains('actiu') && value !== 'tots') {
-            // Si el botó ja està actiu i no és "tots", desactivar-lo
-            button.classList.remove('actiu');
-            console.log(`Desactivant: ${value}`); // Debug
-            
-            // Si no queda cap actiu, activar "tots"
-            const activeButtons = document.querySelectorAll(`.mapa-filtres .filtre-boto[data-group="${group}"].actiu`);
-            if (activeButtons.length === 0) {
-                console.log(`No queden opcions actives, activant "tots"`); // Debug
-                document.querySelector(`.mapa-filtres .filtre-boto[data-group="${group}"][data-filtre="tots"]`)
-                    .classList.add('actiu');
-            }
+        console.log(`🔄 Check auto-reinici ${group}: ${activeButtons.length}/${allButtons.length} opcions actives`);
+        
+        // Només auto-reiniciar si TOTES les opcions específiques estan actives
+        if (allButtons.length > 0 && allButtons.length === activeButtons.length) {
+            console.log(`⚡ Auto-reinici: Totes les opcions de ${group} seleccionades - reiniciant a "tots"`);
+            this.resetGroupToAll(group);
+            return true;
+        }
+        
+        console.log(`✋ No cal auto-reinici per ${group}`);
+        return false;
+    }
+
+    /**
+     * RESTABLIR GRUP A "TOTS" - NOVA FUNCIÓ
+     */
+    resetGroupToAll(group) {
+        // Desactivar tots els botons del grup
+        document.querySelectorAll(`.mapa-filtres .filtre-boto[data-group="${group}"]`)
+            .forEach(btn => btn.classList.remove('actiu'));
+        
+        // Activar només "tots"
+        this.activateTotsButton(group);
+    }
+
+    /**
+     * ACTIVAR NOMÉS UN BOTÓ ESPECÍFIC - NOVA FUNCIÓ
+     */
+    setOnlyActiveButton(group, value) {
+        // Desactivar tots els botons del grup
+        document.querySelectorAll(`.mapa-filtres .filtre-boto[data-group="${group}"]`)
+            .forEach(btn => btn.classList.remove('actiu'));
+        
+        // Activar només el botó especificat
+        const targetButton = document.querySelector(
+            `.mapa-filtres .filtre-boto[data-group="${group}"][data-filtre="${value}"]`
+        );
+        if (targetButton) {
+            targetButton.classList.add('actiu');
+        }
+    }
+
+    /**
+     * ACTIVAR BOTÓ "TOTS" - NOVA FUNCIÓ
+     */
+    activateTotsButton(group) {
+        const totsButton = document.querySelector(
+            `.mapa-filtres .filtre-boto[data-group="${group}"][data-filtre="tots"]`
+        );
+        if (totsButton) {
+            totsButton.classList.add('actiu');
+        }
+    }
+
+    /**
+     * ACTUALITZAR NOMÉS UN GRUP ESPECÍFIC - NOVA FUNCIÓ PER EVITAR INTERFERÈNCIES
+     */
+    updateSingleGroupFilter(grup) {
+        if (grup === 'fullatge') {
+            // Comportament excloent - només llegir l'estat actual
+            const activeButton = document.querySelector(
+                `.mapa-filtres .filtre-boto[data-group="${grup}"].actiu`
+            );
+            this.filtresActius[grup] = activeButton?.dataset.filtre || 'tots';
         } else {
-            if (value === 'tots') {
-                // Si fem clic a "tots", desactivar totes les altres opcions
-                console.log(`Activant "tots", desactivant altres`); // Debug
-                document.querySelectorAll(`.mapa-filtres .filtre-boto[data-group="${group}"]`)
-                    .forEach(btn => btn.classList.remove('actiu'));
-                button.classList.add('actiu');
+            // Comportament multi-selecció - només llegir l'estat actual
+            const totsButton = document.querySelector(
+                `.mapa-filtres .filtre-boto[data-group="${grup}"][data-filtre="tots"]`
+            );
+            
+            if (totsButton && totsButton.classList.contains('actiu')) {
+                // Si "tots" està actiu
+                this.filtresActius[grup] = 'tots';
             } else {
-                // Si fem clic en una opció específica, desactivar "tots" i activar aquesta
-                console.log(`Activant opció específica: ${value}`); // Debug
-                document.querySelector(`.mapa-filtres .filtre-boto[data-group="${group}"][data-filtre="tots"]`)
-                    ?.classList.remove('actiu');
-                button.classList.add('actiu');
+                // Recollir totes les opcions específiques actives
+                const activeButtons = document.querySelectorAll(
+                    `.mapa-filtres .filtre-boto[data-group="${grup}"].actiu:not([data-filtre="tots"])`
+                );
                 
-                // NO verificar auto-reinici aquí - es farà des de handleFilterClick
+                if (activeButtons.length === 0) {
+                    // Si no hi ha cap opció activa, establir a "tots" NOMÉS EN MEMÒRIA
+                    this.filtresActius[grup] = 'tots';
+                } else {
+                    // Crear array amb totes les opcions actives
+                    const values = Array.from(activeButtons).map(btn => btn.dataset.filtre);
+                    this.filtresActius[grup] = values;
+                }
             }
         }
     }
 
     /**
-     * Aplicar filtres (ADAPTAT PER MARCADORS)
+     * ACTUALITZAR FILTRES ACTIUS - NOMÉS LECTURA DE L'ESTAT ACTUAL
+     */
+    updateActiveFilters() {
+        ['tipus', 'color', 'floracio', 'fullatge', 'usos'].forEach(grup => {
+            if (grup === 'fullatge') {
+                // Comportament excloent - només llegir l'estat actual
+                const activeButton = document.querySelector(
+                    `.mapa-filtres .filtre-boto[data-group="${grup}"].actiu`
+                );
+                this.filtresActius[grup] = activeButton?.dataset.filtre || 'tots';
+            } else {
+                // Comportament multi-selecció - només llegir l'estat actual
+                const totsButton = document.querySelector(
+                    `.mapa-filtres .filtre-boto[data-group="${grup}"][data-filtre="tots"]`
+                );
+                
+                if (totsButton && totsButton.classList.contains('actiu')) {
+                    // Si "tots" està actiu
+                    this.filtresActius[grup] = 'tots';
+                } else {
+                    // Recollir totes les opcions específiques actives
+                    const activeButtons = document.querySelectorAll(
+                        `.mapa-filtres .filtre-boto[data-group="${grup}"].actiu:not([data-filtre="tots"])`
+                    );
+                    
+                    if (activeButtons.length === 0) {
+                        // Si no hi ha cap opció activa, establir a "tots" NOMÉS EN MEMÒRIA
+                        // NO modificar l'estat visual aquí
+                        this.filtresActius[grup] = 'tots';
+                    } else {
+                        // Crear array amb totes les opcions actives
+                        const values = Array.from(activeButtons).map(btn => btn.dataset.filtre);
+                        this.filtresActius[grup] = values;
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * Aplicar filtres - SENSE CANVIS MAJORS
      */
     aplicarFiltres() {
         this.markers.clearLayers();
@@ -542,37 +763,137 @@ class MapaBotanica {
     }
 
     /**
-     * Comprovar filtre individual (ADAPTAT PER DADES DEL MAPA)
+     * Comprovar filtre individual - CORREGIT per arrays
      */
     checkFilter(planta, grup, valors) {
         const valorsArray = Array.isArray(valors) ? valors : [valors];
         
         switch (grup) {
             case 'tipus':
+                // Per tipus: la planta ha de coincidir amb QUALSEVOL dels valors seleccionats
                 return valorsArray.includes(planta.tipus);
                 
             case 'color':
-                // Utilitzar dades ja normalitzades des de main.js
+                // Per colors: la planta ha de tenir ALGUN dels colors seleccionats
                 return valorsArray.some(color => 
                     (planta.colors_norm || []).includes(color)
                 );
                 
             case 'floracio':
+                // Per floració: la planta ha de tenir ALGUNA de les floracions seleccionades
                 return valorsArray.some(floracio => 
                     (planta.floracio_norm || []).includes(floracio)
                 );
                 
             case 'usos':
+                // Per usos: la planta ha de tenir ALGUN dels usos seleccionats
                 return valorsArray.some(us => 
                     (planta.usos_norm || []).includes(us)
                 );
                 
             case 'fullatge':
+                // Per fullatge: comportament excloent (valor únic)
                 return valorsArray.includes(planta.caracteristiques?.fullatge);
                 
             default:
                 return true;
         }
+    }
+
+    /**
+     * Mostrar filtres actius - CORREGIT
+     */
+    mostrarFiltresActius() {
+        const container = document.querySelector('.mapa-filtres .filtres-actius');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        let hiHaFiltresActius = false;
+        
+        Object.entries(this.filtresActius).forEach(([grup, valors]) => {
+            if (valors !== 'tots') {
+                hiHaFiltresActius = true;
+                
+                const grupText = this.getGroupLabel(grup);
+                const valorsArray = Array.isArray(valors) ? valors : [valors];
+                
+                valorsArray.forEach(valor => {
+                    if (valor) {
+                        const valorText = this.capitalizeWords(valor.replace(/_/g, ' '));
+                        const etiqueta = document.createElement('span');
+                        etiqueta.className = 'filtre-actiu';
+                        etiqueta.dataset.group = grup;
+                        etiqueta.dataset.filtre = valor;
+                        etiqueta.innerHTML = `${grupText}: ${valorText} <span class="eliminar-filtre">×</span>`;
+                        container.appendChild(etiqueta);
+                    }
+                });
+            }
+        });
+        
+        const clearButton = document.querySelector('.mapa-filtres .netejar-filtres');
+        if (clearButton) {
+            clearButton.style.display = hiHaFiltresActius ? 'block' : 'none';
+        }
+    }
+
+    /**
+     * Gestionar eliminació de filtre individual - CORREGIT
+     */
+    handleRemoveFilter(element) {
+        const etiqueta = element.parentElement;
+        const grup = etiqueta.dataset.group;
+        const valor = etiqueta.dataset.filtre;
+        
+        const button = document.querySelector(
+            `.mapa-filtres .filtre-boto[data-group="${grup}"][data-filtre="${valor}"]`
+        );
+        if (button) {
+            button.classList.remove('actiu');
+        }
+        
+        // Si no queden opcions actives del grup, activar "tots"
+        const activeButtons = document.querySelectorAll(
+            `.mapa-filtres .filtre-boto[data-group="${grup}"].actiu:not([data-filtre="tots"])`
+        );
+        if (activeButtons.length === 0) {
+            this.activateTotsButton(grup);
+        }
+        
+        this.updateActiveFilters();
+        this.aplicarFiltres();
+        this.mostrarFiltresActius();
+    }
+
+    /**
+     * Netejar tots els filtres - CORREGIT
+     */
+    handleClearAllFilters() {
+        // Restablir tots els botons
+        document.querySelectorAll('.mapa-filtres .filtre-boto').forEach(btn => btn.classList.remove('actiu'));
+        document.querySelectorAll('.mapa-filtres .filtre-boto[data-filtre="tots"]').forEach(btn => btn.classList.add('actiu'));
+        
+        // Restablir objecte de filtres
+        Object.keys(this.filtresActius).forEach(key => {
+            this.filtresActius[key] = 'tots';
+        });
+        
+        // Netejar cerca
+        const searchInput = document.getElementById('mapa-cerca');
+        if (searchInput) {
+            searchInput.value = '';
+        }
+        
+        // Actualitzar estat de cerca
+        this.updateSearchClearButton();
+        
+        this.aplicarFiltres();
+        this.mostrarFiltresActius();
+        
+        // Restablir estils d'hàbitats
+        Object.values(this.habitatsLayers).forEach(layer => {
+            layer.setStyle({ weight: 2, opacity: 0.7 });
+        });
     }
 
     /**
@@ -924,7 +1245,7 @@ class MapaBotanica {
     }
 
     /**
-     * FUNCIONS D'UTILITAT UNIFORMITZADES AMB GALERIA
+     * FUNCIONS D'UTILITAT
      */
     
     extractUniqueValues(plantes, field) {
@@ -941,9 +1262,6 @@ class MapaBotanica {
         }));
     }
 
-    /**
-     * AFEGIT: Extracció de colors (COPIAT DE GALERIA)
-     */
     extractColors(plantes) {
         const colors = new Set();
         plantes.forEach(planta => {
@@ -1009,177 +1327,6 @@ class MapaBotanica {
         }));
     }
 
-    /**
-     * AFEGIT: Actualitzar filtres actius (AMB DEBUG EXTENS)
-     */
-    updateActiveFilters() {
-        console.log('=== ACTUALITZANT FILTRES ACTIUS ==='); // Debug
-        
-        ['tipus', 'color', 'floracio', 'fullatge', 'usos'].forEach(grup => {
-            if (grup === 'fullatge') {
-                // Comportament excloent
-                const activeButton = document.querySelector(`.mapa-filtres .filtre-boto[data-group="${grup}"].actiu`);
-                this.filtresActius[grup] = activeButton?.dataset.filtre || 'tots';
-                console.log(`${grup} (excloent): ${this.filtresActius[grup]}`); // Debug
-            } else {
-                // Comportament multi-selecció
-                const totsButton = document.querySelector(`.mapa-filtres .filtre-boto[data-group="${grup}"][data-filtre="tots"]`);
-                if (totsButton && totsButton.classList.contains('actiu')) {
-                    this.filtresActius[grup] = 'tots';
-                    console.log(`${grup} (multi): tots (botó "tots" actiu)`); // Debug
-                } else {
-                    const activeButtons = document.querySelectorAll(`.mapa-filtres .filtre-boto[data-group="${grup}"].actiu:not([data-filtre="tots"])`);
-                    if (activeButtons.length === 0) {
-                        this.filtresActius[grup] = 'tots';
-                        console.log(`${grup} (multi): tots (no hi ha botons actius)`); // Debug
-                    } else {
-                        const values = Array.from(activeButtons).map(btn => btn.dataset.filtre);
-                        this.filtresActius[grup] = values;
-                        console.log(`${grup} (multi): [${values.join(', ')}]`); // Debug
-                    }
-                }
-            }
-        });
-        
-        console.log('Estat final filtres actius:', this.filtresActius); // Debug
-    }
-
-    /**
-     * AFEGIT: Verificar si totes les opcions estan seleccionades (SELECTORS ESPECÍFICS DEL MAPA)
-     */
-    verificarTotesOpcionsSeleccionades(grupFiltre) {
-        if (grupFiltre === 'fullatge') return false;
-        
-        const allButtons = document.querySelectorAll(`.mapa-filtres .filtre-boto[data-group="${grupFiltre}"]:not([data-filtre="tots"])`);
-        const activeButtons = document.querySelectorAll(`.mapa-filtres .filtre-boto[data-group="${grupFiltre}"].actiu:not([data-filtre="tots"])`);
-        
-        // Si tots els botons estan actius (excepte "tots")
-        if (allButtons.length > 0 && allButtons.length === activeButtons.length) {
-            console.log(`Mapa: Totes les opcions del grup ${grupFiltre} estan seleccionades - reiniciant automàticament`);
-            
-            // Activar automàticament el botó "Tots"
-            this.activarBotoTots(grupFiltre);
-            
-            // IMPORTANT: Forçar actualització immediata dels filtres actius
-            this.updateActiveFilters();
-            
-            // Aplicar filtres immediatament per reflectir el canvi
-            setTimeout(() => {
-                this.aplicarFiltres();
-            }, 5);
-            
-            // Actualitzar vista de filtres actius
-            this.mostrarFiltresActius();
-            
-            return true;
-        }
-        
-        return false;
-    }
-
-    /**
-     * AFEGIT: Activar botó "Tots" (SELECTORS ESPECÍFICS DEL MAPA)
-     */
-    activarBotoTots(grupFiltre) {
-        document.querySelectorAll(`.mapa-filtres .filtre-boto[data-group="${grupFiltre}"]`)
-            .forEach(btn => btn.classList.remove('actiu'));
-        document.querySelector(`.mapa-filtres .filtre-boto[data-group="${grupFiltre}"][data-filtre="tots"]`)
-            .classList.add('actiu');
-        this.filtresActius[grupFiltre] = 'tots';
-    }
-
-    /**
-     * MILLORAT: Mostrar filtres actius (SELECTORS ESPECÍFICS DEL MAPA)
-     */
-    mostrarFiltresActius() {
-        const container = document.querySelector('.mapa-filtres .filtres-actius');
-        if (!container) return;
-        
-        container.innerHTML = '';
-        let hiHaFiltresActius = false;
-        
-        Object.entries(this.filtresActius).forEach(([grup, valors]) => {
-            if (valors !== 'tots') {
-                hiHaFiltresActius = true;
-                
-                const grupText = this.getGroupLabel(grup);
-                const valorsArray = Array.isArray(valors) ? valors : [valors];
-                
-                valorsArray.forEach(valor => {
-                    if (valor) {
-                        const valorText = this.capitalizeWords(valor.replace(/_/g, ' '));
-                        const etiqueta = document.createElement('span');
-                        etiqueta.className = 'filtre-actiu';
-                        etiqueta.dataset.group = grup;
-                        etiqueta.dataset.filtre = valor;
-                        etiqueta.innerHTML = `${grupText}: ${valorText} <span class="eliminar-filtre">×</span>`;
-                        container.appendChild(etiqueta);
-                    }
-                });
-            }
-        });
-        
-        const clearButton = document.querySelector('.mapa-filtres .netejar-filtres');
-        if (clearButton) {
-            clearButton.style.display = hiHaFiltresActius ? 'block' : 'none';
-        }
-    }
-
-    /**
-     * MILLORAT: Gestionar eliminació de filtre individual (SELECTORS ESPECÍFICS DEL MAPA)
-     */
-    handleRemoveFilter(element) {
-        const etiqueta = element.parentElement;
-        const grup = etiqueta.dataset.group;
-        const valor = etiqueta.dataset.filtre;
-        
-        const button = document.querySelector(`.mapa-filtres .filtre-boto[data-group="${grup}"][data-filtre="${valor}"]`);
-        if (button) {
-            button.classList.remove('actiu');
-        }
-        
-        const activeButtons = document.querySelectorAll(`.mapa-filtres .filtre-boto[data-group="${grup}"].actiu`);
-        if (activeButtons.length === 0) {
-            document.querySelector(`.mapa-filtres .filtre-boto[data-group="${grup}"][data-filtre="tots"]`)
-                .classList.add('actiu');
-        }
-        
-        this.updateActiveFilters();
-        this.aplicarFiltres();
-        this.mostrarFiltresActius();
-    }
-
-    /**
-     * MILLORAT: Netejar tots els filtres (SELECTORS ESPECÍFICS DEL MAPA)
-     */
-    handleClearAllFilters() {
-        document.querySelectorAll('.mapa-filtres .filtre-boto').forEach(btn => btn.classList.remove('actiu'));
-        document.querySelectorAll('.mapa-filtres .filtre-boto[data-filtre="tots"]').forEach(btn => btn.classList.add('actiu'));
-        
-        Object.keys(this.filtresActius).forEach(key => {
-            this.filtresActius[key] = 'tots';
-        });
-        
-        const searchInput = document.getElementById('mapa-cerca');
-        if (searchInput) {
-            searchInput.value = '';
-        }
-        
-        // Actualitzar estat de cerca
-        this.updateSearchClearButton();
-        
-        this.aplicarFiltres();
-        this.mostrarFiltresActius();
-        
-        // Restablir estils d'hàbitats
-        Object.values(this.habitatsLayers).forEach(layer => {
-            layer.setStyle({ weight: 2, opacity: 0.7 });
-        });
-    }
-
-    /**
-     * AFEGIT: Netejar camp de cerca (COPIAT DE GALERIA)
-     */
     clearSearchInput() {
         const searchInput = document.getElementById('mapa-cerca');
         if (searchInput) {
@@ -1189,9 +1336,6 @@ class MapaBotanica {
         }
     }
 
-    /**
-     * AFEGIT: Actualitzar visibilitat de la creueta de cerca (SELECTORS CORREGITS)
-     */
     updateSearchClearButton() {
         const searchInput = document.getElementById('mapa-cerca');
         const clearButton = document.querySelector('.cerca-clear');
@@ -1203,21 +1347,6 @@ class MapaBotanica {
                 clearButton.style.display = 'none';
             }
         }
-    }
-
-    /**
-     * AFEGIT: Normalitzar arrays (COPIAT DE MAIN.JS)
-     */
-    normalizeArray(data) {
-        if (!data) return [];
-        
-        const array = Array.isArray(data) ? data : [data];
-        return array.map(item => 
-            item.toString()
-                .toLowerCase()
-                .replace(/\s*\(.*?\)\s*/g, '') // eliminar parèntesis
-                .replace(/\s+/g, '_')          // espais a guions baixos
-        );
     }
 
     showErrorInModal(message) {
