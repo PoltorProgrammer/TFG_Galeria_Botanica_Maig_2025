@@ -21,6 +21,15 @@
     --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
     --transition: all 0.3s ease;
     --border-radius: 8px;
+    
+    /* Variables de compatibilitat amb el sistema original */
+    --primary-color: #4CAF50;
+    --primary-dark: #388E3C;
+    --secondary-color: #2196F3;
+    --background-color: #f8f9fa;
+    --text-color: #333;
+    --border-color: #e0e0e0;
+    --shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 /* Reset i base */
@@ -143,7 +152,7 @@ body {
     object-fit: contain;
     filter: drop-shadow(0 10px 25px rgba(0,0,0,0.4));
     transition: all 0.5s ease;
-    background: rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.12) !important;
     border-radius: 50%;
     padding: 12px;
     position: relative;
@@ -166,7 +175,7 @@ body {
 
 .centraleta-link:hover .centraleta-logo {
     filter: drop-shadow(0 15px 35px rgba(245, 184, 0, 0.7));
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.2) !important;
 }
 
 .centraleta-link:hover .centraleta-glow {
@@ -752,6 +761,40 @@ body {
 }
 
 /* =============================================================================
+   LOADING INDICATOR (ORIGINAL COMPATIBILITY)
+   ========================================================================== */
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9998;
+    backdrop-filter: blur(5px);
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--border-color);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+.loading p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+/* =============================================================================
    FOOTER
    ========================================================================== */
 
@@ -948,6 +991,101 @@ body {
 }
 
 /* =============================================================================
+   MODAL BASE (COMPARTIT ENTRE GALERIA I MAPA)
+   ========================================================================== */
+
+.planta-modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(3px);
+}
+
+.planta-modal.actiu {
+    opacity: 1;
+}
+
+.planta-modal-contingut {
+    background-color: #fefefe;
+    margin: 3% auto;
+    padding: 0;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 1000px;
+    animation: modalSlideDown 0.4s ease;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+@keyframes modalSlideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.planta-modal-tancar {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #666;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    background: rgba(255, 255, 255, 0.9);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.planta-modal-tancar:hover {
+    background: rgba(255, 255, 255, 1);
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.planta-modal-cos {
+    padding: 20px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Scrollbar personalitzat per modal */
+.planta-modal-cos::-webkit-scrollbar {
+    width: 8px;
+}
+
+.planta-modal-cos::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.planta-modal-cos::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.planta-modal-cos::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* =============================================================================
    RESPONSIVE DESIGN
    ========================================================================== */
 
@@ -972,6 +1110,15 @@ body {
     .stats-preview {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1.5rem;
+    }
+
+    .planta-modal-contingut {
+        width: 95%;
+        margin: 5% auto;
+    }
+    
+    .planta-modal-cos {
+        padding: 15px;
     }
 }
 
