@@ -1,231 +1,231 @@
-<!DOCTYPE html>
-<html lang="ca">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeria Botànica UAB</title>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PoltorProgrammer/Memoria_TFG_Maig_2025/refs/heads/main/imatges/LOGO_TFG.png">
-    
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Estils locals -->
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/galeria.css">
-    <link rel="stylesheet" href="assets/css/mapa.css">
-</head>
-<body>
-    <!-- Page Loader -->
-    <div class="page-loader">
-        <div class="loader-animation">
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-logo"></div>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Enhanced Header -->
-        <header class="header">
-            <div class="header-background"></div>
-            <div class="header-content">
-                <a href="https://poltorprogrammer.github.io/Memoria_TFG_Maig_2025/Eines_Centraleta.html" class="centraleta-link" target="_blank" title="Anar a la Centraleta d'Eines">
-                    <img src="https://raw.githubusercontent.com/PoltorProgrammer/Memoria_TFG_Maig_2025/refs/heads/main/imatges/LOGO_TFG_LLETRA.png" alt="Logo TFG - Centraleta d'Eines" class="centraleta-logo">
-                    <div class="centraleta-glow"></div>
-                </a>
-                <h1 class="header-title">
-                    <span class="title-line">Galeria Botànica</span>
-                    <span class="title-line title-accent">UAB</span>
-                </h1>
-                <p class="header-subtitle">Descobreix la flora del campus de la Universitat Autònoma de Barcelona</p>
-                <div class="header-decoration">
-                    <div class="decoration-leaf decoration-leaf-1">🌿</div>
-                    <div class="decoration-leaf decoration-leaf-2">🍃</div>
-                    <div class="decoration-leaf decoration-leaf-3">🌱</div>
-                </div>
+    <!DOCTYPE html>
+    <html lang="ca">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Galeria Botànica UAB</title>
+        <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PoltorProgrammer/Memoria_TFG_Maig_2025/refs/heads/main/imatges/LOGO_TFG.png">
+        
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+        
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <!-- Estils locals -->
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/galeria.css">
+        <link rel="stylesheet" href="assets/css/mapa.css">
+    </head>
+    <body>
+        <!-- Page Loader -->
+        <div class="page-loader">
+            <div class="loader-animation">
+                <div class="loader-circle"></div>
+                <div class="loader-circle"></div>
+                <div class="loader-circle"></div>
+                <div class="loader-logo"></div>
             </div>
-        </header>
-
-        <!-- Enhanced Navigation Tabs -->
-        <nav class="tabs-nav">
-            <button class="tab-button active" data-tab="inici">
-                <div class="tab-icon">🏠</div>
-                <span class="tab-text">Inici</span>
-                <div class="tab-indicator"></div>
-            </button>
-            <button class="tab-button" data-tab="galeria">
-                <div class="tab-icon">🌿</div>
-                <span class="tab-text">Galeria Botànica</span>
-                <div class="tab-indicator"></div>
-            </button>
-            <button class="tab-button" data-tab="mapa">
-                <div class="tab-icon">🗺️</div>
-                <span class="tab-text">Mapa Interactiu</span>
-                <div class="tab-indicator"></div>
-            </button>
-        </nav>
-
-        <!-- Tab Content -->
-        <main class="tab-content">
-            <!-- Inici Tab -->
-            <section id="inici-tab" class="tab-panel active">
-                <div class="inici-content">
-                    <!-- Descripció principal -->
-                    <div class="inici-description">
-                        <h2 class="inici-welcome">Benvinguts a la Galeria Botànica Digital!</h2>
-                        <p class="inici-intro"><strong>Demostració en viu del sistema desenvolupat com a Treball de Fi de Grau</strong></p>
-                        <p class="inici-explanation">Aquesta aplicació web és una <strong>rèplica fidel del plugin WordPress</strong> creat per integrar fàcilment la galeria botànica i el mapa interactiu a les pàgines oficials de la UAB. Utilitza les mateixes funcionalitats, dades i interfície que el sistema original, implementat amb tecnologies web obertes per garantir la màxima compatibilitat i rendiment.</p>
-                        
-                        <div class="cta-buttons">
-                            <button class="cta-button tab-switch" data-target="galeria">
-                                <span class="cta-icon">🌿</span>
-                                <span class="cta-text">Explorar Galeria</span>
-                                <div class="cta-shine"></div>
-                            </button>
-                            <button class="cta-button tab-switch" data-target="mapa">
-                                <span class="cta-icon">🗺️</span>
-                                <span class="cta-text">Veure Mapa</span>
-                                <div class="cta-shine"></div>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Estadístiques ràpides -->
-                    <div class="stats-preview">
-                        <div class="stat-item">
-                            <div class="stat-icon">🌱</div>
-                            <span class="stat-number">300+</span>
-                            <span class="stat-label">Espècies Catalogades</span>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-icon">📸</div>
-                            <span class="stat-number">1000+</span>
-                            <span class="stat-label">Imatges d'Alta Qualitat</span>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-icon">🏫</div>
-                            <span class="stat-number">260</span>
-                            <span class="stat-label">Hectàrees Campus</span>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-icon">💻</div>
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Tecnologies Obertes</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Característiques principals -->
-                    <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">🔍</div>
-                            <h3 class="feature-title">Sistema de Filtres Avançat</h3>
-                            <p class="feature-description">Filtra plantes per família, tipus, colors, hàbitat, època de floració i molt més. Combina múltiples criteris per trobar exactament el que busques.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">📱</div>
-                            <h3 class="feature-title">Disseny Responsive</h3>
-                            <p class="feature-description">Perfectament adaptat a mòbils, tauletes i ordinadors. Experiència d'usuari consistent en qualsevol dispositiu.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">🗺️</div>
-                            <h3 class="feature-title">Mapa Interactiu</h3>
-                            <p class="feature-description">Localitza espècies al campus amb coordenades GPS precises, marcadors personalitzats i zones d'hàbitat geolocalitzades.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">📸</div>
-                            <h3 class="feature-title">Galeria Visual Rica</h3>
-                            <p class="feature-description">Imatges d'alta qualitat de flors, fulles, fruits i hàbits de creixement amb visualització lightbox avançada.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">⚡</div>
-                            <h3 class="feature-title">Càrrega Ràpida</h3>
-                            <p class="feature-description">Optimitzat per a màxim rendiment amb lazy-loading d'imatges i clustering intel·ligent de marcadors.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">🌐</div>
-                            <h3 class="feature-title">Tecnologies Obertes</h3>
-                            <p class="feature-description">Basat en WordPress, Leaflet, JSON i tecnologies web estàndard per garantir sostenibilitat a llarg termini.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Galeria Tab -->
-            <section id="galeria-tab" class="tab-panel">
-                <div id="galeria-botanica-container">
-                    <!-- Contingut de la galeria es genera dinàmicament -->
-                </div>
-            </section>
-
-            <!-- Mapa Tab -->
-            <section id="mapa-tab" class="tab-panel">
-                <div id="mapa-botanica-container">
-                    <!-- Contingut del mapa es genera dinàmicament -->
-                </div>
-            </section>
-        </main>
-
-        <!-- Loading Indicator -->
-        <div id="loading" class="loading" style="display: none;">
-            <div class="loading-spinner"></div>
-            <p>Carregant dades botàniques...</p>
         </div>
 
-        <!-- Error Message -->
-        <div id="error-message" class="error-message" style="display: none;">
-            <h3>Error de càrrega</h3>
-            <p>No s'han pogut carregar les dades. Si us plau, comprova que tots els fitxers estiguin disponibles.</p>
-        </div>
-    </div>
-
-    <!-- Enhanced Footer -->
-    <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <a href="https://poltorprogrammer.github.io/Memoria_TFG_Maig_2025/Eines_Centraleta.html" class="footer-logo-link" target="_blank">
-                    <img src="https://raw.githubusercontent.com/PoltorProgrammer/Memoria_TFG_Maig_2025/refs/heads/main/imatges/LOGO_TFG_LLETRA.png" alt="Logo Galeria Botànica" class="footer-logo-img">
-                    <div class="footer-logo-glow"></div>
-                </a>
-                <p class="footer-copyright">&copy; 2025 Tomás González Bartomeu</p>
-                <p class="footer-info">TFG Grau en Biologia Ambiental • Universitat Autònoma de Barcelona</p>
-                <p class="footer-title">🌿 Galeria i Mapa Botànic del Campus UAB 🌿</p>
+            <!-- Enhanced Header -->
+            <header class="header">
+                <div class="header-background"></div>
+                <div class="header-content">
+                    <a href="https://poltorprogrammer.github.io/Memoria_TFG_Maig_2025/Eines_Centraleta.html" class="centraleta-link" target="_blank" title="Anar a la Centraleta d'Eines">
+                        <img src="https://raw.githubusercontent.com/PoltorProgrammer/Memoria_TFG_Maig_2025/refs/heads/main/imatges/LOGO_TFG_LLETRA.png" alt="Logo TFG - Centraleta d'Eines" class="centraleta-logo">
+                        <div class="centraleta-glow"></div>
+                    </a>
+                    <h1 class="header-title">
+                        <span class="title-line">Galeria Botànica</span>
+                        <span class="title-line title-accent">UAB</span>
+                    </h1>
+                    <p class="header-subtitle">Descobreix la flora del campus de la Universitat Autònoma de Barcelona</p>
+                    <div class="header-decoration">
+                        <div class="decoration-leaf decoration-leaf-1">🌿</div>
+                        <div class="decoration-leaf decoration-leaf-2">🍃</div>
+                        <div class="decoration-leaf decoration-leaf-3">🌱</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Enhanced Navigation Tabs -->
+            <nav class="tabs-nav">
+                <button class="tab-button active" data-tab="inici">
+                    <div class="tab-icon">🏠</div>
+                    <span class="tab-text">Inici</span>
+                    <div class="tab-indicator"></div>
+                </button>
+                <button class="tab-button" data-tab="galeria">
+                    <div class="tab-icon">🌿</div>
+                    <span class="tab-text">Galeria Botànica</span>
+                    <div class="tab-indicator"></div>
+                </button>
+                <button class="tab-button" data-tab="mapa">
+                    <div class="tab-icon">🗺️</div>
+                    <span class="tab-text">Mapa Interactiu</span>
+                    <div class="tab-indicator"></div>
+                </button>
+            </nav>
+
+            <!-- Tab Content -->
+            <main class="tab-content">
+                <!-- Inici Tab -->
+                <section id="inici-tab" class="tab-panel active">
+                    <div class="inici-content">
+                        <!-- Descripció principal -->
+                        <div class="inici-description">
+                            <h2 class="inici-welcome">Benvinguts a la Galeria Botànica Digital!</h2>
+                            <p class="inici-intro"><strong>Demostració en viu del sistema desenvolupat com a Treball de Fi de Grau</strong></p>
+                            <p class="inici-explanation">Aquesta aplicació web és una <strong>rèplica fidel del plugin WordPress</strong> creat per integrar fàcilment la galeria botànica i el mapa interactiu a les pàgines oficials de la UAB. Utilitza les mateixes funcionalitats, dades i interfície que el sistema original, implementat amb tecnologies web obertes per garantir la màxima compatibilitat i rendiment.</p>
+                            
+                            <div class="cta-buttons">
+                                <button class="cta-button tab-switch" data-target="galeria">
+                                    <span class="cta-icon">🌿</span>
+                                    <span class="cta-text">Explorar Galeria</span>
+                                    <div class="cta-shine"></div>
+                                </button>
+                                <button class="cta-button tab-switch" data-target="mapa">
+                                    <span class="cta-icon">🗺️</span>
+                                    <span class="cta-text">Veure Mapa</span>
+                                    <div class="cta-shine"></div>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Estadístiques ràpides -->
+                        <div class="stats-preview">
+                            <div class="stat-item">
+                                <div class="stat-icon">🌱</div>
+                                <span class="stat-number">300+</span>
+                                <span class="stat-label">Espècies Catalogades</span>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">📸</div>
+                                <span class="stat-number">1000+</span>
+                                <span class="stat-label">Imatges d'Alta Qualitat</span>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">🏫</div>
+                                <span class="stat-number">260</span>
+                                <span class="stat-label">Hectàrees Campus</span>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">💻</div>
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Tecnologies Obertes</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Característiques principals -->
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">🔍</div>
+                                <h3 class="feature-title">Sistema de Filtres Avançat</h3>
+                                <p class="feature-description">Filtra plantes per família, tipus, colors, hàbitat, època de floració i molt més. Combina múltiples criteris per trobar exactament el que busques.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">📱</div>
+                                <h3 class="feature-title">Disseny Responsive</h3>
+                                <p class="feature-description">Perfectament adaptat a mòbils, tauletes i ordinadors. Experiència d'usuari consistent en qualsevol dispositiu.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">🗺️</div>
+                                <h3 class="feature-title">Mapa Interactiu</h3>
+                                <p class="feature-description">Localitza espècies al campus amb coordenades GPS precises, marcadors personalitzats i zones d'hàbitat geolocalitzades.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">📸</div>
+                                <h3 class="feature-title">Galeria Visual Rica</h3>
+                                <p class="feature-description">Imatges d'alta qualitat de flors, fulles, fruits i hàbits de creixement amb visualització lightbox avançada.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">⚡</div>
+                                <h3 class="feature-title">Càrrega Ràpida</h3>
+                                <p class="feature-description">Optimitzat per a màxim rendiment amb lazy-loading d'imatges i clustering intel·ligent de marcadors.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">🌐</div>
+                                <h3 class="feature-title">Tecnologies Obertes</h3>
+                                <p class="feature-description">Basat en WordPress, Leaflet, JSON i tecnologies web estàndard per garantir sostenibilitat a llarg termini.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Galeria Tab -->
+                <section id="galeria-tab" class="tab-panel">
+                    <div id="galeria-botanica-container">
+                        <!-- Contingut de la galeria es genera dinàmicament -->
+                    </div>
+                </section>
+
+                <!-- Mapa Tab -->
+                <section id="mapa-tab" class="tab-panel">
+                    <div id="mapa-botanica-container">
+                        <!-- Contingut del mapa es genera dinàmicament -->
+                    </div>
+                </section>
+            </main>
+
+            <!-- Loading Indicator -->
+            <div id="loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Carregant dades botàniques...</p>
+            </div>
+
+            <!-- Error Message -->
+            <div id="error-message" class="error-message" style="display: none;">
+                <h3>Error de càrrega</h3>
+                <p>No s'han pogut carregar les dades. Si us plau, comprova que tots els fitxers estiguin disponibles.</p>
             </div>
         </div>
-    </footer>
 
-    <!-- Back to top button -->
-    <button class="back-to-top" id="backToTop" aria-label="Tornar a dalt">
-        <span class="back-to-top-icon">↑</span>
-        <div class="back-to-top-ripple"></div>
-    </button>
+        <!-- Enhanced Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <a href="https://poltorprogrammer.github.io/Memoria_TFG_Maig_2025/Eines_Centraleta.html" class="footer-logo-link" target="_blank">
+                        <img src="https://raw.githubusercontent.com/PoltorProgrammer/Memoria_TFG_Maig_2025/refs/heads/main/imatges/LOGO_TFG_LLETRA.png" alt="Logo Galeria Botànica" class="footer-logo-img">
+                        <div class="footer-logo-glow"></div>
+                    </a>
+                    <p class="footer-copyright">&copy; 2025 Tomás González Bartomeu</p>
+                    <p class="footer-info">TFG Grau en Biologia Ambiental • Universitat Autònoma de Barcelona</p>
+                    <p class="footer-title">🌿 Galeria i Mapa Botànic del Campus UAB 🌿</p>
+                </div>
+            </div>
+        </footer>
 
-    <!-- Modal per detalls de plantes -->
-    <div class="planta-modal" style="display: none;">
-        <div class="planta-modal-contingut">
-            <span class="planta-modal-tancar">&times;</span>
-            <div class="planta-modal-cos"></div>
+        <!-- Back to top button -->
+        <button class="back-to-top" id="backToTop" aria-label="Tornar a dalt">
+            <span class="back-to-top-icon">↑</span>
+            <div class="back-to-top-ripple"></div>
+        </button>
+
+        <!-- Modal per detalls de plantes -->
+        <div class="planta-modal" style="display: none;">
+            <div class="planta-modal-contingut">
+                <span class="planta-modal-tancar">&times;</span>
+                <div class="planta-modal-cos"></div>
+            </div>
         </div>
-    </div>
 
-    <!-- Scripts -->
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
-    
-    <!-- Scripts locals -->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/galeria.js"></script>
-    <script src="assets/js/mapa.js"></script>
-</body>
-</html>
+        <!-- Scripts -->
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
+        
+        <!-- Scripts locals -->
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/galeria.js"></script>
+        <script src="assets/js/mapa.js"></script>
+    </body>
+    </html>
