@@ -1,7 +1,6 @@
 /**
  * MAIN.JS - Galeria Botànica UAB Local
  * Controlador principal de l'aplicació
- * VERSIÓ MILLORADA AMB PÀGINA D'INICI
  * Gestiona: càrrega de dades, pestanyes, inicialització global, funcionalitats d'inici
  */
 
