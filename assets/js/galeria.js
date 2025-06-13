@@ -20,7 +20,7 @@ class GaleriaBotanica {
     }
 
     init() {
-        console.log("Inicialitzant galeria botànica...");
+        console.log("🌿 Inicialitzant galeria botànica...");
         
         try {
             this.renderGallery();
@@ -28,9 +28,9 @@ class GaleriaBotanica {
             this.setupModal();
             this.setupSearch();
             
-            console.log("Galeria inicialitzada correctament");
+            console.log("✅ Galeria inicialitzada correctament");
         } catch (error) {
-            console.error("Error inicialitzant galeria:", error);
+            console.error("❌ Error inicialitzant galeria:", error);
         }
     }
 
@@ -40,7 +40,7 @@ class GaleriaBotanica {
     renderGallery() {
         const container = document.getElementById('galeria-botanica-container');
         if (!container) {
-            console.error("Container de galeria no trobat");
+            console.error("❌ Container de galeria no trobat");
             return;
         }
 
@@ -52,6 +52,11 @@ class GaleriaBotanica {
 
         const html = this.buildGalleryHTML(plantes);
         container.innerHTML = html;
+        
+        // Inicialitzar estat de cerca després de renderitzar
+        setTimeout(() => {
+            this.updateSearchClearButton();
+        }, 100);
     }
 
     /**
@@ -93,7 +98,7 @@ class GaleriaBotanica {
                     ${this.buildFilterGroup('usos', 'Usos', usos, 'usos-filtre')}
                 </div>
                 
-                <div class="filtres-actius-contenidor">
+                <div class="filtres-actius-contenidor" style="display: none;">
                     <span class="etiqueta-filtres-actius">Filtres actius:</span>
                     <div class="filtres-actius"></div>
                     <button class="netejar-filtres" style="display: none;">Netejar tots els filtres</button>
@@ -403,16 +408,24 @@ class GaleriaBotanica {
                 passaFiltres = infoCompleta.toLowerCase().includes(textCerca);
             }
             
-            // Mostrar/amagar planta
+            // Mostrar/amagar planta amb animació suau
             if (passaFiltres) {
                 planta.style.display = 'block';
+                setTimeout(() => {
+                    planta.style.opacity = '1';
+                    planta.style.transform = 'translateY(0)';
+                }, 10);
                 plantesVisibles++;
             } else {
-                planta.style.display = 'none';
+                planta.style.opacity = '0';
+                planta.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    planta.style.display = 'none';
+                }, 300);
             }
         });
         
-        console.log(`Filtres aplicats: ${plantesVisibles} plantes visibles`);
+        console.log(`🔍 Filtres aplicats: ${plantesVisibles} plantes visibles`);
     }
 
     /**
@@ -439,7 +452,7 @@ class GaleriaBotanica {
             this.activarLightbox();
             
         } catch (error) {
-            console.error('Error carregant detalls:', error);
+            console.error('❌ Error carregant detalls:', error);
             this.showErrorInModal('Error carregant els detalls de la planta');
         }
     }
@@ -517,7 +530,7 @@ class GaleriaBotanica {
     }
 
     /**
-     * Funcions d'utilitat
+     * Funcions d'utilitat per extreure valors únics
      */
     
     extractUniqueValues(plantes, field) {
@@ -657,7 +670,9 @@ class GaleriaBotanica {
         }));
     }
 
-    // ... (continuar amb la resta de mètodes d'utilitat)
+    /**
+     * Funcions d'utilitat diverses
+     */
 
     safeString(str) {
         if (str === undefined || str === null) return '';
@@ -754,7 +769,7 @@ class GaleriaBotanica {
         
         // Si tots els botons estan actius (excepte "tots")
         if (allButtons.length > 0 && allButtons.length === activeButtons.length) {
-            console.log(`Totes les opcions del grup ${grupFiltre} estan seleccionades - reiniciant automàticament`);
+            console.log(`🔄 Totes les opcions del grup ${grupFiltre} estan seleccionades - reiniciant automàticament`);
             
             // Activar automàticament el botó "Tots"
             this.activarBotoTots(grupFiltre);
@@ -792,7 +807,8 @@ class GaleriaBotanica {
      */
     mostrarFiltresActius() {
         const container = document.querySelector('.filtres-actius');
-        if (!container) return;
+        const containerWrapper = document.querySelector('.filtres-actius-contenidor');
+        if (!container || !containerWrapper) return;
         
         container.innerHTML = '';
         let hiHaFiltresActius = false;
@@ -818,7 +834,9 @@ class GaleriaBotanica {
             }
         });
         
-        // Mostrar/amagar botó de neteja
+        // Mostrar/amagar contenidor i botó de neteja
+        containerWrapper.style.display = hiHaFiltresActius ? 'flex' : 'none';
+        
         const clearButton = document.querySelector('.netejar-filtres');
         if (clearButton) {
             clearButton.style.display = hiHaFiltresActius ? 'block' : 'none';
@@ -868,6 +886,7 @@ class GaleriaBotanica {
         const searchInput = document.getElementById('cerca-plantes');
         if (searchInput) {
             searchInput.value = '';
+            this.updateSearchClearButton();
         }
         
         // Restaurar imatges originals
@@ -916,7 +935,7 @@ class GaleriaBotanica {
                     planta.querySelector('.planta-imatge a').appendChild(newIndicator);
                 }
             } catch (error) {
-                console.error('Error aplicant canvi d\'imatges:', error);
+                console.error('❌ Error aplicant canvi d\'imatges:', error);
             }
         });
     }
