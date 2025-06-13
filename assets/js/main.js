@@ -1,7 +1,6 @@
 /* =============================================================================
    MAIN CSS - Galeria Botànica UAB Local
    Estils base, layout i sistema de pestanyes
-   VERSIÓ FUSIONADA: Disseny millorat + funcionalitat original
    ========================================================================== */
 
 /* Variables CSS */
