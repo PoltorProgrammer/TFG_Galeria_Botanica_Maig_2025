@@ -1,6 +1,6 @@
 /**
  * GALERIA.JS - Galeria Botànica UAB Local
- * Adaptat de galeria-botanica.js per funcionar sense WordPress
+ * Adaptat de galeria-botanica.js per funcionar en HTML sense WordPress
  */
 
 class GaleriaBotanica {
