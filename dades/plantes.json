@@ -1,0 +1,3686 @@
+{
+  "plantes": [
+    {
+      "id": "pimpinela_escarlata",
+      "nom_comu": "Pimpinela escarlata",
+      "nom_cientific": "Anagallis arvensis",
+      "familia": "Primulaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (marges i terres remogudes)",
+        "bosc_mediterrani (zones obertes i aclarides)"
+      ],
+      "descripcio": "Herba anual de creixement baix i tiges ramificades. Les fulles són ovades i oposades. Les flors són petites, de color vermell ataronjat o blau, amb cinc pètals i apareixen solitàries a les aixelles de les fulles. És coneguda per tancar les seves flors en dies ennuvolats.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.2m",
+        "altres_característiques_rellevants": "indicadora de condicions meteorològiques (flors es tanquen amb núvols)"
+      },
+      "colors": [
+        "vermell",
+        "blau"
+      ],
+      "usos": [
+        "usos ecològics (indicadora de condicions climàtiques)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.500447,
+          "lng": 2.106723
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Lysimachia_arvensis",
+        "https://www.gardenia.net/plant/anagallis-arvensis"
+      ]
+    },
+    {
+      "id": "graminia_geniculada",
+      "nom_comu": "Gramínia geniculada",
+      "nom_cientific": "Aegilops geniculata",
+      "familia": "Poaceae",
+      "tipus": "herba",
+      "habitat": [
+        "torrent_can_domenech (zones obertes amb sòls pobres i pedregosos)",
+        "cami_ho_chi_minh (marges de camins i zones alterades)"
+      ],
+      "descripcio": "Herba anual que pot arribar fins als 40 cm d'alçada, amb tiges geniculades i espigues denses. Les fulles són estretes i planes. Es troba comunament en zones alterades com marges de camins, camps abandonats i sòls pobres. És una espècie resilient que pot competir amb altres gramínies en hàbitats degradats.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.4m",
+        "altres_característiques_rellevants": "Espècie ruderal; pot comportar-se com a mala herba en alguns contextos"
+      },
+      "colors": [
+        "verd"
+      ],
+      "usos": [],
+      "coordenades": [
+        {
+          "lat": 41.500224,
+          "lng": 2.094783
+        },
+        {
+          "lat": 41.502095,
+          "lng": 2.092038
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Aegilops_geniculata",
+        "https://www.maltawildplants.com/POAC/Aegilops_geniculata.php"
+      ]
+    },
+    {
+      "id": "afillantes",
+      "nom_comu": "Afillantes",
+      "nom_cientific": "Aphyllanthes monspeliensis",
+      "familia": "Asparagaceae",
+      "tipus": "herba",
+      "habitat": [
+        "bosc_mediterrani (zones obertes i pedregoses amb vegetació esclarissada)",
+        "zones_enjardinades (espais amb substrat rocós i exposició solar directa)"
+      ],
+      "descripcio": "Herba perenne de fins a 40 cm d’alçada, amb tiges primes i cilíndriques que fan la funció fotosintètica, ja que les fulles són gairebé inexistents. Les flors, de color blau violaci, tenen forma d'estrella i apareixen a l'extrem de les tiges durant la primavera. Prefereix sòls calcaris i secs, i és molt resistent a la sequera.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 0.40m",
+        "altres_característiques_rellevants": "alta tolerància a la sequera i a sòls pobres"
+      },
+      "colors": [
+        "blau (blau violaci)",
+        "violeta (violaci blavós)"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos ecològics (xeropaisatgisme)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.501154,
+          "lng": 2.106309
+        }
+      ],
+      "fonts": [
+        "https://www.florealpes.com/fiche_aphyllanthes.php",
+        "https://www.tela-botanica.org/bdtfx-nn-678"
+      ]
+    },
+    {
+      "id": "arboç",
+      "nom_comu": "Arboç",
+      "nom_cientific": "Arbutus unedo",
+      "familia": "Ericaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "bosc_mediterrani (sòl calcari i zones assolellades)",
+        "zones_enjardinades (utilitzat com a ornamental)"
+      ],
+      "descripcio": "Petit arbre perennifoli amb escorça rogenca i escamosa. Les fulles són coriàcies, de color verd fosc i marges serrats. Floreix a la tardor amb flors blanques en forma de campana, mentre que els fruits, esfèrics i vermells, maduren a finals de tardor o hivern. El contrast entre flors i fruits li confereix un gran valor ornamental.",
+      "caracteristiques": {
+        "floracio": [
+          "tardor"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 10m",
+        "altres_característiques_rellevants": "fruits comestibles utilitzats en licors com el medronho"
+      },
+      "colors": [
+        "blanc",
+        "vermell",
+        "verd"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris",
+        "usos ecològics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.496273,
+          "lng": 2.099584
+        },
+        {
+          "lat": 41.501354,
+          "lng": 2.104939
+        }
+      ],
+      "fonts": [
+        "https://www.thespruce.com/strawberry-tree-arbutus-unedo-3269240",
+        "https://pfaf.org/user/plant.aspx?latinname=Arbutus+unedo"
+      ]
+    },
+    {
+      "id": "astragal_de_montpeller",
+      "nom_comu": "Astràgal de Montpeller",
+      "nom_cientific": "Astragalus monspessulanus",
+      "familia": "Fabaceae",
+      "tipus": "herba",
+      "habitat": [
+        "bosc_mediterrani (present en clarianes i zones assolellades)",
+        "cami_ho_chi_minh (zones obertes i pedregoses)"
+      ],
+      "descripcio": "Herba perenne que forma coixins densos, amb fulles compostes per folíols petits i oblongs. Les flors, de color rosa a porpra, apareixen en raïms i tenen forma papilionada. Prefereix sòls calcaris i ben drenats, sovint en zones seques i pedregoses.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.3m",
+        "altres_característiques_rellevants": "fixadora de nitrogen, millorant la fertilitat del sòl"
+      },
+      "colors": [
+        "rosa",
+        "violeta"
+      ],
+      "usos": [
+        "usos ecològics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.497823,
+          "lng": 2.096505
+        },
+        {
+          "lat": 41.500633,
+          "lng": 2.093021
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Astragalus_monspessulanus",
+        "https://www.wildflowersprovence.fr/plant/astragalus-monspessulanus/"
+      ]
+    },
+    {
+      "id": "margarida_comuna",
+      "nom_comu": "Margarida comuna",
+      "nom_cientific": "Bellis perennis",
+      "familia": "Asteraceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (gespes i parterres en zones urbanitzades)",
+        "eix_central (espais oberts i ben cuidats del campus)"
+      ],
+      "descripcio": "Herba perenne de creixement baix, amb rosetes de fulles oblongo-espatulades i flors solitàries amb lígules blanques i disc central groc. Floreix gairebé tot l'any en climes temperats i és habitual en gespes i prats segats.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 0,1m",
+        "altres_característiques_rellevants": "resistent al trepig i sovint utilitzada en jardineria"
+      },
+      "colors": [
+        "blanc",
+        "groc"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics (gespes i parterres)",
+        "usos agroalimentaris (tradicionalment com a antiinflamatori suau)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.500791,
+          "lng": 2.107595
+        },
+        {
+          "lat": 41.5015,
+          "lng": 2.104302
+        }
+      ],
+      "fonts": [
+        "https://pfaf.org/user/plant.aspx?LatinName=Bellis+perennis",
+        "https://en.wikipedia.org/wiki/Bellis_perennis"
+      ]
+    },
+    {
+      "id": "borsa_pastor",
+      "nom_comu": "Borsa de pastor",
+      "nom_cientific": "Capsella bursa-pastoris",
+      "familia": "Brassicaceae",
+      "tipus": "herba",
+      "descripcio": "Herba anual de petita mida, amb tiges erectes i fulles basals en roseta. Les flors són petites, blanques i agrupades en inflorescències terminals. Els fruits són característics, en forma de cor invertit, que recorden una bossa de pastor.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "tardor"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.5m",
+        "altres_característiques_rellevants": "Planta ruderal molt comuna en zones alterades."
+      },
+      "colors": [
+        "blanc",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos agroalimentaris"
+      ],
+      "fonts": [
+        "https://gobotany.nativeplanttrust.org/species/capsella/bursa-pastoris/",
+        "https://pfaf.org/User/plant.aspx?LatinName=Capsella+bursa-pastoris"
+      ]
+    },
+    {
+      "id": "lodo_bastard",
+      "nom_comu": "Lodo bastard",
+      "nom_cientific": "Celtis australis",
+      "familia": "Cannabaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "vegetacio_ribera (marges de rieres i torrents)",
+        "zones_enjardinades (plantat com a arbre ornamental)"
+      ],
+      "descripcio": "Arbre caducifoli de mida mitjana a gran, amb escorça llisa de color gris i fulles ovades, dentades i de textura aspra. Les flors són petites i verdoses, i els fruits són drupes esfèriques de color negre a la maduresa, apreciades per la fauna.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 25m",
+        "altres_característiques_rellevants": "Tolerant a la sequera i utilitzat en reforestacions."
+      },
+      "colors": [
+        "verd",
+        "gris",
+        "negre"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos ecològics",
+        "usos artesanals/ industrials (fusteria)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.497465,
+          "lng": 2.110196
+        },
+        {
+          "lat": 41.501139,
+          "lng": 2.106184
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Celtis_australis",
+        "https://pfaf.org/user/Plant.aspx?LatinName=Celtis+australis"
+      ]
+    },
+    {
+      "id": "herba_de_cent",
+      "nom_comu": "Herba de cent",
+      "nom_cientific": "Centaurium erythraea",
+      "familia": "Gentianaceae",
+      "tipus": "herba",
+      "habitat": [
+        "cami_ho_chi_minh (vora de camins i clarianes assolellades del campus)",
+        "bosc_mediterrani (ambients oberts dins l'alzinar)"
+      ],
+      "descripcio": "Herba petita de tiges erectes i fines, que pot arribar als 40 cm d’alçada. Té fulles oposades, ovalades a la base i més allargades cap a la tija. Les flors, molt vistoses, són petites i d’un color rosa intens amb cinc pètals. Es disposen en inflorescències terminals.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.4m",
+        "altres_característiques_rellevants": "possiblement amargant; pol·linització per insectes"
+      },
+      "colors": [
+        "rosa",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos ecològics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.49426,
+          "lng": 2.095709
+        },
+        {
+          "lat": 41.500948,
+          "lng": 2.094255
+        }
+      ],
+      "fonts": [
+        "https://www.botanica.cat/fitxa.php?id=1381",
+        "https://es.wikipedia.org/wiki/Centaurium_erythraea"
+      ]
+    },
+    {
+      "id": "espernallac_roig",
+      "nom_comu": "Espernallac roig",
+      "nom_cientific": "Centranthus ruber",
+      "familia": "Caprifoliaceae",
+      "tipus": "herba",
+      "habitat": [
+        "murs_edificis (escletxes i murs antics del campus)",
+        "zones_enjardinades (marges de zones amb poc manteniment)"
+      ],
+      "descripcio": "Planta robusta que pot assolir fins a 80 cm d’alçada, amb fulles oposades, lanceolades i glauques. Forma densos ramells de flors petites i tubulars, d’un viu color vermellós o rosat. Sovint colonitza murs, roques i terres pobres. Té un aspecte ornamental i crida l’atenció per la seva floració abundosa.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 0.8m",
+        "altres_característiques_rellevants": "atractiva per a papallones"
+      },
+      "colors": [
+        "vermell",
+        "rosa",
+        "verd"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos ecològics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.498908,
+          "lng": 2.102575
+        },
+        {
+          "lat": 41.501281,
+          "lng": 2.103967
+        }
+      ],
+      "fonts": [
+        "https://www.botanica.cat/fitxa.php?id=1176",
+        "https://es.wikipedia.org/wiki/Centranthus_ruber"
+      ]
+    },
+    {
+      "id": "celidonia_major",
+      "nom_comu": "Cèlidònia major",
+      "nom_cientific": "Chelidonium majus",
+      "familia": "Papaveraceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_ombrívoles (vora de murs i camins ombrívols)",
+        "vegetacio_ribera (ambients frescos i humits)"
+      ],
+      "descripcio": "Herba alta amb làtex groc característic i tiges ramificades que poden fer més d’un metre. Les fulles són lobulades, de color verd blavós. Fa flors grogues de quatre pètals agrupades en petits ramells. El seu làtex és tòxic però s’ha emprat en remeis tradicionals.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 1m",
+        "altres_característiques_rellevants": "conté alcaloides tòxics; usada en medicina popular"
+      },
+      "colors": [
+        "groc",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.501215,
+          "lng": 2.091836
+        },
+        {
+          "lat": 41.500864,
+          "lng": 2.093095
+        }
+      ],
+      "fonts": [
+        "https://www.botanica.cat/fitxa.php?id=1113",
+        "https://es.wikipedia.org/wiki/Chelidonium_majus"
+      ]
+    },
+    {
+      "id": "jara_blanca",
+      "nom_comu": "Jara blanca",
+      "nom_cientific": "Cistus albidus",
+      "familia": "Cistaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (matorrals secs i assolellats)",
+        "zones_enjardinades (espais oberts amb vegetació naturalitzada)"
+      ],
+      "descripcio": "Arbust perenne de fins a 1 metre d'alçada, amb fulles oblongues cobertes de pèls que li donen un to grisenc. Les flors són grans, de color rosa porpra, amb estams grocs prominents. Tolera bé la sequera i prefereix sòls ben drenats i assolellats.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 1m",
+        "altres_característiques_rellevants": "resistent a la sequera i ideal per a xerojardineria"
+      },
+      "colors": [
+        "rosa",
+        "groc"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos ornamentals i paisatgístics (xerojardineria)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.494815,
+          "lng": 2.106304
+        },
+        {
+          "lat": 41.50124,
+          "lng": 2.103876
+        }
+      ],
+      "fonts": [
+        "https://www.rhs.org.uk/plants/3862/cistus-albidus/details",
+        "https://temperate.theferns.info/plant/Cistus%2Balbidus"
+      ]
+    },
+    {
+      "id": "estepa_blanca",
+      "nom_comu": "Estepa blanca",
+      "nom_cientific": "Cistus salviifolius",
+      "familia": "Cistaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (zones assolellades i seques amb sòls pobres)",
+        "cami_ho_chi_minh (corredor ecològic amb vegetació arbustiva)"
+      ],
+      "descripcio": "Arbust perenne de fins a 1 metre d'alçada, amb tiges esteses cobertes de pèls. Les fulles són oposades, ovalades, de 1 a 4 cm, verdes i tomentoses. Les flors, de 4 a 6 cm de diàmetre, tenen cinc pètals blancs amb una taca groga a la base. El fruit és una càpsula pentagonal de 5 a 7 mm.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 1m",
+        "altres_característiques_rellevants": "tolerant a la sequera i regeneradora després d'incendis"
+      },
+      "colors": [
+        "blanc",
+        "groc"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.498892,
+          "lng": 2.095591
+        },
+        {
+          "lat": 41.501188,
+          "lng": 2.092003
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Cistus_salviifolius",
+        "https://www.first-nature.com/flowers/cistus-salviifolius.php"
+      ]
+    },
+    {
+      "id": "barba_de_vell",
+      "nom_comu": "Barba de vell",
+      "nom_cientific": "Clematis vitalba",
+      "familia": "Ranunculaceae",
+      "tipus": "liana",
+      "habitat": [
+        "vegetacio_ribera (zones humides properes a cursos d'aigua)",
+        "zones_ombrívoles (marges de boscos i bardisses)"
+      ],
+      "descripcio": "Liana caduca que pot arribar als 15 metres de llargada. Les fulles són oposades, compostes per 3 a 5 folíols. Les flors, petites i blanques, apareixen en cimes bipares. Els fruits són aquenis amb plomalls sedosos que li donen un aspecte característic.",
+      "caracteristiques": {
+        "floracio": [
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 15m",
+        "altres_característiques_rellevants": "potent escaladora que pot cobrir arbres i arbustos"
+      },
+      "colors": [
+        "blanc"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.498245,
+          "lng": 2.092111
+        },
+        {
+          "lat": 41.497073,
+          "lng": 2.095304
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Clematis_vitalba",
+        "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/travellers-joy/"
+      ]
+    },
+    {
+      "id": "lisereta",
+      "nom_comu": "Lisereta",
+      "nom_cientific": "Convolvulus arvensis",
+      "familia": "Convolvulaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (zones alterades com marges de camins i camps)",
+        "eix_central (espais oberts i assolellats)"
+      ],
+      "descripcio": "Herba perenne enfiladissa amb tiges fines que poden arribar als 2 metres. Les fulles són alternes, de forma variable. Les flors, en forma d'embut, són blanques o rosades amb venes més fosques. És una planta invasora que pot ser difícil de controlar.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 2m",
+        "altres_característiques_rellevants": "capacitat invasora i difícil de controlar"
+      },
+      "colors": [
+        "blanc",
+        "rosa"
+      ],
+      "usos": [
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.49582,
+          "lng": 2.097496
+        },
+        {
+          "lat": 41.501898,
+          "lng": 2.104968
+        },
+        {
+          "lat": 41.502056,
+          "lng": 2.105228
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Convolvulus_arvensis",
+        "https://www.first-nature.com/flowers/convolvulus-arvensis.php"
+      ]
+    },
+    {
+      "id": "roldor",
+      "nom_comu": "Roldor",
+      "nom_cientific": "Coriaria myrtifolia",
+      "familia": "Coriariaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (zones obertes i marges de boscos)",
+        "torrent_can_domenech (àrees humides i ombrívoles)"
+      ],
+      "descripcio": "Arbust caducifoli de 2 a 3 metres d'alçada amb fulles oposades semblants al murtra. Les flors són petites, verdoses i apareixen en raïms. Els fruits són baies negres brillants, atractives però altament tòxiques. Conté coriamirtina, una substància neurotòxica.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 3m",
+        "altres_característiques_rellevants": "altament tòxica; utilitzada tradicionalment en la indústria del cuir"
+      },
+      "colors": [
+        "verd",
+        "negre"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos productius (tintoreria)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.501718,
+          "lng": 2.093037
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Coriaria_myrtifolia",
+        "https://pfaf.org/user/Plant.aspx?LatinName=Coriaria+myrtifolia"
+      ]
+    },
+    {
+      "id": "avellaner",
+      "nom_comu": "Avellaner",
+      "nom_cientific": "Corylus avellana",
+      "familia": "Betulaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (sotabosc humit i clarianes de boscos mixtos)",
+        "zones_ombrívoles (marges de camins i zones fresques amb ombra)"
+      ],
+      "descripcio": "Arbust caducifoli que pot arribar als 5 metres d'alçada, amb múltiples tiges que formen una mata densa. Les fulles són grans, arrodonides i amb vores dentades. A la primavera, produeix aments masculins penjants de color groc i flors femenines petites i discretes. Els fruits són avellanes envoltades per una involucra verda.",
+      "caracteristiques": {
+        "floracio": [
+          "hivern",
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 5m",
+        "altres_característiques_rellevants": "producció d'avellanes comestibles"
+      },
+      "colors": [
+        "verd",
+        "groc"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics",
+        "usos ecològics (hàbitat per a fauna)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.495355,
+          "lng": 2.103237
+        }
+      ],
+      "fonts": [
+        "https://plants.ces.ncsu.edu/plants/corylus-avellana/",
+        "https://www.tcv.org.uk/i-dig-trees-tree-library/hazel/"
+      ]
+    },
+    {
+      "id": "arç_blanc",
+      "nom_comu": "Arç blanc",
+      "nom_cientific": "Crataegus monogyna",
+      "familia": "Rosaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (marges de boscos i clarianes assolellades)",
+        "zones_enjardinades (utilitzat en tanques vives i com a planta ornamental)"
+      ],
+      "descripcio": "Arbust o petit arbre caducifoli que pot assolir fins a 5 metres d'alçada. Les fulles són lobulades i de color verd fosc. A la primavera, produeix flors blanques en corimbes, seguides de petits fruits vermells comestibles. Té espines curtes i és molt resistent a condicions adverses.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 5m",
+        "altres_característiques_rellevants": "atractiu per a la fauna silvestre"
+      },
+      "colors": [
+        "blanc",
+        "vermell",
+        "verd"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris",
+        "usos forestals (formació de tanques vives)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.493576,
+          "lng": 2.097112
+        },
+        {
+          "lat": 41.500216,
+          "lng": 2.10641
+        }
+      ],
+      "fonts": [
+        "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/british-trees/a-z-of-british-trees/hawthorn/",
+        "https://pfaf.org/user/Plant.aspx?LatinName=Crataegus+monogyna"
+      ]
+    },
+    {
+      "id": "crepis_santa",
+      "nom_comu": "Crepis santa",
+      "nom_cientific": "Crepis sancta",
+      "familia": "Asteraceae",
+      "tipus": "herba",
+      "habitat": [
+        "cami_ho_chi_minh (zones obertes i assolellades al llarg del camí)",
+        "zones_enjardinades (espais oberts amb sòls alterats i ben drenats)"
+      ],
+      "descripcio": "Herba anual que forma una roseta basal de fulles verdes i allargades. Les tiges florals són primes i poden assolir fins a 40 cm d'alçada, coronades per flors grogues semblants a les del dent de lleó. Prefereix zones assolellades amb sòls ben drenats i sovint es troba en hàbitats alterats.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.4m",
+        "altres_característiques_rellevants": "colonitzadora de sòls alterats"
+      },
+      "colors": [
+        "groc",
+        "verd"
+      ],
+      "usos": [
+        "usos ecològics (indicadora de sòls alterats)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.497509,
+          "lng": 2.094258
+        },
+        {
+          "lat": 41.500915,
+          "lng": 2.09248
+        },
+        {
+          "lat": 41.500905,
+          "lng": 2.104243
+        }
+      ],
+      "fonts": [
+        "https://www.cretanflora.com/Crepis%20sancta.html",
+        "https://temperate.theferns.info/plant/Crepis+sancta"
+      ]
+    },
+    {
+      "id": "graminia_dactil",
+      "nom_comu": "Gramínia dàctil",
+      "nom_cientific": "Dactylis glomerata",
+      "familia": "Poaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (àrees obertes i prats)",
+        "cami_ho_chi_minh (espais oberts amb sòls ben drenats)"
+      ],
+      "descripcio": "Herba perenne que forma mates denses amb tiges erectes que poden arribar als 1,5 metres d'alçada. Les fulles són llargues i estretes, de color verd grisenc. Les inflorescències són panícules compactes amb espiguetes que poden tenir tonalitats purpúries. És una espècie molt utilitzada en pastures per la seva qualitat forrajera.",
+      "caracteristiques": {
+        "floracio": [
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 1.5m",
+        "altres_característiques_rellevants": "alta tolerància a la sequera"
+      },
+      "colors": [
+        "verd",
+        "violeta"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos agrícoles i millora del sòl (control d'erosió)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.501094,
+          "lng": 2.096856
+        },
+        {
+          "lat": 41.501769,
+          "lng": 2.105395
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Dactylis_glomerata",
+        "https://plants.ces.ncsu.edu/plants/dactylis-glomerata/"
+      ]
+    },
+    {
+      "id": "ruca_blanca",
+      "nom_comu": "Ruca blanca",
+      "nom_cientific": "Diplotaxis erucoides",
+      "familia": "Brassicaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (espais oberts i marges del campus)",
+        "cami_ho_chi_minh (zones assolellades i alterades)"
+      ],
+      "descripcio": "Herba anual de fins a 50 cm d’alçada, amb tiges erectes i fulles profundament dividides. Les flors són blanques, amb quatre pètals disposats en creu, i es disposen en raïms terminals. El fruit és una síliqua allargada que conté nombroses llavors.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.5m",
+        "altres_característiques_rellevants": "Planta ruderal que colonitza ràpidament sòls alterats."
+      },
+      "colors": [
+        "blanc",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.499703,
+          "lng": 2.093856
+        },
+        {
+          "lat": 41.497808,
+          "lng": 2.098383
+        },
+        {
+          "lat": 41.50098,
+          "lng": 2.091174
+        },
+        {
+          "lat": 41.501031,
+          "lng": 2.102447
+        }
+      ],
+      "fonts": [
+        "https://pfaf.org/user/Plant.aspx?LatinName=Diplotaxis+erucoides",
+        "https://en.wikipedia.org/wiki/Diplotaxis_erucoides"
+      ]
+    },
+    {
+      "id": "ruca_blanca",
+      "nom_comu": "Ruca blanca",
+      "nom_cientific": "Diplotaxis erucoides",
+      "familia": "Brassicaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (espais oberts i marges del campus)",
+        "cami_ho_chi_minh (zones assolellades i alterades)"
+      ],
+      "descripcio": "Herba anual de fins a 50 cm d’alçada, amb tiges erectes i fulles profundament dividides. Les flors són blanques, amb quatre pètals disposats en creu, i es disposen en raïms terminals. El fruit és una síliqua allargada que conté nombroses llavors.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.5m",
+        "altres_característiques_rellevants": "Planta ruderal que colonitza ràpidament sòls alterats."
+      },
+      "colors": [
+        "blanc",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.499703,
+          "lng": 2.093856
+        },
+        {
+          "lat": 41.497808,
+          "lng": 2.098383
+        },
+        {
+          "lat": 41.50098,
+          "lng": 2.091174
+        },
+        {
+          "lat": 41.501031,
+          "lng": 2.102447
+        }
+      ],
+      "fonts": [
+        "https://pfaf.org/user/Plant.aspx?LatinName=Diplotaxis+erucoides",
+        "https://en.wikipedia.org/wiki/Diplotaxis_erucoides"
+      ]
+    },
+    {
+      "id": "bec_de_cigoneta_suau",
+      "nom_comu": "Bec de cigoneta suau",
+      "nom_cientific": "Erodium malacoides",
+      "familia": "Geraniaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (zones alterades i marges)",
+        "eix_central (espais oberts i assolellats)"
+      ],
+      "descripcio": "Herba anual o biennal de fins a 60 cm d'alçada, amb fulles ovades i lobulades. Les flors són petites, de color rosa a porpra, amb cinc pètals. El fruit és llarg i prim, amb forma de bec.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.6m",
+        "altres_característiques_rellevants": "adaptada a hàbitats alterats"
+      },
+      "colors": [
+        "rosa",
+        "violeta",
+        "verd"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.503249,
+          "lng": 2.10204
+        },
+        {
+          "lat": 41.499653,
+          "lng": 2.108316
+        },
+        {
+          "lat": 41.500869,
+          "lng": 2.106222
+        }
+      ],
+      "fonts": [
+        "https://gobotany.nativeplanttrust.org/species/erodium/malacoides/",
+        "https://www.maltawildplants.com/GERN/Erodium_malacoides.php"
+      ]
+    },
+    {
+      "id": "ruca_de_fulla_de_creixens",
+      "nom_comu": "Ruca de fulla de créixens",
+      "nom_cientific": "Erucastrum nasturtiifolium",
+      "familia": "Brassicaceae",
+      "tipus": "herba",
+      "habitat": [
+        "torrent_can_domenech (zones humides i marges)",
+        "bosc_mediterrani (clarianes i marges)"
+      ],
+      "descripcio": "Herba anual o perenne de fins a 80 cm d'alçada, amb tiges ramificades i fulles pinnatífides. Les flors són grogues, amb quatre pètals disposats en creu. El fruit és una síliqua allargada.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.8m",
+        "altres_característiques_rellevants": "tolerant a sòls calcaris i humits"
+      },
+      "colors": [
+        "groc",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris (ús de llavors com a condiment)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.50252,
+          "lng": 2.092479
+        }
+      ],
+      "fonts": [
+        "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:283511-1",
+        "https://www.infoflora.ch/en/flora/erucastrum-nasturtiifolium.html"
+      ]
+    },
+    {
+      "id": "cardo_corredor",
+      "nom_comu": "Cardo corredor",
+      "nom_cientific": "Eryngium campestre",
+      "familia": "Apiaceae",
+      "tipus": "herba",
+      "habitat": [
+        "cami_ho_chi_minh (zones obertes i assolellades amb sòls secs i calcaris)",
+        "bosc_mediterrani (clarianes i vores de camins amb sòls ben drenats)"
+      ],
+      "descripcio": "Herba perenne de fins a 70 cm d'alçada, amb tiges erectes i molt ramificades. Les fulles són espinoses, dividides en lòbuls, i presenten un color verd grisenc. Les flors, de color blavós, es disposen en capítols envoltats per bràctees espinoses. El fruit és un aqueni petit i sec.",
+      "caracteristiques": {
+        "floracio": [
+          "estiu",
+          "tardor"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 0.7m",
+        "altres_característiques_rellevants": "Arrel profunda que pot arribar als 5 metres, facilitant l'accés a l'aigua en sòls secs."
+      },
+      "colors": [
+        "verd",
+        "blau"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.494838,
+          "lng": 2.102637
+        },
+        {
+          "lat": 41.500651,
+          "lng": 2.093253
+        }
+      ],
+      "fonts": [
+        "https://es.wikipedia.org/wiki/Eryngium_campestre",
+        "https://pfaf.org/user/Plant.aspx?LatinName=Eryngium+campestre"
+      ]
+    },
+    {
+      "id": "euforbia_mediterrania",
+      "nom_comu": "Eufòrbia mediterrània",
+      "nom_cientific": "Euphorbia characias",
+      "familia": "Euphorbiaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (clarianes i vores de camins amb exposició solar)",
+        "zones_enjardinades (plantacions ornamentals en zones assolellades)"
+      ],
+      "descripcio": "Arbust perenne de fins a 1,5 m d'alçada, amb tiges erectes i fulles estretes de color verd grisenc. Les flors, de color groc verdós, es disposen en inflorescències denses a l'extrem de les tiges. És una espècie molt resistent a la sequera.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 1.5m",
+        "altres_característiques_rellevants": "Tòxica per ingestió; el làtex pot causar irritacions cutànies."
+      },
+      "colors": [
+        "verd",
+        "groc"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos ornamentals i paisatgístics (xerojardineria)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.496793,
+          "lng": 2.094191
+        },
+        {
+          "lat": 41.501167,
+          "lng": 2.104121
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Euphorbia_characias",
+        "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=d266"
+      ]
+    },
+    {
+      "id": "lleteresa_petita",
+      "nom_comu": "Lleteresa petita",
+      "nom_cientific": "Euphorbia peplus",
+      "familia": "Euphorbiaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (zones alterades i marges de camins)",
+        "eix_central (espais oberts i assolellats)"
+      ],
+      "descripcio": "Herba anual de fins a 30 cm d'alçada amb fulles ovalades i flors petites de color verd clar. Sovint es troba en zones alterades com jardins i camins. La saba és tòxica i pot causar irritacions.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.3m",
+        "altres_característiques_rellevants": "saba tòxica; considerada una mala herba en alguns contextos"
+      },
+      "colors": [
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris (ús tradicional amb precaució)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.495922,
+          "lng": 2.099741
+        },
+        {
+          "lat": 41.501463,
+          "lng": 2.104912
+        },
+        {
+          "lat": 41.499361,
+          "lng": 2.10844
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Euphorbia_peplus",
+        "https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/petty-spurge"
+      ]
+    },
+    {
+      "id": "fonoll",
+      "nom_comu": "Fonoll",
+      "nom_cientific": "Foeniculum vulgare",
+      "familia": "Apiaceae",
+      "tipus": "herba",
+      "descripcio": "Herba perenne amb tiges erectes i buides que poden arribar fins a 2 metres d'alçada. Les fulles són fines i filiformes, donant-li un aspecte plomós. Les flors grogues es disposen en umbel·les planes. El fruit és un aqueni allargat amb aroma característic.",
+      "caracteristiques": {
+        "floracio": [
+          "estiu",
+          "tardor"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 2m",
+        "altres_característiques_rellevants": "Aromaticitat intensa; utilitzat en cuina i medicina tradicional."
+      },
+      "colors": [
+        "groc",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics"
+      ],
+      "fonts": [
+        "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=275990",
+        "https://es.wikipedia.org/wiki/Foeniculum_vulgare"
+      ]
+    },
+    {
+      "id": "freixe_de_fulla_estreta",
+      "nom_comu": "Freixe de fulla estreta",
+      "nom_cientific": "Fraxinus angustifolia",
+      "familia": "Oleaceae",
+      "tipus": "arbre",
+      "descripcio": "Arbre caducifoli de creixement ràpid que pot assolir fins a 25 metres d'alçada. Presenta fulles compostes amb folíols estrets i lanceolats. Les flors, petites i poc vistoses, apareixen abans de la brotada de les fulles. El fruit és una sàmara allargada que facilita la dispersió pel vent.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 25m",
+        "altres_característiques_rellevants": "espècie pionera en boscos de ribera"
+      },
+      "colors": [
+        "verd"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos forestals (reforestació de zones humides)"
+      ],
+      "fonts": [
+        "https://www.euforgen.org/species/fraxinus-angustifolia",
+        "https://herbarivirtual.uib.es/en/general/969/especie/fraxinus-angustifolia-vahl"
+      ]
+    },
+    {
+      "id": "fumària",
+      "nom_comu": "Fumària",
+      "nom_cientific": "Fumaria officinalis",
+      "familia": "Papaveraceae",
+      "tipus": "herba",
+      "descripcio": "Herba anual de tiges fines i ramificades que pot assolir fins a 50 cm d'alçada. Les fulles són dividides i de color verd blavós. Les flors, de color rosa amb l'àpex porpra, s'agrupen en raïms terminals. El fruit és petit i esfèric.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.5m",
+        "altres_característiques_rellevants": "utilitzada tradicionalment com a planta medicinal"
+      },
+      "colors": [
+        "rosa",
+        "violeta"
+      ],
+      "usos": [
+        "usos agroalimentaris"
+      ],
+      "fonts": [
+        "https://herbarivirtual.uib.es/en/general/1103/especie/fumaria-officinalis-l-subsp-officinalis",
+        "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:30017594-2"
+      ]
+    },
+    {
+      "id": "genet_escorpio",
+      "nom_comu": "Genet escorpí",
+      "nom_cientific": "Genista scorpius",
+      "familia": "Fabaceae",
+      "tipus": "arbust",
+      "descripcio": "Arbust espinós de fins a 2 metres d'alçada, amb tiges entrellaçades i angulars de color grisenc. Les fulles són petites i lleugerament piloses. A finals de primavera, produeix flors grogues en forma de papallona agrupades a les parts superiors de les tiges.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 2m",
+        "altres_característiques_rellevants": "adaptat a sòls pobres i ben drenats; resistent a la sequera"
+      },
+      "colors": [
+        "groc"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agrícoles i millora del sòl (control de l'erosió)"
+      ],
+      "fonts": [
+        "https://plantiary.com/plant/genista-scorpius_8495.html",
+        "https://www.treesandshrubsonline.org/articles/genista/genista-scorpius/"
+      ]
+    },
+    {
+      "id": "gerani_san_robert",
+      "nom_comu": "Gerani de Sant Robert",
+      "nom_cientific": "Geranium robertianum",
+      "familia": "Geraniaceae",
+      "tipus": "herba",
+      "descripcio": "Herba anual o biennal de fins a 45 cm d'alçada, amb tiges vermelloses i fulles dividides en lòbuls profunds. Les flors són petites, de color rosa viu, amb cinc pètals. Emana una olor característica quan es frega. Sovint es troba en llocs ombrívols i humits.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.45m",
+        "altres_característiques_rellevants": "utilitzada tradicionalment en medicina popular per les seves propietats astringents"
+      },
+      "colors": [
+        "rosa"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics"
+      ],
+      "fonts": [
+        "https://gobotany.nativeplanttrust.org/species/geranium/robertianum/",
+        "https://es.wikipedia.org/wiki/Geranium_robertianum"
+      ]
+    },
+    {
+      "id": "heura",
+      "nom_comu": "Heura",
+      "nom_cientific": "Hedera helix",
+      "familia": "Araliaceae",
+      "tipus": "liana",
+      "habitat": [
+        "zones_ombrívoles (sota arbres o zones amb poca llum)",
+        "murs_edificis (trepadora en parets i estructures)"
+      ],
+      "descripcio": "L’heura és una liana perenne de creixement vigorós que s’enfila gràcies a arrels aèries. Les seves fulles són de color verd fosc amb nervis clars, de forma lobulada en les tiges joves i més ovades en les adultes. Floreix a la tardor amb petites flors verdoses agrupades en umbel·les, seguides de baies negres que maduren a l’hivern.",
+      "caracteristiques": {
+        "floracio": [
+          "tardor"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 30m",
+        "altres_característiques_rellevants": "pot ser invasora en ambients naturals"
+      },
+      "colors": [
+        "verd",
+        "negre"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.498426,
+          "lng": 2.101998
+        },
+        {
+          "lat": 41.496917,
+          "lng": 2.095729
+        }
+      ],
+      "fonts": [
+        "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=276595",
+        "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/ivy/"
+      ]
+    },
+    {
+      "id": "sempreviva_estepa",
+      "nom_comu": "Sempreviva estepa",
+      "nom_cientific": "Helichrysum stoechas",
+      "familia": "Asteraceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (terrenys secs i pedregosos)",
+        "zones_enjardinades (zones amb plantes aromàtiques)"
+      ],
+      "descripcio": "Arbust baix i dens amb fulles linears de color verd grisenc i una aroma intensa. Les flors grogues i petites es disposen en capítols agrupats i apareixen a l'estiu. És típic de zones seques i assolellades, i molt apreciat per la seva resistència i aroma.",
+      "caracteristiques": {
+        "floracio": [
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 0.5m",
+        "altres_característiques_rellevants": "aroma intensa similar al curri"
+      },
+      "colors": [
+        "groc",
+        "verd"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.49826,
+          "lng": 2.096073
+        },
+        {
+          "lat": 41.500307,
+          "lng": 2.106323
+        }
+      ],
+      "fonts": [
+        "https://www.piante-spontanee.it/specie/helichrysum-stoechas",
+        "https://www.florandalucia.es/index.php/helichrysum-stoechas"
+      ]
+    },
+    {
+      "id": "trencaclosques",
+      "nom_comu": "Trencaclosques",
+      "nom_cientific": "Hippocrepis comosa",
+      "familia": "Fabaceae",
+      "tipus": "herba",
+      "habitat": [
+        "torrent_can_domenech (zones assolellades amb sòls calcaris)",
+        "bosc_mediterrani (marges oberts i secs)"
+      ],
+      "descripcio": "Herba perenne de port baix i prostrat, amb tiges llenyoses a la base. Les fulles són pinnades amb 3 a 8 parells de folíols oblongs. Les flors grogues, de 6 a 10 mm, es disposen en inflorescències de 5 a 12 flors. Els fruits són llegums amb segments en forma de ferradura, d'on prové el seu nom comú.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.4m",
+        "altres_característiques_rellevants": "preferència per sòls calcaris i exposicions assolellades"
+      },
+      "colors": [
+        "groc"
+      ],
+      "usos": [
+        "usos agroalimentaris (aliment per a larves de papallones)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.499173,
+          "lng": 2.102942
+        },
+        {
+          "lat": 41.50286,
+          "lng": 2.093086
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Hippocrepis_comosa",
+        "https://www.naturespot.org.uk/species/horseshoe-vetch"
+      ]
+    },
+    {
+      "id": "herba_de_sant_joan",
+      "nom_comu": "Herba de Sant Joan",
+      "nom_cientific": "Hypericum perforatum",
+      "familia": "Hypericaceae",
+      "tipus": "herba",
+      "habitat": [
+        "cami_ho_chi_minh (marges assolellats i secs)",
+        "zones_enjardinades (espais oberts i ben drenats)"
+      ],
+      "descripcio": "Herba perenne amb tiges erectes i fulles oposades amb petites glàndules translúcides. Les flors són grogues amb nombrosos estams prominents i puntets negres als pètals. Floreix a l'estiu i és coneguda per les seves propietats medicinals.",
+      "caracteristiques": {
+        "floracio": [
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 1m",
+        "altres_característiques_rellevants": "utilitzada tradicionalment com a antidepressiu natural"
+      },
+      "colors": [
+        "groc"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.498664,
+          "lng": 2.095491
+        },
+        {
+          "lat": 41.500438,
+          "lng": 2.094786
+        },
+        {
+          "lat": 41.501614,
+          "lng": 2.104092
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Hypericum_perforatum",
+        "https://www.ncbi.nlm.nih.gov/books/NBK92750/"
+      ]
+    },
+    {
+      "id": "ortiga_morta",
+      "nom_comu": "Ortiga morta",
+      "nom_cientific": "Lamium amplexicaule",
+      "familia": "Lamiaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (parterres i marges de camins)",
+        "eix_central (àrees verdes del campus)"
+      ],
+      "descripcio": "Herba anual de fins a 30 cm d'alçada, amb tiges quadrades i fulles oposades, arrodonides i dentades. Les flors són tubulars, de color rosa a porpra, i apareixen a la primavera. És una planta comuna en zones cultivades i jardins.",
+      "caracteristiques": {
+        "floracio": [
+          "hivern",
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.3m",
+        "altres_característiques_rellevants": "atractiva per a pol·linitzadors com abelles i papallones"
+      },
+      "colors": [
+        "verd",
+        "rosa"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.500781,
+          "lng": 2.107042
+        },
+        {
+          "lat": 41.502598,
+          "lng": 2.105116
+        }
+      ],
+      "fonts": [
+        "https://gobotany.nativeplanttrust.org/species/lamium/amplexicaule/",
+        "https://pfaf.org/user/Plant.aspx?LatinName=Lamium+amplexicaule"
+      ]
+    },
+    {
+      "id": "espigol",
+      "nom_comu": "Espígol",
+      "nom_cientific": "Lavandula angustifolia",
+      "familia": "Lamiaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "zones_enjardinades (parterres i àrees ornamentals)",
+        "eix_central (zones centrals enjardinades del campus)"
+      ],
+      "descripcio": "Arbust perenne i aromàtic que pot assolir fins a 1 metre d'alçada. Les fulles són estretes, de color verd grisenc, i desprenen una aroma característica. Les flors, de color violeta o porpra, es disposen en espigues terminals i són molt atractives per a les abelles. És una planta molt apreciada per la seva bellesa i aroma.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 1m",
+        "altres_característiques_rellevants": "Utilitzada en perfumeria, cosmètica i com a planta ornamental."
+      },
+      "colors": [
+        "violeta",
+        "violeta"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris",
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.501354,
+          "lng": 2.104416
+        },
+        {
+          "lat": 41.501,
+          "lng": 2.10373
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Lavandula_angustifolia",
+        "https://gd.eppo.int/taxon/LAVAN"
+      ]
+    },
+    {
+      "id": "trèvol_de_bosc",
+      "nom_comu": "Trèvol de bosc",
+      "nom_cientific": "Lotus corniculatus",
+      "familia": "Fabaceae",
+      "tipus": "herba",
+      "habitat": [
+        "cami_ho_chi_minh (zones obertes i marges de camins)",
+        "bosc_mediterrani (clarianes i zones assolellades)"
+      ],
+      "descripcio": "Herba perenne de port baix i estès, amb tiges que poden arribar als 30 cm si es recolzen en altres plantes. Les flors grogues, sovint amb tons ataronjats, s'agrupen en inflorescències vistoses. Les fulles són compostes, amb cinc folíols petits. Els fruits són llegums estrets que recorden a una pota d'ocell, d'aquí el seu nom comú.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.3m",
+        "altres_característiques_rellevants": "fixadora de nitrogen, útil per a la millora del sòl"
+      },
+      "colors": [
+        "groc",
+        "taronja"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos agrícoles i millora del sòl (control de l'erosió)",
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.49758,
+          "lng": 2.110914
+        },
+        {
+          "lat": 41.501099,
+          "lng": 2.095609
+        }
+      ],
+      "fonts": [
+        "https://www.first-nature.com/flowers/lotus-corniculatus.php",
+        "https://www.feedipedia.org/node/280"
+      ]
+    },
+    {
+      "id": "malva_comuna",
+      "nom_comu": "Malva comuna",
+      "nom_cientific": "Malva sylvestris",
+      "familia": "Malvaceae",
+      "tipus": "herba",
+      "descripcio": "Herba robusta de fins a 1,2 m d'alçada, amb fulles palmades i flors vistoses de color porpra amb venes més fosques. Les flors apareixen en racimes i són hermafrodites. El fruit és un esquizocarp en forma de discoide, conegut popularment com a 'formatget'.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 1.2m",
+        "altres_característiques_rellevants": "ús medicinal tradicional per a afeccions respiratòries"
+      },
+      "colors": [
+        "violeta",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris"
+      ],
+      "fonts": [
+        "https://es.wikipedia.org/wiki/Malva_sylvestris",
+        "https://www.first-nature.com/flowers/malva-sylvestris.php"
+      ]
+    },
+    {
+      "id": "marrubi_blanc",
+      "nom_comu": "Marrubi blanc",
+      "nom_cientific": "Marrubium vulgare",
+      "familia": "Lamiaceae",
+      "tipus": "herba",
+      "descripcio": "Herba perenne de fins a 0,6 m d'alçada, amb tiges quadrangulars i fulles oposades, rugoses i cobertes de pèls blancs. Les flors són petites, blanques i es disposen en verticils densos al llarg de la tija. El seu aspecte general és blanquinós degut a la pilositat.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 0.6m",
+        "altres_característiques_rellevants": "ús medicinal com a expectorant i digestiu"
+      },
+      "colors": [
+        "blanc",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics"
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Marrubium_vulgare",
+        "https://plants.ces.ncsu.edu/plants/marrubium-vulgare/"
+      ]
+    },
+    {
+      "id": "alfals",
+      "nom_comu": "Alfals",
+      "nom_cientific": "Medicago sativa",
+      "familia": "Fabaceae",
+      "tipus": "herba",
+      "descripcio": "Herba perenne de fins a 1 m d'alçada, amb fulles compostes trifoliades i flors de color violeta agrupades en raïms. Els fruits són llegums en espiral. És una planta molt cultivada per a farratge degut al seu alt contingut proteic.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 1m",
+        "altres_característiques_rellevants": "fixadora de nitrogen, millora la fertilitat del sòl"
+      },
+      "colors": [
+        "violeta",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos agrícoles i millora del sòl (millora del sòl)",
+        "usos agroalimentaris"
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Alfalfa",
+        "https://www.feedipedia.org/node/275"
+      ]
+    },
+    {
+      "id": "jacint_de_raïm",
+      "nom_comu": "Jacint de raïm",
+      "nom_cientific": "Muscari neglectum",
+      "familia": "Asparagaceae",
+      "tipus": "herba",
+      "descripcio": "Planta bulbosa perenne de 10 a 30 cm d'alçada. Les flors són petites, tubulars i de color blau fosc, agrupades en raïms densos que recorden a un raïm. Les fulles són lineals i emergeixen a la base. Floreix a la primavera i és apreciada per la seva resistència i capacitat de naturalització.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.3m",
+        "altres_característiques_rellevants": "olor suau; atractiva per a abelles"
+      },
+      "colors": [
+        "blau"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics"
+      ],
+      "fonts": [
+        "https://pfaf.org/user/Plant.aspx?LatinName=Muscari+neglectum",
+        "https://gobotany.nativeplanttrust.org/species/muscari/neglectum/"
+      ]
+    },
+    {
+      "id": "baladre",
+      "nom_comu": "Baladre",
+      "nom_cientific": "Nerium oleander",
+      "familia": "Apocynaceae",
+      "tipus": "arbust",
+      "descripcio": "Arbust perennifoli amb fulles lanceolades i coriàcies. Les flors, de colors que van del blanc al rosa intens, es disposen en grups terminals i floreixen durant gran part de l'any. És una planta molt resistent a la sequera i a sòls pobres.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 6m",
+        "altres_característiques_rellevants": "totes les parts de la planta són tòxiques si s'ingereixen"
+      },
+      "colors": [
+        "rosa",
+        "blanc"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agrícoles i millora del sòl (control d'erosió)"
+      ],
+      "fonts": [
+        "https://plants.ces.ncsu.edu/plants/nerium-oleander/",
+        "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=a532"
+      ]
+    },
+    {
+      "id": "olivera",
+      "nom_comu": "Olivera",
+      "nom_cientific": "Olea europaea",
+      "familia": "Oleaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "bosc_mediterrani (zones assolellades i rocoses)",
+        "zones_enjardinades (plantada com a ornamental i productiva)"
+      ],
+      "descripcio": "Arbre perennifoli de mida mitjana, amb una capçada densa i arrodonida i tronc tortuós de color grisós. Les fulles són oposades, lanceolades, de color verd fosc per l'anvers i platejades pel revers. Les flors són petites, blanques i apareixen en panícules. El fruit és l'oliva, de forma ovoide i color verd que madura a negre.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 10m",
+        "altres_característiques_rellevants": "molt longeva, resistent a la sequera"
+      },
+      "colors": [
+        "verd",
+        "blanc"
+      ],
+      "usos": [
+        "usos agroalimentaris (oli i olives)",
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris (ús tradicional de les fulles)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.493058,
+          "lng": 2.096525
+        },
+        {
+          "lat": 41.502094,
+          "lng": 2.105615
+        }
+      ],
+      "fonts": [
+        "https://www.kew.org/plants/olive",
+        "https://pfaf.org/User/Plant.aspx?LatinName=Olea+europaea"
+      ]
+    },
+    {
+      "id": "gatosa_groga",
+      "nom_comu": "Gatosa groga",
+      "nom_cientific": "Ononis natrix",
+      "familia": "Fabaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "cami_ho_chi_minh (marges assolellats)",
+        "bosc_mediterrani (zones obertes i seques)"
+      ],
+      "descripcio": "Arbust perenne de fins a 60 cm d'alçada, molt ramificat i amb tiges lleugerament llenyoses. Les fulles són trifoliades, amb folíols petits i pilosos. Les flors són grans, de color groc intens, amb venes vermelloses, i apareixen solitàries o en petits grups. El fruit és una llegum petita i pilosa.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 0.6m",
+        "altres_característiques_rellevants": "atractiva per a pol·linitzadors"
+      },
+      "colors": [
+        "groc"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris (ús tradicional com a diürètic)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.49977,
+          "lng": 2.093236
+        },
+        {
+          "lat": 41.500354,
+          "lng": 2.09486
+        }
+      ],
+      "fonts": [
+        "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:510418-1",
+        "https://temperate.theferns.info/plant/Ononis+natrix"
+      ]
+    },
+    {
+      "id": "gatosa_espinosa",
+      "nom_comu": "Gatosa espinosa",
+      "nom_cientific": "Ononis spinosa",
+      "familia": "Fabaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (zones seques i pedregoses)",
+        "cami_ho_chi_minh (marges assolellats)"
+      ],
+      "descripcio": "Arbust perenne de fins a 60 cm d'alçada, amb tiges rígides i espinoses. Les fulles són trifoliades, amb folíols petits i pilosos. Les flors són de color rosa a porpra, amb forma de papallona, i apareixen solitàries o en grups reduïts. El fruit és una llegum petita i pilosa.",
+      "caracteristiques": {
+        "floracio": [
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 0.6m",
+        "altres_característiques_rellevants": "fixadora de nitrogen, atractiva per a pol·linitzadors"
+      },
+      "colors": [
+        "rosa",
+        "violeta"
+      ],
+      "usos": [
+        "usos agroalimentaris (ús tradicional com a diürètic)",
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.495592,
+          "lng": 2.095998
+        },
+        {
+          "lat": 41.500068,
+          "lng": 2.094655
+        }
+      ],
+      "fonts": [
+        "https://pfaf.org/user/Plant.aspx?LatinName=Ononis+spinosa",
+        "https://temperate.theferns.info/plant/Ononis+spinosa"
+      ]
+    },
+    {
+      "id": "oregano",
+      "nom_comu": "Orenga",
+      "nom_cientific": "Origanum vulgare",
+      "familia": "Lamiaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (plantada en horts i jardins)",
+        "bosc_mediterrani (zones obertes i assolellades)"
+      ],
+      "descripcio": "Herba perenne de fins a 1 m d'alçada, amb tiges quadrangulars i fulles oposades, ovalades i aromàtiques. Les flors són petites, de color rosa a porpra, agrupades en inflorescències terminals. És coneguda pel seu aroma intens i s'utilitza àmpliament en la cuina mediterrània.",
+      "caracteristiques": {
+        "floracio": [
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 1m",
+        "altres_característiques_rellevants": "atractiva per a pol·linitzadors, resistent a la sequera"
+      },
+      "colors": [
+        "rosa",
+        "violeta"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos agroalimentaris (ús tradicional com a digestiu i antisèptic)",
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.495225,
+          "lng": 2.101661
+        },
+        {
+          "lat": 41.501554,
+          "lng": 2.104994
+        }
+      ],
+      "fonts": [
+        "https://pfaf.org/User/Plant.aspx?LatinName=Origanum+vulgare",
+        "https://www.nparks.gov.sg/florafaunaweb/flora/5/1/5191"
+      ]
+    },
+    {
+      "id": "rosella_comuna",
+      "nom_comu": "Rosella comuna",
+      "nom_cientific": "Papaver rhoeas",
+      "familia": "Papaveraceae",
+      "tipus": "herba",
+      "habitat": [
+        "eix_central (zones obertes i assolellades, sovint en marges de camins)",
+        "zones_enjardinades (plantada per la seva floració vistosa)"
+      ],
+      "descripcio": "Herba anual amb tiges erectes i fulles lobulades i piloses. Les flors, de color vermell intens amb un centre negre, són icòniques i apareixen a finals de primavera. Sovint es troba en camps conreats, vores de camins i zones alterades.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu (principis d'estiu)"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.6m",
+        "altres_característiques_rellevants": "sembra fàcil; símbol de recordança en diverses cultures"
+      },
+      "colors": [
+        "vermell",
+        "negre"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.497702,
+          "lng": 2.101841
+        },
+        {
+          "lat": 41.501758,
+          "lng": 2.104496
+        },
+        {
+          "lat": 41.499349,
+          "lng": 2.107752
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Papaver_rhoeas",
+        "https://www.naturespot.org.uk/species/common-poppy"
+      ]
+    },
+    {
+      "id": "filaria_fulles_amplades",
+      "nom_comu": "Filaria de fulles amples",
+      "nom_cientific": "Phillyrea latifolia",
+      "familia": "Oleaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "bosc_mediterrani (alzinars i màquies)",
+        "zones_enjardinades (plantada com a arbre ornamental)"
+      ],
+      "descripcio": "Arbre o arbust gran de fullatge perennifoli, que pot assolir fins a 8 metres d'alçada. Presenta fulles amples, el·líptiques i de marge enter. Floreix a la primavera amb flors petites, blanques i perfumades. Els fruits són drupes de color porpra fosc que atrauen aus.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 8m",
+        "altres_característiques_rellevants": "resistent a la sequera i a la salinitat; utilitzat en jardineria mediterrània"
+      },
+      "colors": [
+        "blanc",
+        "verd",
+        "violeta"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos forestals (formació de tanques)",
+        "usos agroalimentaris (d'aus)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.495514,
+          "lng": 2.093975
+        },
+        {
+          "lat": 41.500753,
+          "lng": 2.106955
+        }
+      ],
+      "fonts": [
+        "https://pfaf.org/user/Plant.aspx?LatinName=Phillyrea+latifolia",
+        "https://landscapeplants.oregonstate.edu/plants/phillyrea-latifolia"
+      ]
+    },
+    {
+      "id": "carrizo_comu",
+      "nom_comu": "Càrritx comú",
+      "nom_cientific": "Phragmites australis",
+      "familia": "Poaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_humides (margins de rius i estanys)",
+        "vegetacio_ribera (àrees amb sòls humits)"
+      ],
+      "descripcio": "Herba perenne de fins a 4 metres d'alçada, amb tiges erectes i fulles llargues i lanceolades. Floreix a l'estiu amb inflorescències en forma de panícula de color porpra a marró. Forma densos canyissars en zones humides.",
+      "caracteristiques": {
+        "floracio": [
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 4m",
+        "altres_característiques_rellevants": "important per a la fauna aquàtica; utilitzat en bioenginyeria per al control de l'erosió"
+      },
+      "colors": [
+        "violeta",
+        "marró",
+        "verd"
+      ],
+      "usos": [
+        "usos agrícoles i millora del sòl (control de l'erosió)",
+        "usos ecològics (hàbitat per a fauna)",
+        "usos forestals (bioenginyeria)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.495606,
+          "lng": 2.099864
+        },
+        {
+          "lat": 41.497798,
+          "lng": 2.088603
+        }
+      ],
+      "fonts": [
+        "https://es.wikipedia.org/wiki/Phragmites_australis",
+        "https://www.fs.usda.gov/database/feis/plants/graminoid/phraus/all.html"
+      ]
+    },
+    {
+      "id": "avet_roig",
+      "nom_comu": "Avet roig",
+      "nom_cientific": "Picea abies",
+      "familia": "Pinaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "zones_enjardinades (plantat en espais ornamentals)",
+        "zones_ombrívoles (preferència per ambients frescos i humits)"
+      ],
+      "descripcio": "L'avet roig és un arbre de gran port amb una silueta piramidal i branques inferiors penjants. Pot assolir fins a 50 metres d'alçada. Les fulles són aciculars, de color verd fosc, disposades al voltant de les branques. Les pinyes són cilíndriques, de fins a 15 cm, i pengen cap avall. L'escorça és marró-grisenca i escamosa en exemplars adults.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 50m",
+        "altres_característiques_rellevants": "utilitzat com a arbre de Nadal i en la producció de fusta i paper"
+      },
+      "colors": [
+        "verd (verd fosc)",
+        "marró"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos artesanals/ industrials",
+        "usos agroalimentaris (resina medicinal)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.501555,
+          "lng": 2.104539
+        },
+        {
+          "lat": 41.494581,
+          "lng": 2.103184
+        }
+      ],
+      "fonts": [
+        "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/british-trees/a-z-of-british-trees/norway-spruce/",
+        "https://pfaf.org/user/Plant.aspx?LatinName=Picea+abies"
+      ]
+    },
+    {
+      "id": "pi_carrasco",
+      "nom_comu": "Pi carrasco",
+      "nom_cientific": "Pinus halepensis",
+      "familia": "Pinaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "bosc_mediterrani (espècie dominant en ambients secs)",
+        "cami_ho_chi_minh (present al llarg del camí)"
+      ],
+      "descripcio": "El pi carrasco és un arbre de mida mitjana amb una copa irregular i escorça grisenca que es torna fissurada amb l'edat. Les fulles són aciculars, fines i de color verd clar, agrupades en parelles. Les pinyes són petites, cònica-ovoides, i poden romandre a l'arbre durant anys. És una espècie resistent a la sequera i al foc.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 25m",
+        "altres_característiques_rellevants": "resistent a condicions àrides i freqüent en reforestacions mediterrànies"
+      },
+      "colors": [
+        "verd (verd clar)",
+        "marró"
+      ],
+      "usos": [
+        "usos forestals (reforestació)",
+        "usos ornamentals i paisatgístics",
+        "usos productius (producció de resina)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.500087,
+          "lng": 2.094503
+        }
+      ],
+      "fonts": [
+        "https://www.euforgen.org/species/pinus-halepensis",
+        "https://www.conifers.org/pi/Pinus_halepensis.php"
+      ]
+    },
+    {
+      "id": "pi_negre",
+      "nom_comu": "Pi negre",
+      "nom_cientific": "Pinus nigra",
+      "familia": "Pinaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "bosc_mediterrani (present en zones muntanyoses)",
+        "zones_enjardinades (plantat com a ornamental)"
+      ],
+      "descripcio": "El pi negre és un arbre robust amb una copa densa i escorça gruixuda de color gris fosc. Les fulles són aciculars, rígides i agrupades en parelles, de color verd fosc. Les pinyes són ovalades i de mida mitjana. És tolerant a sòls pobres i condicions climàtiques adverses.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 40m",
+        "altres_característiques_rellevants": "utilitzat en reforestacions i com a barrera contra el vent"
+      },
+      "colors": [
+        "verd (verd fosc)",
+        "gris"
+      ],
+      "usos": [
+        "usos forestals (reforestació)",
+        "usos ornamentals i paisatgístics",
+        "usos productius (producció de fusta)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.499031,
+          "lng": 2.10849
+        },
+        {
+          "lat": 41.500747,
+          "lng": 2.092546
+        }
+      ],
+      "fonts": [
+        "https://es.wikipedia.org/wiki/Pinus_nigra",
+        "https://www.vdberk.com/trees/pinus-nigra-subsp-nigra/"
+      ]
+    },
+    {
+      "id": "pi_pinya",
+      "nom_comu": "Pi pinyer",
+      "nom_cientific": "Pinus pinaster",
+      "familia": "Pinaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "bosc_mediterrani (comú en zones costaneres)",
+        "zones_enjardinades (plantat per a estabilització de sòls)"
+      ],
+      "descripcio": "El pi pinyer és un arbre de creixement ràpid amb una copa ampla i escorça gruixuda de color marró rogenc. Les fulles són aciculars, llargues i agrupades en parelles, de color verd brillant. Les pinyes són grans, cònica-ovoides, i s'obren per alliberar les llavors. És freqüent en zones costaneres i s'utilitza per a la producció de resina.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 35m",
+        "altres_característiques_rellevants": "important en la indústria resinera i en la reforestació de zones degradades"
+      },
+      "colors": [
+        "verd (verd brillant)",
+        "marró"
+      ],
+      "usos": [
+        "usos productius (resinació)",
+        "usos artesanals/ industrials",
+        "usos forestals (reforestació)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.502555,
+          "lng": 2.105072
+        }
+      ],
+      "fonts": [
+        "https://flora-on.pt/index.php?q=Pinus+pinaster",
+        "https://www.vdberk.co.uk/trees/pinus-pinaster/"
+      ]
+    },
+    {
+      "id": "pi_pinyoner",
+      "nom_comu": "Pi pinyoner",
+      "nom_cientific": "Pinus pinea",
+      "familia": "Pinaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "zones_enjardinades (plantat per a producció de pinyons)",
+        "eix_central (present en alineacions urbanes)"
+      ],
+      "descripcio": "El pi pinyoner és un arbre de gran port amb una copa ampla i arrodonida en forma de para-sol. Les fulles són aciculars, llargues i agrupades en parelles, de color verd intens. Les pinyes són grans, globoses i contenen pinyons comestibles. L'escorça és gruixuda i fissurada, de color marró rogenc.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 25m",
+        "altres_característiques_rellevants": "fonamental en la producció de pinyons i com a arbre ornamental"
+      },
+      "colors": [
+        "verd (verd intens)",
+        "marró"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics",
+        "usos productius (producció de fusta)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.499965,
+          "lng": 2.10674
+        },
+        {
+          "lat": 41.49982,
+          "lng": 2.10818
+        }
+      ],
+      "fonts": [
+        "https://www.naturalezaparatodos.es/2016/03/22/pinus-pinea-pino-pinonero/",
+        "https://pepinieres-lelestin.fr/vegetaux/type-de-jardin/mon-jardin-ensolleille/pinus-pinea-2/"
+      ]
+    },
+    {
+      "id": "llengua_ovella",
+      "nom_comu": "Llengua d'ovella",
+      "nom_cientific": "Plantago lanceolata",
+      "familia": "Plantaginaceae",
+      "tipus": "herba",
+      "descripcio": "Herba perenne de roseta basal amb fulles estretes i lanceolades. Les inflorescències són espigues cilíndriques sobre tiges erectes. Floreix des de la primavera fins a la tardor i és comuna en prats i zones alterades.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 0.6m",
+        "altres_característiques_rellevants": "utilitzada en medicina tradicional per a afeccions respiratòries"
+      },
+      "colors": [
+        "verd",
+        "marró"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics"
+      ],
+      "fonts": [
+        "https://gobotany.nativeplanttrust.org/species/plantago/lanceolata/",
+        "https://www.cabidigitallibrary.org/doi/full/10.1079/cabicompendium.41813"
+      ]
+    },
+    {
+      "id": "plataner",
+      "nom_comu": "Plataner",
+      "nom_cientific": "Platanus hispanica",
+      "familia": "Platanaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "zones_enjardinades (plantat en avingudes i places)",
+        "eix_central (arbres ornamentals del campus)"
+      ],
+      "descripcio": "També anomenada Platanus acerifolia, arbre caducifoli de gran port, que pot arribar als 30 metres d'alçada. Té una escorça característica que es desprèn en plaques, deixant zones de colors clars. Les fulles són grans, palmades i lobulades. Produïx fruits esfèrics i espinosos en grups de 2 a 6.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 30m",
+        "altres_característiques_rellevants": "tolerant a la contaminació urbana i condicions adverses"
+      },
+      "colors": [
+        "verd",
+        "gris",
+        "marró"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos ecològics (ombra urbana)",
+        "usos ecològics (control de contaminació)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.501286,
+          "lng": 2.104792
+        },
+        {
+          "lat": 41.501957,
+          "lng": 2.105225
+        }
+      ],
+      "fonts": [
+        "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/british-trees/a-z-of-british-trees/london-plane/",
+        "https://www.rhs.org.uk/plants/96764/platanus-hispanica/details"
+      ]
+    },
+    {
+      "id": "cirerer_bord",
+      "nom_comu": "Cirerer bord",
+      "nom_cientific": "Prunus avium",
+      "familia": "Rosaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "bosc_mediterrani (marges de boscos mixtos i clarianes assolellades)",
+        "cami_ho_chi_minh (zones obertes i solejades del recorregut)"
+      ],
+      "descripcio": "Arbre caducifoli que pot assolir fins a 30 metres d'alçada, amb escorça llisa de color marró vermellós i lenticel·les horitzontals. Les fulles són ovades amb vores serrades i glàndules vermelles a la base del pecíol. A la primavera, produeix flors blanques en grups, seguides de fruits vermells comestibles a l'estiu.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 30m",
+        "altres_característiques_rellevants": "fusta valorada en ebenisteria i fruits apreciats per la fauna"
+      },
+      "colors": [
+        "blanc",
+        "vermell"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris",
+        "usos artesanals/ industrials (noble)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.498403,
+          "lng": 2.093655
+        },
+        {
+          "lat": 41.500903,
+          "lng": 2.094445
+        }
+      ],
+      "fonts": [
+        "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/british-trees/a-z-of-british-trees/wild-cherry/",
+        "https://plants.ces.ncsu.edu/plants/prunus-avium/"
+      ]
+    },
+    {
+      "id": "pruner",
+      "nom_comu": "Pruner",
+      "nom_cientific": "Prunus domestica",
+      "familia": "Rosaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "zones_enjardinades (plantat en horts i jardins del campus)",
+        "eix_central (zones ornamentals amb arbres fruiters)"
+      ],
+      "descripcio": "Arbre caducifoli de mida mitjana, amb escorça fosca i branques sovint espinoses. Les fulles són ovades amb vores serrades. A la primavera, produeix flors blanques solitàries o en petits grups, seguides de fruits comestibles de colors variats com el morat, groc o vermell.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 6m",
+        "altres_característiques_rellevants": "fruits utilitzats per a consum fresc o assecat (prunes)"
+      },
+      "colors": [
+        "blanc",
+        "violeta",
+        "groc"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.501131,
+          "lng": 2.106297
+        },
+        {
+          "lat": 41.501286,
+          "lng": 2.102937
+        }
+      ],
+      "fonts": [
+        "https://plants.ces.ncsu.edu/plants/prunus-domestica/",
+        "https://pfaf.org/user/plant.aspx?LatinName=Prunus+domestica"
+      ]
+    },
+    {
+      "id": "ametller",
+      "nom_comu": "Ametller",
+      "nom_cientific": "Prunus dulcis",
+      "familia": "Rosaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "bosc_mediterrani (clarians i zones pedregoses assolellades)",
+        "zones_enjardinades (plantat en espais ornamentals del campus)"
+      ],
+      "descripcio": "Arbre caducifoli de fins a 10 metres d'alçada, amb escorça llisa i branques primes. Les fulles són lanceolades amb vores serrades. A finals d'hivern o principis de primavera, abans de l'aparició de les fulles, floreix amb flors rosades o blanques. Els fruits són drupes amb una closca dura que conté l'ametlla comestible.",
+      "caracteristiques": {
+        "floracio": [
+          "hivern",
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 10m",
+        "altres_característiques_rellevants": "floració primerenca i fruits amb valor econòmic"
+      },
+      "colors": [
+        "rosa",
+        "blanc",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.497617,
+          "lng": 2.110864
+        },
+        {
+          "lat": 41.499499,
+          "lng": 2.108516
+        }
+      ],
+      "fonts": [
+        "https://www.gardenia.net/plant/prunus-dulcis",
+        "https://pfaf.org/user/Plant.aspx?LatinName=Prunus+dulcis"
+      ]
+    },
+    {
+      "id": "aranyoner",
+      "nom_comu": "Aranyoner",
+      "nom_cientific": "Prunus spinosa",
+      "familia": "Rosaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (marges i clarianes)",
+        "vegetacio_ribera (zones obertes i solejades)"
+      ],
+      "descripcio": "Arbust caducifoli de fins a 5 metres d'alçada, amb branques espinoses i escorça fosca. Les fulles són ovalades amb vores serrades. A la primavera floreix amb abundants flors blanques abans de l'aparició de les fulles. Els fruits són drupes esfèriques de color blau fosc, molt astringents en cru.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 5m",
+        "altres_característiques_rellevants": "fruits utilitzats per elaborar licors com el 'sloe gin'"
+      },
+      "colors": [
+        "blanc",
+        "verd",
+        "blau (blau fosc)"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics",
+        "usos ecològics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.502073,
+          "lng": 2.097379
+        },
+        {
+          "lat": 41.497048,
+          "lng": 2.096498
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Prunus_spinosa",
+        "https://gobotany.nativeplanttrust.org/species/prunus/spinosa/"
+      ]
+    },
+    {
+      "id": "falguera_aguila",
+      "nom_comu": "Falguera d'àguila",
+      "nom_cientific": "Pteridium aquilinum",
+      "familia": "Dennstaedtiaceae",
+      "tipus": "herba",
+      "habitat": [
+        "bosc_mediterrani (sotabosc clar)",
+        "cami_ho_chi_minh (marges i clarianes)"
+      ],
+      "descripcio": "Falguera perenne amb rizomes subterranis extensos que poden formar grans colònies. Les frondes són grans, triangulars i poden assolir fins a 2 metres d'alçada. Les fulles són dividides diverses vegades i presenten una textura lleugerament pilosa al revers.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 2m",
+        "altres_característiques_rellevants": "pot ser invasora en zones alterades; conté compostos tòxics si s'ingereix"
+      },
+      "colors": [
+        "verd"
+      ],
+      "usos": [
+        "usos ecològics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.500062,
+          "lng": 2.094581
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Pteridium_aquilinum",
+        "https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/ferns/bracken/"
+      ]
+    },
+    {
+      "id": "coscoll",
+      "nom_comu": "Coscoll",
+      "nom_cientific": "Quercus coccifera",
+      "familia": "Fagaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (vegetació esclerofil·la seca i rocosa)",
+        "torrent_can_domenech (zones solejades i pedregoses)"
+      ],
+      "descripcio": "Arbust perennifoli molt ramificat, habitualment de fins a 2 metres d’alçada, tot i que pot arribar als 5 metres en condicions favorables. Les fulles són petites, coriàcies i espinoses, recordant les del grèvol. Les glans són petites, amb una cúpula coberta d’escates punxegudes. L’escorça és grisa i rugosa. És una espècie molt resistent a la sequera i al pasturatge.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 5m",
+        "altres_característiques_rellevants": "tolerant a la sequera i al pasturatge intens"
+      },
+      "colors": [
+        "verd (verd fosc)",
+        "marró"
+      ],
+      "usos": [
+        "usos productius (producció de carbó vegetal)",
+        "usos productius (obtenció de tints naturals)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.501643,
+          "lng": 2.10143
+        },
+        {
+          "lat": 41.502557,
+          "lng": 2.093865
+        }
+      ],
+      "fonts": [
+        "https://www.treesandshrubsonline.org/articles/quercus/quercus-coccifera/",
+        "https://en.wikipedia.org/wiki/Quercus_coccifera"
+      ]
+    },
+    {
+      "id": "alzina",
+      "nom_comu": "Alzina",
+      "nom_cientific": "Quercus ilex",
+      "familia": "Fagaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "bosc_mediterrani (espècie dominant en alzinars)",
+        "zones_enjardinades (utilitzada en paisatgisme per la seva resistència)"
+      ],
+      "descripcio": "Arbre perennifoli que pot arribar als 25 metres d’alçada, amb una capçada densa i arrodonida. Les fulles són coriàcies, de color verd fosc per l’anvers i més clares pel revers, amb marges que poden ser llisos o lleugerament dentats. L’escorça és fosca i fissurada. Les glans són allargades i maduren a la tardor.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 25m",
+        "altres_característiques_rellevants": "espècie clau en ecosistemes mediterranis"
+      },
+      "colors": [
+        "verd (verd fosc)",
+        "marró"
+      ],
+      "usos": [
+        "usos artesanals/ industrials (per a construcció)",
+        "usos agroalimentaris (de bestiar amb glans)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.502243,
+          "lng": 2.105177
+        }
+      ],
+      "fonts": [
+        "https://www.treesandshrubsonline.org/articles/quercus/quercus-ilex/",
+        "https://pfaf.org/User/plant.aspx?LatinName=Quercus+ilex"
+      ]
+    },
+    {
+      "id": "roure_pubescent",
+      "nom_comu": "Roure pubescent",
+      "nom_cientific": "Quercus pubescens",
+      "familia": "Fagaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "bosc_mediterrani (zones amb sòls calcaris i secs)",
+        "cami_ho_chi_minh (àrees amb exposició solar moderada)"
+      ],
+      "descripcio": "Arbre caducifoli que pot assolir fins a 20 metres d’alçada, amb una capçada ampla i irregular. Les fulles són lobulades i recobertes de pèls fins, donant-los una textura suau. L’escorça és clara i profundament fissurada. Les glans es presenten en grups i maduren a la tardor.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 20m",
+        "altres_característiques_rellevants": "tolerant a la sequera i preferència per sòls calcaris"
+      },
+      "colors": [
+        "verd",
+        "marró"
+      ],
+      "usos": [
+        "usos artesanals/ industrials (per a construcció)",
+        "usos productius (producció de carbó vegetal)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.501047,
+          "lng": 2.092007
+        }
+      ],
+      "fonts": [
+        "https://pfaf.org/user/Plant.aspx?LatinName=Quercus+pubescens",
+        "https://en.wikipedia.org/wiki/Quercus_pubescens"
+      ]
+    },
+    {
+      "id": "alzina_surera",
+      "nom_comu": "alzina surera",
+      "nom_cientific": "Quercus suber",
+      "familia": "Fagaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "bosc_mediterrani (boscos esclerofil·les mediterranis)",
+        "zones_enjardinades (plantacions ornamentals al campus)"
+      ],
+      "descripcio": "Arbre de fulla perenne que pot assolir fins a 20 metres d'alçada, amb una copa ampla i irregular. Destaca per la seva escorça gruixuda i esponjosa de color grisós, que és la font del suro. Les fulles són coriàcies, de color verd fosc per l'anvers i més clares pel revers, amb marges dentats. Les flors són petites i poc aparents, i els fruits són aglans allargats.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 20m",
+        "altres_característiques_rellevants": "escorça utilitzada per a la producció de suro"
+      },
+      "colors": [
+        "verd",
+        "gris"
+      ],
+      "usos": [
+        "usos productius (producció de suro)",
+        "usos ornamentals i paisatgístics",
+        "usos agrícoles i millora del sòl (conservació del sòl)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.500914,
+          "lng": 2.103147
+        }
+      ],
+      "fonts": [
+        "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=280726",
+        "https://plants.ces.ncsu.edu/plants/quercus-suber/"
+      ]
+    },
+    {
+      "id": "reseda_raiponce",
+      "nom_comu": "reseda raiponce",
+      "nom_cientific": "Reseda phyteuma",
+      "familia": "Resedaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (zones alterades i marges de camins)",
+        "eix_central (espais oberts i assolellats)"
+      ],
+      "descripcio": "Herba anual o perenne de fins a 60 cm d'alçada, amb tiges erectes i fulles estretes. Les flors són petites, de color groc verdós, agrupades en espigues terminals. Prefereix sòls ben drenats i exposicions assolellades, i sovint es troba en zones alterades o marges de camins.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.6m",
+        "altres_característiques_rellevants": "atractiva per a pol·linitzadors"
+      },
+      "colors": [
+        "groc (groc verdós)",
+        "verd (verd groguenc)",
+        "verd"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos ecològics (atracció de pol·linitzadors)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.500699,
+          "lng": 2.10632
+        },
+        {
+          "lat": 41.499536,
+          "lng": 2.108324
+        },
+        {
+          "lat": 41.499988,
+          "lng": 2.108006
+        }
+      ],
+      "fonts": [
+        "https://pfaf.org/user/Plant.aspx?LatinName=Reseda+phyteuma",
+        "https://temperate.theferns.info/plant/Reseda%2Bphyteuma"
+      ]
+    },
+    {
+      "id": "aladern",
+      "nom_comu": "aladern",
+      "nom_cientific": "Rhamnus alaternus",
+      "familia": "Rhamnaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (matollars i marges de boscos)",
+        "torrent_can_domenech (zones esclerofil·les properes al torrent)"
+      ],
+      "descripcio": "Arbust perenne de fins a 5 metres d'alçada, amb fulles coriàcies, brillants i de marges lleugerament dentats. Les flors són petites, de color groc verdós, i els fruits són drupes vermelles que es tornen negres en madurar. És una espècie típica de la vegetació mediterrània, resistent a la sequera i sovint utilitzada en reforestacions.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 5m",
+        "altres_característiques_rellevants": "resistent a la sequera i útil en reforestacions"
+      },
+      "colors": [
+        "verd",
+        "vermell",
+        "negre"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos forestals (reforestació)",
+        "usos ecològics (atracció de fauna)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.501839,
+          "lng": 2.093054
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Rhamnus_alaternus",
+        "https://pfaf.org/USER/Plant.aspx?LatinName=Rhamnus+alaternus"
+      ]
+    },
+    {
+      "id": "romaní",
+      "nom_comu": "Romaní",
+      "nom_cientific": "Salvia rosmarinus",
+      "familia": "Lamiaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "zones_enjardinades (parterres i talussos assolellats)",
+        "bosc_mediterrani (marges secs i pedregosos)"
+      ],
+      "descripcio": "Antigament Rosmarinus officinalis L., arbust aromàtic de fins a 2 metres d'alçada, amb tiges llenyoses i fulles linears, oposades i de color verd fosc amb l'anvers blanquinós. Flors petites de color blau violaci agrupades en inflorescències terminals. Planta molt resistent a la sequera i adaptada a sòls pobres.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "tardor"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 2m",
+        "altres_característiques_rellevants": "Planta mel·lífera i medicinal; molt utilitzada en gastronomia mediterrània"
+      },
+      "colors": [
+        "blau",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.493772,
+          "lng": 2.102633
+        },
+        {
+          "lat": 41.500482,
+          "lng": 2.107666
+        }
+      ],
+      "fonts": [
+        "https://www.cabidigitallibrary.org/doi/full/10.1079/cabicompendium.47678",
+        "https://www.gardenia.net/plant/rosmarinus-officinalis-rosemary"
+      ]
+    },
+    {
+      "id": "galzeran",
+      "nom_comu": "Galzeran",
+      "nom_cientific": "Ruscus aculeatus",
+      "familia": "Asparagaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (sotabosc ombrívol)",
+        "zones_ombrívoles (espais amb poca llum)"
+      ],
+      "descripcio": "Arbust perenne de fins a 1 m d'alçada, amb tiges rígides i fulles modificades (cladodis) de forma ovalada i punxeguda. Les flors petites i verdoses apareixen al centre dels cladodis, i els fruits són baies vermelles vistoses que persisteixen a l'hivern.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 1m",
+        "altres_característiques_rellevants": "tolerant a l'ombra i la sequera"
+      },
+      "colors": [
+        "verd",
+        "vermell"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.49488,
+          "lng": 2.106182
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Ruscus_aculeatus",
+        "https://pfaf.org/user/Plant.aspx?LatinName=Ruscus+aculeatus"
+      ]
+    },
+    {
+      "id": "sajolida_bastarda",
+      "nom_comu": "Sajolida bastarda",
+      "nom_cientific": "Salvia verbenaca",
+      "familia": "Lamiaceae",
+      "tipus": "herba",
+      "habitat": [
+        "cami_ho_chi_minh (marges i zones obertes)",
+        "bosc_mediterrani (clars i vores)"
+      ],
+      "descripcio": "Herba perenne de fins a 0,7 m d'alçada, amb tiges erectes i fulles lobulades de color verd. Les flors, de color blau violaci, es disposen en espigues terminals i són atractives per a pol·linitzadors.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 0.7m",
+        "altres_característiques_rellevants": "atractiva per a pol·linitzadors i ús en jardineria naturalista"
+      },
+      "colors": [
+        "blau (blau violaci)",
+        "violeta (violaci blavós)",
+        "verd"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.501064,
+          "lng": 2.095483
+        }
+      ],
+      "fonts": [
+        "https://pfaf.org/user/Plant.aspx?LatinName=Salvia+verbenaca",
+        "https://www.naturespot.org/species/wild-clary"
+      ]
+    },
+    {
+      "id": "sauquer_negre",
+      "nom_comu": "Sauquer negre",
+      "nom_cientific": "Sambucus nigra",
+      "familia": "Adoxaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "vegetacio_ribera (zones humides properes a torrents)",
+        "zones_ombrívoles (sotabosc fresc i humit)"
+      ],
+      "descripcio": "Arbust caducifoli de fins a 6 metres d'alçada, amb branques arquejades i escorça grisenca. Les fulles són compostes, amb 5-7 folíols ovats i marges serrats. A la primavera, produeix inflorescències planes de flors blanques i perfumades, seguides a l'estiu per baies negres comestibles.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 6m",
+        "altres_característiques_rellevants": "Les baies són utilitzades per fer melmelades i licors; les flors tenen usos medicinals tradicionals."
+      },
+      "colors": [
+        "blanc",
+        "negre"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.50012,
+          "lng": 2.107246
+        },
+        {
+          "lat": 41.494577,
+          "lng": 2.105573
+        }
+      ],
+      "fonts": [
+        "https://plants.ces.ncsu.edu/plants/sambucus-nigra/",
+        "https://www.missouribotanicalgarden.org/plantfinder/PlantFinderDetails.aspx?taxonid=278936"
+      ]
+    },
+    {
+      "id": "cardo_daurat",
+      "nom_comu": "Cardo daurat",
+      "nom_cientific": "Scolymus hispanicus",
+      "familia": "Asteraceae",
+      "tipus": "herba",
+      "habitat": [
+        "cami_ho_chi_minh (zones assolellades i alterades)",
+        "bosc_mediterrani (clarianes i vores de camins)"
+      ],
+      "descripcio": "Herba bianual amb tiges i fulles espinoses. Les flors són de color groc brillant i es disposen en capítols. Es troba en terrenys alterats i marges de camins.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.8m",
+        "altres_característiques_rellevants": "Les fulles joves i les arrels són comestibles després de cuinar-les."
+      },
+      "colors": [
+        "groc"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.495538,
+          "lng": 2.097324
+        },
+        {
+          "lat": 41.500931,
+          "lng": 2.09472
+        }
+      ],
+      "fonts": [
+        "https://en.wikipedia.org/wiki/Scolymus_hispanicus",
+        "https://www.b4fn.org/resources/species-database/detail/scolymus-hispanicus/"
+      ]
+    },
+    {
+      "id": "sedum_sediforme",
+      "nom_comu": "Sedum sediforme",
+      "nom_cientific": "Sedum sediforme",
+      "familia": "Crassulaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_ombrívoles (rocalles i talussos assolellats)",
+        "bosc_mediterrani (zones rocoses i seques)"
+      ],
+      "descripcio": "Suculenta perenne amb fulles cilíndriques de color blau verdós. Forma grups densos i produeix flors grogues en inflorescències erectes durant l'estiu.",
+      "caracteristiques": {
+        "floracio": [
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 0.6m",
+        "altres_característiques_rellevants": "Atraient per a pol·linitzadors i resistent a la sequera."
+      },
+      "colors": [
+        "groc",
+        "verd"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos ecològics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.500003,
+          "lng": 2.092105
+        },
+        {
+          "lat": 41.502411,
+          "lng": 2.092682
+        }
+      ],
+      "fonts": [
+        "https://pfaf.org/user/Plant.aspx?LatinName=Sedum+sediforme",
+        "https://plantselect.org/plant/sedum-sediforme/"
+      ]
+    },
+    {
+      "id": "roella_blanca",
+      "nom_comu": "Roella blanca",
+      "nom_cientific": "Silene latifolia",
+      "familia": "Caryophyllaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (espais oberts i marges de camins)",
+        "eix_central (zones amb sòls ben drenats)"
+      ],
+      "descripcio": "Planta herbàcia de fins a 1 metre d’alçada, amb flors blanques que s’obren al vespre i desprenen una aroma dolça per atraure papallones nocturnes. Les fulles són oposades i lleugerament piloses. Sovint es troba en zones alterades i marges de camins.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 1m",
+        "altres_característiques_rellevants": "floració nocturna; atracció de pol·linitzadors nocturns"
+      },
+      "colors": [
+        "blanc"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.499041,
+          "lng": 2.108531
+        },
+        {
+          "lat": 41.49944,
+          "lng": 2.108498
+        }
+      ],
+      "fonts": [
+        "https://gobotany.nativeplanttrust.org/species/silene/latifolia/",
+        "https://pfaf.org/User/Plant.aspx?LatinName=Silene+latifolia"
+      ]
+    },
+    {
+      "id": "colleja",
+      "nom_comu": "Colleja",
+      "nom_cientific": "Silene vulgaris",
+      "familia": "Caryophyllaceae",
+      "tipus": "herba",
+      "habitat": [
+        "cami_ho_chi_minh (marges de camins i zones alterades)",
+        "zones_enjardinades (espais oberts i ben drenats)"
+      ],
+      "descripcio": "Herba perenne de fins a 60 cm d’alçada, amb flors blanques característiques per la seva càpsula inflada en forma de globus. Les fulles són oposades i lanceolades. Tradicionalment, les seves fulles joves s’han consumit com a verdura en diverses regions mediterrànies.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.6m",
+        "altres_característiques_rellevants": "ús culinari tradicional"
+      },
+      "colors": [
+        "blanc"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.500907,
+          "lng": 2.094245
+        },
+        {
+          "lat": 41.501514,
+          "lng": 2.105242
+        }
+      ],
+      "fonts": [
+        "https://es.wikipedia.org/wiki/Silene_vulgaris",
+        "https://pfaf.org/user/Plant.aspx?LatinName=Silene+vulgaris"
+      ]
+    },
+    {
+      "id": "aritjol",
+      "nom_comu": "Arítjol",
+      "nom_cientific": "Smilax aspera",
+      "familia": "Smilacaceae",
+      "tipus": "liana",
+      "habitat": [
+        "bosc_mediterrani (marges i clarianes de boscos)",
+        "zones_ombrívoles (espais amb vegetació densa i ombra)"
+      ],
+      "descripcio": "Liana perenne i espinosa que pot assolir fins a 4 metres de longitud. Les fulles són coriàcies, en forma de cor, amb vores espinoses. Produeix petits fruits vermells en baia. Es troba habitualment en boscos mediterranis i zones ombrívoles, enfilant-se sobre altres plantes.",
+      "caracteristiques": {
+        "floracio": [
+          "tardor"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 4m",
+        "altres_característiques_rellevants": "fruits consumits per fauna silvestre"
+      },
+      "colors": [
+        "verd",
+        "vermell"
+      ],
+      "usos": [
+        "usos agroalimentaris (refugi i aliment per a fauna)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.497527,
+          "lng": 2.094398
+        }
+      ],
+      "fonts": [
+        "https://pfaf.org/user/plant.aspx?latinname=Smilax+aspera",
+        "https://tropical.theferns.info/viewtropical.php?id=Smilax+aspera"
+      ]
+    },
+    {
+      "id": "herba_de_pollo",
+      "nom_comu": "Herba de pollo",
+      "nom_cientific": "Stellaria media",
+      "familia": "Caryophyllaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_ombrívoles (llocs humits i ombrívols)",
+        "zones_enjardinades (parterres i horts)"
+      ],
+      "descripcio": "Herba anual de creixement rastrer, amb tiges fines i fulles petites ovades. Flors blanques diminutes amb pètals bífids, visibles durant gran part de l'any. Sovint considerada una mala herba en horts i jardins.",
+      "caracteristiques": {
+        "floracio": [
+          "hivern",
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.3m",
+        "altres_característiques_rellevants": "capacitat de florir fins i tot sota la neu"
+      },
+      "colors": [
+        "blanc",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris (fulles comestibles en amanides)",
+        "usos agroalimentaris"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.500443,
+          "lng": 2.104751
+        },
+        {
+          "lat": 41.498838,
+          "lng": 2.090491
+        }
+      ],
+      "fonts": [
+        "https://pfaf.org/USER/Plant.aspx?LatinName=Stellaria+media",
+        "https://en.wikipedia.org/wiki/Stellaria_media"
+      ]
+    },
+    {
+      "id": "consolda_tuberosa",
+      "nom_comu": "Consolda tuberosa",
+      "nom_cientific": "Symphytum tuberosum",
+      "familia": "Boraginaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_ombrívoles (marges de boscos amb ombra parcial)",
+        "torrent_can_domenech (zones humides properes al torrent)"
+      ],
+      "descripcio": "Herba perenne amb fulles amples i rugoses, de color verd intens. Les flors, en forma de campana, són groguenques i apareixen en grups penjants. Prefereix sòls humits i ombrívols, i sovint es troba en zones boscoses o prop de cursos d'aigua.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.5m",
+        "altres_característiques_rellevants": "Propagació per rizomes tuberosos; pot formar colònies extenses."
+      },
+      "colors": [
+        "verd",
+        "groc (groc pàl·lid)"
+      ],
+      "usos": [
+        "usos agroalimentaris (tradicionalment utilitzada per a afeccions cutànies)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.501808,
+          "lng": 2.093344
+        },
+        {
+          "lat": 41.4984,
+          "lng": 2.090228
+        }
+      ],
+      "fonts": [
+        "https://www.balkep.org/symphytum-tuberosum.html",
+        "https://pfaf.org/user/Plant.aspx?LatinName=Symphytum+tuberosum"
+      ]
+    },
+    {
+      "id": "dent_de_lleo",
+      "nom_comu": "Dent de lleó",
+      "nom_cientific": "Taraxacum officinale",
+      "familia": "Asteraceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (gespes i marges de camins)",
+        "vegetacio_ribera (zones properes a cursos d'aigua)"
+      ],
+      "descripcio": "Herba perenne amb roseta basal de fulles dentades. Les flors grogues apareixen sobre tiges buides i es transformen en esferes de llavors amb pèls blancs que es dispersen amb el vent. Molt comuna en zones urbanes i rurals.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.3m",
+        "altres_característiques_rellevants": "Les fulles joves són comestibles; arrel profunda que ajuda a descompactar el sòl."
+      },
+      "colors": [
+        "groc",
+        "verd"
+      ],
+      "usos": [
+        "usos agroalimentaris (fulles en amanides)",
+        "usos agroalimentaris (tradicionalment utilitzada com a diürètic)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.497541,
+          "lng": 2.110018
+        },
+        {
+          "lat": 41.500702,
+          "lng": 2.10791
+        }
+      ],
+      "fonts": [
+        "https://gobotany.nativeplanttrust.org/species/taraxacum/officinale/",
+        "https://hort.extension.wisc.edu/articles/dandelion-taraxacum-officinale/"
+      ]
+    },
+    {
+      "id": "camedri_fruticos",
+      "nom_comu": "Camedri fruticos",
+      "nom_cientific": "Teucrium fruticans",
+      "familia": "Lamiaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "zones_enjardinades (espais enjardinats del campus)",
+        "eix_central (eix central de la UAB)"
+      ],
+      "descripcio": "Arbust perenne de port arrodonit i dens, amb fulles petites de color verd grisenc i flors de color blau lavanda que apareixen a la primavera i estiu. És molt resistent a la sequera i al vent, i s'utilitza sovint en jardineria per formar tanques o com a planta ornamental.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 2m",
+        "altres_característiques_rellevants": "resistent a la sequera i al vent"
+      },
+      "colors": [
+        "blau",
+        "gris (gris verdós)",
+        "verd (verd grisós)"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos ecològics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.498735,
+          "lng": 2.10386
+        },
+        {
+          "lat": 41.500884,
+          "lng": 2.106695
+        },
+        {
+          "lat": 41.501048,
+          "lng": 2.103517
+        }
+      ],
+      "fonts": [
+        "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=281576",
+        "https://waterwisegardenplanner.org/plants/teucrium-fruticans/"
+      ]
+    },
+    {
+      "id": "tomillo",
+      "nom_comu": "Tomillo",
+      "nom_cientific": "Thymus vulgaris",
+      "familia": "Lamiaceae",
+      "tipus": "herba",
+      "habitat": [
+        "bosc_mediterrani (bosc mediterrani de la UAB)",
+        "zones_enjardinades (espais enjardinats del campus)"
+      ],
+      "descripcio": "Herba perenne de port baix i dens, amb tiges llenyoses i fulles petites, lineals i molt aromàtiques. Flors de color rosa pàl·lid o porpra que apareixen a la primavera i estiu. És una planta típica de la Mediterrània, utilitzada àmpliament en gastronomia i medicina tradicional.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 0.3m",
+        "altres_característiques_rellevants": "resistent a la sequera i molt aromàtica"
+      },
+      "colors": [
+        "rosa",
+        "violeta"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.494073,
+          "lng": 2.097796
+        },
+        {
+          "lat": 41.499081,
+          "lng": 2.108504
+        }
+      ],
+      "fonts": [
+        "https://plants.ces.ncsu.edu/plants/thymus-vulgaris/",
+        "https://pfaf.org/user/plant.aspx?LatinName=Thymus+vulgaris"
+      ]
+    },
+    {
+      "id": "aliaga",
+      "nom_comu": "Aliaga",
+      "nom_cientific": "Ulex parviflorus",
+      "familia": "Fabaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (matorrals secs i solells sobre sòls calcaris)",
+        "torrent_can_domenech (zones assolellades amb sòls pobres i erosionats)"
+      ],
+      "descripcio": "Arbust dens i molt ramificat que pot arribar fins als 2 metres d'alçada. Les seves tiges estan cobertes d'espines rígides i les fulles són reduïdes o absents. Floreix a l'hivern amb flors grogues brillants, solitàries i axil·lars. El fruit és una llegum petita i pilosa que conté 1-2 llavors.",
+      "caracteristiques": {
+        "floracio": [
+          "hivern",
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 2m",
+        "altres_característiques_rellevants": "fixadora de nitrogen, resistent a la sequera"
+      },
+      "colors": [
+        "groc"
+      ],
+      "usos": [
+        "usos ecològics (recuperació de sòls degradats)",
+        "usos ornamentals i paisatgístics (jardins de baix manteniment)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.498445,
+          "lng": 2.09692
+        },
+        {
+          "lat": 41.501016,
+          "lng": 2.091237
+        }
+      ],
+      "fonts": [
+        "https://pfaf.org/user/Plant.aspx?LatinName=Ulex+parviflorus",
+        "https://es.wikipedia.org/wiki/Ulex_parviflorus"
+      ]
+    },
+    {
+      "id": "om_comu",
+      "nom_comu": "Om comú",
+      "nom_cientific": "Ulmus minor",
+      "familia": "Ulmaceae",
+      "tipus": "arbre",
+      "habitat": [
+        "vegetacio_ribera (zones humides properes a cursos d'aigua)",
+        "zones_enjardinades (plantat com a arbre ornamental en espais verds)"
+      ],
+      "descripcio": "Arbre caducifoli de mida mitjana a gran, que pot assolir fins a 30 metres d'alçada. Presenta una capçada ampla i arrodonida amb branques ascendents. Les fulles són ovades, asimètriques a la base, amb marges serrats i una textura aspra. Les flors són petites i apareixen abans de la brotació de les fulles. El fruit és una sàmara plana amb una llavor central.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 30m",
+        "altres_característiques_rellevants": "tolerant a la poda i a la contaminació urbana"
+      },
+      "colors": [
+        "verd"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics (arbre de carrer i parc)",
+        "usos ecològics (estabilització de riberes)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.497984,
+          "lng": 2.09257
+        },
+        {
+          "lat": 41.50103,
+          "lng": 2.102231
+        }
+      ],
+      "fonts": [
+        "https://plants.ces.ncsu.edu/plants/ulmus-minor/",
+        "https://es.wikipedia.org/wiki/Ulmus_minor"
+      ]
+    },
+    {
+      "id": "verbena_comuna",
+      "nom_comu": "Verbena comuna",
+      "nom_cientific": "Verbena officinalis",
+      "familia": "Verbenaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (espais oberts i marges de camins)",
+        "bosc_mediterrani (clars i vores de camins)"
+      ],
+      "descripcio": "Herba perenne de fins a 1 m d'alçada, amb tiges erectes i angulars. Les fulles són oposades, pinnatífides i rugoses. Les flors, petites i de color lila o blau pàl·lid, es disposen en espigues terminals. El fruit és una càpsula que conté quatre llavors.",
+      "caracteristiques": {
+        "floracio": [
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 1m",
+        "altres_característiques_rellevants": "utilitzada tradicionalment per les seves propietats medicinals"
+      },
+      "colors": [
+        "violeta",
+        "blau (blau pàl·lid)"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.502028,
+          "lng": 2.097994
+        },
+        {
+          "lat": 41.501299,
+          "lng": 2.104199
+        }
+      ],
+      "fonts": [
+        "https://es.wikipedia.org/wiki/Verbena_officinalis",
+        "https://gobotany.nativeplanttrust.org/species/verbena/officinalis/"
+      ]
+    },
+    {
+      "id": "veronica_persica",
+      "nom_comu": "Verònica persa",
+      "nom_cientific": "Veronica persica",
+      "familia": "Plantaginaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (gespes i jardins)",
+        "zones_humides (terrenys amb certa humitat)"
+      ],
+      "descripcio": "Herba anual de fins a 40 cm d'alçada, amb tiges ramificades i fulles ovades amb marges dentats. Les flors són petites, d'un blau cel amb centre blanc, i es troben solitàries a les axil·les de les fulles. El fruit és una càpsula en forma de cor.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 0.4m",
+        "altres_característiques_rellevants": "espècie ruderal comuna en àrees urbanes"
+      },
+      "colors": [
+        "blau (blau cel)",
+        "blanc"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.500874,
+          "lng": 2.107619
+        },
+        {
+          "lat": 41.49762,
+          "lng": 2.092646
+        }
+      ],
+      "fonts": [
+        "https://gobotany.nativeplanttrust.org/species/veronica/persica/",
+        "https://www.minnesotawildflowers.info/flower/birds-eye-speedwell"
+      ]
+    },
+    {
+      "id": "matabou",
+      "nom_comu": "Matabou",
+      "nom_cientific": "Viburnum lantana",
+      "familia": "Adoxaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "bosc_mediterrani (marges i clarianes)",
+        "zones_enjardinades (espais verds i jardins)"
+      ],
+      "descripcio": "Arbust caducifoli que pot arribar als 4 m d'alçada, amb fulles ovades, rugoses i de marge dentat. Les flors són blanques, agrupades en corimbes terminals. Els fruits són drupes que canvien de color vermell a negre a mesura que maduren.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 4m",
+        "altres_característiques_rellevants": "atractiu per a la fauna silvestre per les seves baies"
+      },
+      "colors": [
+        "blanc",
+        "vermell",
+        "negre"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos ecològics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.50096,
+          "lng": 2.102938
+        },
+        {
+          "lat": 41.494485,
+          "lng": 2.102267
+        }
+      ],
+      "fonts": [
+        "https://www.missouribotanicalgarden.org/plantfinder/PlantFinderDetails.aspx?taxonid=278956",
+        "https://plants.ces.ncsu.edu/plants/viburnum-lantana/"
+      ]
+    },
+    {
+      "id": "marfull",
+      "nom_comu": "Marfull",
+      "nom_cientific": "Viburnum tinus",
+      "familia": "Adoxaceae",
+      "tipus": "arbust",
+      "habitat": [
+        "zones_ombrívoles (sotabosc d'alzinars)",
+        "zones_enjardinades (jardins i parcs)"
+      ],
+      "descripcio": "Arbust perennifoli que pot assolir els 7 m d'alçada, amb fulles ovades, brillants i de marge enter. Les flors són blanques o rosades, agrupades en inflorescències terminals, i apareixen durant l'hivern. Els fruits són drupes de color blau metàl·lic.",
+      "caracteristiques": {
+        "floracio": [
+          "hivern",
+          "primavera"
+        ],
+        "fullatge": "perenne",
+        "alçada": "fins a 7m",
+        "altres_característiques_rellevants": "floració hivernal que aporta color en èpoques fredes"
+      },
+      "colors": [
+        "blanc",
+        "rosa",
+        "blau (blau metàl·lic)"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos ecològics"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.499881,
+          "lng": 2.107843
+        },
+        {
+          "lat": 41.497766,
+          "lng": 2.095687
+        }
+      ],
+      "fonts": [
+        "https://es.wikipedia.org/wiki/Viburnum_tinus",
+        "https://mymediterraneangarden.com/plants/viburnum-tinus/"
+      ]
+    },
+    {
+      "id": "veça_comuna",
+      "nom_comu": "Veça comuna",
+      "nom_cientific": "Vicia sativa",
+      "familia": "Fabaceae",
+      "tipus": "herba",
+      "habitat": [
+        "zones_enjardinades (zones obertes i marges de camins amb sòls remoguts)",
+        "cami_ho_chi_minh (espais oberts amb presència de vegetació herbàcia)"
+      ],
+      "descripcio": "Herba anual enfiladissa amb tiges primes i fulles compostes pinnades amb circells. Les flors, de color porpra o rosa, apareixen en parelles i donen lloc a llegums allargats. Pot assolir fins a 1 metre d'alçada.",
+      "caracteristiques": {
+        "floracio": [
+          "primavera",
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 1m",
+        "altres_característiques_rellevants": "fixadora de nitrogen"
+      },
+      "colors": [
+        "violeta",
+        "rosa"
+      ],
+      "usos": [
+        "usos agroalimentaris",
+        "usos agrícoles i millora del sòl (adob verd)"
+      ],
+      "coordenades": [
+        {
+          "lat": 41.500441,
+          "lng": 2.094735
+        },
+        {
+          "lat": 41.50152,
+          "lng": 2.104769
+        }
+      ],
+      "fonts": [
+        "https://gobotany.nativeplanttrust.org/species/vicia/sativa/",
+        "https://www.wildlifetrusts.org/wildlife-explorer/wildflowers/common-vetch"
+      ]
+    },
+    {
+      "id": "arbre_cast",
+      "nom_comu": "Arbre cast",
+      "nom_cientific": "Vitex agnus-castus",
+      "familia": "Lamiaceae",
+      "tipus": "arbust",
+      "descripcio": "Arbust caducifoli de fins a 5 metres d'alçada, amb fulles palmades de 5 a 7 folíols lanceolats i aromàtics. Floreix a l'estiu amb espigues erectes de flors liles o violetes, molt atractives per a papallones i abelles. Els fruits són drupes esfèriques de color fosc, coneguts com a 'pebre de monjo'.",
+      "caracteristiques": {
+        "floracio": [
+          "estiu"
+        ],
+        "fullatge": "caduc",
+        "alçada": "fins a 5m",
+        "altres_característiques_rellevants": "aromàtic, resistent a la sequera, atractiu per a pol·linitzadors"
+      },
+      "colors": [
+        "violeta",
+        "verd"
+      ],
+      "usos": [
+        "usos ornamentals i paisatgístics",
+        "usos agroalimentaris"
+      ],
+      "fonts": [
+        "https://plants.ces.ncsu.edu/plants/vitex-agnus-castus/",
+        "https://en.wikipedia.org/wiki/Vitex_agnus-castus"
+      ]
+    }
+  ]
+}
